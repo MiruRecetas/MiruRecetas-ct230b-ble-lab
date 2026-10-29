@@ -51,7 +51,7 @@ async function v5EnsureIdentity(){
 }
 function v5Text(ctx,font,text,x,y,maxWidth){
  ctx.font=font;ctx.fillStyle="#000";
- ctx.fillText(text,x,y,maxWidth);
+ if(maxWidth===undefined)ctx.fillText(text,x,y);else ctx.fillText(text,x,y,maxWidth);
 }
 function v5SegmentPattern(ctx,angle0,angle1,kind,cx,cy,rOuter=43,rInner=28){
  ctx.save();
