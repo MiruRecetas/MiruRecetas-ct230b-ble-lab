@@ -31,7 +31,7 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#14251b;color:#d6f6e0
 <main>
 <header><span class="eyebrow">MIRURECETAS · LABORATORIO AISLADO</span>
 <h1>CLABEL CT230B · Prueba Bluetooth BLE</h1>
-<p class="muted">Versión 0.3 experimental · No es la web oficial ni un controlador probado. No usa Airtable, cuentas ni inventarios.</p>
+<p class="muted">Versión 0.4 experimental · No es la web oficial ni un controlador probado. No usa Airtable, cuentas ni inventarios.</p>
 <span class="badge" role="status" id="status">Desconectado</span></header>
 
 <section>
@@ -66,7 +66,20 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#14251b;color:#d6f6e0
 </section>
 
 <section>
-<h2>4 · Registro local</h2>
+<h2>4 · Comparativa de QR legible (v0.4)</h2>
+<p><strong>QR v0.3: impreso pero no escaneable.</strong> En la fotografía varios módulos se unen; también falló el QR impreso desde Clabel trade. En cambio, la impresión de bitmap de 864 bytes y sus tramas funcionó bien.</p>
+<p>Las dos nuevas pruebas codifican el mismo texto <code>MR-QR-01</code>, con módulos de seis puntos y blanco amplio alrededor. No cambiaremos la densidad para aislar las diferencias. <strong>No es una URL</strong>: al escanearlo, el móvil debería mostrar simplemente ese texto.</p>
+<label class="switch"><input type="checkbox" id="confirmQR"><span>Confirmo papel estándar <strong>50 × 30 mm</strong> y autorizo <strong>una copia por intento</strong>.</span></label>
+<div class="actions">
+<button type="button" id="shortQR" disabled>QR nativo corto y grande</button>
+<button type="button" id="rasterQR" disabled>QR bitmap con margen blanco</button>
+</div>
+<p class="tiny muted">Empieza por el QR nativo. Solo si vuelve a fallar, prueba el QR bitmap. Cada botón requiere confirmación individual. La matriz rasterizada se ha comprobado informáticamente; queda pendiente su impresión física.</p>
+<p class="tiny warn">No repitas el mismo envío si hay avance anómalo de papel, datos ilegibles o desconexión: detén la prueba y comparte el registro.</p>
+</section>
+
+<section>
+<h2>5 · Registro local</h2>
 <div class="actions">
 <button id="copy" class="secondary" type="button">Copiar registro</button>
 <button id="clear" class="secondary" type="button">Limpiar registro</button>
@@ -92,6 +105,8 @@ function updateStatus(label){
   byId("print").disabled=busy || !connected || !byId("confirm").checked;
   byId("qrtest").disabled=busy || !connected || !byId("confirmGraphics").checked;
   byId("bitmaptest").disabled=busy || !connected || !byId("confirmGraphics").checked;
+  byId("shortQR").disabled=busy || !connected || !byId("confirmQR").checked;
+  byId("rasterQR").disabled=busy || !connected || !byId("confirmQR").checked;
 }
 function clearConnection(){writeChannel=null;notifyChannel=null;updateStatus("Desconectado");}
 function wasDisconnected(){log("Impresora desconectada.");clearConnection();}
@@ -102,6 +117,7 @@ function receivedNotification(event){
 }
 byId("confirm").addEventListener("change",()=>updateStatus(device && device.gatt && device.gatt.connected && writeChannel?"Conectado":"Desconectado"));
 byId("confirmGraphics").addEventListener("change",()=>updateStatus(device && device.gatt && device.gatt.connected && writeChannel?"Conectado":"Desconectado"));
+byId("confirmQR").addEventListener("change",()=>updateStatus(device && device.gatt && device.gatt.connected && writeChannel?"Conectado":"Desconectado"));
 byId("connect").addEventListener("click",async()=>{
  if(!navigator.bluetooth){log("Web Bluetooth no está disponible. Usa Chrome Android bajo HTTPS.");return;}
  busy=true;updateStatus("Seleccionando dispositivo...");
@@ -251,6 +267,85 @@ async function runGraphic(kind){
 }
 byId("qrtest").addEventListener("click",()=>runGraphic("qr"));
 byId("bitmaptest").addEventListener("click",()=>runGraphic("bitmap"));
+
+// QR versión 1, ECC M, carga ASCII "MR-QR-01". Incluye cuatro módulos de quiet zone.
+// Generada y decodificada offline. Esta prueba es estática; no es un codificador de QR dinámico.
+const QR_TEST_ROWS=[
+"00000000000000000000000000000",
+"00000000000000000000000000000",
+"00000000000000000000000000000",
+"00000000000000000000000000000",
+"00001111111000110011111110000",
+"00001000001010000010000010000",
+"00001011101000111010111010000",
+"00001011101000110010111010000",
+"00001011101011011010111010000",
+"00001000001001010010000010000",
+"00001111111010101011111110000",
+"00000000000001100000000000000",
+"00001010101000001000100100000",
+"00000011000110110101001000000",
+"00001101101111010111000000000",
+"00000111010101111101111010000",
+"00000000011001010111011100000",
+"00000000000010100011001010000",
+"00001111111001001000110010000",
+"00001000001000100011010100000",
+"00001011101010101010010110000",
+"00001011101001110101011100000",
+"00001011101011110110100010000",
+"00001000001001011101010110000",
+"00001111111010110110101010000",
+"00000000000000000000000000000",
+"00000000000000000000000000000",
+"00000000000000000000000000000",
+"00000000000000000000000000000"
+];
+function makeQrRaster(){
+ const mod=6,height=29*mod,rowBytes=Math.ceil(height/8);
+ const result=new Uint8Array(height*rowBytes);result.fill(255);
+ for(let iy=0;iy<29;iy++){
+  if(QR_TEST_ROWS[iy].length!==29)throw new Error("Matriz QR defectuosa");
+  for(let ix=0;ix<29;ix++){
+   if(QR_TEST_ROWS[iy][ix]!=="1")continue;
+   for(let dy=0;dy<mod;dy++)for(let dx=0;dx<mod;dx++){
+    const y=iy*mod+dy,x=ix*mod+dx;
+    result[y*rowBytes+(x>>3)] &= ~(0x80>>(x&7));
+   }
+  }
+ }
+ return {bytes:result,rowBytes,height};
+}
+function largeNativeQrJob(){
+ return encoder.encode([
+  "SIZE 50 mm,30 mm","GAP 2 mm,0 mm","DIRECTION 0","CLS",
+  'TEXT 35,48,"3",0,1,1,"QR NATIVO"',
+  'TEXT 35,111,"2",0,1,1,"MR-QR-01"',
+  'QRCODE 340,55,M,6,A,0,M2,S7,"MR-QR-01"',
+  "PRINT 1,1",""
+ ].join("\r\n"));
+}
+function rasterQrJob(){
+ const qr=makeQrRaster();
+ const before=encoder.encode([
+  "SIZE 50 mm,30 mm","GAP 2 mm,0 mm","DIRECTION 0","CLS",
+  'TEXT 35,48,"3",0,1,1,"QR BITMAP"',
+  'TEXT 35,111,"2",0,1,1,"MR-QR-01"',""
+ ].join("\r\n")+"BITMAP 350,40,"+qr.rowBytes+","+qr.height+",0,");
+ return joinBuffers(before,qr.bytes,encoder.encode("\r\nPRINT 1,1\r\n"));
+}
+async function runQrDiagnostic(type){
+ if(busy || !writeChannel || !device?.gatt?.connected || !byId("confirmQR").checked)return;
+ const label=type==="native"?"QR nativo 6 puntos":"QR bitmap 6 puntos";
+ if(!window.confirm("¿Enviar UNA etiqueta de "+label+" 50 × 30 mm a la CT230B?"))return;
+ const data=type==="native"?largeNativeQrJob():rasterQrJob();
+ await transmitDiagnostic(data,label);
+ byId("confirmQR").checked=false;
+ updateStatus(writeChannel&&device&&device.gatt.connected?"Conectado":"Desconectado");
+}
+byId("shortQR").addEventListener("click",()=>runQrDiagnostic("native"));
+byId("rasterQR").addEventListener("click",()=>runQrDiagnostic("raster"));
+
 
 byId("copy").addEventListener("click",async()=>{
  try{await navigator.clipboard.writeText(byId("log").textContent);log("Registro copiado.");}
