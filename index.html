@@ -31,7 +31,7 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#14251b;color:#d6f6e0
 <main>
 <header><span class="eyebrow">MIRURECETAS · LABORATORIO AISLADO</span>
 <h1>CLABEL CT230B · Prueba Bluetooth BLE</h1>
-<p class="muted">Versión 0.2 experimental · No es la web oficial ni un controlador probado. No usa Airtable, cuentas ni inventarios.</p>
+<p class="muted">Versión 0.3 experimental · No es la web oficial ni un controlador probado. No usa Airtable, cuentas ni inventarios.</p>
 <span class="badge" role="status" id="status">Desconectado</span></header>
 
 <section>
@@ -48,13 +48,25 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#14251b;color:#d6f6e0
 <h2>2 · Imprimir una prueba mínima</h2>
 <p>Prueba experimental de texto TSPL: <strong>50 × 30 mm</strong>, blanco y negro, una sola etiqueta. El envío TSPL ya produjo una impresión real, pero la orientación anterior se observó invertida.</p>
 <div class="preview" aria-label="Vista ilustrativa del texto de la etiqueta"><strong>MIRURECETAS</strong><div>PRUEBA BLE</div><span>50 × 30 mm · 1 copia</span></div>
-<p><label for="direction"><strong>Orientación de prueba:</strong></label> <select id="direction"><option value="0">DIRECTION 0 · corrección propuesta (180°)</option><option value="1">DIRECTION 1 · referencia anterior (invertida)</option></select></p><p class="tiny muted">En v0.1 se imprimió con DIRECTION 1 y salió boca abajo. El valor 0 es una hipótesis a confirmar físicamente; no cambiaremos tamaño, texto ni posición, para aislar esta diferencia. El comando DIRECTION puede quedar guardado en la impresora.</p><label class="switch"><input id="confirm" type="checkbox"><span>Confirmo que tengo el rollo estándar de <strong>50 × 30 mm</strong> y autorizo enviar <strong>una sola etiqueta</strong> de prueba.</span></label>
+<p><label for="direction"><strong>Orientación de prueba:</strong></label> <select id="direction"><option value="0">DIRECTION 0 · orientación comprobada</option><option value="1">DIRECTION 1 · referencia invertida</option></select></p><p class="tiny muted">En v0.1 DIRECTION 1 salió invertido; en v0.2 DIRECTION 0 imprimió correctamente, confirmado con fotografía. El selector solo afecta a esta prueba de texto. El comando DIRECTION puede quedar guardado en la impresora.</p><label class="switch"><input id="confirm" type="checkbox"><span>Confirmo que tengo el rollo estándar de <strong>50 × 30 mm</strong> y autorizo enviar <strong>una sola etiqueta</strong> de prueba.</span></label>
 <div class="actions"><button id="print" type="button" disabled>Enviar etiqueta de prueba</button></div>
 <p class="tiny warn">Solo se enviarán comandos tras pulsar y confirmar. No se actualiza firmware ni se escriben características desconocidas. Atención: según la sintaxis TSPL, DIRECTION puede persistir como preferencia de orientación de la impresora.</p>
 </section>
 
 <section>
-<h2>3 · Registro local</h2>
+<h2>3 · Gráficos de diagnóstico (novedad v0.3)</h2>
+<p>Dos ensayos <strong>independientes</strong> sobre una única etiqueta de 50 × 30 mm: QR nativo TSPL y mapa de bits de 96 × 72 puntos. No se envía la etiqueta nutricional real en esta fase.</p>
+<label class="switch"><input id="confirmGraphics" type="checkbox"><span>Confirmo rollo estándar de <strong>50 × 30 mm</strong> y autorizo <strong>una copia por ensayo</strong>. Cada botón muestra una confirmación adicional.</span></label>
+<div class="actions">
+<button type="button" id="qrtest" disabled>Prueba QR nativo (1 etiqueta)</button>
+<button type="button" id="bitmaptest" disabled>Prueba bitmap (1 etiqueta)</button>
+</div>
+<p class="tiny muted">El QR apunta a la portada pública de MiruRecetas; no incorpora identificadores de bolsa, datos personales ni receta privada. El bitmap lleva tres patrones de prueba y usa bytes binarios sin compresión. No usa fuentes oficiales todavía: las probaremos después de validar el transporte de imágenes.</p>
+<p class="tiny warn">Si el papel empieza a avanzar de forma anómala o imprime datos ilegibles, cancela, desconecta y apaga la impresora. No pulses varias veces el mismo ensayo si falla; comparte el registro primero.</p>
+</section>
+
+<section>
+<h2>4 · Registro local</h2>
 <div class="actions">
 <button id="copy" class="secondary" type="button">Copiar registro</button>
 <button id="clear" class="secondary" type="button">Limpiar registro</button>
@@ -78,6 +90,8 @@ function updateStatus(label){
   byId("connect").disabled=busy || connected;
   byId("disconnect").disabled=busy || !(device && device.gatt && device.gatt.connected);
   byId("print").disabled=busy || !connected || !byId("confirm").checked;
+  byId("qrtest").disabled=busy || !connected || !byId("confirmGraphics").checked;
+  byId("bitmaptest").disabled=busy || !connected || !byId("confirmGraphics").checked;
 }
 function clearConnection(){writeChannel=null;notifyChannel=null;updateStatus("Desconectado");}
 function wasDisconnected(){log("Impresora desconectada.");clearConnection();}
@@ -87,6 +101,7 @@ function receivedNotification(event){
   log("Notificación de "+bytes.length+" bytes: "+Array.from(bytes).map(x=>x.toString(16).padStart(2,"0")).join(" "));
 }
 byId("confirm").addEventListener("change",()=>updateStatus(device && device.gatt && device.gatt.connected && writeChannel?"Conectado":"Desconectado"));
+byId("confirmGraphics").addEventListener("change",()=>updateStatus(device && device.gatt && device.gatt.connected && writeChannel?"Conectado":"Desconectado"));
 byId("connect").addEventListener("click",async()=>{
  if(!navigator.bluetooth){log("Web Bluetooth no está disponible. Usa Chrome Android bajo HTTPS.");return;}
  busy=true;updateStatus("Seleccionando dispositivo...");
@@ -155,6 +170,88 @@ byId("print").addEventListener("click",async()=>{
  }catch(error){log("Error de transmisión: "+error.name+": "+error.message+". Puede haberse enviado un trabajo parcial.");}
  finally{busy=false;updateStatus(writeChannel && device && device.gatt.connected?"Conectado":"Desconectado");}
 });
+
+// Conversión 1-bit sin compresión, MSB-first; la polaridad negro=0 se
+// contrasta en la impresión real porque hay firmwares con variantes.
+function makeBitmap(){
+  const width=96,height=72,stride=12, bytes=new Uint8Array(stride*height);
+  bytes.fill(255);  // blanco por defecto bajo codificación TSPL clásica
+  const dot=(x,y)=>{
+    if(x<0||x>=width||y<0||y>=height)return;
+    bytes[y*stride+(x>>3)] &= ~(0x80>>(x&7));
+  };
+  for(let y=0;y<height;y++){
+    for(let x=0;x<width;x++){
+      if(x===0||x===95||y===0||y===71){dot(x,y);continue;}
+      if(x<32 && y>=13 && y<58 && (x+y)%11<4)dot(x,y);
+      if(x>=32 && x<64 && y>=13 && y<58 && (x-y+256)%9===0)dot(x,y);
+      if(x>=64 && y>=13 && y<58 && x%7<2 && y%7<2)dot(x,y);
+    }
+  }
+  return bytes;
+}
+const encoder=new TextEncoder();
+function joinBuffers(...buffers){
+ const total=buffers.reduce((sum,b)=>sum+b.length,0);
+ const out=new Uint8Array(total);
+ let offset=0;
+ for(const buffer of buffers){out.set(buffer,offset);offset+=buffer.length;}
+ return out;
+}
+function qrTestJob(){
+ return encoder.encode([
+  "SIZE 50 mm,30 mm","GAP 2 mm,0 mm","DIRECTION 0","CLS",
+  'TEXT 35,40,"3",0,1,1,"MIRURECETAS"',
+  'TEXT 35,100,"2",0,1,1,"QR NATIVO"',
+  'QRCODE 335,65,M,4,A,0,M2,S7,"https://mirurecetas.github.io/"',
+  "BAR 35,220,230,4","PRINT 1,1",""
+ ].join("\r\n"));
+}
+function bitmapTestJob(){
+ const before=encoder.encode([
+  "SIZE 50 mm,30 mm","GAP 2 mm,0 mm","DIRECTION 0","CLS",
+  'TEXT 35,35,"3",0,1,1,"MIRURECETAS"',
+  'TEXT 35,95,"2",0,1,1,"BITMAP TEST"',
+  ""
+ ].join("\r\n")+"BITMAP 35,152,12,72,0,");
+ const after=encoder.encode("\r\nPRINT 1,1\r\n");
+ return joinBuffers(before,makeBitmap(),after);
+}
+async function transmitDiagnostic(data,label){
+ busy=true;
+ updateStatus("Enviando "+label+"...");
+ const chunkSize=20;
+ try{
+  log("Iniciando "+label+": "+data.length+" bytes, "+Math.ceil(data.length/chunkSize)+" fragmentos BLE.");
+  for(let start=0;start<data.length;start+=chunkSize){
+   if(!device || !device.gatt.connected)throw new Error("Bluetooth desconectado durante el envío");
+   const chunk=data.slice(start,start+chunkSize);
+   if(writeChannel.properties.write && typeof writeChannel.writeValueWithResponse==="function"){
+    await writeChannel.writeValueWithResponse(chunk);
+   }else if(writeChannel.properties.writeWithoutResponse && typeof writeChannel.writeValueWithoutResponse==="function"){
+    await writeChannel.writeValueWithoutResponse(chunk);
+   }else{throw new Error("Método WRITE no compatible");}
+   await pause(75);
+  }
+  log("Datos de "+label+" enviados. Confirmar físicamente impresión, tamaño, orientación y QR.");
+  byId("confirmGraphics").checked=false;
+ }catch(error){
+  log("ERROR "+label+": "+error.name+": "+error.message+". Puede existir envío parcial. No repetir sin revisar.");
+ }finally{
+  busy=false;
+  updateStatus(writeChannel&&device&&device.gatt.connected?"Conectado":"Desconectado");
+ }
+}
+async function runGraphic(kind){
+ if(busy || !writeChannel || !device?.gatt?.connected || !byId("confirmGraphics").checked)return;
+ const desc=kind==="qr"?"QR nativo TSPL":"BITMAP 1-bit (96x72, 864 bytes)";
+ if(!window.confirm("¿Imprimir UNA etiqueta de 50 × 30 mm para la prueba "+desc+"?"))return;
+ const data=kind==="qr"?qrTestJob():bitmapTestJob();
+ await transmitDiagnostic(data,desc);
+}
+byId("qrtest").addEventListener("click",()=>runGraphic("qr"));
+byId("bitmaptest").addEventListener("click",()=>runGraphic("bitmap"));
+
 byId("copy").addEventListener("click",async()=>{
  try{await navigator.clipboard.writeText(byId("log").textContent);log("Registro copiado.");}
  catch(error){log("No se pudo copiar: "+error.message);}
