@@ -35,7 +35,7 @@ No hacen falta workflows ni tokens personalizados para este laboratorio estátic
 
 Una característica adicional terminada en `0318` se ha descubierto pero **no debe utilizarse**: su función real no está verificada. Las direcciones únicas, números de serie y capturas identificativas de la unidad no se publican aquí.
 
-**Importante:** encontrar una característica de escritura no implica que acepte TSPL ni que una etiqueta impresa desde navegador funcione. El protocolo y la fragmentación permanecen sin verificar.
+**Importante:** la característica de escritura ha permitido **una impresión TSPL mínima** en esta unidad; todavía se desconoce el comportamiento con imágenes y trabajos grandes. El protocolo y la fragmentación permanecen sin verificar.
 
 ## Cómo realizar la prueba
 
@@ -47,13 +47,13 @@ Una característica adicional terminada en `0318` se ha descubierto pero **no de
 6. Cuando quieras intentar el primer envío TSPL, marcar la casilla de confirmación, pulsar **Enviar etiqueta de prueba** y aceptar el diálogo. Se envía **una única etiqueta de texto**.
 7. Revisar si físicamente salió una etiqueta, su posición y cualquier indicación de error. Copiar el registro si necesitas compartirlo; no compartir direcciones ni identificadores privados.
 
-El prototipo v0.1 prepara instrucciones de texto TSPL `SIZE 50 mm,30 mm`, `GAP 2 mm,0 mm`, `DIRECTION 1`, `CLS`, `TEXT` y `PRINT 1,1`, transmitidas en bloques de hasta **20 bytes**, con una pequeña pausa. **Son parámetros de ensayo**, no calibración validada del firmware o adhesivo. La aceptación por la API BLE no confirma la impresión física.
+El prototipo v0.2 prepara instrucciones de texto TSPL `SIZE 50 mm,30 mm`, `GAP 2 mm,0 mm`, `DIRECTION 1`, `CLS`, `TEXT` y `PRINT 1,1`, transmitidas en bloques de hasta **20 bytes**, con una pequeña pausa. **Son parámetros de ensayo**, no calibración validada del firmware o adhesivo. La pantalla permite seleccionar **`DIRECTION 0`** (propuesta correctiva) o **`DIRECTION 1`** (valor de la prueba real anterior). Cambiar este parámetro TSPL puede persistir en la configuración de la impresora; comprueba la orientación tras la prueba. La aceptación por la API BLE no confirma la impresión física.
 
 ## Seguridad y límites
 
 - El dispositivo Bluetooth se solicita solo tras pulsar un control.
 - No hay acceso a datos nutricionales, usuarios, recetas privadas ni inventarios personales.
-- No se envían comandos hasta la confirmación de impresión; ninguna operación actualiza firmware o ajusta parámetros permanentes.
+- No se envían comandos hasta la confirmación de impresión ni se actualiza el firmware. **Precaución:** el comando TSPL `DIRECTION` puede quedar almacenado como ajuste de impresión; si cambia la orientación al usar otras aplicaciones, revisarla allí.
 - No probar escritura en otras características sin estudiar su función. Si un trabajo falla, revisar la impresora antes de reenviarlo.
 - La web funciona en el origen de GitHub Pages y no cambia la configuración de la aplicación principal.
 - La fuente externa [CT320B-G28T](https://github.com/klks/CT320B-G28T) estudia **otro modelo**. Su código no se copia ni se reutiliza sin permiso o licencia clara.
@@ -63,6 +63,7 @@ La **bitácora técnica completa y las decisiones de arquitectura** siguen en el
 ## Estado del proyecto
 
 - **Verificado:** impresión oficial desde Clabel trade; BLE GATT conectado y servicios descubiertos desde Chrome Android.
-- **Pendiente:** primera escritura TSPL, impresión física desde el navegador, control de buffer/fragmentación, QR, fuentes oficiales, plantillas 50 × 80 / 50 × 30 / 30 × 20 y futura integración privada de «Conserva».
+- **Verificado el 29/10/2026:** **primera impresión física directa desde Chrome Android por BLE sin Clabel trade**. La usuaria aportó registro con conexión al servicio UART, notificaciones activadas, `134 bytes` en `7 fragmentos` y fotografía de salida física con textos `MIRURECETAS` / `PRUEBA BLE`. **DIRECTION 1 produjo orientación girada 180°** frente a la deseada. El registro de bytes enviado no implica prueba genérica del control de flujo, pero la impresión física confirma aceptación de un trabajo mínimo TSPL en esta CT230B.
+- **Pendiente:** prueba de calibración con **DIRECTION 0**, alineación, control de buffer/fragmentación de trabajos grandes, QR, fuentes oficiales, plantillas 50 × 80 / 50 × 30 / 30 × 20 y futura integración privada de «Conserva».
 
 Todo el laboratorio se considera **experimental**, no aprobado para la web principal.
