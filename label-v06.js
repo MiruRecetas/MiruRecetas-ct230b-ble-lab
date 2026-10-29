@@ -173,6 +173,7 @@ function updateV06Buttons(){
  const connected=!!(device&&device.gatt&&device.gatt.connected&&writeChannel);
  let valid=false;try{v6Dates();valid=true}catch(e){}
  V6_EL("v6Label").disabled=busy||!connected||!V6_EL("v6Confirm").checked||!v6Ready||!valid;
+ V6_EL("v6Probe").disabled=busy||!connected||!V6_EL("v6ProbeConfirm").checked;
 }
 async function v6Repaint(){
  if(v6Rendering)return;v6Rendering=true;
@@ -207,6 +208,47 @@ V6_EL("v6Confirm").addEventListener("change",updateV06Buttons);
 V6_EL("v6Packed").addEventListener("change",()=>{updateV06Buttons();v6Repaint();});
 V6_EL("v6Expiry").addEventListener("change",()=>{updateV06Buttons();v6Repaint();});
 V6_EL("v6Label").addEventListener("click",v6Print);
+
+/* v0.6.1 · Test diagnóstico NATIVO, una sola etiqueta.
+ * Preserva la misma ubicación y módulo del QR original. Sin BITMAP ni
+ * cambios de densidad/calibración/motor; diferencia el canal de raster
+ * grande de los problemas que también aparecen en impresión nativa.
+ * No es un arreglo confirmado de la V0.6 ni un producto listo.
+ */
+function v6NativeProbeJob(){
+ const c=[
+  v6Header().trimEnd(),
+  'TEXT 26,38,"3",0,1,1,"MIRURECETAS · CT230B"',
+  'TEXT 26,87,"3",0,1,1,"CONTROL 50X80"',
+  'BAR 26,128,531,3',
+  'TEXT 26,177,"3",0,1,1,"PR HC GR - TEXTOS"',
+  'BAR 26,417,531,3',
+  'TEXT 26,444,"3",0,1,1,"ENVASADO / FECHAS"',
+  'BAR 26,530,531,3',
+  'TEXT 26,572,"3",0,1,1,"DESCONGELACION"',
+  'TEXT 26,607,"3",0,1,1,"Y CONSUMO"',
+  'TEXT 26,674,"3",0,1,1,"RECALENTAR"',
+  'TEXT 26,709,"3",0,1,1,"TAPADO"',
+  'TEXT 26,767,"3",0,1,1,"NOTA Y TEXTO"',
+  'BAR 26,861,531,3',
+  'TEXT 26,887,"3",0,1,1,"CONTROL OK"',
+  v6Qr(),
+  'PRINT 1,1',
+  ''
+ ].join("\r\n");
+ return encoder.encode(c);
+}
+async function v6RunNativeProbe(){
+ if(busy||!device?.gatt?.connected||!writeChannel||!V6_EL("v6ProbeConfirm").checked)return;
+ const job=v6NativeProbeJob();
+ if(!window.confirm("¿Imprimir UNA etiqueta diagnóstica 50×80 de texto TSPL nativo y QR real, sin bitmap? No modificará parámetros persistentes. Mantén el rollo 50×80."))return;
+ log("v0.6.1 · CONTROL NATIVO 50x80; QR en ("+V6_QR.x+","+V6_QR.y+") con módulo "+V6_QR.module+"; "+job.length+" bytes; 0 bitmaps. Comparar QR y zona TAPADO con foto v0.6.");
+ await transmitDiagnostic(job,"v0.6.1 CONTROL NATIVO 50×80");
+ V6_EL("v6ProbeConfirm").checked=false;updateV06Buttons();
+}
+V6_EL("v6ProbeConfirm").addEventListener("change",updateV06Buttons);
+V6_EL("v6Probe").addEventListener("click",v6RunNativeProbe);
+
 V6_EL("v6Url").href=V5_RECIPE.url;
 V6_EL("v6Packed").value=V5_EL("v5Packed").value;
 log("v0.6 · referencia Canva 50×80: identidad BN real, anillo 4/4/9 exacto, QR canónico probado en v0.5. Nuevo formato aún sin prueba física.");
