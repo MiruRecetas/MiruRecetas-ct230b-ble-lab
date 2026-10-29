@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="color-scheme" content="light">
+<title>MiruRecetas · Laboratorio CT230B BLE</title>
+<style>
+:root{--ink:#222927;--muted:#53645a;--line:#dce5df;--bg:#f5f8f6;--dark:#204332;--ok:#266b4d;--warn:#815c1f}
+*{box-sizing:border-box}body{margin:0;background:#fff;color:var(--ink);font:16px/1.48 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:730px;margin:auto;padding:26px 18px 72px}
+h1{font-size:1.6rem;line-height:1.2;margin:6px 0 9px}h2{font-size:1.12rem;margin:0 0 10px}
+header{margin-bottom:25px}.eyebrow{font-size:.75rem;letter-spacing:.12em;font-weight:700;color:var(--muted)}
+.muted,small{color:var(--muted)}.badge{display:inline-block;background:#eef4f0;color:#294d37;border-radius:20px;padding:5px 12px}
+section{border:1px solid var(--line);border-radius:14px;padding:18px;margin:15px 0}p{margin:8px 0 13px}
+button{min-height:44px;border:0;border-radius:8px;padding:12px 16px;background:var(--dark);color:#fff;font:inherit;font-weight:650;cursor:pointer}
+button.secondary{background:white;border:1px solid #aab9b1;color:var(--ink)}
+button:disabled{cursor:not-allowed;background:#e1e8e3;border-color:#d4ded8;color:#647369}
+button:focus-visible,input:focus-visible{outline:3px solid #2d8460;outline-offset:3px}
+.actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.preview{width:min(100%,420px);aspect-ratio:5/3;border:1px dashed #abb8ae;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;margin:18px auto;color:#111}
+.preview strong{font-size:1.4rem}.preview span{color:#666;font-size:.8rem}
+.switch{display:flex;gap:10px;align-items:flex-start;margin:13px 0}
+input[type=checkbox]{width:20px;height:20px;flex-shrink:0;accent-color:var(--ok)}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#14251b;color:#d6f6e0;padding:15px;border-radius:9px;max-height:320px;min-height:125px;overflow:auto;font-size:12px}
+.warn{color:var(--warn)}.tiny{font-size:.86rem}footer{font-size:.83rem;color:var(--muted);margin-top:22px}
+</style>
+</head>
+<body>
+<main>
+<header><span class="eyebrow">MIRURECETAS · LABORATORIO AISLADO</span>
+<h1>CLABEL CT230B · Prueba Bluetooth BLE</h1>
+<p class="muted">Versión 0.1 experimental · No es la web oficial ni un controlador probado. No usa Airtable, cuentas ni inventarios.</p>
+<span class="badge" role="status" id="status">Desconectado</span></header>
+
+<section>
+<h2>1 · Conexión GATT</h2>
+<p>Enciende la impresora con papel normal de 50 × 30 mm. Cierra Clabel trade y desconecta nRF Connect. En Chrome Android selecciona un dispositivo cuyo nombre empiece por <strong>CT230B</strong>. Conectarse no envía instrucciones de impresión.</p>
+<div class="actions">
+<button id="connect" type="button">Conectar impresora</button>
+<button id="disconnect" class="secondary" type="button" disabled>Desconectar</button>
+</div>
+<p class="tiny muted">Se accederá únicamente al servicio BLE de UART identificado durante el diagnóstico. No se usa Bluetooth Classic ni USB.</p>
+</section>
+
+<section>
+<h2>2 · Imprimir una prueba mínima</h2>
+<p>Prueba experimental de texto TSPL: <strong>50 × 30 mm</strong>, blanco y negro, una sola etiqueta. El éxito de conexión no garantiza compatibilidad con TSPL.</p>
+<div class="preview" aria-label="Vista ilustrativa del texto de la etiqueta"><strong>MIRURECETAS</strong><div>PRUEBA BLE</div><span>50 × 30 mm · 1 copia</span></div>
+<label class="switch"><input id="confirm" type="checkbox"><span>Confirmo que tengo el rollo estándar de <strong>50 × 30 mm</strong> y autorizo enviar <strong>una sola etiqueta</strong> de prueba.</span></label>
+<div class="actions"><button id="print" type="button" disabled>Enviar etiqueta de prueba</button></div>
+<p class="tiny warn">Se escribirán comandos únicamente tras pulsar el botón y confirmar. No se envían instrucciones de actualización del firmware, calibración permanente ni escrituras a características desconocidas.</p>
+</section>
+
+<section>
+<h2>3 · Registro local</h2>
+<div class="actions">
+<button id="copy" class="secondary" type="button">Copiar registro</button>
+<button id="clear" class="secondary" type="button">Limpiar registro</button>
+</div>
+<pre id="log" aria-live="polite"></pre>
+<p class="tiny muted">El registro se muestra solo en esta página, sin subirse a un servidor. No se solicitan ni registran MAC o números de serie. El dispositivo puede pedir permisos del sistema.</p>
+</section>
+<footer>Laboratorio independiente, no oficial ni afiliado al fabricante. Comprueba físicamente la salida antes de declarar una prueba superada. El envío por BLE no implica impresión correcta.</footer>
+</main>
+<script>
+"use strict";
+const SERVICE="49535343-fe7d-4ae5-8fa9-9fafd205e455";
+const WRITABLE="49535343-8841-43f4-a8d4-ecbe34729bb3";
+const NOTIFY="49535343-1e4d-4bd9-ba61-23c647249616";
+const byId=(id)=>document.getElementById(id);
+let device=null, writeChannel=null, notifyChannel=null, busy=false;
+const log=(message)=>{const element=byId("log");element.textContent+="["+new Date().toLocaleTimeString("es-ES")+"] "+message+"\n";element.scrollTop=element.scrollHeight;};
+function updateStatus(label){
+  byId("status").textContent=label;
+  const connected=!!(device && device.gatt && device.gatt.connected && writeChannel);
+  byId("connect").disabled=busy || connected;
+  byId("disconnect").disabled=busy || !(device && device.gatt && device.gatt.connected);
+  byId("print").disabled=busy || !connected || !byId("confirm").checked;
+}
+function clearConnection(){writeChannel=null;notifyChannel=null;updateStatus("Desconectado");}
+function wasDisconnected(){log("Impresora desconectada.");clearConnection();}
+function receivedNotification(event){
+  const value=event.target.value;
+  const bytes=new Uint8Array(value.buffer,value.byteOffset,value.byteLength);
+  log("Notificación de "+bytes.length+" bytes: "+Array.from(bytes).map(x=>x.toString(16).padStart(2,"0")).join(" "));
+}
+byId("confirm").addEventListener("change",()=>updateStatus(device && device.gatt && device.gatt.connected && writeChannel?"Conectado":"Desconectado"));
+byId("connect").addEventListener("click",async()=>{
+ if(!navigator.bluetooth){log("Web Bluetooth no está disponible. Usa Chrome Android bajo HTTPS.");return;}
+ busy=true;updateStatus("Seleccionando dispositivo...");
+ try{
+   device=await navigator.bluetooth.requestDevice({filters:[{namePrefix:"CT230B"}],optionalServices:[SERVICE]});
+   device.addEventListener("gattserverdisconnected",wasDisconnected);
+   log("Dispositivo CT230B seleccionado. Solicitando conexión GATT...");
+   const server=await device.gatt.connect();
+   const svc=await server.getPrimaryService(SERVICE);
+   const ch=await svc.getCharacteristic(WRITABLE);
+   if(!ch.properties.write && !ch.properties.writeWithoutResponse)throw new Error("No se encontró permiso de escritura");
+   writeChannel=ch;
+   log("Servicio UART accesible. WRITE="+Boolean(ch.properties.write)+"; WRITE_NO_RESPONSE="+Boolean(ch.properties.writeWithoutResponse));
+   try{
+     notifyChannel=await svc.getCharacteristic(NOTIFY);
+     notifyChannel.addEventListener("characteristicvaluechanged",receivedNotification);
+     await notifyChannel.startNotifications();
+     log("Canal de notificaciones activado.");
+   }catch(error){log("Aviso: notificaciones no disponibles: "+error.message);}
+   log("Conectado. No se han enviado comandos de impresión.");
+ }catch(error){
+   log("Error de conexión: "+error.name+": "+error.message);
+   try{if(device && device.gatt && device.gatt.connected)device.gatt.disconnect();}catch(ignore){}
+   clearConnection();
+ }finally{busy=false;updateStatus(writeChannel?"Conectado":"Desconectado");}
+});
+byId("disconnect").addEventListener("click",()=>{
+ try{if(device && device.gatt)device.gatt.disconnect();}catch(error){log(error.message);}
+ clearConnection();
+});
+const pause=(ms)=>new Promise(resolve=>setTimeout(resolve,ms));
+function testJob(){
+ return [
+  "SIZE 50 mm,30 mm",
+  "GAP 2 mm,0 mm",
+  "DIRECTION 1",
+  "CLS",
+  'TEXT 35,65,"3",0,1,1,"MIRURECETAS"',
+  'TEXT 35,130,"3",0,1,1,"PRUEBA BLE"',
+  "PRINT 1,1",
+  ""
+ ].join("\r\n");
+}
+byId("print").addEventListener("click",async()=>{
+ if(busy || !writeChannel || !device || !device.gatt.connected || !byId("confirm").checked)return;
+ if(!window.confirm("¿Enviar una única etiqueta TSPL 50 × 30 mm a la CLABEL conectada?"))return;
+ busy=true;updateStatus("Enviando...");
+ try{
+   const data=new TextEncoder().encode(testJob());
+   const chunkSize=20;
+   log("Iniciando prueba TSPL: "+data.length+" bytes en "+Math.ceil(data.length/chunkSize)+" fragmentos.");
+   for(let start=0;start<data.length;start+=chunkSize){
+     if(!device.gatt.connected)throw new Error("Bluetooth desconectado durante la transmisión");
+     const chunk=data.slice(start,start+chunkSize);
+     if(writeChannel.properties.write && typeof writeChannel.writeValueWithResponse==="function"){
+       await writeChannel.writeValueWithResponse(chunk);
+     }else if(writeChannel.properties.writeWithoutResponse && typeof writeChannel.writeValueWithoutResponse==="function"){
+       await writeChannel.writeValueWithoutResponse(chunk);
+     }else{throw new Error("No hay método Web Bluetooth de escritura compatible");}
+     await pause(75);
+   }
+   log("Todos los fragmentos enviados a la API BLE. Revisa si la impresora ha impreso.");
+   byId("confirm").checked=false;
+ }catch(error){log("Error de transmisión: "+error.name+": "+error.message+". Puede haberse enviado un trabajo parcial.");}
+ finally{busy=false;updateStatus(writeChannel && device && device.gatt.connected?"Conectado":"Desconectado");}
+});
+byId("copy").addEventListener("click",async()=>{
+ try{await navigator.clipboard.writeText(byId("log").textContent);log("Registro copiado.");}
+ catch(error){log("No se pudo copiar: "+error.message);}
+});
+byId("clear").addEventListener("click",()=>{byId("log").textContent="";});
+log("Laboratorio listo. HTTPS="+Boolean(window.isSecureContext)+"; Web Bluetooth disponible="+Boolean(navigator.bluetooth));
+updateStatus("Desconectado");
+</script>
+</body>
+</html>
