@@ -14,7 +14,7 @@ h1{font-size:1.6rem;line-height:1.2;margin:6px 0 9px}h2{font-size:1.12rem;margin
 header{margin-bottom:25px}.eyebrow{font-size:.75rem;letter-spacing:.12em;font-weight:700;color:var(--muted)}
 .muted,small{color:var(--muted)}.badge{display:inline-block;background:#eef4f0;color:#294d37;border-radius:20px;padding:5px 12px}
 section{border:1px solid var(--line);border-radius:14px;padding:18px;margin:15px 0}p{margin:8px 0 13px}
-button{min-height:44px;border:0;border-radius:8px;padding:12px 16px;background:var(--dark);color:#fff;font:inherit;font-weight:650;cursor:pointer}
+select{font:inherit;padding:9px;border:1px solid #aab9b1;border-radius:8px;color:var(--ink);background:#fff;max-width:100%}button{min-height:44px;border:0;border-radius:8px;padding:12px 16px;background:var(--dark);color:#fff;font:inherit;font-weight:650;cursor:pointer}
 button.secondary{background:white;border:1px solid #aab9b1;color:var(--ink)}
 button:disabled{cursor:not-allowed;background:#e1e8e3;border-color:#d4ded8;color:#647369}
 button:focus-visible,input:focus-visible{outline:3px solid #2d8460;outline-offset:3px}
@@ -31,7 +31,7 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#14251b;color:#d6f6e0
 <main>
 <header><span class="eyebrow">MIRURECETAS · LABORATORIO AISLADO</span>
 <h1>CLABEL CT230B · Prueba Bluetooth BLE</h1>
-<p class="muted">Versión 0.1 experimental · No es la web oficial ni un controlador probado. No usa Airtable, cuentas ni inventarios.</p>
+<p class="muted">Versión 0.2 experimental · No es la web oficial ni un controlador probado. No usa Airtable, cuentas ni inventarios.</p>
 <span class="badge" role="status" id="status">Desconectado</span></header>
 
 <section>
@@ -46,11 +46,11 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#14251b;color:#d6f6e0
 
 <section>
 <h2>2 · Imprimir una prueba mínima</h2>
-<p>Prueba experimental de texto TSPL: <strong>50 × 30 mm</strong>, blanco y negro, una sola etiqueta. El éxito de conexión no garantiza compatibilidad con TSPL.</p>
+<p>Prueba experimental de texto TSPL: <strong>50 × 30 mm</strong>, blanco y negro, una sola etiqueta. El envío TSPL ya produjo una impresión real, pero la orientación anterior se observó invertida.</p>
 <div class="preview" aria-label="Vista ilustrativa del texto de la etiqueta"><strong>MIRURECETAS</strong><div>PRUEBA BLE</div><span>50 × 30 mm · 1 copia</span></div>
-<label class="switch"><input id="confirm" type="checkbox"><span>Confirmo que tengo el rollo estándar de <strong>50 × 30 mm</strong> y autorizo enviar <strong>una sola etiqueta</strong> de prueba.</span></label>
+<p><label for="direction"><strong>Orientación de prueba:</strong></label> <select id="direction"><option value="0">DIRECTION 0 · corrección propuesta (180°)</option><option value="1">DIRECTION 1 · referencia anterior (invertida)</option></select></p><p class="tiny muted">En v0.1 se imprimió con DIRECTION 1 y salió boca abajo. El valor 0 es una hipótesis a confirmar físicamente; no cambiaremos tamaño, texto ni posición, para aislar esta diferencia. El comando DIRECTION puede quedar guardado en la impresora.</p><label class="switch"><input id="confirm" type="checkbox"><span>Confirmo que tengo el rollo estándar de <strong>50 × 30 mm</strong> y autorizo enviar <strong>una sola etiqueta</strong> de prueba.</span></label>
 <div class="actions"><button id="print" type="button" disabled>Enviar etiqueta de prueba</button></div>
-<p class="tiny warn">Se escribirán comandos únicamente tras pulsar el botón y confirmar. No se envían instrucciones de actualización del firmware, calibración permanente ni escrituras a características desconocidas.</p>
+<p class="tiny warn">Solo se enviarán comandos tras pulsar y confirmar. No se actualiza firmware ni se escriben características desconocidas. Atención: según la sintaxis TSPL, DIRECTION puede persistir como preferencia de orientación de la impresora.</p>
 </section>
 
 <section>
@@ -118,11 +118,11 @@ byId("disconnect").addEventListener("click",()=>{
  clearConnection();
 });
 const pause=(ms)=>new Promise(resolve=>setTimeout(resolve,ms));
-function testJob(){
+function testJob(direction){
  return [
   "SIZE 50 mm,30 mm",
   "GAP 2 mm,0 mm",
-  "DIRECTION 1",
+  `DIRECTION ${direction}`,
   "CLS",
   'TEXT 35,65,"3",0,1,1,"MIRURECETAS"',
   'TEXT 35,130,"3",0,1,1,"PRUEBA BLE"',
@@ -132,12 +132,14 @@ function testJob(){
 }
 byId("print").addEventListener("click",async()=>{
  if(busy || !writeChannel || !device || !device.gatt.connected || !byId("confirm").checked)return;
- if(!window.confirm("¿Enviar una única etiqueta TSPL 50 × 30 mm a la CLABEL conectada?"))return;
+ const direction=byId("direction").value;
+ if(!["0","1"].includes(direction))return;
+ if(!window.confirm("¿Enviar una única etiqueta TSPL 50 × 30 mm con DIRECTION "+direction+" a la CLABEL conectada?"))return;
  busy=true;updateStatus("Enviando...");
  try{
-   const data=new TextEncoder().encode(testJob());
+   const data=new TextEncoder().encode(testJob(direction));
    const chunkSize=20;
-   log("Iniciando prueba TSPL: "+data.length+" bytes en "+Math.ceil(data.length/chunkSize)+" fragmentos.");
+   log("Iniciando prueba TSPL DIRECTION "+direction+": "+data.length+" bytes en "+Math.ceil(data.length/chunkSize)+" fragmentos.");
    for(let start=0;start<data.length;start+=chunkSize){
      if(!device.gatt.connected)throw new Error("Bluetooth desconectado durante la transmisión");
      const chunk=data.slice(start,start+chunkSize);
