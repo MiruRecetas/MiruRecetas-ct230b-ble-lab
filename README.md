@@ -67,17 +67,36 @@ La **bitácora técnica completa y las decisiones de arquitectura** siguen en el
 - **Verificado el 29/10/2026:** v0.2 con **`DIRECTION 0`** produjo una segunda etiqueta real con «MIRURECETAS / PRUEBA BLE» en orientación legible. Registro de la usuaria: conexión y notificaciones, **134 bytes/7 fragmentos** recibidos por la API BLE, fotografía física.
 - **Pendiente:** robustez de buffers y trabajos grandes, primera prueba de QR nativo, primera prueba de bitmap binario, fuentes oficiales, plantillas 50 × 80 / 50 × 30 / 30 × 20 y futura integración privada de «Conserva».
 
-## Nuevos ensayos gráficos v0.3 (aún no comprobados físicamente)
+## Ensayos gráficos v0.3 · resultados físicos verificados
 
 La pantalla tiene dos botones de **impresión separada**, ambos sobre papel estándar **50 × 30 mm**, con casilla de autorización y confirmación individual antes de imprimir:
 
 1. **Prueba QR nativo (una etiqueta):** utiliza comandos TSPL `TEXT`, `BAR` y `QRCODE`, con un QR que apunta a la portada pública `https://mirurecetas.github.io/`. Permite confirmar si el firmware admite su propio generador QR.
 2. **Prueba BITMAP (una etiqueta):** utiliza `BITMAP 35,152,12,72,0,<bytes>` con una imagen de 96 × 72 puntos, **864 bytes de raster monocromo**, para probar transporte binario real. La prueba presenta tres patrones geométricos. Bajo TSPL estándar clásico se envían píxeles negros como bit 0 y blancos como bit 1; la polaridad también **debe verificarse físicamente** con este modelo.
 
-Las dos pruebas mantienen `DIRECTION 0`, `PRINT 1,1`, transmisión BLE en paquetes de 20 bytes y pausa entre paquetes. Son ensayos controlados; **no** constituyen validación de su firmware para trabajos gráficos completos, ni fuerzan la integración con la web principal. Si aparece alimentación anómala de papel, impresión ilegible o desconexión, detener y compartir el registro; no reiterar hasta estudiar el fallo.
+Las dos pruebas mantienen `DIRECTION 0`, `PRINT 1,1`, transmisión BLE en paquetes de 20 bytes y pausa entre paquetes. **Ambas se han ejecutado físicamente** en la CT230B. El QR de la prueba completa **se imprime pero no se puede leer** (también falló el generado desde Clabel trade); varios módulos aparecen unidos en fotos de detalle. El bitmap de 96×72 (864 bytes) **se imprimió con sus tres tramas bien diferenciadas**, notablemente nítido. Esto confirma el transporte de datos binarios de 1 KB en este firmware, no todavía trabajos grandes. Si aparece alimentación anómala de papel, impresión ilegible o desconexión, detener y compartir el registro; no reiterar hasta estudiar el fallo.
 
 ### Secuencia recomendada
 
-Primero la prueba de **QR nativo**; observar si se imprime y si la cámara lo lee. Si funciona, volver a confirmar la casilla y ejecutar **BITMAP** por separado. Enviar fotografía y registro de cada una. La impresión gráfica completa de «Cebollas rellenas», que deberá cargar las **fuentes oficiales reales** y usar valores nutricionales canónicos, será una fase posterior.
+Primero la prueba de **QR nativo**; observar si se imprime y si la cámara lo lee. Si funciona, volver a confirmar la casilla y ejecutar **BITMAP** por separado. Enviar fotografía y registro de cada una. La impresión gráfica completa de «Cebollas rellenas», que deberá cargar las **fuentes oficiales reales** y usar valores nutricionales canónicos, será una fase posterior. Ahora se prioriza la legibilidad comprobable del QR.
+
+## Pruebas de QR v0.4 · preparadas, no ejecutadas
+
+En la primera prueba v0.3 el código TSPL `QRCODE 335,65,M,4,A,0,M2,S7,"https://mirurecetas.github.io/"` imprimió un QR demasiado compacto o con blancos internos insuficientes para que la cámara lo leyera, incluso usando una foto macro. Este diagnóstico de impresión se considera **confirmado como ilegible**, pero **no está identificada la causa exacta** (tamaño de módulo, longitud del contenido, densidad, variación de firmware, proceso térmico).
+
+A partir de la documentación de TSPL de TSC y recomendaciones de tamaño de módulos QR de DENSO WAVE, la versión 0.4 aporta un nuevo bloque de ensayos **separados y con confirmación explícita**, sin modificar la densidad de impresión:
+
+1. **QR nativo corto:** `QRCODE 340,55,M,6,A,0,M2,S7,"MR-QR-01"`, un único trabajo de texto + QR con módulo de seis puntos de 300 dpi y contenido muy corto. El móvil debe devolver el **texto** `MR-QR-01` (no un enlace).
+2. **QR bitmap:** matriz QR **versión 1 ECC M**, texto `MR-QR-01`, 21×21 módulos más zona de silencio de cuatro módulos en cada lado (29×29 módulos); raster 174×174 píxeles a seis píxeles por módulo, 22 bytes por fila × 174 filas = **3.828 bytes**. La matriz se generó con un codificador estándar y se validó mediante decodificación informática antes de incorporarla al código. Este ensayo reutiliza el comando `BITMAP` y la polaridad negro=bit 0/ blanco=bit 1 que produjo correctamente las tramas anteriores. Sigue pendiente la prueba física.
+
+**Secuencia:** primero QR nativo corto/grande, confirmar lectura; **solo si no se lee**, QR bitmap en una etiqueta nueva, confirmar lectura. El primer ensayo puede resolver el problema sin consumir etiquetas ni tiempo extra. No modificar otros parámetros ni repetir automáticamente ante fallos. Ambos botones vuelven a exigir casilla y diálogo de confirmación. En ambos casos `DIRECTION 0` y `PRINT 1,1`.
+
+Estos QR **son diagnósticos**, no contienen URL de receta ni lote privado. Cuando funcionen, se probará una URL pública corta y estable y su lectura tras congelación real; si vuelve a fallar por longitud, usar un identificador corto que dirija a una ruta o servidor apropiado, sin exponer datos personales.
+
+### Estado de validación
+
+- **Confirmado en hardware:** conexión GATT desde Chrome, TSPL texto, `DIRECTION 0`, QRCODE renderizado (ilegible) y BITMAP 864 bytes (patrones legibles).
+- **Pendiente en hardware:** QR corto de seis puntos y QR raster de 3.828 bytes; robustez con trabajos mayores; tipografías reales, logotipo y anillo completo.
+- **Sin cambios en producción:** ningún dato de Airtable ni de usuario, ni PWA, ni cambios de configuración del publicador.
 
 Todo el laboratorio se considera **experimental**, no aprobado para la web principal.
