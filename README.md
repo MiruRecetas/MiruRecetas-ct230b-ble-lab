@@ -138,3 +138,29 @@ No se ha modificado la PWA de producción, su repositorio público, el índice d
 
 
 Todo el laboratorio se considera **experimental**, no aprobado para la web principal.
+
+
+## V0.6 · Etiqueta editorial vertical 50 × 80 mm basada en Canva · Cebollas rellenas
+
+**Alcance:** prueba aislada de laboratorio, añadida como sección 6 sin eliminar ni cambiar los botones v0.1–v0.5. El Canva de la usuaria no se modifica. Documento de referencia: \`01 · Ración completa · propuesta v1 MiruRecetas (editable)\`, diseño \`DAHZbhgmFc0\` de **189 × 302 unidades Canva** (equivalentes a 50 × 80 mm). La composición reproduce su jerarquía: título grande arriba, anillo B/N y macros a la derecha, fecha en bloque horizontal, instrucciones+nota a izquierda, QR abajo a derecha, firma MiruRecetas al pie. Se **elimina** el donut coloreado superpuesto que aparece en la captura porque no coincide con los datos y tapa las fechas.
+
+**Nutrición oficial usada por 1 ración:** 338,68 kcal; PR 15,92 g; HC 27,50 g; GR 17,67 g. El anillo se traza matemáticamente de **63,68 / 110,00 / 159,03 kcal = 19,1407 % / 33,0618 % / 47,7978 %**, normalizando el total energético derivado de macros (**332,71 kcal**). Se mantienen intactas las **338,68 kcal oficiales en el centro**, sin recalcularlas ni inventar equivalencias. Patrones impresos: **negro sólido proteínas, diagonal hidratos, puntos grasas**; sus símbolos de leyenda llevan el mismo patrón. Una diferencia entre 332,71 y 338,68 puede tener causas nutricionales distintas que no determinamos aquí.
+
+**Marca:** isotipo real BN \`assets/isotipo-bn.svg\` procedente del canónico, Bricolage Grotesque 700/600 para título y firma, Geist 500/700 para cuerpos y cifras, desde el CSS web oficial. Se bloquea la etiqueta si faltan los pesos esenciales. Blanco puro, tinta negra, reglas de tres píxeles para legibilidad. El texto «NOTA: El huevo puede variar de textura al congelar» reproduce el alcance de la advertencia culinaria existente y no es una indicación genérica de seguridad.
+
+**Tecnología y geometría:**
+- \`SIZE 50 mm,80 mm\`, \`GAP 2 mm,0 mm\`, \`DIRECTION 0\`, **1** \`PRINT 1,1\`.
+- Lienzo 590 × 945 puntos a 300 dpi y cinco bandas BITMAP 1-bit, para no enviar la gran zona QR en blanco. Bandas \`x,y,w,h\` en puntos: \`0,0,576,115\`, \`0,130,576,275\`, \`0,430,576,92\`, \`0,546,344,300\`, \`0,873,576,72\`. Total **52.788 bytes reales de píxeles**, con 4 reglas de barra nativa.
+- **Un QR nativo** \`QRCODE 352,638,M,5,A,0,M2,S7\`, URL **exacta y pública** \`https://mirurecetas.github.io/menu-anual-recetas/recetas/cebollas-rellenas/\`, sin redirecciones ni nuevo repositorio. La URL ha sido impresa y escaneada en v0.5, **pero el tamaño físico/posicionamiento v0.6 queda pendiente**.
+- **Trabajo simulado**: **53.146 bytes, 2.658 fragmentos BLE de 20 bytes**; salida única y tamaño inferior a barrera preventiva 75 KB. Transportador BLE v0.5 sin cambios: \`WRITE\` con 75 ms entre fragmentos. Puede tardar **varios minutos**, potencialmente >3 min. **No hay reintentos automáticos.**
+- Dos fechas editables; envasado sugerido como día local, consumo preferente vacío y obligatorio, sin plazo predeterminado. Validación de formato, día real y orden cronológico. La vista previa dibuja todos los elementos salvo **matriz QR** (cuadro reservado claramente rotulado); el QR se genera nativamente en la impresora y no está falseado en el preview.
+
+**Pendiente antes de aprobar:** una prueba física real **en el rollo 50 × 80 mm**, comprobar salida completa, márgenes, posición y lectura QR, tramas, tamaño de Geist, contraste de reglas, ubicación del logo, posible corte entre bloques y tiempos BLE; copiar el registro y fotografiar etiqueta. **Éxito de v0.5 no acredita la v0.6.** No se modifica la PWA principal, Airtable, receta, nutrición, publicación habitual ni las fuentes canónicas.
+
+**Uso:**
+1. Abrir el laboratorio HTTPS en Chrome Android y confirmar que existe la sección **«V0.6 · Etiqueta editorial 50 × 80 mm»**.
+2. Cambiar físicamente el rollo, cerrar Clabel trade/nRF Connect, conectar CT230B.
+3. Introducir ambas fechas (no usar vencimientos ficticios como si fueran normas alimentarias).
+4. Marcar la casilla de autorización e imprimir **una sola etiqueta V0.6**. Esperar a completar el registro y observar la salida; no reiniciar si parece lento.
+5. Revisar la salida física y escanear el QR. Si algo falla, **no repetir**: copiar el registro y aportar foto.
+
