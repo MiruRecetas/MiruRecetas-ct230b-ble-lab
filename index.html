@@ -123,6 +123,16 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#14251b;color:#d6f6e0
 <p><a id="v6Url" target="_blank" rel="noopener noreferrer">Abrir receta pública exacta (destino del QR)</a></p>
 <label class="switch"><input id="v6Confirm" type="checkbox"><span>Confirmo que he instalado <strong>una etiqueta de 50 × 80 mm</strong> en la CT230B y autorizo <strong>una única impresión experimental</strong>. Comprendo que pueden transcurrir varios minutos y que no hay reintento automático.</span></label>
 <div class="actions"><button id="v6Label" type="button" disabled>Imprimir V0.6 · 50 × 80 mm (una etiqueta)</button></div>
+
+<div style="border-top:1px solid #dce5df;margin-top:20px;padding-top:16px">
+<h3>6A · Diagnóstico V0.6.1 de líneas y QR · SIN BITMAP</h3>
+<p>La foto de la primera impresión v0.6 muestra letras verticalmente comprimidas y posibles filas defectuosas en el QR. Este control mantiene el <strong>mismo papel 50 × 80 mm</strong>, el mismo <strong>QR nativo con la URL real, posición (352,638) y módulo 5</strong>, pero sustituye los cinco mapas de bits de 53 KB por varias líneas de texto nativo de prueba. Permite diferenciar un problema relacionado con el raster grande/buffer de uno que también afecta a los trazos que dibuja la propia impresora.</p>
+<p class="tiny muted"><strong>Importante:</strong> la tipografía del diagnóstico es la incorporada a la impresora y no representa el diseño final. Es deliberado para aislar variables. No se cambia densidad, velocidad, calibración ni firmware. La sección V0.6 completa permanece intacta para comparación.</p>
+<label class="switch"><input id="v6ProbeConfirm" type="checkbox"><span>Tengo papel <strong>50 × 80 mm</strong> y autorizo <strong>una única etiqueta de control nativo con QR</strong>. No repetiré si aparecen fallos.</span></label>
+<div class="actions"><button id="v6Probe" type="button" disabled>Diagnóstico rápido · Texto nativo + QR (1 etiqueta)</button></div>
+<p class="tiny warn">Comprueba visualmente las líneas Y CONSUMO, TAPADO y los tres cuadrados del QR; escanéalo. Si el QR nativo falla igual que el anterior, antes de modificar el diseño debemos revisar papel, rodillo y cabezal. Un registro de envío exitoso <strong>no demuestra</strong> una impresión sin defectos.</p>
+</div>
+
 <p class="tiny warn">Prueba de formato nuevo. El QR nativo se colocará en la esquina inferior derecha y dejará aire respecto al texto. El trabajo usa cinco bitmaps segmentados y el QR nativo, con pausas BLE conservadoras de 75 ms: su duración puede ser varios minutos. Si hay cortes o errores, no repitas: copia el registro. El recuadro QR en la vista previa es una <strong>reserva</strong>, no un código ficticio.</p>
 </section>
 
