@@ -47,7 +47,7 @@ Una característica adicional terminada en `0318` se ha descubierto pero **no de
 6. Cuando quieras intentar el primer envío TSPL, marcar la casilla de confirmación, pulsar **Enviar etiqueta de prueba** y aceptar el diálogo. Se envía **una única etiqueta de texto**.
 7. Revisar si físicamente salió una etiqueta, su posición y cualquier indicación de error. Copiar el registro si necesitas compartirlo; no compartir direcciones ni identificadores privados.
 
-El prototipo v0.2 prepara instrucciones de texto TSPL `SIZE 50 mm,30 mm`, `GAP 2 mm,0 mm`, `DIRECTION 1`, `CLS`, `TEXT` y `PRINT 1,1`, transmitidas en bloques de hasta **20 bytes**, con una pequeña pausa. **Son parámetros de ensayo**, no calibración validada del firmware o adhesivo. La pantalla permite seleccionar **`DIRECTION 0`** (propuesta correctiva) o **`DIRECTION 1`** (valor de la prueba real anterior). Cambiar este parámetro TSPL puede persistir en la configuración de la impresora; comprueba la orientación tras la prueba. La aceptación por la API BLE no confirma la impresión física.
+El prototipo v0.3 conserva instrucciones de texto TSPL `SIZE 50 mm,30 mm`, `GAP 2 mm,0 mm`, `DIRECTION 1`, `CLS`, `TEXT` y `PRINT 1,1`, transmitidas en bloques de hasta **20 bytes**, con una pequeña pausa. **Son parámetros de ensayo**, no calibración validada del firmware o adhesivo. La pantalla permite seleccionar **`DIRECTION 0`** (propuesta correctiva) o **`DIRECTION 1`** (valor de la prueba real anterior). **Se ha verificado en la unidad CT230B que `DIRECTION 0` imprime el texto en la orientación de lectura deseada**, mientras que `DIRECTION 1` lo imprime invertido. Cambiar este parámetro TSPL puede persistir en la configuración de la impresora; comprueba la orientación tras la prueba. La aceptación por la API BLE no confirma la impresión física.
 
 ## Seguridad y límites
 
@@ -63,7 +63,21 @@ La **bitácora técnica completa y las decisiones de arquitectura** siguen en el
 ## Estado del proyecto
 
 - **Verificado:** impresión oficial desde Clabel trade; BLE GATT conectado y servicios descubiertos desde Chrome Android.
-- **Verificado el 29/10/2026:** **primera impresión física directa desde Chrome Android por BLE sin Clabel trade**. La usuaria aportó registro con conexión al servicio UART, notificaciones activadas, `134 bytes` en `7 fragmentos` y fotografía de salida física con textos `MIRURECETAS` / `PRUEBA BLE`. **DIRECTION 1 produjo orientación girada 180°** frente a la deseada. El registro de bytes enviado no implica prueba genérica del control de flujo, pero la impresión física confirma aceptación de un trabajo mínimo TSPL en esta CT230B.
-- **Pendiente:** prueba de calibración con **DIRECTION 0**, alineación, control de buffer/fragmentación de trabajos grandes, QR, fuentes oficiales, plantillas 50 × 80 / 50 × 30 / 30 × 20 y futura integración privada de «Conserva».
+- **Verificado el 29/10/2026:** **primera impresión física directa desde Chrome Android por BLE sin Clabel trade**. La usuaria aportó registro con conexión al servicio UART, notificaciones activadas, `134 bytes` en `7 fragmentos` y fotografía de salida física con textos `MIRURECETAS` / `PRUEBA BLE`. **DIRECTION 1 produjo orientación girada 180°** frente a la deseada. **DIRECTION 0 (segunda prueba física) imprime correctamente:** captura de registro de **134 bytes/7 fragmentos** y fotografía con ambos textos legibles. El registro de bytes enviado no implica prueba genérica del control de flujo, pero la impresión física confirma aceptación de un trabajo mínimo TSPL en esta CT230B.
+- **Verificado el 29/10/2026:** v0.2 con **`DIRECTION 0`** produjo una segunda etiqueta real con «MIRURECETAS / PRUEBA BLE» en orientación legible. Registro de la usuaria: conexión y notificaciones, **134 bytes/7 fragmentos** recibidos por la API BLE, fotografía física.
+- **Pendiente:** robustez de buffers y trabajos grandes, primera prueba de QR nativo, primera prueba de bitmap binario, fuentes oficiales, plantillas 50 × 80 / 50 × 30 / 30 × 20 y futura integración privada de «Conserva».
+
+## Nuevos ensayos gráficos v0.3 (aún no comprobados físicamente)
+
+La pantalla tiene dos botones de **impresión separada**, ambos sobre papel estándar **50 × 30 mm**, con casilla de autorización y confirmación individual antes de imprimir:
+
+1. **Prueba QR nativo (una etiqueta):** utiliza comandos TSPL `TEXT`, `BAR` y `QRCODE`, con un QR que apunta a la portada pública `https://mirurecetas.github.io/`. Permite confirmar si el firmware admite su propio generador QR.
+2. **Prueba BITMAP (una etiqueta):** utiliza `BITMAP 35,152,12,72,0,<bytes>` con una imagen de 96 × 72 puntos, **864 bytes de raster monocromo**, para probar transporte binario real. La prueba presenta tres patrones geométricos. Bajo TSPL estándar clásico se envían píxeles negros como bit 0 y blancos como bit 1; la polaridad también **debe verificarse físicamente** con este modelo.
+
+Las dos pruebas mantienen `DIRECTION 0`, `PRINT 1,1`, transmisión BLE en paquetes de 20 bytes y pausa entre paquetes. Son ensayos controlados; **no** constituyen validación de su firmware para trabajos gráficos completos, ni fuerzan la integración con la web principal. Si aparece alimentación anómala de papel, impresión ilegible o desconexión, detener y compartir el registro; no reiterar hasta estudiar el fallo.
+
+### Secuencia recomendada
+
+Primero la prueba de **QR nativo**; observar si se imprime y si la cámara lo lee. Si funciona, volver a confirmar la casilla y ejecutar **BITMAP** por separado. Enviar fotografía y registro de cada una. La impresión gráfica completa de «Cebollas rellenas», que deberá cargar las **fuentes oficiales reales** y usar valores nutricionales canónicos, será una fase posterior.
 
 Todo el laboratorio se considera **experimental**, no aprobado para la web principal.
