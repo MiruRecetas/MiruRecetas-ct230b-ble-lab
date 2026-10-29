@@ -99,4 +99,39 @@ Estos QR **son diagnósticos**, no contienen URL de receta ni lote privado. Cuan
 - **Pendiente en hardware:** QR corto de seis puntos y QR raster de 3.828 bytes; robustez con trabajos mayores; tipografías reales, logotipo y anillo completo.
 - **Sin cambios en producción:** ningún dato de Airtable ni de usuario, ni PWA, ni cambios de configuración del publicador.
 
+
+## v0.5 · Primera etiqueta real «Cebollas rellenas» (50 × 30 mm)
+
+**Estado:** implementada en el laboratorio, **pendiente de primera impresión y lectura física** en la CT230B. Se preservan todas las pruebas v0.1–v0.4.
+
+### Datos canónicos y URL sin abreviadores
+
+- **Fuente de receta:** \`MiruRecetas/mirurecetas-web-source/main:datos/recetas/cebollas-rellenas.json\`; verificación adicional en la [ficha pública existente](https://mirurecetas.github.io/menu-anual-recetas/recetas/cebollas-rellenas/) y en \`menu-anual-recetas/main:indice-recetas.json\`.
+- **URL exacta de ambos QR:** \`https://mirurecetas.github.io/menu-anual-recetas/recetas/cebollas-rellenas/\`. **No se crean redirecciones ni repositorios adicionales**. La impresión QR aislada y la etiqueta completa comparten exactamente la cadena y el mismo comando \`QRCODE 356,84,M,5,A,0,M2,S7\` (solo cambia la presencia del bitmap izquierdo).
+- **Valores oficiales publicados por ración:** 338,68 kcal; proteínas 15,92 g; hidratos 27,50 g; grasas 17,67 g. **1 ración por bolsa**. No inventar kcal a partir de 4/4/9: esos factores solo distribuyen el anillo.
+- **Anillo energético monocromo:** proteínas 19,13979 %, hidratos 33,06183 %, grasas 47,79838 % de la energía derivada de macronutrientes. Un único segmento por macro, con negro/diagonal/punteado. El centro presenta las kcal oficiales.
+- **Identidad:** \`assets/isotipo-bn.svg\`, adaptación estrictamente monocroma de los seis trazados de \`assets/marca/isotipo.svg\` publicados en \`mirurecetas-web-source\`, la misma geometría aprobada. Tipografía en pantalla y en el raster térmico: **Bricolage Grotesque 600** (marca/título) y **Geist** (textos). Se cargan las **mismas familias y URL de Google Fonts** usadas por la ficha pública; **no se incluyen archivos de fuentes** y se bloquea la impresión completa si fallan.
+- **Icono de categoría** \`guisos-legumbres\`: Lucide \`cooking-pot\`, la misma designación que aparece en el HTML de la receta. El trazado es el original Lucide (licencia ISC).
+- **Fechas:** dos controles editables «Envasado y congelación» y «Consumo preferente». Primera fecha sugerida por el navegador como fecha local actual; la segunda deliberadamente **sin fecha automática**: quien imprime decide la conservación. No asignamos lotes imaginarios. En la etiqueta compacta la fecha aparece \`dd/mm/aa\`; la fecha vacía bloquea el botón completo.
+- **Instrucción compacta:** «Nevera · recalentar tapado», coherente con las instrucciones de la receta. La ficha original advierte de posible pérdida de textura por el huevo cocido si se congela: el etiquetado no anula esa advertencia.
+
+### Qué envía cada botón
+
+1. **«Imprimir QR de la receta (solo QR)»:** una etiqueta completa 50 × 30 con únicamente **QR nativo TSPL** situado en \`x356,y84\`, \`M\` y **5 dots por módulo**, que apunta a la URL larga real. Prueba deliberadamente más exigente que los QR cortos de v0.4. **Antes de declararlo válido, escanearlo**.
+2. **«Imprimir etiqueta real completa»:** una única etiqueta 50 × 30. Un **bitmap 1-bit** de 304 × 330 puntos ocupa la banda izquierda; se imprime mediante \`BITMAP 12,12,38,330,0\` (12.540 bytes de imagen), y después se compone **el mismo comando QR nativo** y \`PRINT 1,1\`. El bitmap se rasteriza en el navegador a 300 dpi con un umbral conservador de negro; **no se exporta ni importa PNG**. Evita una imagen con texto aproximado: el propio navegador dibuja con las fuentes oficiales reales.
+3. **Vista previa:** representa fielmente la banda izquierda rasterizada; la zona del QR se indica expresamente como **reserva**, no se pinta una matriz ficticia. En la impresión real, el QR lo genera la impresora por TSPL.
+
+El bitmap completo supera con mucho los **3.828 bytes de QR bitmap** ya probados en v0.4; con fragmentos BLE de 20 bytes y pausas de 75 ms, puede requerir cientos de transmisiones y fallar por buffers, desconexiones o limitaciones del firmware. **No probado físicamente todavía**. No cambiar simultáneamente densidad, tamaño de módulo y orientación. Detener y compartir el registro si hay fallos. Cada botón requiere conexión BLE, casilla de autorización y confirmación del navegador; la impresión completa requiere además activos correctos y ambas fechas válidas.
+
+### Próxima validación física
+
+- Abrir GitHub Pages, verificar que se lee **«Versión 0.5 experimental»**. Cerrar Clabel trade/nRF Connect.
+- Usar el **rollo estándar 50 × 30**, conectar desde Chrome Android.
+- Pulsar **solo QR real**, escanear y verificar la URL exacta de la ficha pública. La lectura del QR anterior \`MR-QR-01\` no garantiza la lectura de esta URL de 75 caracteres con módulo de 5 puntos.
+- Completar fechas, imprimir **una etiqueta real completa**, observar alineación, contraste, tramas, tipografías, icono y que **el mismo QR** sea legible integrado.
+- Registrar capturas, fotografía física y log **en la bitácora privada de arquitectura**, no en repositorio público.
+
+No se ha modificado la PWA de producción, su repositorio público, el índice de recetas, Airtable, nutrición, publicación Actions ni el futuro espacio personal Conserva. El laboratorio no almacena inventario ni lotes; **v0.5 es una prueba, no la función productiva**.
+
+
 Todo el laboratorio se considera **experimental**, no aprobado para la web principal.
