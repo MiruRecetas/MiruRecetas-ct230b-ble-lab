@@ -6,6 +6,9 @@
 <meta name="robots" content="noindex,nofollow">
 <meta name="color-scheme" content="light">
 <title>MiruRecetas · Laboratorio CT230B BLE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--ink:#222927;--muted:#53645a;--line:#dce5df;--bg:#f5f8f6;--dark:#204332;--ok:#266b4d;--warn:#815c1f}
 *{box-sizing:border-box}body{margin:0;background:#fff;color:var(--ink);font:16px/1.48 system-ui,-apple-system,"Segoe UI",sans-serif}
@@ -25,13 +28,18 @@ button:focus-visible,input:focus-visible{outline:3px solid #2d8460;outline-offse
 input[type=checkbox]{width:20px;height:20px;flex-shrink:0;accent-color:var(--ok)}
 pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#14251b;color:#d6f6e0;padding:15px;border-radius:9px;max-height:320px;min-height:125px;overflow:auto;font-size:12px}
 .warn{color:var(--warn)}.tiny{font-size:.86rem}footer{font-size:.83rem;color:var(--muted);margin-top:22px}
+.v5-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:10px;margin:12px 0}
+.v5-field{display:grid;gap:4px;color:var(--muted);font-size:.82rem}
+.v5-field input{border:1px solid #adb9b1;border-radius:7px;min-height:44px;padding:8px 10px;font:inherit;color:var(--ink)}
+#v5Preview{width:100%;max-width:590px;height:auto;aspect-ratio:590/354;border:1px solid #bac8bf;display:block;margin:14px auto 6px;background:white}
+.url-text{overflow-wrap:anywhere;font:12px/1.4 ui-monospace,monospace;color:#435b4d}
 </style>
 </head>
 <body>
 <main>
 <header><span class="eyebrow">MIRURECETAS · LABORATORIO AISLADO</span>
 <h1>CLABEL CT230B · Prueba Bluetooth BLE</h1>
-<p class="muted">Versión 0.4 experimental · No es la web oficial ni un controlador probado. No usa Airtable, cuentas ni inventarios.</p>
+<p class="muted">Versión 0.5 experimental · No es la web oficial ni un controlador probado. No usa Airtable, cuentas ni inventarios.</p>
 <span class="badge" role="status" id="status">Desconectado</span></header>
 
 <section>
@@ -74,12 +82,33 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#14251b;color:#d6f6e0
 <button type="button" id="shortQR" disabled>QR nativo corto y grande</button>
 <button type="button" id="rasterQR" disabled>QR bitmap con margen blanco</button>
 </div>
-<p class="tiny muted">Empieza por el QR nativo. Solo si vuelve a fallar, prueba el QR bitmap. Cada botón requiere confirmación individual. La matriz rasterizada se ha comprobado informáticamente; queda pendiente su impresión física.</p>
+<p class="tiny muted">Empieza por el QR nativo. Solo si vuelve a fallar, prueba el QR bitmap. Cada botón requiere confirmación individual. Ambas variantes de QR corto ya se han impreso y escaneado correctamente. La URL larga se prueba en v0.5.</p>
 <p class="tiny warn">No repitas el mismo envío si hay avance anómalo de papel, datos ilegibles o desconexión: detén la prueba y comparte el registro.</p>
 </section>
 
+<section id="v5">
+<h2>5 · Etiqueta real 50 × 30 mm · Cebollas rellenas (v0.5)</h2>
+<p><strong>Diseño de prueba con identidad aprobada:</strong> isotipo vectorial oficial en BN, <strong>Bricolage Grotesque 600</strong> para título y marca, <strong>Geist</strong> para información, anillo con tres patrones originales, nutrición publicada <strong>por una ración</strong>, fechas editables y QR TSPL con la <strong>URL real de la receta</strong>.</p>
+<p>QR de <strong>módulo 5 puntos</strong> (su URL es más larga que MR-QR-01). Aún no sabemos si este tamaño será escaneable: ambos botones generan <strong>exactamente el mismo QR</strong>, con igual contenido, error, tamaño y posición.</p>
+<canvas id="v5Preview" width="590" height="354" role="img" aria-label="Vista previa de la etiqueta con marca, nombre, calorías, tres macronutrientes y fechas. El recuadro derecho indica la reserva para QR nativo."></canvas>
+<p class="tiny muted" id="v5Assets">Cargando isotipo y tipografías oficiales...</p>
+<div class="v5-grid">
+<label class="v5-field" for="v5Packed"><strong>Envasado y congelación</strong><input id="v5Packed" type="date" required></label>
+<label class="v5-field" for="v5Expiry"><strong>Consumo preferente</strong><input id="v5Expiry" type="date" required></label>
+</div>
+<p class="tiny muted">La fecha de envasado se propone como la fecha local de hoy y puedes editarla. La fecha de consumo preferente se deja vacía: no se calcula automáticamente un plazo de conservación ni se inventa un lote.</p>
+<p class="url-text" id="v5UrlLiteral"></p>
+<p><a id="v5RecipeUrl" target="_blank" rel="noopener noreferrer">Abrir ficha pública de la receta</a></p>
+<label class="switch"><input id="v5Confirm" type="checkbox"><span>Confirmo que hay papel estándar de <strong>50 × 30 mm</strong>. Autorizo <strong>una sola etiqueta por pulsación</strong> y comprendo que el diseño completo todavía no está probado físicamente.</span></label>
+<div class="actions">
+<button id="v5QrOnly" type="button" disabled>Imprimir QR de la receta (solo QR)</button>
+<button id="v5Label" type="button" disabled>Imprimir etiqueta real completa</button>
+</div>
+<p class="tiny warn">Haz primero la prueba «solo QR» y comprueba si abre la ficha real. Si se lee, prueba la etiqueta completa. Esta segunda prueba envía un bitmap de más de 12 KB en cientos de fragmentos BLE; podría tardar, perder conexión o no imprimirse. No repitas ante un error sin revisar el registro. La vista previa indica la reserva del QR, no simula su matriz.</p>
+</section>
+
 <section>
-<h2>5 · Registro local</h2>
+<h2>6 · Registro local</h2>
 <div class="actions">
 <button id="copy" class="secondary" type="button">Copiar registro</button>
 <button id="clear" class="secondary" type="button">Limpiar registro</button>
@@ -105,6 +134,7 @@ function updateStatus(label){
   byId("print").disabled=busy || !connected || !byId("confirm").checked;
   byId("qrtest").disabled=busy || !connected || !byId("confirmGraphics").checked;
   byId("bitmaptest").disabled=busy || !connected || !byId("confirmGraphics").checked;
+  if(typeof updateV05Buttons==="function")updateV05Buttons();
   byId("shortQR").disabled=busy || !connected || !byId("confirmQR").checked;
   byId("rasterQR").disabled=busy || !connected || !byId("confirmQR").checked;
 }
@@ -355,5 +385,6 @@ byId("clear").addEventListener("click",()=>{byId("log").textContent="";});
 log("Laboratorio listo. HTTPS="+Boolean(window.isSecureContext)+"; Web Bluetooth disponible="+Boolean(navigator.bluetooth));
 updateStatus("Desconectado");
 </script>
+<script src="./label-v05.js"></script>
 </body>
 </html>
