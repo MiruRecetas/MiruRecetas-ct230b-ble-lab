@@ -218,7 +218,7 @@ V6_EL("v6Label").addEventListener("click",v6Print);
 function v6NativeProbeJob(){
  const c=[
   v6Header().trimEnd(),
-  'TEXT 26,38,"3",0,1,1,"MIRURECETAS · CT230B"',
+  'TEXT 26,38,"3",0,1,1,"MIRURECETAS CT230B"',
   'TEXT 26,87,"3",0,1,1,"CONTROL 50X80"',
   'BAR 26,128,531,3',
   'TEXT 26,177,"3",0,1,1,"PR HC GR - TEXTOS"',
