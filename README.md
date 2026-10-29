@@ -164,3 +164,15 @@ Todo el laboratorio se considera **experimental**, no aprobado para la web princ
 4. Marcar la casilla de autorización e imprimir **una sola etiqueta V0.6**. Esperar a completar el registro y observar la salida; no reiniciar si parece lento.
 5. Revisar la salida física y escanear el QR. Si algo falla, **no repetir**: copiar el registro y aportar foto.
 
+
+### V0.6.1 · Control diagnóstico de filas y QR sin bitmap (después de la prueba física inicial)
+
+**Observación real (fotos y registro del 30/10/2026):** impresión del trabajo completo V0.6 50×80 finalizada tras ~4 min 58 s (00:46:20 → 00:51:18). Se imprimieron nombre, macros, anillo, fechas, texto, marca y un QR nativo. Se aprecian líneas de caracteres comprimidas o parcialmente ausentes (especialmente «Y CONSUMO» y «tapado») y anomalías de trazos en QR nativo; no consta aún prueba de lectura física del QR. En el anillo hay una zona con tinta irregular cerca de la transición entre sólido y rayado. El panel BLE confirmó envío, **no integridad física ni escaneabilidad**.
+
+**Inferencia, aún no diagnóstico confirmado:** el texto dañado está en el centro de la **cuarta banda BITMAP** \`y=546..846\`, no sobre un límite de recorte de bandas. El QR fue creado por un **comando nativo separado**; si sus módulos también pierden líneas, el fallo puede afectar al transporte de papel, alimentación térmica, procesamiento interno o stock, no solo a las fuentes en canvas. No atribuirlo a paquetes BLE perdidos sin una prueba controlada: el hecho de ver un QR emitido después de 52 KB de raster no valida ni descarta todos los problemas de firmware o buffer.
+
+**Nueva prueba aislada:** aparece debajo del botón V0.6 completo el botón **«Diagnóstico rápido · Texto nativo + QR (1 etiqueta)»**. Mantiene **50×80 mm, \`DIRECTION 0\`, \`GAP 2\`, el QR original exactamente en \`(352,638)\`, error M, módulo 5 y URL real**, pero usa exclusivamente texto TSPL incorporado a la impresora, líneas \`BAR\` y el QR nativo; **no incluye BITMAP**. Solo ASCII para la fuente TSPL interna. Es una etiqueta de prueba de tamaño completo, sin uso alimentario; exige casilla y doble confirmación. No cambia parámetros persistentes.
+
+**Interpretación del control:** si texto nativo y QR salen bien y se pueden escanear, investigar primero la carga de cinco bitmaps, memoria/firmware y los parámetros de envío; no tocar aún motor o etiquetas. Si también aparece compresión de líneas en el control nativo, comprobar en primer lugar rollo correctamente guiado y asentado, suciedad/agarre del rodillo, cabezal y nivel de batería/carga; hacer solo comprobaciones seguras según manual. Una simple foto en ángulo puede falsear el escaneo del QR; escanear directamente en mano con teléfono. Mantener un único cambio por ensayo. **No repetir la V0.6 de 53 KB antes del diagnóstico**.
+
+**Estado:** ensayo 0.6.1 solo implementado/validado informáticamente, **todavía no impreso**. La prueba v0.6 sigue siendo un resultado parcial, no una plantilla aprobada.
