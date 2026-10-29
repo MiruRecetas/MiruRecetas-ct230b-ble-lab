@@ -80,7 +80,10 @@ Las dos pruebas mantienen `DIRECTION 0`, `PRINT 1,1`, transmisión BLE en paquet
 
 Primero la prueba de **QR nativo**; observar si se imprime y si la cámara lo lee. Si funciona, volver a confirmar la casilla y ejecutar **BITMAP** por separado. Enviar fotografía y registro de cada una. La impresión gráfica completa de «Cebollas rellenas», que deberá cargar las **fuentes oficiales reales** y usar valores nutricionales canónicos, será una fase posterior. Ahora se prioriza la legibilidad comprobable del QR.
 
-## Pruebas de QR v0.4 · preparadas, no ejecutadas
+## Pruebas de QR v0.4 · ambas superadas en impresora real
+
+La usuaria ha aportado fotografía de ambas etiquetas y confirmó que **los dos QR se leen**: QR nativo arriba, QR bitmap abajo. Registro BLE: **QR nativo 170 bytes/9 fragmentos**, **QR bitmap 3.983 bytes/200 fragmentos**. Ambos contenían `MR-QR-01`. Estas pruebas acreditan QR corto escaneable en CT230B, pero **no la URL canónica larga de la v0.5**.
+
 
 En la primera prueba v0.3 el código TSPL `QRCODE 335,65,M,4,A,0,M2,S7,"https://mirurecetas.github.io/"` imprimió un QR demasiado compacto o con blancos internos insuficientes para que la cámara lo leyera, incluso usando una foto macro. Este diagnóstico de impresión se considera **confirmado como ilegible**, pero **no está identificada la causa exacta** (tamaño de módulo, longitud del contenido, densidad, variación de firmware, proceso térmico).
 
@@ -89,7 +92,7 @@ A partir de la documentación de TSPL de TSC y recomendaciones de tamaño de mó
 1. **QR nativo corto:** `QRCODE 340,55,M,6,A,0,M2,S7,"MR-QR-01"`, un único trabajo de texto + QR con módulo de seis puntos de 300 dpi y contenido muy corto. El móvil debe devolver el **texto** `MR-QR-01` (no un enlace).
 2. **QR bitmap:** matriz QR **versión 1 ECC M**, texto `MR-QR-01`, 21×21 módulos más zona de silencio de cuatro módulos en cada lado (29×29 módulos); raster 174×174 píxeles a seis píxeles por módulo, 22 bytes por fila × 174 filas = **3.828 bytes**. La matriz se generó con un codificador estándar y se validó mediante decodificación informática antes de incorporarla al código. Este ensayo reutiliza el comando `BITMAP` y la polaridad negro=bit 0/ blanco=bit 1 que produjo correctamente las tramas anteriores. Sigue pendiente la prueba física.
 
-**Secuencia:** primero QR nativo corto/grande, confirmar lectura; **solo si no se lee**, QR bitmap en una etiqueta nueva, confirmar lectura. El primer ensayo puede resolver el problema sin consumir etiquetas ni tiempo extra. No modificar otros parámetros ni repetir automáticamente ante fallos. Ambos botones vuelven a exigir casilla y diálogo de confirmación. En ambos casos `DIRECTION 0` y `PRINT 1,1`.
+**Secuencia histórica ejecutada:** la usuaria probó y escaneó correctamente el QR nativo y el QR bitmap. Las dos etiquetas demostraron la viabilidad de ambos transportes. No modificar otros parámetros ni repetir automáticamente ante fallos. Ambos botones vuelven a exigir casilla y diálogo de confirmación. En ambos casos `DIRECTION 0` y `PRINT 1,1`.
 
 Estos QR **son diagnósticos**, no contienen URL de receta ni lote privado. Cuando funcionen, se probará una URL pública corta y estable y su lectura tras congelación real; si vuelve a fallar por longitud, usar un identificador corto que dirija a una ruta o servidor apropiado, sin exponer datos personales.
 
