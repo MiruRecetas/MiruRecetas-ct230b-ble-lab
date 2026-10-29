@@ -104,14 +104,10 @@ function v5Legend(ctx,x,y,type,title,grams){
  v5Text(ctx,'600 14px "Geist"',grams,x+15,y+18,105);
 }
 function v5Pot(ctx,x,y){
- // categoría oficial de esta receta: guisos-legumbres, icono cooking-pot.
- // Pictograma lineal del mismo concepto Lucide. Solo contenido de icono, no nueva marca.
- ctx.save();ctx.translate(x,y);ctx.strokeStyle="#000";ctx.lineWidth=1.6;ctx.lineCap="round";ctx.lineJoin="round";
- ctx.beginPath();ctx.moveTo(2,8);ctx.lineTo(22,8);ctx.moveTo(4,11);ctx.lineTo(20,11);
- ctx.moveTo(5,11);ctx.lineTo(5,21);ctx.quadraticCurveTo(5,23,8,23);
- ctx.lineTo(17,23);ctx.quadraticCurveTo(20,23,20,21);ctx.lineTo(20,11);
- ctx.moveTo(9,8);ctx.lineTo(9,5);ctx.quadraticCurveTo(9,1,12,1);ctx.quadraticCurveTo(15,1,15,5);ctx.lineTo(15,8);
- ctx.stroke();ctx.restore();
+ // Icono exacto "cooking-pot" de Lucide, asignado a la categoría guisos-legumbres
+ // en la ficha pública; Lucide ISC (ver README).
+ const shape=new Path2D("M2 12h20m-2 0v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8m0-4l16-4M8.86 6.78l-.45-1.81a2 2 0 0 1 1.45-2.43l1.94-.48a2 2 0 0 1 2.43 1.46l.45 1.8");
+ ctx.save();ctx.translate(x,y);ctx.strokeStyle="#000";ctx.lineWidth=2;ctx.lineCap="round";ctx.lineJoin="round";ctx.stroke(shape);ctx.restore();
 }
 function v5RenderLeft(dates){
  const cv=document.createElement("canvas");cv.width=V5_BITMAP.w;cv.height=V5_BITMAP.h;
