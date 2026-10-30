@@ -114,7 +114,7 @@ function p15hRender(d){
  p15hText(c,d.instructionHeading,26,308,23,"700","Bricolage Grotesque",485,16);
  p15hWrap(c,d.instruction,26,349,491,23,"400",false,2);
  p15hText(c,d.noteHeading,26,502,21,"700","Bricolage Grotesque",470,16);
- p15hWrap(c,d.note,26,531,245,21,"500",true,2);
+ p15hWrap(c,d.note,26,531,245,18,"500",true,2);
  // Los separadores NO se rasterizan: los dibuja TSPL BAR nativo.
  // El QR nativo ocupa esquina inferior derecha: NO se rasteriza el QR viejo de Canva.
  const physical=document.createElement("canvas");physical.width=P15H_W;physical.height=P15H_H;
