@@ -41,6 +41,10 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#14251b;color:#d6f6e0
 .p15-card .p15-metrics{font-size:.82rem;color:var(--muted)}
 #p15Status{font-size:.9rem;color:var(--muted)}
 
+
+#p15h-preview{display:block;width:min(100%,370px);height:auto;margin:12px auto;border:1px solid #b6c2bb;background:white}
+#p15h .v5-field{min-width:0}
+#p15h .v5-field input{width:100%;min-width:0}
 </style>
 </head>
 <body>
@@ -199,6 +203,33 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#14251b;color:#d6f6e0
 </div>
 <p class="tiny warn">Si la impresión sale deformada, no repitas automáticamente: copia el registro, fotografía el resultado e identifica qué formato falló. El transporte completado no certifica calidad ni adhesión al congelador.</p>
 </section>
+
+<section id="p15h">
+<h2>6D · Horizontal SVG 50 × 80 · Puré de calabaza y calabacín</h2>
+<p><strong>Prueba editorial fiel al SVG aprobado de Canva.</strong> A diferencia del prototipo anterior, no se redistribuyen los bloques: título y logo grande arriba, información de fechas e instrucciones a la izquierda, nutrición y QR a la derecha. Las <strong>dos únicas líneas</strong> se envían como <code>BAR</code> nativo TSPL, una gruesa y una parcial más fina.</p>
+<p class="tiny muted">Diseño de referencia: «MiruRecetas · Etiqueta 50x80 · v1_20261030_200122_0000.svg». Papel 50 × 80 mm, arte horizontal girado para el cabezal físico de 50 mm. Las letras se rasterizan con Bricolage Grotesque/Geist e isotipo BN; QR creado por TSPL nativo, no como imagen.</p>
+<div class="v5-grid">
+<label class="v5-field" for="p15h-name"><strong>Nombre de receta</strong><input id="p15h-name" type="text" maxlength="90" required></label>
+<label class="v5-field" for="p15h-kcal"><strong>kcal oficiales</strong><input id="p15h-kcal" type="text" inputmode="decimal" required></label>
+<label class="v5-field" for="p15h-protein"><strong>PR · g</strong><input id="p15h-protein" type="text" inputmode="decimal" required></label>
+<label class="v5-field" for="p15h-carbs"><strong>HC · g</strong><input id="p15h-carbs" type="text" inputmode="decimal" required></label>
+<label class="v5-field" for="p15h-fat"><strong>GR · g</strong><input id="p15h-fat" type="text" inputmode="decimal" required></label>
+<label class="v5-field" for="p15h-packed"><strong>Envasado y congelación</strong><input id="p15h-packed" type="date" required></label>
+<label class="v5-field" for="p15h-expiry"><strong>Consumo preferente · introducción manual</strong><input id="p15h-expiry" type="date" required></label>
+<label class="v5-field" for="p15h-instructionHeading"><strong>Título de instrucciones</strong><input id="p15h-instructionHeading" type="text" maxlength="70" required></label>
+<label class="v5-field" for="p15h-instruction"><strong>Descongelación y consumo</strong><input id="p15h-instruction" type="text" maxlength="150" required></label>
+<label class="v5-field" for="p15h-noteHeading"><strong>Título de nota</strong><input id="p15h-noteHeading" type="text" maxlength="35" required></label>
+<label class="v5-field" for="p15h-note"><strong>Nota de conservación</strong><input id="p15h-note" type="text" maxlength="160" required></label>
+</div>
+<label class="v5-field" for="p15h-url"><strong>QR · URL canónica de la receta</strong><input id="p15h-url" type="url" autocomplete="off" spellcheck="false" required></label>
+<p class="tiny muted">Valores iniciales del puré: 215,56 kcal · PR 4,44 g · HC 22,31 g · GR 12,92 g, contrastados con MiruRecetas. Cambiar los campos para otra receta exige comprobar sus datos oficiales y su URL antes de imprimir. Las fechas no se calculan automáticamente; la ficha del puré no valida un plazo de congelación.</p>
+<canvas id="p15h-preview" width="590" height="945" role="img" aria-label="Vista de arte horizontal 50 por 80 girado para la impresora; líneas gruesa y parcial fieles al SVG y reserva de QR nativo."></canvas>
+<p id="p15h-assets" class="tiny muted">Preparando la tipografía y el isotipo oficiales…</p>
+<p id="p15h-metrics" class="tiny muted">Introduce ambas fechas para calcular los paquetes BLE.</p>
+<label class="switch"><input id="p15h-confirm" type="checkbox"><span>He instalado <strong>papel 50 × 80 mm</strong> en la CLABEL CT230B y autorizo <strong>una sola etiqueta</strong> con los valores actuales; comprendo que es un ensayo y que no habrá reintento automático.</span></label>
+<div class="actions"><button id="p15h-print" type="button" disabled>Imprimir horizontal SVG · 50 × 80 · una etiqueta</button></div>
+<p class="tiny warn">Mantiene idéntico el transporte BLE de V0.6.2: 20 bytes por paquete, pausa 75 ms, bandas raster dispersas de hasta 12 filas, QR TSPL nativo. Si sale mal, no repitas: recoge registro y fotografía. El envío completo no garantiza impresión correcta.</p>
+</section>
 <section>
 <h2>7 · Registro local</h2>
 <div class="actions">
@@ -229,6 +260,7 @@ function updateStatus(label){
   if(typeof updateV05Buttons==="function")updateV05Buttons();
   if(typeof updateV06Buttons==="function")updateV06Buttons();
   if(typeof updateV062Buttons==="function")updateV062Buttons();
+  if(typeof p15hUpdate==="function")p15hUpdate();
   if(typeof p15Update==="function")p15Update();
   byId("shortQR").disabled=busy || !connected || !byId("confirmQR").checked;
   byId("rasterQR").disabled=busy || !connected || !byId("confirmQR").checked;
@@ -484,5 +516,6 @@ updateStatus("Desconectado");
 <script src="./label-v06.js"></script>
 <script src="./label-v062.js"></script>
 <script src="./label-p15.js"></script>
+<script src="./label-p15-horizontal-svg.js"></script>
 </body>
 </html>
