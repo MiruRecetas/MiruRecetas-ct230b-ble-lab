@@ -151,7 +151,20 @@ function v7Render(d){
   p.fillStyle="#fff";p.fillRect(0,0,V7_W,V7_H);
   p.save();p.translate(0,V7_H);p.rotate(-Math.PI/2);
   p.drawImage(landscape,0,0);p.restore();
-  // Después de la rotación no hay trazos adicionales sobre el canvas físico.
+  // Autotest de píxeles ANTES de habilitar impresión: evita precisamente
+  // la desaparición del SVG y las dos reglas desplazadas de la V0.7.1.
+  function darkAt(x,y){
+    const d=p.getImageData(x,y,1,1).data;
+    return d[0]<90&&d[1]<90&&d[2]<90&&d[3]>230;
+  }
+  let logoDark=0;
+  const area=p.getImageData(8,13,80,94).data;
+  for(let k=0;k<area.length;k+=4)
+    if(area[k]<90&&area[k+1]<90&&area[k+2]<90&&area[k+3]>230)logoDark++;
+  if(logoDark<350)throw Error("V0.7.2: isotipo BN invisible; impresión bloqueada.");
+  if(!darkAt(119,300)||!darkAt(254,700)||
+    darkAt(300,819)||darkAt(350,690))
+    throw Error("V0.7.2: líneas mal orientadas; impresión bloqueada.");
   return physical;
 }
 function v7Build(d){
