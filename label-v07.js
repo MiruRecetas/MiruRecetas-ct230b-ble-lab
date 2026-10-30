@@ -163,7 +163,7 @@ function v7Render(d){
     if(area[k]<90&&area[k+1]<90&&area[k+2]<90&&area[k+3]>230)logoDark++;
   if(logoDark<350)throw Error("V0.7.2: isotipo BN invisible; impresión bloqueada.");
   if(!darkAt(119,300)||!darkAt(254,700)||
-    darkAt(300,819)||darkAt(350,690))
+    darkAt(560,824)||darkAt(575,690))
     throw Error("V0.7.2: líneas mal orientadas; impresión bloqueada.");
   return physical;
 }
