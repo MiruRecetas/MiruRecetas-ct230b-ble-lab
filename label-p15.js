@@ -95,7 +95,7 @@ function p15Component(d){
  p15Font(c,'700 50px "Bricolage Grotesque"',r.name,27,59,385);
  c.drawImage(v5Logo,521,13,46,46);
  c.fillRect(25,75,540,2);
- p15Dates(c,d,27,106,380,true);
+ p15Dates(c,d,27,106,339,true);
  c.fillRect(25,153,540,2);
  p15Font(c,'700 20px "Bricolage Grotesque"',"DESCONGELACIÓN Y CONSUMO",27,194,315);
  p15Font(c,'500 18px "Geist"',"En nevera · Recalentar tapado",27,226,307);
@@ -110,11 +110,11 @@ function p15Component(d){
  const vals=[["PR",r.protein],["HC",r.carbs],["GR",r.fat]];
  for(let i=0;i<vals.length;i++){
   const x=388+i*65;
-  p15Font(c,'700 15px "Geist"',p15Format(vals[i][1])+" g",x,143,61);
-  p15Font(c,'500 13px "Geist"',vals[i][0],x,154);
+  p15Font(c,'700 15px "Geist"',p15Format(vals[i][1])+" g",x,109,61);
+  p15Font(c,'500 13px "Geist"',vals[i][0],x,122);
  }
- // QR real (no reutilizar imagen/URL de Cebollas del Canva inicial).
- // Área 352..583 x 117..344 permanece sin dibujo raster.
+ // QR real de Pisto. Zona despejada también de reglas, textos y tramas.
+ c.fillStyle="#fff";c.fillRect(353,117,232,230);
  return cv;
 }
 function p15Ingredient(d){
@@ -152,8 +152,8 @@ function p15Landscape(d){
  p15Font(c,'500 21px "Geist"',"En nevera · Recalentar tapado",36,471,580);
  p15Font(c,'700 20px "Bricolage Grotesque"',"NOTA",36,517);
  p15Font(c,'italic 500 18px "Geist"',"El huevo puede variar de textura al congelar.",36,550,598);
- // QR nativo en zona lógica (x700..905 y~315..520); girar ubicación
- // correspondiente a física x64..269,y700..905, y dejarla blanca.
+ // Zona lógica despejada x688..918,y309..539 para QR físico x64..269,y700..905.
+ c.fillStyle="#fff";c.fillRect(688,309,230,230);
  const physical=document.createElement("canvas");
  physical.width=590;physical.height=945;
  const pc=physical.getContext("2d",{willReadFrequently:true});
