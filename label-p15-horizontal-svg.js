@@ -27,7 +27,7 @@ const P15H_DEFAULT=Object.freeze({
  instructionHeading:"DESCONGELACIÓN Y CONSUMO",
  instruction:"Descongelar en nevera · Recalentar removiendo",
  noteHeading:"NOTA",
- note:"Recalentar removiendo para evitar zonas frías.",
+ note:"Refrigerar pronto; máximo 48 h en nevera.",
  url:"https://mirurecetas.github.io/menu-anual-recetas/recetas/pure-de-calabaza-y-calabacin/"
 });
 const p15h=id=>document.getElementById(id);
