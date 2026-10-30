@@ -1,5 +1,5 @@
 "use strict";
-/* V0.7 · SVG CANVA ORIGINAL 20261030_200122_0000.svg
+/* V0.7.1 · SVG CANVA ORIGINAL 20261030_200122_0000.svg
  * INDEPENDIENTE de label-p15-horizontal-svg.js y de la reconstrucción del agente.
  * Referencia visual: SVG real aportado por la usuaria (lienzo vertical
  * 141.75 × 226.50 unidades), renderizado e inspeccionado girado 90°.
@@ -7,16 +7,18 @@
  * Reserva de logo en la esquina derecha del encabezado (activo oficial BN),
  * banda gruesa completa bajo el título, banda fina PARCIAL tras las fechas,
  * instrucciones y nota a la izquierda, kcal/macros/QR a la derecha.
- * Solamente BAR y QR son objetos TSPL nativos. No se añade un anillo.
+ * Solo QR es nativo. Los separadores se imprimen en bandas raster de 12 filas.
+ * No se añade ningún anillo ni se altera el contenido editorial.
  */
 const V7_W=590,V7_H=945,V7_LW=945,V7_LH=590;
 const V7_LIMIT=35000,V7_QR=Object.freeze({x:345,y:58,module:5});
-const V7_BARS=Object.freeze([
+const V7_RULES=Object.freeze([
   {x:109,y:0,w:21,h:945},
   {x:251,y:427,w:7,h:518}
 ]);
 const V7_REGIONS=Object.freeze([
   {x:0,y:0,w:109,h:945,label:"título e isotipo"},
+  {x:109,y:0,w:21,h:945,label:"línea gruesa raster; geometría SVG"},
   {x:130,y:0,w:121,h:945,label:"fechas y calorías"},
   {x:251,y:0,w:94,h:945,label:"encabezado y macros"},
   {x:345,y:260,w:245,h:685,label:"instrucciones y nota"},
@@ -56,11 +58,11 @@ function v7Text(ctx,str,x,y,size,weight="500",family="Geist",max=Infinity,min=13
   if(fontSize<min)throw Error("No cabe la cadena completa en la zona de Canva: "+str);
   ctx.fillStyle="#000";ctx.fillText(str,x,y);
 }
-function v7Lines(ctx,str,x,y,maxWidth,size,weight="400",maxLines=4,italic=false){
+function v7Lines(ctx,str,x,y,maxWidth,size,weight="400",maxLines=4,italic=false,minSize=18){
   const words=str.trim().split(/\s+/);
   // Reducir suavemente el tamaño únicamente si el CONTENIDO de la receta
   // requiere más espacio que el texto de muestra del SVG.
-  for(let test=size;test>=18;test--){
+  for(let test=size;test>=minSize;test--){
     ctx.font=(italic?"italic ":"")+weight+" "+test+'px "Geist"';
     let lines=[],current="",failed=false;
     for(const word of words){
@@ -88,7 +90,16 @@ function v7Render(d){
   c.textAlign="left";c.textBaseline="alphabetic";c.imageSmoothingEnabled=true;
   // Bloque superior del SVG: tipografía protagonista + reserva exacta del logo.
   v7Text(c,d.name,19,87,66,"700","Bricolage Grotesque",795,30);
-  c.drawImage(v5Logo,845,19,84,80);
+  // El SVG de marca posee un viewBox cuadrado con márgenes transparentes
+  // (~19 % lateral y ~24 % superior; arte útil ~61 % × 52 %).
+  // Recortamos SOLO AL DIBUJAR para que el isotipo real tenga el tamaño
+  // visible en Canva. El archivo vectorial aprobado permanece intacto.
+  const logoWidth=v5Logo.naturalWidth,logoHeight=v5Logo.naturalHeight;
+  if(!logoWidth||!logoHeight)throw Error("Dimensiones del isotipo no disponibles.");
+  c.drawImage(v5Logo,
+    Math.round(logoWidth*.19),Math.round(logoHeight*.236),
+    Math.round(logoWidth*.62),Math.round(logoHeight*.53),
+    838,8,94,80);
   // Fechas a la izquierda del módulo energético; coordenadas del SVG.
   v7Text(c,"Envasado y congelación",26,168,25,"400","Geist",350,20);
   v7Text(c,"Consumo preferente",26,212,25,"400","Geist",350,20);
@@ -104,10 +115,10 @@ function v7Render(d){
     v7Text(c,abbr,x+26,296,20,"400","Geist",64,16);
   }
   // Instrucciones bajo la regla PARCIAL, no reordenadas ni superpuestas al QR.
-  v7Text(c,d.heading,26,309,23,"700","Bricolage Grotesque",495,18);
-  v7Lines(c,d.instruction,26,350,495,23,"400",4,false);
-  v7Text(c,d.noteHeading,26,503,21,"700","Bricolage Grotesque",200,17);
-  v7Lines(c,d.note,26,532,245,18,"500",2,true);
+  v7Text(c,d.heading,26,309,30,"700","Bricolage Grotesque",550,24);
+  v7Lines(c,d.instruction,26,350,555,27,"400",4,false,24);
+  v7Text(c,d.noteHeading,26,503,26,"700","Bricolage Grotesque",200,22);
+  v7Lines(c,d.note,26,532,325,24,"500",2,true,21);
   // El SVG ya contiene la orientación horizontal aprobada. Gira el arte
   // -90 grados al espacio FÍSICO sin alterar ninguna posición interna.
   const physical=document.createElement("canvas");
@@ -115,6 +126,9 @@ function v7Render(d){
   const p=physical.getContext("2d",{willReadFrequently:true});
   p.fillStyle="#fff";p.fillRect(0,0,V7_W,V7_H);
   p.translate(0,V7_H);p.rotate(-Math.PI/2);p.drawImage(landscape,0,0);
+  // Mismas dos líneas aprobadas, rasterizadas por bandas como el texto,
+  // en lugar de BAR nativo que mostró irregularidades físicas en V0.7.
+  p.fillStyle="#000";for(const b of V7_RULES)p.fillRect(b.x,b.y,b.w,b.h);
   return physical;
 }
 function v7Build(d){
@@ -129,8 +143,7 @@ function v7Build(d){
       tile.widthBytes+","+tile.height+",0,"));
     parts.push(tile.bytes,encoder.encode("\r\n"));
   }
-  for(const b of V7_BARS)parts.push(encoder.encode(
-    "BAR "+b.x+","+b.y+","+b.w+","+b.h+"\r\n"));
+  // Las dos líneas ya están dentro de las bandas BITMAP. NO enviar BAR.
   parts.push(encoder.encode("QRCODE "+V7_QR.x+","+V7_QR.y+
     ",M,"+V7_QR.module+',A,0,M2,S7,"'+d.url+'"\r\n'));
   parts.push(encoder.encode("PRINT 1,1\r\n"));
@@ -143,7 +156,7 @@ function v7Preview(d){
   const cv=v7ById("v7Preview");
   cv.width=V7_W;cv.height=V7_H;
   const p=cv.getContext("2d");p.drawImage(v7Render(d),0,0);
-  p.fillStyle="#000";for(const b of V7_BARS)p.fillRect(b.x,b.y,b.w,b.h);
+  // Los separadores ya están incluidos en v7Render; vista previa = raster.
   p.save();p.strokeStyle="#999";p.lineWidth=1;p.setLineDash([4,4]);
   p.strokeRect(V7_QR.x,V7_QR.y,205,205);p.setLineDash([]);
   p.translate(V7_QR.x+102,V7_QR.y+102);p.rotate(-Math.PI/2);
@@ -174,10 +187,10 @@ async function v7Refresh(){
       const m=v7Build(v7GetData());
       v7ById("v7Metrics").textContent=m.job.length+" B / "+
         Math.ceil(m.job.length/20)+" fragmentos BLE · "+m.tiles+
-        " bandas dispersas · "+m.raster+" B gráficos · 2 BAR + QR nativos.";
+        " bandas dispersas · "+m.raster+" B gráficos · 2 líneas raster + QR nativo.";
     }catch(e){v7ById("v7Metrics").textContent="Aún no imprimible: "+e.message;}
     v7ById("v7Assets").textContent=
-      "Vista previa cargada · reconstrucción independiente del SVG original; fuentes y marca oficiales.";
+      "Vista previa V0.7.1 · isotipo completo sin márgenes, textos ampliados, 2 líneas raster · QR nativo.";
   }catch(e){
     v7Ready=false;
     v7ById("v7Assets").textContent="Error V0.7: "+e.message;
@@ -193,8 +206,8 @@ async function v7Print(){
      d.name+" (diseño horizontal aprobado)?\n"+
      b.job.length+" bytes / "+Math.ceil(b.job.length/20)+
      " fragmentos BLE. QR real. Sin reintentos automáticos."))return;
-  log("V0.7 · Puré de calabaza y calabacín · "+b.job.length+
-    " B / "+b.tiles+" bandas · BAR nativas 2 · QR real "+d.url);
+  log("V0.7.1 · Puré de calabaza y calabacín · "+b.job.length+
+    " B / "+b.tiles+" bandas · líneas raster 2 · QR nativo real "+d.url);
   try{await transmitDiagnostic(b.job,"V0.7 50×80 Puré · SVG original");}
   finally{v7ById("v7Confirm").checked=false;v7Update();}
 }
@@ -206,5 +219,5 @@ for(const id of ["v7Packed","v7Expiry"])
   v7ById(id).addEventListener("change",()=>{v7Update();v7Refresh();});
 v7ById("v7Confirm").addEventListener("change",v7Update);
 v7ById("v7Print").addEventListener("click",v7Print);
-log("V0.7 · Módulo independiente del P15H; referencia directa SVG Canva aprobado, 50×80.");
+log("V0.7.1 · mismo SVG Canva aprobado; isotipo visible ampliado, tipografía inferior mayor, líneas raster, QR nativo 50×80.");
 v7Refresh();

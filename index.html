@@ -232,10 +232,10 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#14251b;color:#d6f6e0
 <p class="tiny warn">Mantiene idéntico el transporte BLE de V0.6.2: 20 bytes por paquete, pausa 75 ms, bandas raster dispersas de hasta 12 filas, QR TSPL nativo. Si sale mal, no repitas: recoge registro y fotografía. El envío completo no garantiza impresión correcta.</p>
 </section>
 <section id="v7">
-<h2>6E · V0.7 · Etiqueta horizontal aprobada 50 × 80 · Puré de calabaza y calabacín</h2>
-<p class="tiny muted"><strong>V0.7 corregida:</strong> módulo independiente del antiguo 6D, con bloques y coordenadas tomados del SVG original aportado. La vista previa debe mostrarse incluso sin fecha de consumo preferente; la impresión exige ambas fechas.</p>
+<h2>6E · V0.7.1 · Etiqueta horizontal aprobada 50 × 80 · Puré de calabaza y calabacín</h2>
+<p class="tiny muted"><strong>V0.7.1:</strong> ajuste exclusivo de logo y tipografías inferiores frente al SVG aprobado. La V0.7 se imprimió, pero las dos líneas BAR mostraron irregularidades; aquí las dos líneas conservan exactamente su geometría y pasan a raster disperso. QR nativo intacto.</p>
 <p><strong>Prueba física nueva, independiente de las anteriores.</strong> Reproduce la composición del SVG de Canva aportado: lectura horizontal con el arte girado 90° antihorario dentro del rollo físico de 50 × 80 mm. No incorpora anillo ni elementos nuevos. El título, campos, jerarquía, tipografía Bricolage Grotesque / Geist e isotipo BN mantienen la geometría aprobada.</p>
-<p class="tiny muted">Datos oficiales por ración: <strong>215,56 kcal · PR 4,44 g · HC 22,31 g · GR 12,92 g</strong>. Instrucción exacta: <strong>«Descongelar en nevera y remover mientras se calienta enérgicamente o volver a batir»</strong>. QR de la ficha pública canónica del puré. Dos separadores nativos <code>BAR</code>; QR <code>QRCODE</code> nativo; los demás elementos en raster disperso.</p>
+<p class="tiny muted">Datos oficiales por ración: <strong>215,56 kcal · PR 4,44 g · HC 22,31 g · GR 12,92 g</strong>. Instrucción exacta: <strong>«Descongelar en nevera y remover mientras se calienta enérgicamente o volver a batir»</strong>. QR de la ficha pública canónica del puré. Dos separadores <strong>rasterizados por bandas</strong> sin cambiar sus coordenadas o grosores; QR <code>QRCODE</code> nativo; los demás elementos en raster disperso.</p>
 <div class="v5-grid">
 <label class="v5-field" for="v7Packed"><strong>Envasado y congelación</strong><input id="v7Packed" type="date" required></label>
 <label class="v5-field" for="v7Expiry"><strong>Consumo preferente · indicar manualmente</strong><input id="v7Expiry" type="date" required></label>
@@ -244,8 +244,8 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#14251b;color:#d6f6e0
 <canvas id="v7Preview" role="img" width="590" height="945" aria-label="Vista previa de la etiqueta V0.7 horizontal, girada para rollo 50 por 80; QR nativo reservado."></canvas>
 <p id="v7Assets" class="tiny muted">Cargando fuentes e isotipo oficiales…</p>
 <p id="v7Metrics" class="tiny muted">Selecciona ambas fechas para calcular el trabajo.</p>
-<label class="switch"><input id="v7Confirm" type="checkbox"><span>He instalado papel <strong>50 × 80 mm</strong>, he revisado las fechas y autorizo <strong>una única impresión experimental V0.7</strong>; no se repetirá automáticamente.</span></label>
-<div class="actions"><button id="v7Print" type="button" disabled>Imprimir V0.7 · Puré · horizontal 50 × 80 (una etiqueta)</button></div>
+<label class="switch"><input id="v7Confirm" type="checkbox"><span>He instalado papel <strong>50 × 80 mm</strong>, he revisado las fechas y autorizo <strong>una única impresión experimental V0.7.1</strong>; no se repetirá automáticamente.</span></label>
+<div class="actions"><button id="v7Print" type="button" disabled>Imprimir V0.7.1 · Puré · horizontal 50 × 80 (una etiqueta)</button></div>
 <p class="tiny muted">Se reutiliza el transporte BLE validado V0.6.2: fragmentos de 20 bytes y pausa de 75 ms. No se realizan calibraciones, cambios permanentes, comunicaciones fuera del canal UART comprobado ni impresiones al abrir la página.</p>
 </section>
 
