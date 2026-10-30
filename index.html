@@ -45,6 +45,7 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#14251b;color:#d6f6e0
 #p15h-preview{display:block;width:min(100%,370px);height:auto;margin:12px auto;border:1px solid #b6c2bb;background:white}
 #p15h .v5-field{min-width:0}
 #p15h .v5-field input{width:100%;min-width:0}
+#v8Preview{display:block;width:min(100%,590px);height:auto;aspect-ratio:354/236;margin:12px auto;border:1px solid #b6c2bb;background:#fff}
 #v7Preview{display:block;width:min(100%,370px);height:auto;aspect-ratio:590/945;margin:12px auto;border:1px solid #b6c2bb;background:#fff}
 </style>
 </head>
@@ -250,6 +251,25 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#14251b;color:#d6f6e0
 <p class="tiny muted">Se reutiliza el transporte BLE validado V0.6.2: fragmentos de 20 bytes y pausa de 75 ms. No se realizan calibraciones, cambios permanentes, comunicaciones fuera del canal UART comprobado ni impresiones al abrir la página.</p>
 </section>
 
+<section id="v8">
+<h2>6F · V0.8 · Ingrediente 30 × 20 mm · diseño Canva aprobado</h2>
+<p><strong>Primera prueba de impresión, NO aprobada físicamente todavía.</strong> Composición del diseño «03 · Ingrediente» de Canva (<code>DAHZfxOJgfA</code>): título grande, dos separadores negros, dos fechas, cantidad destacada, isotipo BN oficial y «Descongelar en nevera». Sin QR.</p>
+<p class="tiny muted">Cuatro campos editables independientes. Papel físico <strong>30 × 20 mm</strong>. El diseño Canva no se modifica. Esta sección es independiente de la V0.7.3 horizontal 50 × 80, declarada aprobada.</p>
+<div class="v5-grid">
+<label class="v5-field" for="v8Name"><strong>Nombre del ingrediente</strong><input id="v8Name" type="text" maxlength="55" autocomplete="off" required></label>
+<label class="v5-field" for="v8Packed"><strong>Fecha de envasado y congelación</strong><input id="v8Packed" type="date" required></label>
+<label class="v5-field" for="v8Expiry"><strong>Fecha de consumo preferente · manual</strong><input id="v8Expiry" type="date" required></label>
+<label class="v5-field" for="v8Quantity"><strong>Cantidad (gramos)</strong><input id="v8Quantity" type="number" step="1" min="1" max="9999" required></label>
+</div>
+<p class="tiny warn">No se calcula automáticamente ningún plazo de conservación congelada. El consumo preferente debe introducirse conscientemente y no puede preceder al envasado.</p>
+<canvas id="v8Preview" width="354" height="236" role="img" aria-label="Vista previa 30 por 20 para ingrediente con fechas y cantidad editables."></canvas>
+<p id="v8Status" class="tiny muted">Preparando Bricolage Grotesque, Geist e isotipo BN oficiales…</p>
+<p id="v8Metrics" class="tiny muted">Completa las fechas para calcular el trabajo.</p>
+<label class="switch"><input id="v8Confirm" type="checkbox"><span>He instalado el rollo <strong>30 × 20 mm</strong>, he revisado los cuatro campos y autorizo <strong>una sola impresión V0.8</strong> sin reintento automático.</span></label>
+<div class="actions"><button id="v8Print" type="button" disabled>Imprimir V0.8 · Ingrediente 30 × 20 (una etiqueta)</button></div>
+<p class="tiny muted">Raster disperso de hasta 12 filas, TSPL sin QR, BLE 20 B / 75 ms. Tras imprimir, compara fuentes, márgenes, isotipo, líneas y legibilidad con el diseño de Canva antes de aprobar.</p>
+</section>
+
 <section>
 <h2>7 · Registro local</h2>
 <div class="actions">
@@ -282,6 +302,7 @@ function updateStatus(label){
   if(typeof updateV062Buttons==="function")updateV062Buttons();
   if(typeof p15hUpdate==="function")p15hUpdate();
    if(typeof v7Update==="function")v7Update();
+  if(typeof v8Update==="function")v8Update();
   if(typeof p15Update==="function")p15Update();
   byId("shortQR").disabled=busy || !connected || !byId("confirmQR").checked;
   byId("rasterQR").disabled=busy || !connected || !byId("confirmQR").checked;
@@ -539,5 +560,6 @@ updateStatus("Desconectado");
 <script src="./label-p15.js"></script>
 <script src="./label-p15-horizontal-svg.js"></script>
 <script src="./label-v07.js?v=79a17bc81adfe4025f8242355c4bd497f8685b66"></script>
+<script src="./label-v08-ingredient.js?v=469d5754bec1fe189afc61c404003a970e0589bd"></script>
 </body>
 </html>
