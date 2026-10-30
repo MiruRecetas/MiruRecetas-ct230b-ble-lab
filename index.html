@@ -47,6 +47,8 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#14251b;color:#d6f6e0
 #p15h .v5-field input{width:100%;min-width:0}
 #v8Preview{display:block;width:min(100%,590px);height:auto;aspect-ratio:354/236;margin:12px auto;border:1px solid #b6c2bb;background:#fff}
 #v7Preview{display:block;width:min(100%,370px);height:auto;aspect-ratio:590/945;margin:12px auto;border:1px solid #b6c2bb;background:#fff}
+
+#v9Preview{display:block;width:min(100%,590px);height:auto;aspect-ratio:590/354;margin:14px auto;border:1px solid #bac8bf;background:#fff}
 </style>
 </head>
 <body>
@@ -270,6 +272,24 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#14251b;color:#d6f6e0
 <p class="tiny muted">Raster disperso de hasta 12 filas, TSPL sin QR, BLE 20 B / 75 ms. Tras imprimir, compara fuentes, márgenes, isotipo, líneas y legibilidad con el diseño de Canva antes de aprobar.</p>
 </section>
 
+
+<section id="v9">
+<h2>6G · V0.9 · Componente cocinado 50 × 30 · Pisto</h2>
+<p><strong>Ensayo de la última familia pendiente.</strong> Diseño reproducido desde el SVG original aportado por la usuaria: título dominante, isotipo BN grande, banda superior gruesa, segunda línea fina y parcial, nutrición a la derecha, QR abajo a la derecha. <strong>Sin gramaje ni número de raciones</strong>: Pisto es una receta MiruRecetas, con una ración por bolsa.</p>
+<p class="tiny muted">Solo las dos fechas son variables en esta prueba. Nombre, 164,35 kcal, PR 5,69 g, HC 18,58 g, GR 7,84 g, instrucciones, nota y QR de Pisto están fijados en el módulo V0.9, no requieren introducirlos. No se ha modificado Canva ni V0.7.3/0.8.</p>
+<div class="v5-grid">
+<label class="v5-field" for="v9Packed"><strong>Envasado y congelación</strong><input type="date" id="v9Packed" required></label>
+<label class="v5-field" for="v9Expiry"><strong>Consumo preferente · manual</strong><input type="date" id="v9Expiry" required></label>
+</div>
+<p class="tiny warn">No se asigna automáticamente un plazo de conservación: selecciona conscientemente la segunda fecha. La prueba no acredita seguridad alimentaria ni adhesión sobre congelados.</p>
+<canvas id="v9Preview" width="590" height="354" role="img" aria-label="Vista previa del arte de Pisto 50 × 30 mm con reserva para QR TSPL nativo; dos líneas conforme al SVG."></canvas>
+<p id="v9Status" class="tiny muted">Preparando fuentes y logotipo oficiales…</p>
+<p id="v9Metrics" class="tiny muted">Selecciona ambas fechas para calcular los paquetes de impresión.</p>
+<label class="switch"><input id="v9Confirm" type="checkbox"><span>He instalado papel <strong>50 × 30 mm</strong>, he comprobado las fechas y autorizo <strong>una única etiqueta V0.9 de Pisto</strong>. Sin reintentos automáticos.</span></label>
+<div class="actions"><button id="v9Print" type="button" disabled>Imprimir V0.9 · Componente Pisto · 50 × 30</button></div>
+<p class="tiny muted">Raster disperso de 1 bit, bandas ≤12 filas, GATT UART 20 bytes/75 ms y QR TSPL nativo. Tras imprimir, comprobar físicamente alineaciones, tamaño del isotipo, grosor de líneas y escaneo del QR; la V0.9 aún no está aprobada.</p>
+</section>
+
 <section>
 <h2>7 · Registro local</h2>
 <div class="actions">
@@ -303,6 +323,7 @@ function updateStatus(label){
   if(typeof p15hUpdate==="function")p15hUpdate();
    if(typeof v7Update==="function")v7Update();
   if(typeof v8Update==="function")v8Update();
+  if(typeof v9Update==="function")v9Update();
   if(typeof p15Update==="function")p15Update();
   byId("shortQR").disabled=busy || !connected || !byId("confirmQR").checked;
   byId("rasterQR").disabled=busy || !connected || !byId("confirmQR").checked;
@@ -561,5 +582,6 @@ updateStatus("Desconectado");
 <script src="./label-p15-horizontal-svg.js"></script>
 <script src="./label-v07.js?v=79a17bc81adfe4025f8242355c4bd497f8685b66"></script>
 <script src="./label-v08-ingredient.js?v=469d5754bec1fe189afc61c404003a970e0589bd"></script>
+<script src="./label-v09-component.js?v=3123defc0abc0916705c80aa9d949349e0eeabbd"></script>
 </body>
 </html>
