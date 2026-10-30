@@ -86,7 +86,7 @@ function p15hWrap(c,text,x,y,maxWidth,size,weight="500",italic=false,maxLines=2)
  if(lines.length>maxLines)throw Error("Texto ocupa más de "+maxLines+" líneas: "+text.slice(0,50));
  for(let i=0;i<lines.length;i++)p15hText(c,lines[i],x,y+i*(size+5),size,weight,"Geist",maxWidth,size,italic);
 }
-function p15hRender(d){
+function p15hRender(d,instructionLines=2){
  if(!v5Logo)throw Error("No se ha cargado el isotipo oficial de MiruRecetas.");
  const logical=document.createElement("canvas");logical.width=P15H_ED_W;logical.height=P15H_ED_H;
  const c=logical.getContext("2d",{willReadFrequently:true});if(!c)throw Error("Canvas 2D no disponible.");
@@ -112,7 +112,7 @@ function p15hRender(d){
  }
  // La segunda línea SE CONSERVA con longitud parcial y nativa TSPL; no se añade tercera línea.
  p15hText(c,d.instructionHeading,26,308,23,"700","Bricolage Grotesque",485,16);
- p15hWrap(c,d.instruction,26,349,491,23,"400",false,2);
+ p15hWrap(c,d.instruction,26,349,491,23,"400",false,instructionLines);
  p15hText(c,d.noteHeading,26,502,21,"700","Bricolage Grotesque",470,16);
  p15hWrap(c,d.note,26,531,245,18,"500",true,2);
  // Los separadores NO se rasterizan: los dibuja TSPL BAR nativo.
@@ -123,8 +123,8 @@ function p15hRender(d){
  p.translate(0,P15H_H);p.rotate(-Math.PI/2);p.drawImage(logical,0,0);
  return physical;
 }
-function p15hBuild(d){
- const artwork=p15hRender(d);
+function p15hBuild(d,instructionLines=2){
+ const artwork=p15hRender(d,instructionLines);
  const blocks=[];for(const region of P15H_REGIONS)blocks.push(...v62SparseRegion(artwork,region));
  const buffers=[encoder.encode("SIZE 50 mm,80 mm\r\nGAP 2 mm,0 mm\r\nDIRECTION 0\r\nCLS\r\n")];
  for(const tile of blocks){
