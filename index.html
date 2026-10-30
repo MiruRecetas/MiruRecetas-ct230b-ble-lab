@@ -133,6 +133,16 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#14251b;color:#d6f6e0
 <p class="tiny warn">Comprueba visualmente las líneas Y CONSUMO, TAPADO y los tres cuadrados del QR; escanéalo. Si el QR nativo falla igual que el anterior, antes de modificar el diseño debemos revisar papel, rodillo y cabezal. Un registro de envío exitoso <strong>no demuestra</strong> una impresión sin defectos.</p>
 </div>
 
+<div style="border-top:1px solid #dce5df;margin-top:20px;padding-top:16px">
+<h3>6B · V0.6.2 · Misma etiqueta completa, raster optimizado</h3>
+<p>Tras la prueba 6A correcta y el QR escaneable, probamos si <strong>reducir la cantidad de datos gráficos</strong> resuelve el defecto de las filas comprimidas y el QR no legible que aparecieron en la impresión completa. <strong>El diseño es exactamente el mismo que V0.6:</strong> Bricolage Grotesque, Geist, anillo y cifras oficiales, fechas, nota, isotipo BN, QR nativo y URL pública. No hay que editar Canva.</p>
+<p>En vez de cinco bitmaps grandes, se eliminan únicamente los <strong>espacios blancos de la transmisión</strong> en sub-bandas de hasta 12 filas y se envía lo que realmente contiene tinta. La posición geométrica de cada píxel se conserva. El QR sigue siendo nativo e idéntico al anterior; ni densidad, ni calibración, ni velocidad cambian.</p>
+<p id="v62Metrics" class="tiny muted">Calculando tamaño del nuevo trabajo…</p>
+<label class="switch"><input id="v62Confirm" type="checkbox"><span>He colocado papel <strong>50 × 80 mm</strong> y autorizo <strong>una sola impresión experimental V0.6.2</strong>. No repetiré la prueba sin valorar la salida.</span></label>
+<div class="actions"><button id="v62Label" type="button" disabled>Imprimir V0.6.2 · etiqueta completa optimizada (una etiqueta)</button></div>
+<p class="tiny warn">Este ensayo todavía no ha sido probado físicamente. El ahorro en bytes NO garantiza una impresión correcta: comprueba texto, tramas, fecha y QR con tu móvil; copia el registro si falla.</p>
+</div>
+
 <p class="tiny warn">Prueba de formato nuevo. El QR nativo se colocará en la esquina inferior derecha y dejará aire respecto al texto. El trabajo usa cinco bitmaps segmentados y el QR nativo, con pausas BLE conservadoras de 75 ms: su duración puede ser varios minutos. Si hay cortes o errores, no repitas: copia el registro. El recuadro QR en la vista previa es una <strong>reserva</strong>, no un código ficticio.</p>
 </section>
 
@@ -165,6 +175,7 @@ function updateStatus(label){
   byId("bitmaptest").disabled=busy || !connected || !byId("confirmGraphics").checked;
   if(typeof updateV05Buttons==="function")updateV05Buttons();
   if(typeof updateV06Buttons==="function")updateV06Buttons();
+  if(typeof updateV062Buttons==="function")updateV062Buttons();
   byId("shortQR").disabled=busy || !connected || !byId("confirmQR").checked;
   byId("rasterQR").disabled=busy || !connected || !byId("confirmQR").checked;
 }
@@ -417,5 +428,6 @@ updateStatus("Desconectado");
 </script>
 <script src="./label-v05.js"></script>
 <script src="./label-v06.js"></script>
+<script src="./label-v062.js"></script>
 </body>
 </html>
