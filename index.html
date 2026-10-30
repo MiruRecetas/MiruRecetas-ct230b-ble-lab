@@ -111,7 +111,7 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#14251b;color:#d6f6e0
 <section id="v6">
 <h2>6 · V0.6 · Etiqueta editorial 50 × 80 mm · Cebollas rellenas</h2>
 <p><strong>Reproducción experimental de la composición que diseñamos en Canva:</strong> título dominante, anillo con tres tramas B/N y macros a la derecha, fechas, descongelación, QR y firma MiruRecetas al pie. La referencia original está en <a href="https://www.canva.com/d/bFHRwJvBsO3OOQP" rel="noopener noreferrer" target="_blank">la propuesta Canva de 50 × 80 mm</a>, que no modificamos desde este ensayo.</p>
-<p class="v6-verified"><strong>Ya comprobado en la CT230B (v0.5):</strong> QR nativo con URL larga y transmisión híbrida BITMAP+QR. <strong>Pendiente:</strong> impresión vertical de 50 × 80 mm, cinco bloques bitmap y legibilidad del nuevo diseño. No equivale a validar conservación ni adhesión.</p>
+<p class="v6-verified"><strong>Resultado real:</strong> v0.6 completa sí imprimió, pero mostró letras comprimidas y QR ilegible. El diagnóstico nativo v0.6.1 imprimió perfectamente el texto y su QR se escaneó al primer intento. <strong>Pendiente:</strong> probar v0.6.2 con datos raster optimizados; no equivale a validar conservación ni adhesión.</p>
 <p><strong>Anillo por aportación energética de los macros, exactamente calculado:</strong> proteínas 19,14 % (negro), hidratos 33,06 % (rayado) y grasas 47,80 % (puntos). Centro: <strong>338,68 kcal oficiales</strong>. La suma 332,71 kcal que resulta de factores 4/4/9 solo determina proporciones, no sustituye la cifra oficial.</p>
 <canvas id="v6Preview" width="590" height="945" role="img" aria-label="Vista previa vertical de la etiqueta Cebollas rellenas con anillo proporcional, tres macros, fechas y QR reservado. La matriz del QR se imprime nativamente y no está reproducida en el lienzo de previsualización."></canvas>
 <p class="tiny muted" id="v6Assets">Cargando tipografías e isotipo oficiales para la vista previa...</p>
@@ -131,6 +131,16 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#14251b;color:#d6f6e0
 <label class="switch"><input id="v6ProbeConfirm" type="checkbox"><span>Tengo papel <strong>50 × 80 mm</strong> y autorizo <strong>una única etiqueta de control nativo con QR</strong>. No repetiré si aparecen fallos.</span></label>
 <div class="actions"><button id="v6Probe" type="button" disabled>Diagnóstico rápido · Texto nativo + QR (1 etiqueta)</button></div>
 <p class="tiny warn">Comprueba visualmente las líneas Y CONSUMO, TAPADO y los tres cuadrados del QR; escanéalo. Si el QR nativo falla igual que el anterior, antes de modificar el diseño debemos revisar papel, rodillo y cabezal. Un registro de envío exitoso <strong>no demuestra</strong> una impresión sin defectos.</p>
+</div>
+
+<div style="border-top:1px solid #dce5df;margin-top:20px;padding-top:16px">
+<h3>6B · V0.6.2 · Misma etiqueta completa, raster optimizado</h3>
+<p>Tras la prueba 6A correcta y el QR escaneable, probamos si <strong>reducir la cantidad de datos gráficos</strong> resuelve el defecto de las filas comprimidas y el QR no legible que aparecieron en la impresión completa. <strong>El diseño es exactamente el mismo que V0.6:</strong> Bricolage Grotesque, Geist, anillo y cifras oficiales, fechas, nota, isotipo BN, QR nativo y URL pública. No hay que editar Canva.</p>
+<p>En vez de cinco bitmaps grandes, se eliminan únicamente los <strong>espacios blancos de la transmisión</strong> en sub-bandas de hasta 12 filas y se envía lo que realmente contiene tinta. La posición geométrica de cada píxel se conserva. El QR sigue siendo nativo e idéntico al anterior; ni densidad, ni calibración, ni velocidad cambian.</p>
+<p id="v62Metrics" class="tiny muted">Calculando tamaño del nuevo trabajo…</p>
+<label class="switch"><input id="v62Confirm" type="checkbox"><span>He colocado papel <strong>50 × 80 mm</strong> y autorizo <strong>una sola impresión experimental V0.6.2</strong>. No repetiré la prueba sin valorar la salida.</span></label>
+<div class="actions"><button id="v62Label" type="button" disabled>Imprimir V0.6.2 · etiqueta completa optimizada (una etiqueta)</button></div>
+<p class="tiny warn">Este ensayo todavía no ha sido probado físicamente. El ahorro en bytes NO garantiza una impresión correcta: comprueba texto, tramas, fecha y QR con tu móvil; copia el registro si falla.</p>
 </div>
 
 <p class="tiny warn">Prueba de formato nuevo. El QR nativo se colocará en la esquina inferior derecha y dejará aire respecto al texto. El trabajo usa cinco bitmaps segmentados y el QR nativo, con pausas BLE conservadoras de 75 ms: su duración puede ser varios minutos. Si hay cortes o errores, no repitas: copia el registro. El recuadro QR en la vista previa es una <strong>reserva</strong>, no un código ficticio.</p>
@@ -165,6 +175,7 @@ function updateStatus(label){
   byId("bitmaptest").disabled=busy || !connected || !byId("confirmGraphics").checked;
   if(typeof updateV05Buttons==="function")updateV05Buttons();
   if(typeof updateV06Buttons==="function")updateV06Buttons();
+  if(typeof updateV062Buttons==="function")updateV062Buttons();
   byId("shortQR").disabled=busy || !connected || !byId("confirmQR").checked;
   byId("rasterQR").disabled=busy || !connected || !byId("confirmQR").checked;
 }
@@ -417,5 +428,6 @@ updateStatus("Desconectado");
 </script>
 <script src="./label-v05.js"></script>
 <script src="./label-v06.js"></script>
+<script src="./label-v062.js"></script>
 </body>
 </html>
