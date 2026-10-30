@@ -1,5 +1,12 @@
 # MiruRecetas · Laboratorio BLE CT230B
 
+## V0.7 · Nueva prueba horizontal (30/10/2026)
+
+El laboratorio incluye **6E · V0.7**, un botón específico de impresión experimental **50 × 80 mm**, lectura horizontal girada 90° antihorario para «Puré de calabaza y calabacín». Usa como referencia aprobada el SVG Canva suministrado por la usuaria, sin añadir anillo ni rediseñar bloques. Reutiliza bandas raster dispersas de V0.6.2, **dos líneas TSPL `BAR` nativas** y un **QR TSPL nativo** con la URL canónica de la receta. Los valores oficiales son 215,56 kcal, 4,44 g PR, 22,31 g HC, 12,92 g GR (por ración). La instrucción exacta de descongelación de esta prueba procede de la usuaria.
+
+**Pendiente:** selección manual de fechas, impresión física, escaneo de QR y cotejo visual contra el SVG. La impresión no se activa sin autorización de papel y confirmación; no modifica recetas, Canva ni PWA. Documento técnico: [V07-HORIZONTAL-PURE-CALABAZA-CALABACIN.md](V07-HORIZONTAL-PURE-CALABAZA-CALABACIN.md). Las versiones anteriores siguen disponibles para comparación.
+
+
 **Laboratorio experimental público** para explorar impresión térmica directa desde Chrome Android hacia una **CLABEL CT230B** por Bluetooth Low Energy. **No es la web oficial de MiruRecetas ni un controlador validado.**
 
 ## Acceder
