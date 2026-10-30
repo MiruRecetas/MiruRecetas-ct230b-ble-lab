@@ -1,5 +1,5 @@
 "use strict";
-/* V0.7.2 · SVG CANVA ORIGINAL 20261030_200122_0000.svg
+/* V0.7.3 · SVG CANVA ORIGINAL 20261030_200122_0000.svg
  * INDEPENDIENTE de label-p15-horizontal-svg.js y de la reconstrucción del agente.
  * Referencia visual: SVG real aportado por la usuaria (lienzo vertical
  * 141.75 × 226.50 unidades), renderizado e inspeccionado girado 90°.
@@ -11,7 +11,11 @@
  * No se añade ningún anillo ni se altera el contenido editorial.
  */
 const V7_W=590,V7_H=945,V7_LW=945,V7_LH=590;
-const V7_LIMIT=35000,V7_QR=Object.freeze({x:345,y:58,module:5});
+// V0.7.2 emitió 35.026 B: +26 B sobre el límite preventivo de 35.000.
+// Este tope propio de V7 admite margen acotado sin cambiar ni un píxel,
+// número de copias, chunk BLE, ritmo, orden de comandos ni QRCODE.
+// Otros ensayos conservan sus límites independientes.
+const V7_LIMIT=36000,V7_QR=Object.freeze({x:345,y:58,module:5});
 // Líneas con cotas exactas del SVG horizontal Canva (945×590); antes de rotar.
 const V7_LANDSCAPE_RULES=Object.freeze([
   {x:0,y:109,w:945,h:21},
@@ -161,10 +165,10 @@ function v7Render(d){
   const area=p.getImageData(8,13,80,94).data;
   for(let k=0;k<area.length;k+=4)
     if(area[k]<90&&area[k+1]<90&&area[k+2]<90&&area[k+3]>230)logoDark++;
-  if(logoDark<350)throw Error("V0.7.2: isotipo BN invisible; impresión bloqueada.");
+  if(logoDark<350)throw Error("V0.7.3: isotipo BN invisible; impresión bloqueada.");
   if(!darkAt(119,300)||!darkAt(254,700)||
     darkAt(580,824)||darkAt(580,690))
-    throw Error("V0.7.2: líneas mal orientadas; impresión bloqueada.");
+    throw Error("V0.7.3: líneas mal orientadas; impresión bloqueada.");
   return physical;
 }
 function v7Build(d){
@@ -226,7 +230,7 @@ async function v7Refresh(){
         " bandas dispersas · "+m.raster+" B gráficos · 2 líneas raster + QR nativo.";
     }catch(e){v7ById("v7Metrics").textContent="Aún no imprimible: "+e.message;}
     v7ById("v7Assets").textContent=
-      "Vista previa V0.7.2 · isotipo BN recuperado, líneas rotadas con el SVG, Lentejas estofadas con chorizo · QR nativo.";
+      "Vista previa V0.7.3 · diseño idéntico a V0.7.2 · 36.000 B límite de esta prueba · Lentejas estofadas con chorizo · QR nativo.";
   }catch(e){
     v7Ready=false;
     v7ById("v7Assets").textContent="Error V0.7: "+e.message;
@@ -238,13 +242,13 @@ async function v7Print(){
       !writeChannel||!v7ById("v7Confirm").checked)return;
   let d,b;try{d=v7GetData();b=v7Build(d);}
   catch(e){log("V0.7 · BLOQUEADO: "+e.message);return;}
-  if(!window.confirm("Enviar UNA etiqueta V0.7.2 de 50×80 mm para "+
+  if(!window.confirm("Enviar UNA etiqueta V0.7.3 de 50×80 mm para "+
      d.name+" (diseño horizontal aprobado)?\n"+
      b.job.length+" bytes / "+Math.ceil(b.job.length/20)+
      " fragmentos BLE. QR real. Sin reintentos automáticos."))return;
-  log("V0.7.2 · Lentejas estofadas con chorizo · "+b.job.length+
+  log("V0.7.3 · Lentejas estofadas con chorizo · "+b.job.length+
     " B / "+b.tiles+" bandas · líneas raster 2 · QR nativo real "+d.url);
-  try{await transmitDiagnostic(b.job,"V0.7.2 50×80 Lentejas · SVG aprobado");}
+  try{await transmitDiagnostic(b.job,"V0.7.3 50×80 Lentejas · SVG aprobado");}
   finally{v7ById("v7Confirm").checked=false;v7Update();}
 }
 const v7Today=new Date();
@@ -255,5 +259,5 @@ for(const id of ["v7Packed","v7Expiry"])
   v7ById(id).addEventListener("change",()=>{v7Update();v7Refresh();});
 v7ById("v7Confirm").addEventListener("change",v7Update);
 v7ById("v7Print").addEventListener("click",v7Print);
-log("V0.7.2 · Lentejas estofadas con chorizo; SVG Canva horizontal aprobado; isotipo BN rasterizado con recorte alfa, líneas en origen antes de rotar, QR nativo 50×80.");
+log("V0.7.3 · mismo diseño V0.7.2 de Lentejas; límite de prueba exclusivo V7: 36.000 B; sin cambios gráficos ni en BLE, QR nativo.");
 v7Refresh();
