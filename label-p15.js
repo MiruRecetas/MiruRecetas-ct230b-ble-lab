@@ -18,7 +18,7 @@ const P15_PROFILES=Object.freeze({
   qr:Object.freeze({x:64,y:700,module:5}),url:P15_RECIPES.cebollas.url,
   canva:"DAHZgFaJ6oM"}),
  component:Object.freeze({title:"50×30 componente · Pisto",width:590,height:354,size:"50 mm,30 mm",
-  qr:Object.freeze({x:365,y:126,module:5}),url:P15_RECIPES.pisto.url,
+  qr:Object.freeze({x:365,y:151,module:5}),url:P15_RECIPES.pisto.url,
   canva:"DAHZfv_-Y-g"}),
  ingredient:Object.freeze({title:"30×20 ingrediente · Carne picada",width:354,height:236,size:"30 mm,20 mm",
   qr:null,url:null,canva:"DAHZfxOJgfA"})
@@ -104,17 +104,17 @@ function p15Component(d){
  p15Font(c,'italic 500 16px "Geist"',"El calabacín puede variar",27,317,300);
  p15Font(c,'italic 500 16px "Geist"',"de textura al congelar.",27,338,300);
  c.textAlign="center";
- p15Font(c,'700 29px "Bricolage Grotesque"',p15Format(r.kcal),463,102,175);
- p15Font(c,'500 15px "Geist"',"kcal",463,120);
+ p15Font(c,'700 29px "Bricolage Grotesque"',p15Format(r.kcal),458,60,140);
+ p15Font(c,'500 15px "Geist"',"kcal",458,79);
  c.textAlign="left";
  const vals=[["PR",r.protein],["HC",r.carbs],["GR",r.fat]];
  for(let i=0;i<vals.length;i++){
   const x=388+i*65;
-  p15Font(c,'700 15px "Geist"',p15Format(vals[i][1])+" g",x,109,61);
-  p15Font(c,'500 13px "Geist"',vals[i][0],x,122);
+  p15Font(c,'700 15px "Geist"',p15Format(vals[i][1])+" g",x,114,61);
+  p15Font(c,'500 13px "Geist"',vals[i][0],x,131);
  }
  // QR real de Pisto. Zona despejada también de reglas, textos y tramas.
- c.fillStyle="#fff";c.fillRect(353,117,232,230);
+ c.fillStyle="#fff";c.fillRect(353,142,232,207);
  return cv;
 }
 function p15Ingredient(d){
