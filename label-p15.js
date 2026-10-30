@@ -110,8 +110,8 @@ function p15Component(d){
  const vals=[["PR",r.protein],["HC",r.carbs],["GR",r.fat]];
  for(let i=0;i<vals.length;i++){
   const x=388+i*65;
-  p15Font(c,'700 15px "Geist"',p15Format(vals[i][1])+" g",x,105,61);
-  p15Font(c,'500 13px "Geist"',vals[i][0],x,118);
+  p15Font(c,'700 15px "Geist"',p15Format(vals[i][1])+" g",x,95,61);
+  p15Font(c,'500 13px "Geist"',vals[i][0],x,111);
  }
  // QR real de Pisto. Zona despejada también de reglas, textos y tramas.
  c.fillStyle="#fff";c.fillRect(353,116,232,229);
