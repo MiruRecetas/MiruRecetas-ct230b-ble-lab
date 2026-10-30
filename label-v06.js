@@ -192,7 +192,7 @@ async function v6Repaint(){
  }catch(e){
   v6Ready=false;V6_EL("v6Assets").textContent="No es posible generar la etiqueta: "+e.message;
   log("v0.6 · error de activos: "+e.message);
- }finally{v6Rendering=false;updateV06Buttons();}
+ }finally{v6Rendering=false;updateV06Buttons();if(typeof v62Metrics==="function")v62Metrics();}
 }
 async function v6Print(){
  if(busy||!device?.gatt?.connected||!writeChannel||!V6_EL("v6Confirm").checked||!v6Ready)return;
