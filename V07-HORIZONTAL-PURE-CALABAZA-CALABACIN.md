@@ -1,7 +1,7 @@
 # V0.7 · Ensayo horizontal 50×80 · Puré de calabaza y calabacín
 
 **Fecha:** 30 de octubre de 2026.  
-**Estado:** implementado en rama y pendiente de validación física (Chrome Android + CT230B). No afirmar que se ha impreso ni que el QR ya se ha escaneado en V0.7.
+**Estado:** corregido tras fallo real de carga comunicado a las 21:36 del 30/10/2026; pendiente de validación física (Chrome Android + CT230B). No afirmar que se ha impreso ni que el QR ya se ha escaneado en V0.7.
 
 ## 1. Diseño aprobado y limitación de alcance
 
@@ -45,3 +45,14 @@ Las fechas de envasado y consumo preferente se introducen a mano. No generar un 
 **Pruebas de código:** parseo de JavaScript del módulo nuevo y del reutilizado; se verificaron los controles, referencias, configuración de línea/QR y que las pruebas previas conservan el máximo de 2 líneas. **Pendiente:** ejecución real en Chrome Android, cálculo de bytes con sus fuentes rasterizadas, impresión física, lectura QR y comparación visual contra SVG aprobado.
 
 **Ámbito:** únicamente laboratorio BLE CT230B. No se modifica Canva, web principal, Airtable, receta oficial, publicación canónica ni PWA.
+## Incidencia real y corrección de la V0.7 (30/10/2026)
+
+**Evidencia de la usuaria, 21:36–21:37:** la vista previa estaba vacía; aun indicando fechas, la sección V0.7 repetía `p15hIso is not defined` y no permitía imprimir. **No hubo impresión V0.7**.
+
+**Causa confirmada:** `label-v05.js` y `label-p15-horizontal-svg.js` declaraban ambos `const now` al nivel global de scripts clásicos del mismo documento. La duplicación produce `SyntaxError: Identifier 'now' has already been declared`; por ello la declaración de `p15hIso` dentro del segundo script no existía. La V0.7 antigua usaba esa función y otras del módulo anterior, que además era una reconstrucción de otro agente.
+
+**Corrección:** en la sección antigua 6D solo se renombra el `now` local a `p15hToday`, preservando su comportamiento. **V0.7 deja de llamar a cualquier función `p15h*`** y construye por su cuenta el render, las fechas, las áreas de raster, los dos `BAR`, el QR y el trabajo. Sigue reutilizando exclusivamente los servicios estables de V0.6.2: `v62SparseRegion`, `v5Logo`, carga de fuentes/identidad y `transmitDiagnostic`. La referencia directa es el **SVG realmente adjuntado** `MiruRecetas · Etiqueta 50x80 · v1_20261030_200122_0000.svg` (SHA-256 `15661f972de80d007599fe44a1ce5f08cd397c890feb7bbb32efc2ecc92a1090`). La implementación reproduce sus bloques y cotas de colocación; **no importa automáticamente cada path vectorial del SVG** ni enlaza cambios de Canva.
+
+**Pruebas sin papel:** compilación conjunta de todos los scripts del HTML (sin colisión de identificadores); simulación de Canvas 2D y GATT confirmando vista previa 590×945, fechas válidas, botón habilitable, 2 BAR nativas, 1 QRCODE, 1 PRINT y URL auténtica del puré. Son pruebas programáticas **simuladas**, no ejecución física ni garantía del ajuste real con las fuentes remotas. Validación pendiente en Chrome Android: aspecto geométrico, bytes reales, rotación, títulos largos y lectura QR en papel.
+
+**Instrucción congelación exacta a preservar:** «Descongelar en nevera y remover mientras se calienta enérgicamente o volver a batir». Solo se permite ajustar el salto automático de línea para encajarla en la caja ya existente; prohibido resumirla o reubicarla sin autorización.

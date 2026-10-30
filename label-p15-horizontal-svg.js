@@ -201,9 +201,9 @@ async function p15hPrint(){
  finally{p15h("p15h-confirm").checked=false;p15hUpdate();}
 }
 for(const [k,v] of Object.entries(P15H_DEFAULT))p15h("p15h-"+k).value=v;
-const now=new Date();
-p15h("p15h-packed").value=now.getFullYear()+"-"+String(now.getMonth()+1).padStart(2,"0")+
- "-"+String(now.getDate()).padStart(2,"0");
+const p15hToday=new Date();
+p15h("p15h-packed").value=p15hToday.getFullYear()+"-"+String(p15hToday.getMonth()+1).padStart(2,"0")+
+ "-"+String(p15hToday.getDate()).padStart(2,"0");
 for(const id of ["name","kcal","protein","carbs","fat","packed","expiry",
  "instructionHeading","instruction","noteHeading","note","url"])
  p15h("p15h-"+id).addEventListener("input",()=>{p15hUpdate();p15hRefresh();});
