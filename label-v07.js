@@ -118,7 +118,7 @@ function v7Render(d){
   v7Text(c,d.heading,26,309,30,"700","Bricolage Grotesque",550,24);
   v7Lines(c,d.instruction,26,350,555,27,"400",4,false,24);
   v7Text(c,d.noteHeading,26,503,26,"700","Bricolage Grotesque",200,22);
-  v7Lines(c,d.note,26,532,390,24,"500",2,true,21);
+  v7Lines(c,d.note,26,532,265,24,"500",2,true,21);
   // El SVG ya contiene la orientación horizontal aprobada. Gira el arte
   // -90 grados al espacio FÍSICO sin alterar ninguna posición interna.
   const physical=document.createElement("canvas");
