@@ -232,20 +232,20 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#14251b;color:#d6f6e0
 <p class="tiny warn">Mantiene idéntico el transporte BLE de V0.6.2: 20 bytes por paquete, pausa 75 ms, bandas raster dispersas de hasta 12 filas, QR TSPL nativo. Si sale mal, no repitas: recoge registro y fotografía. El envío completo no garantiza impresión correcta.</p>
 </section>
 <section id="v7">
-<h2>6E · V0.7.1 · Etiqueta horizontal aprobada 50 × 80 · Puré de calabaza y calabacín</h2>
-<p class="tiny muted"><strong>V0.7.1:</strong> ajuste exclusivo de logo y tipografías inferiores frente al SVG aprobado. La V0.7 se imprimió, pero las dos líneas BAR mostraron irregularidades; aquí las dos líneas conservan exactamente su geometría y pasan a raster disperso. QR nativo intacto.</p>
+<h2>6E · V0.7.2 · Etiqueta horizontal aprobada 50 × 80 · Lentejas estofadas con chorizo</h2>
+<p class="tiny muted"><strong>V0.7.2:</strong> corrección del fallo de coordenadas al rasterizar las líneas tras girar la etiqueta y del recorte invisible del SVG del isotipo. Mantiene la composición horizontal aprobada, las fuentes oficiales, las dos líneas raster dispersas y el QR nativo real. La receta cambia a Lentejas estofadas con chorizo, por petición expresa.</p>
 <p><strong>Prueba física nueva, independiente de las anteriores.</strong> Reproduce la composición del SVG de Canva aportado: lectura horizontal con el arte girado 90° antihorario dentro del rollo físico de 50 × 80 mm. No incorpora anillo ni elementos nuevos. El título, campos, jerarquía, tipografía Bricolage Grotesque / Geist e isotipo BN mantienen la geometría aprobada.</p>
-<p class="tiny muted">Datos oficiales por ración: <strong>215,56 kcal · PR 4,44 g · HC 22,31 g · GR 12,92 g</strong>. Instrucción exacta: <strong>«Descongelar en nevera y remover mientras se calienta enérgicamente o volver a batir»</strong>. QR de la ficha pública canónica del puré. Dos separadores <strong>rasterizados por bandas</strong> sin cambiar sus coordenadas o grosores; QR <code>QRCODE</code> nativo; los demás elementos en raster disperso.</p>
+<p class="tiny muted">Datos oficiales por ración: <strong>654,65 kcal · PR 38,89 g · HC 52,44 g · GR 31,43 g</strong>. Preparación: <strong>«Descongelar en nevera y recalentar bien caliente»</strong> (instrucción práctica de etiqueta; la ficha publicada solo indica añadir agua al recalentar si espesa). QR de la ficha pública canónica de las lentejas. Dos separadores <strong>rasterizados por bandas</strong> sin cambiar sus coordenadas o grosores; QR <code>QRCODE</code> nativo; los demás elementos en raster disperso.</p>
 <div class="v5-grid">
 <label class="v5-field" for="v7Packed"><strong>Envasado y congelación</strong><input id="v7Packed" type="date" required></label>
 <label class="v5-field" for="v7Expiry"><strong>Consumo preferente · indicar manualmente</strong><input id="v7Expiry" type="date" required></label>
 </div>
 <p class="tiny warn">La ficha canónica no establece un plazo de conservación congelada; esta prueba no atribuye uno. El QR está reservado en la vista previa: la matriz REAL la imprime la CT230B mediante TSPL. Se necesita Chrome Android y rollo 50 × 80 mm.</p>
-<canvas id="v7Preview" role="img" width="590" height="945" aria-label="Vista previa de la etiqueta V0.7 horizontal, girada para rollo 50 por 80; QR nativo reservado."></canvas>
-<p id="v7Assets" class="tiny muted">Cargando motor gráfico V0.7.1, fuentes e isotipo oficiales…</p>
+<canvas id="v7Preview" role="img" width="590" height="945" aria-label="Vista previa V0.7.2 para 50 por 80, Lentejas estofadas con chorizo, texto girado 90 grados; QR nativo reservado."></canvas>
+<p id="v7Assets" class="tiny muted">Cargando motor gráfico V0.7.2, fuentes e isotipo oficiales…</p>
 <p id="v7Metrics" class="tiny muted">Selecciona ambas fechas para calcular el trabajo.</p>
-<label class="switch"><input id="v7Confirm" type="checkbox"><span>He instalado papel <strong>50 × 80 mm</strong>, he revisado las fechas y autorizo <strong>una única impresión experimental V0.7.1</strong>; no se repetirá automáticamente.</span></label>
-<div class="actions"><button id="v7Print" type="button" disabled>Imprimir V0.7.1 · Puré · horizontal 50 × 80 (una etiqueta)</button></div>
+<label class="switch"><input id="v7Confirm" type="checkbox"><span>He instalado papel <strong>50 × 80 mm</strong>, he revisado las fechas y autorizo <strong>una única impresión experimental V0.7.2</strong>; no se repetirá automáticamente.</span></label>
+<div class="actions"><button id="v7Print" type="button" disabled>Imprimir V0.7.2 · Lentejas estofadas · horizontal 50 × 80 (una etiqueta)</button></div>
 <p class="tiny muted">Se reutiliza el transporte BLE validado V0.6.2: fragmentos de 20 bytes y pausa de 75 ms. No se realizan calibraciones, cambios permanentes, comunicaciones fuera del canal UART comprobado ni impresiones al abrir la página.</p>
 </section>
 
@@ -537,6 +537,6 @@ updateStatus("Desconectado");
 <script src="./label-v062.js"></script>
 <script src="./label-p15.js"></script>
 <script src="./label-p15-horizontal-svg.js"></script>
-<script src="./label-v07.js?v=753c9df606db70d2ee5bd94066bc3911ba61f930"></script>
+<script src="./label-v07.js?v=3c7f257a64d1e11627225d43d3dd209a732475a9"></script>
 </body>
 </html>
