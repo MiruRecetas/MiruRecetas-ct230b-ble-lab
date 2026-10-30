@@ -7,7 +7,7 @@
  */
 const V8_ID=id=>document.getElementById(id);
 const V8_WIDTH=354,V8_HEIGHT=236,V8_LIMIT=35000;
-let v8Ready=false,v8Preparing=false,v8Printing=false;
+let v8Ready=false,v8Preparing=false,v8Printing=false,v8NeedsRefresh=false;
 function v8Date(str,required=true){
  if(!str){if(required)throw Error("Selecciona ambas fechas.");return "__/__/__";}
  if(!/^\d{4}-\d{2}-\d{2}$/.test(str))throw Error("Fecha incorrecta.");
@@ -86,7 +86,7 @@ function v8Update(){
   !device?.gatt?.connected||!writeChannel||!V8_ID("v8Confirm").checked;
 }
 async function v8Refresh(){
- if(v8Preparing)return;
+ if(v8Preparing){v8NeedsRefresh=true;return;}
  v8Preparing=true;
  try{
   await v5EnsureIdentity();
@@ -112,7 +112,10 @@ async function v8Refresh(){
  }catch(e){
   v8Ready=false;V8_ID("v8Status").textContent="No se puede generar la vista previa: "+e.message;
   log("V0.8 · ERROR: "+e.message);
- }finally{v8Preparing=false;v8Update();}
+ }finally{
+  v8Preparing=false;v8Update();
+  if(v8NeedsRefresh){v8NeedsRefresh=false;void v8Refresh();}
+ }
 }
 async function v8Print(){
  if(busy||v8Printing||!v8Ready||!device?.gatt?.connected||
