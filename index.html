@@ -34,13 +34,20 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#14251b;color:#d6f6e0
 #v5Preview{width:100%;max-width:590px;height:auto;aspect-ratio:590/354;border:1px solid #bac8bf;display:block;margin:14px auto 6px;background:white}
 .url-text{overflow-wrap:anywhere;font:12px/1.4 ui-monospace,monospace;color:#435b4d}
 #v6Preview{display:block;width:min(100%,370px);height:auto;aspect-ratio:590/945;margin:14px auto;border:1px solid #b6c2bb;background:#fff} .v6-verified{font-size:.91rem;color:#2d5a43}
+
+.p15-card{padding:14px 0;border-top:1px solid #dce5df}
+.p15-card h3{margin:0 0 7px;font-size:1rem}
+.p15-card canvas{display:block;width:min(100%,285px);height:auto;max-height:440px;object-fit:contain;margin:10px auto;border:1px solid #bdc7c0;background:#fff}
+.p15-card .p15-metrics{font-size:.82rem;color:var(--muted)}
+#p15Status{font-size:.9rem;color:var(--muted)}
+
 </style>
 </head>
 <body>
 <main>
 <header><span class="eyebrow">MIRURECETAS · LABORATORIO AISLADO</span>
 <h1>CLABEL CT230B · Prueba Bluetooth BLE</h1>
-<p class="muted">Versión 0.5 experimental · No es la web oficial ni un controlador probado. No usa Airtable, cuentas ni inventarios.</p>
+<p class="muted">Laboratorio aislado: V0.6.2 validada físicamente en una muestra; cuatro propuestas P15 nuevas pendientes de prueba. Sin Airtable, cuentas ni inventarios.</p>
 <span class="badge" role="status" id="status">Desconectado</span></header>
 
 <section>
@@ -146,6 +153,52 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#14251b;color:#d6f6e0
 <p class="tiny warn">Prueba de formato nuevo. El QR nativo se colocará en la esquina inferior derecha y dejará aire respecto al texto. El trabajo usa cinco bitmaps segmentados y el QR nativo, con pausas BLE conservadoras de 75 ms: su duración puede ser varios minutos. Si hay cortes o errores, no repitas: copia el registro. El recuadro QR en la vista previa es una <strong>reserva</strong>, no un código ficticio.</p>
 </section>
 
+
+<section id="p15">
+<h2>6C · P15 · Cuatro etiquetas desde Canva (pruebas nuevas)</h2>
+<p><strong>Cuatro botones independientes.</strong> Se recrean diseños de Canva como arte raster con fuentes e isotipo oficiales; el QR es comando TSPL nativo, no la imagen del lienzo. La 50×80 horizontal se imprime girando el arte dentro del ancho real de 50 mm: <code>SIZE 50 mm,80 mm</code>.</p>
+<p class="tiny warn">Propuestas NUEVAS NO PROBADAS en la impresora. Mantienen exactamente el transporte BLE histórico: fragmentos 20 B, 75 ms entre envíos, sin reintentos. Imprimen una sola copia, exigen confirmación y bloquean trabajos mayores de 35.000 B. La vista previa no simula el QR real; comprueba el escaneo sobre papel.</p>
+<div class="v5-grid">
+<label class="v5-field" for="p15Packed"><strong>Envasado y congelación</strong><input id="p15Packed" type="date" required></label>
+<label class="v5-field" for="p15Expiry"><strong>Consumo preferente (indicar conscientemente)</strong><input id="p15Expiry" type="date" required></label>
+<label class="v5-field" for="p15Quantity"><strong>Ingrediente Carne picada · gramos</strong><input id="p15Quantity" type="number" min="1" max="9999" step="1" value="500" required></label>
+</div>
+<p class="tiny muted">Las recetas cocinadas son siempre una ración por bolsa, pero la etiqueta <strong>no muestra ni número de raciones ni gramaje</strong>. Solo el ingrediente muestra la cantidad elegida. Las fechas no implican que se haya validado un plazo de conservación.</p>
+<p id="p15Status">Preparando las fuentes e isotipo oficiales…</p>
+<div class="p15-card">
+<h3>01 · Ración completa · vertical 50 × 80</h3>
+<p class="tiny muted">Referencia: <a target="_blank" rel="noopener noreferrer" href="https://www.canva.com/design/DAHZbhgmFc0/edit">Canva DAHZbhgmFc0</a> · papel físico 50 × 80 mm.</p>
+<canvas id="p15Preview-vertical" role="img" width="590" height="945" aria-label="Vista previa del arte que enviará TSPL; QR reservado para impresión nativa."></canvas>
+<p id="p15Metrics-vertical" class="p15-metrics">Calcular trabajo con fechas reales.</p>
+<label class="switch"><input id="p15Confirm-vertical" type="checkbox"><span>Confirmo que tengo puesto papel <strong>50 × 80 mm</strong> y autorizo una sola etiqueta de este formato.</span></label>
+<div class="actions"><button id="p15Print-vertical" type="button" disabled>Imprimir 01 · Ración completa · vertical 50 × 80</button></div>
+</div>
+<div class="p15-card">
+<h3>01bis · Ración completa · lectura horizontal 50 × 80</h3>
+<p class="tiny muted">Referencia: <a target="_blank" rel="noopener noreferrer" href="https://www.canva.com/design/DAHZgFaJ6oM/edit">Canva DAHZgFaJ6oM</a> · papel físico 50 × 80 mm (lectura girada 90°, alimentación 80 mm).</p>
+<canvas id="p15Preview-landscape" role="img" width="590" height="945" aria-label="Vista previa del arte que enviará TSPL; QR reservado para impresión nativa."></canvas>
+<p id="p15Metrics-landscape" class="p15-metrics">Calcular trabajo con fechas reales.</p>
+<label class="switch"><input id="p15Confirm-landscape" type="checkbox"><span>Confirmo que tengo puesto papel <strong>50 × 80 mm (lectura girada 90°, alimentación 80 mm)</strong> y autorizo una sola etiqueta de este formato.</span></label>
+<div class="actions"><button id="p15Print-landscape" type="button" disabled>Imprimir 01bis · Ración completa · lectura horizontal 50 × 80</button></div>
+</div>
+<div class="p15-card">
+<h3>02 · Componente cocinado · Pisto · 50 × 30</h3>
+<p class="tiny muted">Referencia: <a target="_blank" rel="noopener noreferrer" href="https://www.canva.com/design/DAHZfv_-Y-g/edit">Canva DAHZfv_-Y-g</a> · papel físico 50 × 30 mm.</p>
+<canvas id="p15Preview-component" role="img" width="590" height="354" aria-label="Vista previa del arte que enviará TSPL; QR reservado para impresión nativa."></canvas>
+<p id="p15Metrics-component" class="p15-metrics">Calcular trabajo con fechas reales.</p>
+<label class="switch"><input id="p15Confirm-component" type="checkbox"><span>Confirmo que tengo puesto papel <strong>50 × 30 mm</strong> y autorizo una sola etiqueta de este formato.</span></label>
+<div class="actions"><button id="p15Print-component" type="button" disabled>Imprimir 02 · Componente cocinado · Pisto · 50 × 30</button></div>
+</div>
+<div class="p15-card">
+<h3>03 · Ingrediente · Carne picada · 30 × 20</h3>
+<p class="tiny muted">Referencia: <a target="_blank" rel="noopener noreferrer" href="https://www.canva.com/design/DAHZfxOJgfA/edit">Canva DAHZfxOJgfA</a> · papel físico 30 × 20 mm.</p>
+<canvas id="p15Preview-ingredient" role="img" width="354" height="236" aria-label="Vista previa del arte que enviará TSPL; QR reservado para impresión nativa."></canvas>
+<p id="p15Metrics-ingredient" class="p15-metrics">Calcular trabajo con fechas reales.</p>
+<label class="switch"><input id="p15Confirm-ingredient" type="checkbox"><span>Confirmo que tengo puesto papel <strong>30 × 20 mm</strong> y autorizo una sola etiqueta de este formato.</span></label>
+<div class="actions"><button id="p15Print-ingredient" type="button" disabled>Imprimir 03 · Ingrediente · Carne picada · 30 × 20</button></div>
+</div>
+<p class="tiny warn">Si la impresión sale deformada, no repitas automáticamente: copia el registro, fotografía el resultado e identifica qué formato falló. El transporte completado no certifica calidad ni adhesión al congelador.</p>
+</section>
 <section>
 <h2>7 · Registro local</h2>
 <div class="actions">
@@ -176,6 +229,7 @@ function updateStatus(label){
   if(typeof updateV05Buttons==="function")updateV05Buttons();
   if(typeof updateV06Buttons==="function")updateV06Buttons();
   if(typeof updateV062Buttons==="function")updateV062Buttons();
+  if(typeof p15Update==="function")p15Update();
   byId("shortQR").disabled=busy || !connected || !byId("confirmQR").checked;
   byId("rasterQR").disabled=busy || !connected || !byId("confirmQR").checked;
 }
@@ -429,5 +483,6 @@ updateStatus("Desconectado");
 <script src="./label-v05.js"></script>
 <script src="./label-v06.js"></script>
 <script src="./label-v062.js"></script>
+<script src="./label-p15.js"></script>
 </body>
 </html>
