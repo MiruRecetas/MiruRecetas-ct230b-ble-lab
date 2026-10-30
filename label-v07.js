@@ -1,5 +1,5 @@
 "use strict";
-/* V0.7.1 · SVG CANVA ORIGINAL 20261030_200122_0000.svg
+/* V0.7.2 · SVG CANVA ORIGINAL 20261030_200122_0000.svg
  * INDEPENDIENTE de label-p15-horizontal-svg.js y de la reconstrucción del agente.
  * Referencia visual: SVG real aportado por la usuaria (lienzo vertical
  * 141.75 × 226.50 unidades), renderizado e inspeccionado girado 90°.
@@ -12,9 +12,10 @@
  */
 const V7_W=590,V7_H=945,V7_LW=945,V7_LH=590;
 const V7_LIMIT=35000,V7_QR=Object.freeze({x:345,y:58,module:5});
-const V7_RULES=Object.freeze([
-  {x:109,y:0,w:21,h:945},
-  {x:251,y:427,w:7,h:518}
+// Líneas con cotas exactas del SVG horizontal Canva (945×590); antes de rotar.
+const V7_LANDSCAPE_RULES=Object.freeze([
+  {x:0,y:109,w:945,h:21},
+  {x:0,y:251,w:518,h:7}
 ]);
 const V7_REGIONS=Object.freeze([
   {x:0,y:0,w:109,h:945,label:"título e isotipo"},
@@ -25,16 +26,45 @@ const V7_REGIONS=Object.freeze([
   {x:550,y:0,w:40,h:260,label:"margen junto a QR"}
 ]);
 const V7_RECIPE=Object.freeze({
-  name:"Puré de calabaza y calabacín",
-  kcal:"215,56", protein:"4,44", carbs:"22,31", fat:"12,92",
+  name:"Lentejas estofadas con chorizo",
+  kcal:"654,65", protein:"38,89", carbs:"52,44", fat:"31,43",
   heading:"DESCONGELACIÓN Y CONSUMO",
-  instruction:"Descongelar en nevera y remover mientras se calienta enérgicamente o volver a batir",
+  instruction:"Descongelar en nevera y recalentar bien caliente.",
   noteHeading:"NOTA",
-  note:"La textura puede variar al descongelar.",
-  url:"https://mirurecetas.github.io/menu-anual-recetas/recetas/pure-de-calabaza-y-calabacin/"
+  note:"Añadir un poco de agua si queda demasiado espeso.",
+  url:"https://mirurecetas.github.io/menu-anual-recetas/recetas/lentejas-estofadas-con-chorizo/"
 });
 const v7ById=id=>document.getElementById(id);
-let v7Ready=false,v7Busy=false;
+let v7Ready=false,v7Busy=false,v7TrimmedLogo=null;
+// En Chrome, el SVG original sin width/height tiene tamaño intrínseco 150x150.
+// Recortar el SVG directamente en drawImage(...) produjo una imagen VACÍA.
+// Primero lo rasterizamos completo en un canvas de alta resolución y recortamos
+// allí la caja alfa real. Las seis piezas del isotipo permanecen intactas.
+function v7GetVisibleLogo(){
+  if(v7TrimmedLogo)return v7TrimmedLogo;
+  if(!v5Logo)throw Error("Isotipo oficial BN no cargado.");
+  const n=512,base=document.createElement("canvas");
+  base.width=n;base.height=n;
+  const g=base.getContext("2d",{willReadFrequently:true});
+  g.clearRect(0,0,n,n);g.drawImage(v5Logo,0,0,n,n);
+  const data=g.getImageData(0,0,n,n).data;
+  let minX=n,minY=n,maxX=-1,maxY=-1,count=0;
+  for(let y=0;y<n;y++)for(let x=0;x<n;x++){
+    if(data[(y*n+x)*4+3]>24){
+      if(x<minX)minX=x;if(x>maxX)maxX=x;
+      if(y<minY)minY=y;if(y>maxY)maxY=y;
+      count++;
+    }
+  }
+  if(count<1000||maxX<=minX||maxY<=minY)
+    throw Error("Isotipo sin píxeles visibles: impresión bloqueada.");
+  const tight=document.createElement("canvas");
+  tight.width=maxX-minX+1;tight.height=maxY-minY+1;
+  tight.getContext("2d").drawImage(base,minX,minY,tight.width,tight.height,
+    0,0,tight.width,tight.height);
+  v7TrimmedLogo=tight;
+  return tight;
+}
 function v7Date(iso){
   if(!/^\d{4}-\d{2}-\d{2}$/.test(iso)||!Number.isFinite(Date.parse(iso))||
     new Date(iso+"T12:00:00").toISOString().slice(0,10)!==iso)
@@ -90,16 +120,8 @@ function v7Render(d){
   c.textAlign="left";c.textBaseline="alphabetic";c.imageSmoothingEnabled=true;
   // Bloque superior del SVG: tipografía protagonista + reserva exacta del logo.
   v7Text(c,d.name,19,87,66,"700","Bricolage Grotesque",795,30);
-  // El SVG de marca posee un viewBox cuadrado con márgenes transparentes
-  // (~19 % lateral y ~24 % superior; arte útil ~61 % × 52 %).
-  // Recortamos SOLO AL DIBUJAR para que el isotipo real tenga el tamaño
-  // visible en Canva. El archivo vectorial aprobado permanece intacto.
-  const logoWidth=v5Logo.naturalWidth,logoHeight=v5Logo.naturalHeight;
-  if(!logoWidth||!logoHeight)throw Error("Dimensiones del isotipo no disponibles.");
-  c.drawImage(v5Logo,
-    Math.round(logoWidth*.19),Math.round(logoHeight*.236),
-    Math.round(logoWidth*.62),Math.round(logoHeight*.53),
-    838,8,94,80);
+  // SVG BN oficial: recorte de márgenes ya RASTERIZADO, preservando formas.
+  c.drawImage(v7GetVisibleLogo(),838,8,94,80);
   // Fechas a la izquierda del módulo energético; coordenadas del SVG.
   v7Text(c,"Envasado y congelación",26,168,25,"400","Geist",350,20);
   v7Text(c,"Consumo preferente",26,212,25,"400","Geist",350,20);
@@ -119,16 +141,17 @@ function v7Render(d){
   v7Lines(c,d.instruction,26,350,555,27,"400",4,false,24);
   v7Text(c,d.noteHeading,26,503,26,"700","Bricolage Grotesque",200,22);
   v7Lines(c,d.note,26,532,325,24,"500",2,true,21);
-  // El SVG ya contiene la orientación horizontal aprobada. Gira el arte
-  // -90 grados al espacio FÍSICO sin alterar ninguna posición interna.
+  // Dibujar las dos líneas en coordenadas CANVA ANTES de girar todo el arte.
+  // Evita el bug V7.1 de dibujarlas en un contexto rotado sin restaurarlo.
+  c.fillStyle="#000";
+  for(const r of V7_LANDSCAPE_RULES)c.fillRect(r.x,r.y,r.w,r.h);
   const physical=document.createElement("canvas");
   physical.width=V7_W;physical.height=V7_H;
   const p=physical.getContext("2d",{willReadFrequently:true});
   p.fillStyle="#fff";p.fillRect(0,0,V7_W,V7_H);
-  p.translate(0,V7_H);p.rotate(-Math.PI/2);p.drawImage(landscape,0,0);
-  // Mismas dos líneas aprobadas, rasterizadas por bandas como el texto,
-  // en lugar de BAR nativo que mostró irregularidades físicas en V0.7.
-  p.fillStyle="#000";for(const b of V7_RULES)p.fillRect(b.x,b.y,b.w,b.h);
+  p.save();p.translate(0,V7_H);p.rotate(-Math.PI/2);
+  p.drawImage(landscape,0,0);p.restore();
+  // Después de la rotación no hay trazos adicionales sobre el canvas físico.
   return physical;
 }
 function v7Build(d){
@@ -190,7 +213,7 @@ async function v7Refresh(){
         " bandas dispersas · "+m.raster+" B gráficos · 2 líneas raster + QR nativo.";
     }catch(e){v7ById("v7Metrics").textContent="Aún no imprimible: "+e.message;}
     v7ById("v7Assets").textContent=
-      "Vista previa V0.7.1 · isotipo completo sin márgenes, textos ampliados, 2 líneas raster · QR nativo.";
+      "Vista previa V0.7.2 · isotipo BN recuperado, líneas rotadas con el SVG, Lentejas estofadas con chorizo · QR nativo.";
   }catch(e){
     v7Ready=false;
     v7ById("v7Assets").textContent="Error V0.7: "+e.message;
@@ -202,13 +225,13 @@ async function v7Print(){
       !writeChannel||!v7ById("v7Confirm").checked)return;
   let d,b;try{d=v7GetData();b=v7Build(d);}
   catch(e){log("V0.7 · BLOQUEADO: "+e.message);return;}
-  if(!window.confirm("Enviar UNA etiqueta V0.7 de 50×80 mm para "+
+  if(!window.confirm("Enviar UNA etiqueta V0.7.2 de 50×80 mm para "+
      d.name+" (diseño horizontal aprobado)?\n"+
      b.job.length+" bytes / "+Math.ceil(b.job.length/20)+
      " fragmentos BLE. QR real. Sin reintentos automáticos."))return;
-  log("V0.7.1 · Puré de calabaza y calabacín · "+b.job.length+
+  log("V0.7.2 · Lentejas estofadas con chorizo · "+b.job.length+
     " B / "+b.tiles+" bandas · líneas raster 2 · QR nativo real "+d.url);
-  try{await transmitDiagnostic(b.job,"V0.7 50×80 Puré · SVG original");}
+  try{await transmitDiagnostic(b.job,"V0.7.2 50×80 Lentejas · SVG aprobado");}
   finally{v7ById("v7Confirm").checked=false;v7Update();}
 }
 const v7Today=new Date();
@@ -219,5 +242,5 @@ for(const id of ["v7Packed","v7Expiry"])
   v7ById(id).addEventListener("change",()=>{v7Update();v7Refresh();});
 v7ById("v7Confirm").addEventListener("change",v7Update);
 v7ById("v7Print").addEventListener("click",v7Print);
-log("V0.7.1 · mismo SVG Canva aprobado; isotipo visible ampliado, tipografía inferior mayor, líneas raster, QR nativo 50×80.");
+log("V0.7.2 · Lentejas estofadas con chorizo; SVG Canva horizontal aprobado; isotipo BN rasterizado con recorte alfa, líneas en origen antes de rotar, QR nativo 50×80.");
 v7Refresh();
