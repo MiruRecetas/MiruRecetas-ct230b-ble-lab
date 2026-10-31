@@ -19,7 +19,7 @@
 </header>
 <p class="p1-lab-note"><strong>Laboratorio · Panel V1 de impresión.</strong> Página independiente de ensayo, sin conexión con Airtable ni publicación en MiruRecetas. La ficha reproducida es <strong>Ragú a la boloñesa</strong> con datos públicos reales. Las etiquetas utilizan por ahora <strong>#r047</strong>: el resolvedor de URL corta aún está pendiente de desplegarse. El laboratorio histórico permanece sin cambios.</p>
 <main>
-<article class="p1-recipe" aria-label="Ficha de receta de Ragú a la boloñesa, réplica experimental">
+<article id="p1-recipe-card" class="p1-recipe" aria-label="Ficha de receta de Ragú a la boloñesa, réplica experimental">
 <section id="p1-front-face" class="p1-face" aria-label="Cara de ingredientes de Ragú a la boloñesa">
 <div class="p1-recipe-grid">
 <div class="p1-photo">
@@ -29,7 +29,7 @@
 <div class="p1-main">
 <span class="p1-eyebrow">Recetario · ficha de prueba</span>
 <div class="p1-title-row">
-<h1>Ragú a la boloñesa</h1>
+<h1 id="p1-front-title" tabindex="-1">Ragú a la boloñesa</h1>
 <button id="p1-open" class="p1-print-circle" type="button" title="Imprimir etiqueta" aria-label="Imprimir etiqueta de Ragú a la boloñesa" aria-haspopup="dialog" aria-controls="p1-dialog"><svg class="p1-cta-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v7H6zM18 12h.01"/></svg></button>
 </div>
 <p class="p1-description">Salsa de ternera y verduras cocinada a fuego lento, con tomate y un toque cremoso de leche y queso.</p>
@@ -135,14 +135,7 @@
 <option value="component">50 × 30 mm · Componente · V0.9</option>
 </select>
 </label>
-<label class="p1-field" id="p1-qr-test-field" hidden>
-<span>Ensayo del QR · solo etiqueta 50 × 30</span>
-<select id="p1-qr-size">
-<option value="original" selected>Original · 4 puntos por módulo (referencia)</option>
-<option value="large">Ampliado · 5 puntos por módulo (experimental)</option>
-</select>
-<small>Solo cambia el tamaño y la posición del QR; nombre, macros, notas y BLE se conservan. Prueba primero una etiqueta.</small>
-</label>
+
 <div class="p1-two">
 <label class="p1-field"><span>Envasado y congelación *</span><input type="date" id="p1-packed" required><small>Obligatorio para imprimir</small></label>
 <label class="p1-field"><span>Consumo preferente</span><input type="date" id="p1-expiry"><small>Opcional · en blanco: --/--/--</small></label>
@@ -157,11 +150,11 @@
 <small>De 1 a 20 · un solo trabajo BLE. Dos copias verificadas; más de dos, pendientes de prueba física.</small>
 </div>
 <div class="p1-preview-box">
-<span class="p1-preview-title">Vista previa de etiqueta (QR de 5 puntos todavía experimental)</span>
+<span class="p1-preview-title">Vista previa de la composición aprobada</span>
 <canvas class="p1-preview" id="p1-preview" width="590" height="945" role="img" aria-label="Vista previa de la etiqueta con reserva para el código QR nativo"></canvas>
 <span class="p1-metrics" id="p1-metrics" aria-live="polite">Cargando fuentes e isotipo…</span>
 </div>
-<p class="p1-qr-note"><strong>QR corto de Ragú:</strong> <code>https://mirurecetas.github.io/#r047</code>. La versión de 4 puntos ha resultado difícil de escanear en la CT230B. En la opción experimental de 5 puntos, la matriz se amplía aproximadamente un 25 % y se reserva su margen blanco. El QR real se dibuja en la impresora; el destino puede no redirigir hasta que se publique el índice.</p>
+<p class="p1-qr-note"><strong>QR de receta:</strong> <code>https://mirurecetas.github.io/#r047</code>. El componente 50 × 30 utiliza <strong>5 puntos por módulo y corrección M, aprobados y escaneados</strong>, sin selector. Los QR de 50 × 80 conservan su configuración. La vista previa reserva el espacio; la matriz real se imprime con TSPL. La redirección web depende de la publicación del índice.</p>
 <div class="p1-connection">
 <div class="p1-state" role="status" id="p1-connection-text"><i class="p1-state-dot" id="p1-state-dot" aria-hidden="true"></i><span id="p1-status">Impresora desconectada</span></div>
 <div class="p1-connection-buttons">
