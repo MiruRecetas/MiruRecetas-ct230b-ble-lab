@@ -1,55 +1,36 @@
-# MiruRecetas · Panel V1 de impresión · ensayo aislado en laboratorio público
+# MiruRecetas · Panel V1 de impresión · Ragú a la boloñesa
 
-**Estado inicial:** desarrollo de interfaz/ensayo TSPL; **multicopia todavía no validada físicamente**. Las tres plantillas de receta/componente aprobadas (V0.6.2 50×80 vertical, V0.7.3 50×80 horizontal, V0.9 50×30 componente) permanecen disponibles en el índice histórico del laboratorio, sin cambios. La cuarta plantilla, V0.8 30×20 ingrediente, permanece en el histórico y **queda fuera de este motor** hasta que exista «Conserva».
+**Estado:** página experimental en el laboratorio público, distinta de `/index.html` histórico. **Los diseños originales y el transporte BLE siguen aprobados; la impresión de la adaptación a Ragú y la multicopia no están aún comprobadas físicamente.**
 
-**Página nueva independiente:** `https://mirurecetas.github.io/MiruRecetas-ct230b-ble-lab/panel-v1/` (GitHub Pages main/root, tras fusión y despliegue).
+**URL de prueba:** `https://mirurecetas.github.io/MiruRecetas-ct230b-ble-lab/panel-v1/`.
 
-## Contrato visual
+## Receta real empleada
 
-- La página contiene **una réplica de ficha real de Pisto** basada en `MiruRecetas/mirurecetas-web-source/main:datos/recetas/pisto.json`: título, descripción, fotografía pública, 6 raciones base, ingredientes reales y nutrición oficial **por ración**: 164,35 kcal; PR 5,69 g; HC 18,58 g; GR 7,84 g. La ficha no sustituye la pública.
-- Botón **«Imprimir etiqueta»** dentro de la ficha; panel flotante con patrón visual real de la **ficha diaria compacta**: móvil `max-width:700px` asciende desde abajo con fondo oscurecido y `max-height:89dvh`, escritorio a la derecha. Permite cerrar por X, Escape o fondo, retiene y devuelve el foco; bloquea desplazamiento de fondo y respeta `safe-area-inset-bottom`.
-- Selector de **formato** predeterminado **50×80 vertical**; opciones 50×80 horizontal y 50×30 componente. La plantilla de ingrediente 30×20 no aparece.
-- **Fecha de envasado obligatoria**, consumo preferente opcional. En blanco se imprime **`--/--/--`**; no se presume vida útil ni se rellena caducidad automáticamente.
-- **Copias entre 1 y 20**, predeterminado 1. No se altera el número de raciones impreso (de hecho las tres etiquetas continúan **sin texto de peso/ración**); el selector de raciones en la ficha modifica solo cantidades de ingredientes de la página, no las kcal/macros de la etiqueta ni las copias.
-- El botón «Imprimir» permanece deshabilitado salvo que: las fuentes reales y logo BN estén preparados, exista una fecha de envasado válida, el número de copias sea entero permitido y exista **conexión Web Bluetooth CT230B**.
-- QR nativo TSPL de **`https://mirurecetas.github.io/#r001`**, identidad corta futura de Pisto. **El resolvedor #r001 puede no estar disponible hasta que se publique la PR #46 del privado**. No utilizar para otra receta; en esta fase se prueba el tamaño de la matriz, no el destino.
-- Bajo la ficha, registro persistente durante la sesión con **«Copiar registro» y «Limpiar registro»**; sin telemetría ni persistencia remota.
+**Fuente canónica:** `MiruRecetas/mirurecetas-web-source/main:datos/recetas/ragu-a-la-bolonesa.json`, contrastada con la ficha pública `/menu-anual-recetas/recetas/ragu-a-la-bolonesa/`. Se cambia la antigua muestra de Pisto únicamente en esta página nueva, **sin alterar la página de laboratorio histórica, las fichas públicas o los JSON de recetas**.
 
-## Motor y relación con plantillas físicas
+- Nombre: **Ragú a la boloñesa**; slug `ragu-a-la-bolonesa`, categoría **salsas-aderezos**, imagen oficial `imagenes/ragu-a-la-bolonesa.webp`.
+- Raciones del JSON: **4**. Ingredientes: pimiento verde 75 g; pimiento rojo 75 g; cebolla 75 g; AOVE 7,5 ml; ternera picada 300 g; zanahoria 75 g; tomate triturado 300 g; vino blanco de guiso 50 ml; leche semidesnatada 50 ml; queso crema 35 g; sal y pimienta negra sin cantidad especificada.
+- Nutrición **por ración**: **251,89 kcal; PR 16,65 g; HC 10,67 g; GR 15,78 g**. El anillo gráfico de la réplica se adapta a las fracciones energéticas 4/4/9 de esos tres macronutrientes.
+- El contador de «Cantidad a preparar» empieza en **4**; cambia los ingredientes de la ficha, nunca altera las **cifras por ración de las etiquetas**, ni el contador de copias.
+- **QR de ensayo propio:** `https://mirurecetas.github.io/#r047`. `r047` está asignado a Ragú en la rama de la **PR privada #46**, todavía no publicada. **No considerar la navegación desde QR operativa hasta fusionar y publicar #46**. La reducción de densidad sí puede ensayarse.
+- Los textos impresos para descongelación/nota se han **abreviado a partir de las notas de la receta registrada**, no del ejemplo de Pisto. En los bloques pequeños: «Descongelar en nevera» / «Recalentar removiendo» y «Refrigerar pronto o» / «congelar por raciones». En horizontal se expresa la indicación ampliada, también fundamentada en las notas de origen. **No se ha generado ningún plazo nuevo de consumo preferente.** La nota canónica completa contiene más instrucciones; esta abreviación es **experimental**, pendiente de revisión por la usuaria antes de integrar en la web real.
 
-`panel-v1/engine.js` contiene una **extracción experimental** (sin dependencias en el DOM histórico) de los renderizadores y comandos de:
-- `label-v06.js` y `label-v062.js` → vertical V0.6.2, raster 12 filas, barras nativas iguales y QR nativo.
-- `label-v07.js` → horizontal V0.7.3, líneas raster geométricas, alfa recortada del isotipo BN, mapa 945×590 rotado hacia 590×945 para la impresora.
-- `label-v09-component.js` → componente V0.9, raster y 2 líneas geométricas; logotipo recortado y QR nativo reservado.
-- `label-v05.js` → conversión bitmap monocromática MSB-first/polaridad aprobada y carga de fuentes BN.
+## Panel y formatos
 
-El contenido **de los tres renderizadores se adapta a Pisto** para que la ficha y la vista previa siempre muestren la misma receta; el contrato de posición, patrón, fuentes, campos y canal BLE se preserva. **Esta adaptación de contenido a Pisto en 50×80 no equivale a aprobación física independiente de la variación**. Tampoco significa que se haya integrado ya un motor genérico de cualquier receta.
+- Móvil: bottom sheet desde abajo, **88dvh** y anchura correcta; escritorio: panel derecho de hasta **480 px**, siguiendo el patrón de ficha diaria compacta.
+- Selector de formato inicial: **50×80 vertical V0.6.2**; alternativas **50×80 horizontal V0.7.3** y **50×30 componente V0.9**. V0.8 ingrediente 30×20 se reserva a la futura pantalla «Conserva» y no se ofrece aquí.
+- Fecha de envasado: **fecha local del dispositivo por defecto, modificable**. Consumo preferente: opcional, con guiones `--/--/--` si está vacío. No establecer caducidad alimentaria automática.
+- Copias: **1 a 20** mediante selector −/+, con una ración por etiqueta y **un único trabajo TSPL `PRINT 1,N`**, transmitido con BLE 20 B / 75 ms. Multicopia aún pendiente de prueba física.
+- Conexión manual CT230B y botón de imprimir **deshabilitado** sin fecha válida, conexión, fuentes reales y número de copias permitido. Confirmación previa sin reintentos.
+- El cuadro de vista previa usa proporciones 590×945, 945×590 y 590×354 respectivamente, con QR nativo TSPL reservado; el QR real solo se ve tras imprimir.
+- Registro BLE/TSPL visible bajo la ficha, en consola oscura que envuelve líneas largas, con botones **Copiar registro** y **Limpiar registro**. Sin telemetría remota.
 
-La vista previa **reserva el espacio del QR nativo**, no simula su matriz pixel a pixel. Solo la impresión puede validar la matriz más sencilla producida por `#r001`.
+## Precauciones y próximos ensayos
 
-## Multicopia con UN transporte BLE
+1. Verificar que Ragú aparece con fotografía real, 4 raciones, ingredientes correctos, nutrición 251,89 / 16,65 / 10,67 / 15,78 y que ningún texto de Pisto permanece en la página o etiquetas.
+2. Abrir el panel y comprobar las vistas previas, especialmente título largo en 50×30 y notas para Ragú, sin solapamiento con logo, kcal o QR.
+3. Probar 1 etiqueta de Ragú para comprobar que nombre, fechas, macros e instrucciones coinciden con la ficha y que el QR muestra **`#r047`**. Esta etiqueta puede guardarse para uso real **solo si sus fechas, contenido y destino del QR son adecuados**; la URL corta aún puede no resolver a su ficha.
+4. Para multicopia, probar primero 2 etiquetas y confirmar dos salidas completas con un único trabajo BLE, antes de elevar el número de copias.
+5. Facilitar el registro de ejecución y fotografías para cerrar validaciones sin alterar las cuatro maquetaciones originales.
 
-La generación original de cada etiqueta termina con `PRINT 1,1\r\n`. El nuevo controlador verifica que el trabajo termina **exactamente** en esa instrucción y sustituye **solo el sufijo final** por `PRINT 1,N\r\n` (1 ≤ N ≤ 20). Se envían **una sola vez** el bitmap, las instrucciones TSPL y el QR. La reproducción de las N copias queda a cargo del **firmware de la impresora**. Conserva `SIZE`, `GAP`, `DIRECTION 0`, `CLS`, módulo/ubicación del QR y 20 bytes/75 ms por fragmento BLE, con confirmación previa y **sin reintentos automáticos**.
-
-**Advertencia:** `PRINT 1,N` es sintaxis TSPL prevista para multicopia, pero el comportamiento real de la CT230B con este firmware **NO ha sido probado aún**. La primera prueba física debe usar **2 copias** con papel correcto, seleccionar una fecha, conectar y comprobar si imprime dos etiquetas completas sin añadir una tercera. Si hay problema de alimentación/papel, parar y enviar registro antes de repetir. El estado final de envío BLE **no certifica** cuántas etiquetas salieron.
-
-## Verificaciones realizadas antes de publicar
-
-- Comprobación sintáctica de `engine.js` y `app.js`, referencias a 27 IDs DOM sin duplicados.
-- Mock JS de los tres renderizadores y carga de fuentes/isotipo, con fechas obligatoria/opcional y rechazo de caducidad anterior.
-- Construcción de **12 trabajos TSPL simulados**: 3 formatos × 1, 2, 5 y 20 copias, exactamente un comando `PRINT 1,N`, un `QRCODE` que incluye `#r001`, tamaños correctos y límites de 35.000/36.000 bytes; **los mocks no miden el tamaño real de raster** y no sustituyen pruebas en Chrome Android/CT230B.
-- La prueba de interfaz visual y el hardware Bluetooth real se comprobarán **tras Pages** con el usuario, antes de promover al repositorio privado.
-
-## Lista de pruebas para Chrome Android
-
-1. Abrir la página independiente por HTTPS. Verificar foto y datos reales de Pisto, botón, ausencia de alteraciones en la antigua página raíz del laboratorio.
-2. Abrir/cerrar la hoja varias veces (X, toque en fondo, Escape si se usa teclado), observar el desplazamiento y foco en Android vertical y horizontal.
-3. Abrir el panel sin fecha y sin conexión: Imprimir deshabilitado. Seleccionar fecha de envasado; Imprimir sigue deshabilitado hasta conectar la CT230B.
-4. Dejar **vacío** Consumo preferente: vista previa muestra `--/--/--`, seleccionar 50×80 vertical, 50×80 horizontal y 50×30; verificar que el texto encaja y no tapa el QR.
-5. Cambiar «Cantidad a preparar» de 6 a 8: cambian solo las cantidades de la ficha, **no** la nutrición por ración de etiqueta ni su número de copias.
-6. Conectar CT230B desde Chrome Android; comprobar canal GATT y notificaciones sin imprimir automáticamente.
-7. Imprimir **una sola copia** de cada formato para validar la integración. Después **dos copias** de un formato, con un único trabajo TSPL.
-8. Escanear QR: leer `https://mirurecetas.github.io/#r001` y comparar tamaño/legibilidad con URL larga. No exigir redirección hasta desplegar acortador.
-9. Copiar y limpiar el registro; aportar log, foto de 1 etiqueta y foto de 2 etiquetas, indicando formato, fecha opcional en blanco y número de copias.
-
-**No modifica:** repositorios de MiruRecetas privados, la app/PWA pública, el índice QR pendiente, Airtable, las recetas canónicas, inventario, costes, fotografías aprobadas, orquestación Actions ni los mecanismos de publicación.
+**Publicación y límites:** desarrollo exclusivo en repositorio laboratorio público; ningún cambio en `mirurecetas-web-source`, web/PWA oficial, Airtable, Hero, índices QR, ni mecanismo de Actions de producción. El traslado a la fuente privada queda pendiente de aprobación.
