@@ -1,5 +1,8 @@
 # V0.9 · Componente cocinado 50 × 30 · Pisto — prueba SVG Canva
 
+> **ACTUALIZACIÓN DEL QR · 31/10/2026:** la etiqueta gráfica V0.9 de Pisto continúa aprobada como diseño histórico; su QR largo de **4 puntos**, difícil de leer, permanece **sin cambios** en label-v09-component.js. El **QR de 5 puntos con ECC M para 50×30** ha sido **probado y aprobado** en el nuevo panel V1 para Ragú con URL corta **#r047**. **No afirmar que se reescribió el módulo V0.9 histórico**. Ver [acta vigente](VALIDACION-ETIQUETAS-CT230B-2026-10-31.md). Las observaciones previas sobre lectura difícil son historia de la versión anterior.
+
+
 **Estado vigente (31/10/2026): V0.9 FÍSICAMENTE VALIDADA Y APROBADA POR LA USUARIA.** El QR **se puede leer, pero requiere varios intentos**; esta limitación se acepta como incidencia abierta para estudiar enlaces cortos sin alterar el diseño. La versión aprobada incorpora la PR #20 (`d621dbc1aefc`). Las menciones a «pendiente» y «QR no verificado» en párrafos previos son **históricas y quedan superadas** por esta decisión explícita. **No sustituye ni modifica** las versiones V0.6.2 vertical, V0.7.3 horizontal y V0.8 ingrediente aprobadas.
 
 ## Autoridad del diseño

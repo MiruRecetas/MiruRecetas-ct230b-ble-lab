@@ -1,5 +1,8 @@
 # MiruRecetas · Laboratorio BLE CT230B
 
+> **ACTA VIGENTE · 31/10/2026:** las cuatro familias de etiqueta están **aprobadas físicamente**. QR de **50×30: módulo 5 puntos + ECC M**, escaneado correctamente; QR de las dos 50×80, escaneables sin modificación; V0.8 ingrediente sin QR. **PRINT 1,2** validado con dos etiquetas en una transmisión; etiquetas en congelador 2–3 días y manipulación en buen estado. Ver [acta consolidada](VALIDACION-ETIQUETAS-CT230B-2026-10-31.md). Los estados «pendiente» de ensayos anteriores se conservan como historia.
+
+
 ## V0.7 · Nueva prueba horizontal (30/10/2026)
 
 El laboratorio incluye **6E · V0.7**, un botón específico de impresión experimental **50 × 80 mm**, lectura horizontal girada 90° antihorario para «Puré de calabaza y calabacín». Usa como referencia aprobada el SVG Canva suministrado por la usuaria, sin añadir anillo ni rediseñar bloques. Reutiliza bandas raster dispersas de V0.6.2, **dos líneas TSPL `BAR` nativas** y un **QR TSPL nativo** con la URL canónica de la receta. Los valores oficiales son 215,56 kcal, 4,44 g PR, 22,31 g HC, 12,92 g GR (por ración). La instrucción exacta de descongelación de esta prueba procede de la usuaria.
