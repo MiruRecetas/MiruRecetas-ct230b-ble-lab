@@ -15,7 +15,7 @@
        status=$("p1-status"),error=$("p1-error"),metrics=$("p1-metrics"),
        logElement=$("p1-log");
  let origin=null,device=null,writeChannel=null,notifyChannel=null,busy=false,ready=false;
- let portions=6, labelCopies=1;
+ let portions=engine.recipe.portions, labelCopies=1;
  function log(message){
   logElement.textContent+="["+new Date().toLocaleTimeString("es-ES")+"] "+message+"\n";
   logElement.scrollTop=logElement.scrollHeight;
@@ -65,7 +65,7 @@
    preview.getContext("2d").drawImage(art,0,0);
    const n=labelCopies;
    metrics.textContent=engine.formats[format.value].label+
-    " · Pisto · "+n+" "+(n===1?"etiqueta":"etiquetas")+
+    " · "+engine.recipe.name+" · "+n+" "+(n===1?"etiqueta":"etiquetas")+
     " · envasado "+dates.packed+" · consumo "+dates.expiry;
    if(!error.hidden)showError("");
   }catch(e){
@@ -114,7 +114,7 @@
  function renderPortions(){
   $("p1-portions").textContent=String(portions);
   document.querySelectorAll("[data-p1-base]").forEach(element=>{
-   const base=Number(element.dataset.p1Base),amount=base*portions/6;
+   const base=Number(element.dataset.p1Base),amount=base*portions/engine.recipe.portions;
    element.textContent=new Intl.NumberFormat("es-ES",{maximumFractionDigits:2}).format(amount)+
     " "+element.dataset.p1Unit;
   });
@@ -200,10 +200,10 @@
      (count===1?"copia":"copias")+" · "+job.bytes+" bytes · "+
      job.fragments+" fragmentos · "+job.tiles+" bandas raster.");
   const text="¿Enviar UN trabajo BLE a la CLABEL para imprimir "+
-   count+" "+(count===1?"etiqueta":"etiquetas")+" de Pisto ("+
+   count+" "+(count===1?"etiqueta":"etiquetas")+" de "+engine.recipe.name+" ("+
    engine.formats[format.value].label+")?\n"+
    "Envasado: "+dates.packed+" · Consumo preferente: "+dates.expiry+
-   "\nQR corto #r001 · PRINT 1,"+count+".\n"+
+   "\nQR corto #"+engine.recipe.qrId+" · PRINT 1,"+count+".\n"+
    "Sin reintentos. La multicopia todavía está pendiente de validación física.";
   if(!window.confirm(text)){log("Impresión cancelada antes del envío.");return;}
   busy=true;update();showError("");
@@ -236,7 +236,7 @@
   log("Envasado preseleccionado: "+todayLocal+" (fecha local del dispositivo; editable).");
   log("Panel V1 preparado: HTTPS="+Boolean(window.isSecureContext)+
       "; Web Bluetooth disponible="+Boolean(navigator.bluetooth)+".");
-  log("Ficha real Pisto: 6 raciones de cocina; etiqueta siempre 1 ración, datos oficiales 164,35 kcal.");
+  log("Ficha real "+engine.recipe.name+": "+engine.recipe.portions+" raciones de cocina; etiqueta siempre 1 ración, datos oficiales "+engine.recipe.kcalDisplay+" kcal.");
   log("Diseños: V0.6.2 50×80 vertical, V0.7.3 50×80 horizontal, V0.9 50×30 componente.");
   log("QR de ensayo: "+engine.recipe.shortUrl+"; resolvedor aún no publicado. Multicopia PRINT 1,N pendiente de validación.");
   try{
