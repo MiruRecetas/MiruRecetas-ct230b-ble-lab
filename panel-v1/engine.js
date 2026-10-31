@@ -473,6 +473,21 @@ function v7Build(d){
 const V9_ID=id=>document.getElementById(id);
 const V9_W=590,V9_H=354,V9_LIMIT=35000;
 const V9_QR=Object.freeze({x:420,y:187,module:4,box:148});
+/* Solo en panel-v1: opción experimental de QR 5 puntos por módulo.
+ * URL #r047: previsiblemente QR V3 29×29 a ECC M.
+ * QR grande x425..570 (145 dots), y187..332; quiet zone 4×5 dots:
+ * x405..590 e y167..352, sin salir del área 590×354.
+ * Configuración original 4 puntos conservada como valor predeterminado.
+ */
+const PANEL_QR_VARIANTS=Object.freeze({
+ original:V9_QR,
+ large:Object.freeze({x:425,y:187,module:5,box:185})
+});
+function panelComponentQr(variant="original"){
+ if(!Object.hasOwn(PANEL_QR_VARIANTS,variant))
+  throw Error("Variante QR desconocida.");
+ return PANEL_QR_VARIANTS[variant];
+}
 const V9_RECIPE=Object.freeze({
  name:PANEL_RECIPE.name,kcal:PANEL_RECIPE.kcalDisplay,
  protein:PANEL_RECIPE.proteinDisplay,carbs:PANEL_RECIPE.carbsDisplay,fat:PANEL_RECIPE.fatDisplay,
@@ -550,7 +565,8 @@ function v9Draw(d){
  // Zona x≥405,y≥174 SIN TINTA para QR real + quiet zone: no fake QR raster.
  return canvas;
 }
-function v9Build(d){
+function v9Build(d,qrVariant="original"){
+ const qr=panelComponentQr(qrVariant);
  const canvas=v9Draw(d);
  // Raster partido: segunda zona NO invade QR nativo ni su quiet zone.
  const regions=[
@@ -565,8 +581,8 @@ function v9Build(d){
   parts.push(encoder.encode("BITMAP "+tile.x+","+tile.y+","+tile.widthBytes+","+tile.height+",0,"));
   parts.push(tile.bytes,encoder.encode("\r\n"));
  }
- parts.push(encoder.encode("QRCODE "+V9_QR.x+","+V9_QR.y+
-  ",M,"+V9_QR.module+',A,0,M2,S7,"'+V9_RECIPE.url+'"\r\n'));
+ parts.push(encoder.encode("QRCODE "+qr.x+","+qr.y+
+  ",M,"+qr.module+',A,0,M2,S7,"'+V9_RECIPE.url+'"\r\n'));
  parts.push(encoder.encode("PRINT 1,1\r\n"));
  const job=joinBuffers(...parts);
  if(job.length>V9_LIMIT)throw Error("Trabajo "+job.length+
@@ -604,7 +620,8 @@ function panelQrPlaceholder(ctx,x,y,w,h,title){
  ctx.font='500 12px "Geist"';ctx.fillText("#"+PANEL_RECIPE.qrId+" · QR TSPL",x+w/2,y+h/2+15);
  ctx.restore();
 }
-function panelPreview(format,dates){
+function panelPreview(format,dates,qrVariant="original"){
+ if(format!=="component"&&qrVariant!=="original")throw Error("QR de prueba solo para formato componente.");
  if(!v5Logo)throw Error("Identidad visual no cargada.");
  let canvas=document.createElement("canvas"),ctx=canvas.getContext("2d");
  if(format==="vertical"){
@@ -629,18 +646,24 @@ function panelPreview(format,dates){
   const art=v9Draw(dates);
   canvas.width=V9_W;canvas.height=V9_H;
   ctx=canvas.getContext("2d");ctx.drawImage(art,0,0);
-  panelQrPlaceholder(ctx,V9_QR.x,V9_QR.y,148,148,"QR NATIVO");
+  const qr=panelComponentQr(qrVariant);
+  const symbolDots=29*qr.module;
+  panelQrPlaceholder(ctx,qr.x,qr.y,symbolDots,symbolDots,
+   qrVariant==="large"?"QR 5 PUNTOS":"QR NATIVO");
   return canvas;
  }
  throw Error("Formato no reconocido.");
 }
-function panelBuild(format,dates,copies){
+function panelBuild(format,dates,copies,qrVariant="original"){
+ if(format!=="component"&&qrVariant!=="original")
+  throw Error("QR experimental solo disponible en 50×30.");
+ panelComponentQr(qrVariant);
  if(!Object.hasOwn(PANEL_FORMATS,format))throw Error("Formato no reconocido.");
  if(!Number.isInteger(copies)||copies<1||copies>20)throw Error("Elige de 1 a 20 etiquetas.");
  let result;
  if(format==="vertical")result=v62Build(dates);
  else if(format==="horizontal")result=v7Build(panelArgs(dates));
- else result=v9Build(dates);
+ else result=v9Build(dates,qrVariant);
  const original=result.job;
  // Mantener un único trabajo BLE: raster + QR nativo + PRINT 1,N.
  // El cambio de PRINT 1,1 a PRINT 1,N se evalúa físicamente; es sintaxis TSPL.
@@ -651,7 +674,7 @@ function panelBuild(format,dates,copies){
  const multiple=encoder.encode("PRINT 1,"+copies+"\r\n");
  const job=joinBuffers(original.subarray(0,original.length-tail.length),multiple);
  if(job.length>PANEL_FORMATS[format].maxBytes)throw Error("Límite de seguridad de tamaño de trabajo excedido.");
- return {job,format,copies,bytes:job.length,fragments:Math.ceil(job.length/20),
+ return {job,format,copies,qrVariant,qrModule:format==="component"?panelComponentQr(qrVariant).module:null,bytes:job.length,fragments:Math.ceil(job.length/20),
    tiles:result.blocks??result.tiles??0,rasterBytes:result.rasterBytes??result.raster??0};
 }
 async function panelLoadIdentity(){
@@ -671,6 +694,6 @@ async function panelLoadIdentity(){
  return true;
 }
 window.PanelEngine=Object.freeze({
- recipe:PANEL_RECIPE,formats:PANEL_FORMATS,
+ recipe:PANEL_RECIPE,formats:PANEL_FORMATS,qrVariants:PANEL_QR_VARIANTS,
  dates:panelDates,preview:panelPreview,build:panelBuild,loadIdentity:panelLoadIdentity
 });
