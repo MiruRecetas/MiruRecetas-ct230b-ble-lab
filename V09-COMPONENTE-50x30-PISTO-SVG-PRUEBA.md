@@ -1,6 +1,6 @@
 # V0.9 · Componente cocinado 50 × 30 · Pisto — prueba SVG Canva
 
-**Estado:** implementada en el laboratorio, pendiente de impresión y aprobación física de la usuaria. **No sustituye ni modifica** las versiones V0.6.2 vertical, V0.7.3 horizontal y V0.8 ingrediente aprobadas.
+**Estado vigente (31/10/2026): IMPRESA FÍSICAMENTE; aprobación final y escaneo QR no comunicados todavía.** La versión evaluada incluye el ajuste editorial de la PR #20 (`d621dbc1aefc`). Los párrafos históricos sobre prueba pendiente se conservan como registro del estado previo. **No sustituye ni modifica** las versiones V0.6.2 vertical, V0.7.3 horizontal y V0.8 ingrediente aprobadas.
 
 ## Autoridad del diseño
 
@@ -40,3 +40,31 @@ Se comprobó: sintaxis JavaScript de V0.9; **sintaxis concatenada de los scripts
 **Pendiente de aprobación V0.9:** fotografía real 50×30, legibilidad, coincidencia del tamaño de logo con el SVG, barra gruesa, línea parcial, alineación entre kcal/macros, QR situado correctamente y escaneable. El área libre restante del QR debe verificarse sobre papel. La aprobación de V0.7.3 y V0.8 no se extiende automáticamente a V0.9.
 
 **Ámbito estricto:** solo `MiruRecetas/MiruRecetas-ct230b-ble-lab`, sin PR/edición de arquitectura privada, web/PWA principal, Airtable, productos, recetas, nutrición, inventario, Canva o mecanismos de publicación ajenos.
+
+## Ensayo físico posterior — 31/10/2026, 10:13–10:17 (hora de España)
+
+**Evidencia recibida:** dos fotografías de la etiqueta Pisto 50×30 sobre la CLABEL CT230B, una general y otra de detalle del QR, y el log BLE completo facilitado por la usuaria. El aspecto en ambas imágenes corresponde a la **V0.9 con ampliación de títulos e instrucciones de la PR #20**, no a la anterior.
+
+| Hito | Primer envío | Segundo envío |
+| --- | --- | --- |
+| Inicio | 10:14:34 | 10:16:04 |
+| Mensaje «Datos ... enviados» | 10:15:43 | 10:17:16 |
+| Trabajo TSPL | **12.352 B** | **12.352 B** |
+| Fragmentos BLE | **618** | **618** |
+| Bandas raster | **27** | **27** |
+| QR nativo | URL pública `.../recetas/pisto/` | La misma |
+
+Conexión GATT confirmada a las 10:13:59 (canal de notificaciones activo, `WRITE=true` y `WRITE_NO_RESPONSE=true`). Desconexión a las 10:17:25. **Ambos envíos BLE completaron sin que el log notificara errores**. La fotografía acredita salida física real de al menos una etiqueta, pero **el log por sí solo no certifica dos etiquetas distintas físicamente revisadas**.
+
+### Inspección visual frente al SVG
+
+- **Título «Pisto» e isotipo oficial:** aparecen impresos y reconocibles en la cabecera; el isotipo conserva tamaño apreciable y está a la derecha.
+- **Separadores:** banda superior gruesa de ancho completo; segundo separador más fino que termina antes del área nutricional; no se ve la línea adicional errónea de reconstrucciones anteriores.
+- **Nutrición:** 164,35 kcal, PR 5,69 g, HC 18,58 g y GR 7,84 g claramente separados de las líneas en la imagen, sin solapamiento visible.
+- **Fechas:** «20/09/26» y «20/03/27» en la muestra impresa. **Son valores de prueba proporcionados por la usuaria, no plazos de conservación validados.**
+- **Bloque inferior:** cabecera «DESCONGELACIÓN Y CONSUMO», instrucciones y NOTA completas y legibles; tamaño aumentado conforme PR #20. La última línea de nota queda visualmente cerca del borde inferior, pero **no parece cortada**.
+- **QR:** la imagen muestra el símbolo completo y dentro de su área blanca; **no hay confirmación de escaneo correcto ni del destino decodificado**. No marcarlo como «escaneado» hasta prueba expresa.
+
+**Conclusión del ensayo:** el transporte BLE/TSPL y la impresión física de esta versión **sí están comprobados** con la evidencia aportada. La revisión visual es favorable. **V0.9 no se clasifica todavía como «aprobada físicamente»**, porque no se ha expresado esa aprobación ni se ha confirmado escaneabilidad del QR. Mantener V0.6.2, V0.7.3 y V0.8 aprobadas sin cambios; no modificar código de V0.9 por observaciones menores sin autorización. La adhesión de etiquetas sobre bolsa PA/PE congelada a −18 °C es una validación aparte, no realizada aquí.
+
+**Alcance documental:** solo esta bitácora del laboratorio; no se modifica el código de impresión, las fechas oficiales de ninguna receta, Canva, Airtable, la web/PWA de MiruRecetas ni los mecanismos de publicación.
