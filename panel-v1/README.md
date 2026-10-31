@@ -1,5 +1,8 @@
 # MiruRecetas · Panel V1 de impresión · Ragú a la boloñesa
 
+> **INTERFAZ APROBADA PARA INTEGRAR · 31/10/2026:** la usuaria aprobó expresamente los dos accesos a impresión de la maqueta: botón circular **printer** a la derecha del título de la cara de ingredientes; botón verde **printer + Imprimir etiqueta** después del temporizador real y antes de Notas en modo cocina. La integración definitiva se hará desde la fuente privada y conservará el botón de dar la vuelta, la lógica de temporizador y los QR ya aprobados. La nueva barra de avance BLE descrita a continuación está **implementada en el laboratorio y pendiente de revisión visual**, no se afirma aprobada físicamente.
+
+
 > **VALIDACIÓN FÍSICA POSTERIOR · 31/10/2026:** panel de Ragú con **dos copias mediante PRINT 1,2** (609 fragmentos de 20 B, 12.176 B); QR de **50×30, 5 puntos por módulo y ECC M** escaneado correctamente: https://mirurecetas.github.io/#r047. Aprobación expresa de la usuaria. Adhesión/aspecto después de **2–3 días de congelador y manipulación**, satisfactorios. La opción **original de 4 puntos sigue siendo predeterminada en este panel**; elegir **5 puntos** para usar el QR aprobado hasta posterior actualización. Ver [acta](../VALIDACION-ETIQUETAS-CT230B-2026-10-31.md). Las reservas «pendiente» inferiores pertenecen a fases previas.
 
 
@@ -99,3 +102,18 @@ Documentación técnica: [TSPL QRCODE (TSC)](https://fs.tscprinters.com/system/f
 Probar con Chrome Android retrato/paisaje: título e icono sin desbordamiento, navegación entre caras y conservación del CTA Modo cocina, posición del botón verde después del temporizador y antes de Notas, mismo diálogo accesible desde ambos botones, foco devuelto al acceso de origen, selección 50×30 sin control de puntos, previsualizaciones completas y registro BLE copiable. No atribuir a las comprobaciones estáticas una prueba de impresión adicional.
 
 **Referencia de futura integración:** el contrato de etiquetado en la fuente privada MiruRecetas/mirurecetas-web-source, documento docs/ETIQUETADO-CT230B-INTEGRACION-PLAN.md (PR documental #47). No editar fichas públicas ni mover archivos del laboratorio hasta aprobar esta maqueta.
+
+## Visibilidad del progreso de impresión BLE · añadido 31/10/2026
+
+**Motivo:** la indicación «Enviando 200/609 fragmentos» funciona pero tiene poca presencia visual dentro del diálogo. Se ha incorporado **una barra de avance de transporte**, no un indicador de estado físico del papel.
+
+- **Ubicación:** primera línea de la tarjeta de conexión, justo **encima del texto de estado** («Enviando X/Y fragmentos») y antes de los botones Conectar / Desconectar. Ocupa toda la anchura útil interior con los **mismos márgenes de 12 px** que los controles existentes. No se añade una caja nueva ni modifica el tamaño de los botones.
+- **Aspecto:** pista gris **#dcddda**, exactamente el color de los **anillos de días incompletos** de la fuente canónica (#week .week-kcal-ring .ring-track), avance **terracota #b96c4a**, altura de **7 px**, bordes redondeados, transición discreta de 120 ms (desactivada si el dispositivo pide reducción de movimiento).
+- **Cuándo aparece:** exclusivamente al comenzar el transporte Bluetooth tras la confirmación humana. La barra aparece en **0 %**, progresa horizontalmente sobre el total calculado de fragmentos de 20 B y se actualiza **después de cada escritura GATT completada y de la pausa existente de 75 ms**. Los incrementos de porcentaje se limitan a cambios de entero para no introducir trabajo visual en cada fragmento.
+- **Cuándo desaparece:** al terminar el trabajo **o** tras error/interrupción, reseteando valor y anchura. No se muestra mientras se selecciona o conecta una impresora, al preparar el trabajo, ni cuando el sistema está ocioso; nunca se deja erróneamente al 100 % si se interrumpe el canal.
+- **Accesibilidad:** rol progressbar con mínimo 0 y máximo 100, valor actual y texto accesible del contador de fragmentos; el mensaje de estado existente **se conserva**, incluidos sus avances de 100 en 100 y la última lectura X/X.
+- **Significado:** 100 % significa **fragmentos Bluetooth enviados**. La CLABEL puede seguir procesando y extrayendo la etiqueta después; no representa una impresión física confirmada.
+- **Sin cambios de transporte:** tamaño **20 B por escritura**, espera **75 ms**, canales UUID, QR TSPL nativo, PRINT 1,N, raster, número de copias, fechas o lógica de reintentos.
+- **QA automatizada:** 20 comprobaciones, incluidas simulación de **201 escrituras GATT completas**, progresión observable 0 → 100 y desaparición al finalizar; error forzado en la escritura 70/201 con barra retirada **sin llegar al 100 %**. Son simulaciones, no ensayos nuevos sobre impresora física.
+
+La **maqueta V1** incorpora así la mejora visual antes de ser trasladada a la fuente privada. La web y PWA oficiales **no se han modificado** por esta iteración.

@@ -83,6 +83,9 @@ button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{ou
 .p1-preview.p1-component{width:min(100%,410px);height:auto;max-height:none;aspect-ratio:590/354}
 .p1-qr-note{font-size:.78rem;line-height:1.4;color:#705f41;background:#fff5df;border:1px solid #e3d4b5;border-radius:9px;padding:8px 10px;overflow-wrap:anywhere;word-break:break-word}
 .p1-connection{display:grid;gap:10px;border:1px solid var(--line);border-radius:14px;padding:12px}
+.p1-ble-progress{position:relative;display:block;box-sizing:border-box;width:100%;height:7px;overflow:hidden;border-radius:999px;background:#dcddda}
+.p1-ble-progress-fill{position:absolute;top:0;bottom:0;left:0;width:0%;border-radius:inherit;background:var(--terra);transition:width .12s linear}
+@media(prefers-reduced-motion:reduce){.p1-ble-progress-fill{transition:none}}
 .p1-state{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:.82rem;color:var(--muted)}
 .p1-state-dot{width:9px;height:9px;border-radius:50%;background:#9e9e99}
 .p1-state-dot.is-connected{background:#27845c}

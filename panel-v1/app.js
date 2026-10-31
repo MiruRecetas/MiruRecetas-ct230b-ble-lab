@@ -14,7 +14,7 @@
        expiry=$("p1-expiry"),copies=$("p1-copies"),connect=$("p1-connect"),
        disconnect=$("p1-disconnect"),print=$("p1-print"),preview=$("p1-preview"),
        status=$("p1-status"),error=$("p1-error"),metrics=$("p1-metrics"),
-       logElement=$("p1-log");
+       logElement=$("p1-log"),bleProgress=$("p1-ble-progress"),bleProgressFill=$("p1-ble-progress-fill");
  let origin=null,device=null,writeChannel=null,notifyChannel=null,busy=false,ready=false;
  let portions=engine.recipe.portions, labelCopies=1;
  function log(message){
@@ -186,11 +186,33 @@
   clearConnection();log("Desconexión solicitada.");
  });
  const pause=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+ // Barra estrictamente de transporte BLE: no representa tiempo ni impresión física.
+ function showTransmissionProgress(total){
+  bleProgress.hidden=false;
+  bleProgressFill.style.width="0%";
+  bleProgress.setAttribute("aria-valuenow","0");
+  bleProgress.setAttribute("aria-valuetext","0 de "+total+" fragmentos enviados");
+ }
+ function advanceTransmissionProgress(completed,total){
+  const percent=Math.min(100,Math.floor(100*completed/total));
+  if(bleProgress.getAttribute("aria-valuenow")!==String(percent)||completed===total){
+   bleProgressFill.style.width=percent+"%";
+   bleProgress.setAttribute("aria-valuenow",String(percent));
+   bleProgress.setAttribute("aria-valuetext",completed+" de "+total+" fragmentos enviados");
+  }
+ }
+ function hideTransmissionProgress(){
+  bleProgress.hidden=true;
+  bleProgressFill.style.width="0%";
+  bleProgress.setAttribute("aria-valuenow","0");
+  bleProgress.setAttribute("aria-valuetext","0 de 0 fragmentos enviados");
+ }
  async function transmit(bytes,label){
   // Contrato físico original: 20 bytes/fragmento, 75 ms entre escrituras,
   // preferir WRITE con respuesta, sin reintentos ni canales alternativos.
   const chunkSize=20,total=Math.ceil(bytes.length/chunkSize);
   log("Iniciando "+label+": "+bytes.length+" bytes, "+total+" fragmentos BLE.");
+  showTransmissionProgress(total);
   for(let start=0;start<bytes.length;start+=chunkSize){
    if(!connected())throw Error("Conexión BLE perdida durante el transporte.");
    const chunk=bytes.slice(start,start+chunkSize);
@@ -202,6 +224,7 @@
    else throw Error("No hay método WRITE compatible.");
    await pause(75);
    const completed=Math.min(total,Math.ceil((start+chunk.length)/chunkSize));
+   advanceTransmissionProgress(completed,total);
    if(completed%100===0||completed===total){
     status.textContent="Enviando "+completed+" / "+total+" fragmentos";
     if(completed===total)log("Envío de fragmentos BLE: "+completed+"/"+total+".");
@@ -230,7 +253,7 @@
   try{await transmit(job.job,"PANEL V1 "+job.format+" · QR "+(job.qrModule||"normal")+" puntos · PRINT 1,"+count);}
   catch(e){log("ERROR DE TRANSPORTE: "+e.name+": "+e.message+
    ". Puede existir impresión parcial; NO repetir automáticamente.");showError("Transmisión interrumpida: revisar impresora antes de repetir.");}
-  finally{busy=false;update();}
+  finally{hideTransmissionProgress();busy=false;update();}
  });
  $("p1-copy").addEventListener("click",async()=>{
   const data=logElement.textContent;
