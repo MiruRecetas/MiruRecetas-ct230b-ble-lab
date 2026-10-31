@@ -1,6 +1,6 @@
 # V0.9 · Componente cocinado 50 × 30 · Pisto — prueba SVG Canva
 
-**Estado vigente (31/10/2026): IMPRESA FÍSICAMENTE; aprobación final y escaneo QR no comunicados todavía.** La versión evaluada incluye el ajuste editorial de la PR #20 (`d621dbc1aefc`). Los párrafos históricos sobre prueba pendiente se conservan como registro del estado previo. **No sustituye ni modifica** las versiones V0.6.2 vertical, V0.7.3 horizontal y V0.8 ingrediente aprobadas.
+**Estado vigente (31/10/2026): V0.9 FÍSICAMENTE VALIDADA Y APROBADA POR LA USUARIA.** El QR **se puede leer, pero requiere varios intentos**; esta limitación se acepta como incidencia abierta para estudiar enlaces cortos sin alterar el diseño. La versión aprobada incorpora la PR #20 (`d621dbc1aefc`). Las menciones a «pendiente» y «QR no verificado» en párrafos previos son **históricas y quedan superadas** por esta decisión explícita. **No sustituye ni modifica** las versiones V0.6.2 vertical, V0.7.3 horizontal y V0.8 ingrediente aprobadas.
 
 ## Autoridad del diseño
 
@@ -68,3 +68,20 @@ Conexión GATT confirmada a las 10:13:59 (canal de notificaciones activo, `WRITE
 **Conclusión del ensayo:** el transporte BLE/TSPL y la impresión física de esta versión **sí están comprobados** con la evidencia aportada. La revisión visual es favorable. **V0.9 no se clasifica todavía como «aprobada físicamente»**, porque no se ha expresado esa aprobación ni se ha confirmado escaneabilidad del QR. Mantener V0.6.2, V0.7.3 y V0.8 aprobadas sin cambios; no modificar código de V0.9 por observaciones menores sin autorización. La adhesión de etiquetas sobre bolsa PA/PE congelada a −18 °C es una validación aparte, no realizada aquí.
 
 **Alcance documental:** solo esta bitácora del laboratorio; no se modifica el código de impresión, las fechas oficiales de ninguna receta, Canva, Airtable, la web/PWA de MiruRecetas ni los mecanismos de publicación.
+
+
+## Cierre de aprobación V0.9 — decisión expresa de la usuaria · 31/10/2026
+
+La usuaria confirma **«Esta plantilla de etiqueta 50x30 está validada y aprobada»**, tras dos impresiones realizadas con la CLABEL CT230B y fotografiadas, con dos transmisiones exitosas de **12.352 bytes, 618 fragmentos BLE y 27 bandas raster** (10:14:34–10:15:43 y 10:16:04–10:17:16, hora peninsular). Las imágenes confirman legibilidad, isotipo auténtico, separadores, alineación de kcal y macros, texto de nota completo y QR nativo bien situado.
+
+**Observación de QR aprobada con reserva de mejora:** la usuaria comunica que el QR **sí se lee, pero le cuesta bastante**, a menudo sin conseguir lectura a la primera. Es una observación funcional real, no una hipótesis sobre el dispositivo; su posible causa por alta densidad debida a URL larga está **por comprobar**. No atribuir el problema exclusivamente a la longitud ni afirmar que los QR no se leen. La revisión futura debe probar **enlaces cortos propios** con la misma impresión, posición y geometría aprobada para aislar la variable de datos QR; conservar la URL canónica de la ficha al abrirse en el navegador.
+
+**Con esta aprobación se completan cuatro plantillas distintas:**
+- **50×80 vertical:** V0.6.2, receta completa, aprobada.
+- **50×80 horizontal:** V0.7.3, receta completa, aprobada.
+- **50×30:** V0.9, receta componente, **aprobada con incidencia de lectura QR**.
+- **30×20:** V0.8, ingrediente en gramos variables, aprobada.
+
+**Regla de congelación editorial:** no retocar composiciones, logotipos, fuentes, instrucciones genéricas ni motor BLE/TSPL de las cuatro versiones aprobadas sin autorización. La personalización de instrucciones/nota de descongelación se estudiará **solo al trasladar el producto a MiruRecetas**, no durante el cierre de laboratorio. Las etiquetas de receta contienen **una ración por bolsa** sin mostrar peso ni número de raciones; la de ingrediente sí muestra gramaje.
+
+No se han probado adhesión del consumible PA/PE a −18 °C, vida útil alimentaria, alta de bolsa/inventario ni integración PWA. La incidencia QR queda abierta a diseño técnico (alternativas de URL corta), **sin cambios de código** en esta aprobación.
