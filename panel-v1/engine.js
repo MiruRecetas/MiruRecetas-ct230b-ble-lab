@@ -620,7 +620,7 @@ function panelQrPlaceholder(ctx,x,y,w,h,title){
  ctx.font='500 12px "Geist"';ctx.fillText("#"+PANEL_RECIPE.qrId+" · QR TSPL",x+w/2,y+h/2+15);
  ctx.restore();
 }
-function panelPreview(format,dates,qrVariant="original"){
+function panelPreview(format,dates,qrVariant=format==="component"?"large":"original"){
  if(format!=="component"&&qrVariant!=="original")throw Error("QR de prueba solo para formato componente.");
  if(!v5Logo)throw Error("Identidad visual no cargada.");
  let canvas=document.createElement("canvas"),ctx=canvas.getContext("2d");
@@ -654,7 +654,7 @@ function panelPreview(format,dates,qrVariant="original"){
  }
  throw Error("Formato no reconocido.");
 }
-function panelBuild(format,dates,copies,qrVariant="original"){
+function panelBuild(format,dates,copies,qrVariant=format==="component"?"large":"original"){
  if(format!=="component"&&qrVariant!=="original")
   throw Error("QR experimental solo disponible en 50×30.");
  panelComponentQr(qrVariant);
