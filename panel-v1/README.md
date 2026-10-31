@@ -34,3 +34,37 @@
 5. Facilitar el registro de ejecución y fotografías para cerrar validaciones sin alterar las cuatro maquetaciones originales.
 
 **Publicación y límites:** desarrollo exclusivo en repositorio laboratorio público; ningún cambio en `mirurecetas-web-source`, web/PWA oficial, Airtable, Hero, índices QR, ni mecanismo de Actions de producción. El traslado a la fuente privada queda pendiente de aprobación.
+
+
+## Ensayo físico registrado de multicopia y defecto QR
+
+Una prueba real en CLABEL CT230B con papel **50×30 mm** confirmó:
+- Impresión de una etiqueta de Ragú con \`PRINT 1,1\`: **12.176 B, 609 fragmentos BLE, 26 bandas raster**.
+- Impresión de dos etiquetas iguales mediante **un único** \`PRINT 1,2\`: **12.176 B, 609 fragmentos BLE**. Las dos salidas completas se aprecian en la fotografía. Las tres etiquetas tienen nombre, fechas, macros y notas legibles.
+- **El QR del enlace corto \`https://mirurecetas.github.io/#r047\` NO fue escaneable**. Aumentar el número de copias o acortar la URL en ese formato no lo solucionó.
+
+La respuesta binaria BLE de notificación \`dd 00 05 86 00 01 14 d1 dd\` se registró durante la multicopia, pero **no se le atribuye ninguna interpretación de firmware no comprobada**. La conclusión de 2 copias correctas proviene de la foto física y del log, no de esa notificación.
+
+### Modificación experimental aislada · QR nativo ampliado
+
+El problema puede ser **módulo excesivamente pequeño con engrosamiento térmico**, no solo exceso de información. El código corto tiene 35 caracteres, que encajan previsiblemente en un QR de **versión 3 (29×29 módulos), ECC M**. El TSPL original de componente usa:
+\`\`\`tspl
+QRCODE 420,187,M,4,A,0,M2,S7,"https://mirurecetas.github.io/#r047"
+\`\`\`
+Matriz: 116×116 dots, módulo aproximado 0,34 mm si la impresora imprime ~300 ppp.
+
+El panel incorpora una nueva selección **únicamente al elegir 50×30**:
+- **Original (4 puntos):** exactamente el mismo trabajo TSPL anterior.
+- **Ampliado (5 puntos, experimental):** solo cambia el comando de QR a
+\`\`\`tspl
+QRCODE 425,187,M,5,A,0,M2,S7,"https://mirurecetas.github.io/#r047"
+\`\`\`
+Matriz: 145×145 dots; módulo aproximado 0,42 mm. La zona blanca mínima de cuatro módulos por lado supone 20 dots. El QR y su quiet zone ocupan x=405…590 e y=167…352, dentro de la zona reservada. Se conservan **ECC M**, modo A, modelo M2, máscara S7, URL #r047, tamaño papel, raster, notas, macros y BLE 20 B/75 ms. No se añade DENSITY global ni se cambia el contraste de toda la etiqueta.
+
+**Limitación:** el tamaño real de la matriz depende del firmware nativo. La geometría se ha estimado para un QR versión 3, y se ha verificado en simulación; la lectura y los márgenes se deberán comprobar en papel.
+
+Se han ejecutado **16 comprobaciones simuladas** de regresión: los trabajos originales (3 formatos × 1,2,20 copias) se mantienen **byte a byte idénticos**; en 50×30 con 1,2,5,20 copias, la opción ampliada solo cambia la instrucción QRCODE; los otros dos formatos rechazan el experimento; se impide cualquier variante desconocida. Los controles nativos de fecha, confirmación y conexión no se modifican.
+
+**Siguiente prueba física:** seleccionar 50×30, «Ampliado · 5 puntos», **1 copia**, imprimir Ragú con fechas adecuadas y escanear el nuevo QR en el teléfono. Si no lo reconoce, compartir foto y log y no aumentar copias con esa variante. No se considera aprobado el QR ampliado hasta la prueba.
+
+Documentación técnica: [TSPL QRCODE (TSC)](https://fs.tscprinters.com/system/files/31-0000001-00_tspl_tspl2_programming_g.pdf), [DENSO WAVE: tamaño de módulo](https://www.qrcode.com/en/howto/cell.html/index.html) y [zona blanca obligatoria](https://www.qrcode.com/en/howto/code.html/index.html).
