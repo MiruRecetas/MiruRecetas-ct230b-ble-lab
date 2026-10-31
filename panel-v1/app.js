@@ -15,7 +15,7 @@
        status=$("p1-status"),error=$("p1-error"),metrics=$("p1-metrics"),
        logElement=$("p1-log");
  let origin=null,device=null,writeChannel=null,notifyChannel=null,busy=false,ready=false;
- let portions=6;
+ let portions=6, labelCopies=1;
  function log(message){
   logElement.textContent+="["+new Date().toLocaleTimeString("es-ES")+"] "+message+"\n";
   logElement.scrollTop=logElement.scrollHeight;
@@ -26,10 +26,14 @@
  }
  function connected(){return !!(device&&device.gatt&&device.gatt.connected&&writeChannel);}
  function copiesValue(){
-  const n=Number(copies.value);
-  if(copies.value.trim()===""||!Number.isInteger(n)||n<1||n>20)
-   throw Error("El número de etiquetas debe ser un entero entre 1 y 20.");
-  return n;
+  if(!Number.isInteger(labelCopies)||labelCopies<1||labelCopies>20)
+   throw Error("El número de etiquetas debe estar entre 1 y 20.");
+  return labelCopies;
+ }
+ function updateCopyStepper(){
+  copies.textContent=String(labelCopies);
+  $("p1-copies-minus").disabled=busy||labelCopies<=1;
+  $("p1-copies-plus").disabled=busy||labelCopies>=20;
  }
  function dataForPrint(required=true){
   const dates=engine.dates(packed.value,expiry.value,required);
@@ -47,7 +51,8 @@
   let valid=false;
   try{dataForPrint(true);valid=true;}catch(_){}
   print.disabled=busy||!ready||!online||!valid;
-  const n=Number(copies.value)||1;
+  updateCopyStepper();
+  const n=labelCopies;
   print.textContent="Imprimir "+(n===1?"1 etiqueta":n+" etiquetas");
  }
  function refreshPreview(){
@@ -58,7 +63,7 @@
    preview.width=art.width;preview.height=art.height;
    preview.className="p1-preview"+(format.value==="horizontal"?" p1-horizontal":format.value==="component"?" p1-component":"");
    preview.getContext("2d").drawImage(art,0,0);
-   const n=Number(copies.value)||1;
+   const n=labelCopies;
    metrics.textContent=engine.formats[format.value].label+
     " · Pisto · "+n+" "+(n===1?"etiqueta":"etiquetas")+
     " · envasado "+dates.packed+" · consumo "+dates.expiry;
@@ -92,10 +97,20 @@
   if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}
   else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}
  });
- for(const input of [format,packed,expiry,copies]){
+ for(const input of [format,packed,expiry]){
   input.addEventListener("input",refreshPreview);
   input.addEventListener("change",refreshPreview);
  }
+ $("p1-copies-minus").addEventListener("click",()=>{
+  if(busy)return;
+  labelCopies=Math.max(1,labelCopies-1);
+  refreshPreview();
+ });
+ $("p1-copies-plus").addEventListener("click",()=>{
+  if(busy)return;
+  labelCopies=Math.min(20,labelCopies+1);
+  refreshPreview();
+ });
  function renderPortions(){
   $("p1-portions").textContent=String(portions);
   document.querySelectorAll("[data-p1-base]").forEach(element=>{
@@ -213,6 +228,12 @@
   log("Registro limpiado.");
  });
  async function initialize(){
+  // Fecha local del teléfono, no UTC: evita adelantar o retrasar un día cerca de medianoche.
+  const now=new Date();
+  const todayLocal=now.getFullYear()+"-"+String(now.getMonth()+1).padStart(2,"0")+"-"+
+   String(now.getDate()).padStart(2,"0");
+  if(!packed.value)packed.value=todayLocal;
+  log("Envasado preseleccionado: "+todayLocal+" (fecha local del dispositivo; editable).");
   log("Panel V1 preparado: HTTPS="+Boolean(window.isSecureContext)+
       "; Web Bluetooth disponible="+Boolean(navigator.bluetooth)+".");
   log("Ficha real Pisto: 6 raciones de cocina; etiqueta siempre 1 ración, datos oficiales 164,35 kcal.");
