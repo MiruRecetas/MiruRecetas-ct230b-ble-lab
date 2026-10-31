@@ -76,6 +76,60 @@ button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{ou
 .p1-field small{font-size:.77rem;color:var(--muted)}
 .p1-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;min-width:0;max-width:100%}
 .p1-preview-box{background:transparent;border:0;padding:8px 0;display:flex;flex:0 0 auto;flex-direction:column;align-items:center;justify-content:center;gap:9px;min-width:0;width:100%;max-width:100%;overflow:visible}
+
+/* Panel de prueba: dos caras en vertical y horizontal, mismo icono printer en ambas. */
+.p1-face{min-width:0}
+.p1-title-row{width:100%;display:grid;grid-template-columns:minmax(0,1fr) 48px;gap:12px;align-items:center;min-width:0}
+.p1-title-row h1{min-width:0;max-width:100%;overflow-wrap:break-word;margin:12px 0;line-height:1.09}
+.p1-print-circle{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;padding:0;border:1px solid #c1cec2;background:#eaf1e8;color:var(--green);box-shadow:0 3px 10px #29352e12}
+.p1-print-circle:hover{background:#dceade;border-color:var(--green)}
+.p1-print-circle .p1-cta-icon{width:24px;height:24px}
+.p1-flipbar{display:flex;align-items:center;justify-content:center;padding:18px;background:#edf0e8;border-top:1px solid var(--line)}
+.p1-flip{background:var(--green);border:0;border-radius:999px;min-height:48px;padding:12px 24px;color:white;font-weight:700}
+.p1-flip:hover{background:#3d5c4a}
+.p1-back-grid{display:grid;grid-template-columns:minmax(0,60%) minmax(0,40%);min-width:0}
+.p1-cooking-main{min-width:0;padding:clamp(20px,3.2vw,38px)}
+.p1-cook-title{font:600 clamp(2rem,4vw,3.2rem)/1.1 "Bricolage Grotesque",system-ui;letter-spacing:-.038em;margin:14px 0;overflow-wrap:break-word}
+.p1-cooking-steps{padding:0;margin:16px 0 24px;list-style:none;counter-reset:p1-step}
+.p1-cooking-steps li{counter-increment:p1-step;display:flex;gap:15px;padding:13px 0;border-bottom:1px solid var(--line);line-height:1.55}
+.p1-cooking-steps li::before{content:counter(p1-step,decimal-leading-zero);color:var(--terra);font:600 1.25rem "Bricolage Grotesque",system-ui}
+.p1-cook-side{background:#edf0e8;padding:clamp(20px,3.2vw,38px);min-width:0;display:flex;flex-direction:column}
+.p1-timer-sample{padding:18px 13px 14px;margin:18px 0 16px;background:var(--paper);border-radius:20px;display:flex;flex-direction:column;align-items:center;text-align:center;min-width:0}
+.p1-timer-face{width:min(100%,290px);aspect-ratio:1/1;border:12px solid #879c89;border-radius:50%;background:conic-gradient(from 0deg,#ab7452 0 18deg,#faf6ee 18deg 360deg);display:grid;place-items:center;box-shadow:inset 0 0 0 2px #34443b}
+.p1-timer-center{border-radius:50%;background:#faf6ee;display:grid;justify-items:center;align-content:center;width:58%;aspect-ratio:1/1;color:#3c493f}
+.p1-timer-center strong{font:700 clamp(1.45rem,3vw,2.2rem)/1.25 "Geist",system-ui;white-space:nowrap}
+.p1-timer-center span{font-size:.78rem}
+.p1-timer-sample p{font-size:.83rem;color:var(--muted);margin:13px 0}
+.p1-timer-preset,.p1-timer-example-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;margin:3px 0 12px}
+.p1-timer-preset span{border:1px solid #c1cec2;border-radius:24px;padding:7px 9px;font-size:.75rem;white-space:nowrap}
+.p1-timer-example-actions span{display:grid;place-items:center;border:1px solid #93a298;border-radius:50%;width:42px;height:42px;color:var(--green);font-size:1.25rem}
+.p1-timer-example-actions span:first-child{background:var(--green);color:white}
+.p1-timer-sample small{font-size:.7rem;color:var(--muted);line-height:1.4}
+.p1-cook-print{min-height:52px;flex:0 0 auto;margin:2px 0 22px;border-radius:999px;box-shadow:0 4px 15px #304d3920}
+.p1-cook-print .p1-cta-icon{width:23px;height:23px}
+.p1-cook-notes{border-left:3px solid var(--terra);padding:14px 0 10px 16px;margin:0}
+.p1-cook-notes h3{font:650 clamp(1.4rem,3vw,1.7rem) "Bricolage Grotesque",system-ui;margin:0 0 12px}
+.p1-cook-notes p{margin:0;line-height:1.65}
+@media (orientation:portrait), (max-width:649px){
+ .p1-recipe-grid,.p1-back-grid{grid-template-columns:1fr}
+ .p1-cooking-main,.p1-cook-side{overflow:visible}
+}
+@media (orientation:landscape) and (min-width:650px){
+ .p1-recipe-grid{grid-template-columns:minmax(0,43%) minmax(0,57%)}
+ .p1-photo{min-height:0;height:auto}
+ .p1-photo img{position:absolute;inset:0;height:100%;min-height:100%}
+ .p1-back-grid{height:clamp(400px,calc(100dvh - 165px),900px);min-height:0;grid-template-columns:minmax(0,60%) minmax(0,40%)}
+ .p1-back-grid>.p1-cooking-main,.p1-back-grid>.p1-cook-side{overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;min-height:0}
+ .p1-cooking-main,.p1-cook-side{padding:clamp(18px,2.5vw,38px)}
+ .p1-timer-sample{padding:13px;margin:12px 0}
+}
+@media (max-width:540px){
+ .p1-title-row{gap:8px;grid-template-columns:minmax(0,1fr) 46px}
+ .p1-print-circle{width:46px;height:46px}
+ .p1-cooking-main,.p1-cook-side{padding:22px 20px}
+ .p1-cook-print{width:100%}
+}
+
 .p1-preview-title{font-size:.77rem;color:var(--muted);font-weight:650}
 .p1-preview{display:block;flex:none;box-sizing:border-box;width:min(100%,182px);max-width:100%;height:auto;max-height:none;aspect-ratio:590/945;object-fit:fill;background:#fff;border:1px solid #d0d5cf;box-shadow:0 2px 9px #0001}
 .p1-preview.p1-horizontal{width:min(100%,410px);height:auto;max-height:none;aspect-ratio:945/590}
