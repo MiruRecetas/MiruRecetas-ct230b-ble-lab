@@ -210,7 +210,7 @@
    engine.formats[format.value].label+")?\n"+
    "Envasado: "+dates.packed+" · Consumo preferente: "+dates.expiry+
    "\nQR corto #"+engine.recipe.qrId+" · QR "+(job.qrModule||"original")+" puntos"+(job.qrVariant==="large"?" EXPERIMENTAL":"")+" · PRINT 1,"+count+".\n"+
-   "Sin reintentos. La multicopia todavía está pendiente de validación física.";
+   "Sin reintentos. PRINT 1,2 probado físicamente; más de dos copias pendiente.";
   if(!window.confirm(text)){log("Impresión cancelada antes del envío.");return;}
   busy=true;update();showError("");
   try{await transmit(job.job,"PANEL V1 "+job.format+" · QR "+(job.qrModule||"normal")+" puntos · PRINT 1,"+count);}
@@ -244,7 +244,7 @@
       "; Web Bluetooth disponible="+Boolean(navigator.bluetooth)+".");
   log("Ficha real "+engine.recipe.name+": "+engine.recipe.portions+" raciones de cocina; etiqueta siempre 1 ración, datos oficiales "+engine.recipe.kcalDisplay+" kcal.");
   log("Diseños: V0.6.2 50×80 vertical, V0.7.3 50×80 horizontal, V0.9 50×30 componente.");
-  log("QR de ensayo: "+engine.recipe.shortUrl+"; resolvedor aún no publicado. Multicopia PRINT 1,N pendiente de validación.");
+  log("QR de ensayo: "+engine.recipe.shortUrl+"; resolvedor aún no publicado. PRINT 1,2 probado físicamente; más de dos copias, pendiente.");
   try{
    await engine.loadIdentity();
    ready=true;
