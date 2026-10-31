@@ -647,7 +647,7 @@ function panelPreview(format,dates,qrVariant="original"){
   canvas.width=V9_W;canvas.height=V9_H;
   ctx=canvas.getContext("2d");ctx.drawImage(art,0,0);
   const qr=panelComponentQr(qrVariant);
-  const symbolDots=29*qr.module;
+  const symbolDots=qrVariant==="large"?29*qr.module:148;
   panelQrPlaceholder(ctx,qr.x,qr.y,symbolDots,symbolDots,
    qrVariant==="large"?"QR 5 PUNTOS":"QR NATIVO");
   return canvas;
