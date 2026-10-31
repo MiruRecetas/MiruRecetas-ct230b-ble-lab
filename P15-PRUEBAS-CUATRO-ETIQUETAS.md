@@ -1,5 +1,8 @@
 # P15 · Cuatro etiquetas Canva para prueba física — 30/10/2026
 
+> **ESTADO VIGENTE · 31/10/2026:** este documento describe el primer lote P15 histórico. Las **cuatro plantillas** están aprobadas, ambas **50×80 tienen QR legible**, y la solución de QR para **50×30 (5 puntos + corrección M)** ha sido probada y aprobada en el panel V1 con Ragú. Multicopia 1/2 y observación de uso tras 2–3 días en congelador: favorables. Fuente de estado actual: [acta de validación](VALIDACION-ETIQUETAS-CT230B-2026-10-31.md). No editar los motores históricos para corregir esta bitácora.
+
+
 **Estado: implementadas para ensayo en laboratorio aislado, NO impresas ni aprobadas físicamente.**  
 La versión **V0.6.2** (50 × 80 vertical, diseño anterior) **ya fue impresa correctamente** desde Chrome Android por BLE/TSPL con QR escaneable; su transportador se conserva. La presente serie P15 no reemplaza la V0.6.2 ni la portará a la PWA oficial.
 

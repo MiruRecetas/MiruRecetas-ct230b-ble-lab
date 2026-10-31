@@ -1,5 +1,8 @@
 # MiruRecetas · Panel V1 de impresión · Ragú a la boloñesa
 
+> **VALIDACIÓN FÍSICA POSTERIOR · 31/10/2026:** panel de Ragú con **dos copias mediante PRINT 1,2** (609 fragmentos de 20 B, 12.176 B); QR de **50×30, 5 puntos por módulo y ECC M** escaneado correctamente: https://mirurecetas.github.io/#r047. Aprobación expresa de la usuaria. Adhesión/aspecto después de **2–3 días de congelador y manipulación**, satisfactorios. La opción **original de 4 puntos sigue siendo predeterminada en este panel**; elegir **5 puntos** para usar el QR aprobado hasta posterior actualización. Ver [acta](../VALIDACION-ETIQUETAS-CT230B-2026-10-31.md). Las reservas «pendiente» inferiores pertenecen a fases previas.
+
+
 **Estado:** página experimental en el laboratorio público, distinta de `/index.html` histórico. **Los diseños originales y el transporte BLE siguen aprobados; la impresión de la adaptación a Ragú y la multicopia no están aún comprobadas físicamente.**
 
 **URL de prueba:** `https://mirurecetas.github.io/MiruRecetas-ct230b-ble-lab/panel-v1/`.
