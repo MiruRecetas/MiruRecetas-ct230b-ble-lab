@@ -75,12 +75,15 @@ function v9Draw(d){
   v9Label(c,abbr,x,164,15,"400","Geist",56,14,"center");
  }
  // Instrucciones intactas del diseño. En V0.9 no se ofrece edición de notas.
- v9Label(c,V9_RECIPE.heading,15,185,20,"700","Bricolage Grotesque",377,17);
- v9Label(c,V9_RECIPE.instructions[0],15,228,20,"400","Geist",376,18);
- v9Label(c,V9_RECIPE.instructions[1],15,252,20,"400","Geist",376,18);
- v9Label(c,V9_RECIPE.noteTitle,15,297,17,"700","Bricolage Grotesque",130);
- v9Label(c,V9_RECIPE.note[0],15,319,16,"500","Geist",365,15,"left",true);
- v9Label(c,V9_RECIPE.note[1],15,340,16,"500","Geist",365,15,"left",true);
+ // Revisión editorial del SVG: más cuerpo y anchura útil hasta antes del QR.
+ // Los textos se detienen en x=401; reserva TSPL del QR desde x=420.
+ const v9TextMaxWidth=401-15;
+ v9Label(c,V9_RECIPE.heading,15,189,24,"700","Bricolage Grotesque",v9TextMaxWidth,21);
+ v9Label(c,V9_RECIPE.instructions[0],15,230,23,"400","Geist",v9TextMaxWidth,21);
+ v9Label(c,V9_RECIPE.instructions[1],15,258,23,"400","Geist",v9TextMaxWidth,21);
+ v9Label(c,V9_RECIPE.noteTitle,15,299,20,"700","Bricolage Grotesque",v9TextMaxWidth,18);
+ v9Label(c,V9_RECIPE.note[0],15,322,19,"500","Geist",v9TextMaxWidth,17,"left",true);
+ v9Label(c,V9_RECIPE.note[1],15,345,19,"500","Geist",v9TextMaxWidth,17,"left",true);
  // Zona x≥405,y≥174 SIN TINTA para QR real + quiet zone: no fake QR raster.
  return canvas;
 }
