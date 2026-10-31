@@ -9,11 +9,12 @@
  const WRITABLE="49535343-8841-43f4-a8d4-ecbe34729bb3";
  const NOTIFY="49535343-1e4d-4bd9-ba61-23c647249616";
  const overlay=$("p1-overlay"),dialog=$("p1-dialog"),close=$("p1-close"),
-       opened=$("p1-open"),format=$("p1-format"),packed=$("p1-packed"),
+       opened=$("p1-open"),cookingOpened=$("p1-open-cooking"),flip=$("p1-toggle-face"),
+       frontFace=$("p1-front-face"),cookFace=$("p1-cook-face"),format=$("p1-format"),packed=$("p1-packed"),
        expiry=$("p1-expiry"),copies=$("p1-copies"),connect=$("p1-connect"),
        disconnect=$("p1-disconnect"),print=$("p1-print"),preview=$("p1-preview"),
        status=$("p1-status"),error=$("p1-error"),metrics=$("p1-metrics"),
-       logElement=$("p1-log"),qrSelect=$("p1-qr-size"),qrField=$("p1-qr-test-field");
+       logElement=$("p1-log");
  let origin=null,device=null,writeChannel=null,notifyChannel=null,busy=false,ready=false;
  let portions=engine.recipe.portions, labelCopies=1;
  function log(message){
@@ -25,9 +26,9 @@
   if(message)log("AVISO: "+message);
  }
  function connected(){return !!(device&&device.gatt&&device.gatt.connected&&writeChannel);}
- function qrMode(){
-  return format.value==="component"?qrSelect.value:"original";
- }
+ // Contrato final aprobado: componente 50×30 SIEMPRE QR 5 puntos/ECC M;
+ // los dos formatos 50×80 conservan su QR existente sin variantes.
+ function qrMode(){return format.value==="component"?"large":"original";}
  function copiesValue(){
   if(!Number.isInteger(labelCopies)||labelCopies<1||labelCopies>20)
    throw Error("El número de etiquetas debe estar entre 1 y 20.");
@@ -61,7 +62,6 @@
   print.textContent="Imprimir "+(n===1?"1 etiqueta":n+" etiquetas");
  }
  function refreshPreview(){
-  qrField.hidden=format.value!=="component";
   if(!ready)return;
   try{
    const dates=engine.dates(packed.value,expiry.value,false);
@@ -72,7 +72,7 @@
    const n=labelCopies;
    metrics.textContent=engine.formats[format.value].label+
     " · "+engine.recipe.name+" · "+n+" "+(n===1?"etiqueta":"etiquetas")+
-    " · QR "+(qrMode()==="large"?"5 puntos (prueba)":"4 puntos / normal")+" · envasado "+dates.packed+" · consumo "+dates.expiry;
+    " · "+(qrMode()==="large"?"QR 5 puntos / ECC M (aprobado)":"QR aprobado / formato 50×80")+" · envasado "+dates.packed+" · consumo "+dates.expiry;
    if(!error.hidden)showError("");
   }catch(e){
    metrics.textContent="Error de vista previa: "+e.message;
@@ -89,7 +89,20 @@
   overlay.hidden=true;document.body.classList.remove("p1-modal-open");
   origin?.focus();
  }
- opened.addEventListener("click",openDialog);
+ for(const trigger of [opened,cookingOpened])trigger.addEventListener("click",openDialog);
+ function showCooking(on){
+  if(!overlay.hidden||busy)return;
+  frontFace.hidden=on;
+  cookFace.hidden=!on;
+  flip.textContent=on?"← Volver a la ficha":"Dar la vuelta · Modo cocina →";
+  flip.setAttribute("aria-expanded",String(on));
+  const target=on?$("p1-cook-heading"):$("p1-front-title");
+  target?.focus({preventScroll:true});
+  $("p1-recipe-card").scrollIntoView({block:"start",behavior:"auto"});
+  log(on?"Vista de prueba: Modo cocina (acceso a etiquetas después del temporizador).":
+         "Vista de prueba: cara de ingredientes (impresora circular junto al título).");
+ }
+ flip.addEventListener("click",()=>showCooking(cookFace.hidden));
  close.addEventListener("click",dismiss);
  overlay.addEventListener("click",event=>{if(event.target===overlay)dismiss();});
  document.addEventListener("keydown",event=>{
@@ -103,7 +116,7 @@
   if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}
   else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}
  });
- for(const input of [format,packed,expiry,qrSelect]){
+ for(const input of [format,packed,expiry]){
   input.addEventListener("input",refreshPreview);
   input.addEventListener("change",refreshPreview);
  }
@@ -119,6 +132,7 @@
  });
  function renderPortions(){
   $("p1-portions").textContent=String(portions);
+  $("p1-cook-servings").textContent=portions+" "+(portions===1?"ración seleccionada":"raciones seleccionadas");
   document.querySelectorAll("[data-p1-base]").forEach(element=>{
    const base=Number(element.dataset.p1Base),amount=base*portions/engine.recipe.portions;
    element.textContent=new Intl.NumberFormat("es-ES",{maximumFractionDigits:2}).format(amount)+
@@ -204,12 +218,12 @@
   }catch(e){showError(e.message);return;}
   log("Trabajo preparado: "+job.format+" · "+count+" "+
      (count===1?"copia":"copias")+" · "+job.bytes+" bytes · "+
-     job.fragments+" fragmentos · "+job.tiles+" bandas raster · QR "+(job.qrModule||"estándar")+" puntos"+(job.qrVariant==="large"?" (EXPERIMENTAL)":"")+".");
+     job.fragments+" fragmentos · "+job.tiles+" bandas raster · QR "+(job.qrModule||"estándar")+" puntos"+(job.qrVariant==="large"?" (5/M APROBADO)":"")+".");
   const text="¿Enviar UN trabajo BLE a la CLABEL para imprimir "+
    count+" "+(count===1?"etiqueta":"etiquetas")+" de "+engine.recipe.name+" ("+
    engine.formats[format.value].label+")?\n"+
    "Envasado: "+dates.packed+" · Consumo preferente: "+dates.expiry+
-   "\nQR corto #"+engine.recipe.qrId+" · QR "+(job.qrModule||"original")+" puntos"+(job.qrVariant==="large"?" EXPERIMENTAL":"")+" · PRINT 1,"+count+".\n"+
+   "\nQR corto #"+engine.recipe.qrId+" · QR "+(job.qrModule||"original")+" puntos"+(job.qrVariant==="large"?" 5/M APROBADO":"")+" · PRINT 1,"+count+".\n"+
    "Sin reintentos. PRINT 1,2 probado físicamente; más de dos copias pendiente.";
   if(!window.confirm(text)){log("Impresión cancelada antes del envío.");return;}
   busy=true;update();showError("");
@@ -243,7 +257,7 @@
   log("Panel V1 preparado: HTTPS="+Boolean(window.isSecureContext)+
       "; Web Bluetooth disponible="+Boolean(navigator.bluetooth)+".");
   log("Ficha real "+engine.recipe.name+": "+engine.recipe.portions+" raciones de cocina; etiqueta siempre 1 ración, datos oficiales "+engine.recipe.kcalDisplay+" kcal.");
-  log("Diseños: V0.6.2 50×80 vertical, V0.7.3 50×80 horizontal, V0.9 50×30 componente.");
+  log("Diseños: V0.6.2 50×80 vertical, V0.7.3 50×80 horizontal, V0.9 50×30 componente; QR 5/M fijo para componente.");
   log("QR de ensayo: "+engine.recipe.shortUrl+"; resolvedor aún no publicado. PRINT 1,2 probado físicamente; más de dos copias, pendiente.");
   try{
    await engine.loadIdentity();

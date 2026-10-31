@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#f6f2eb">
-<title>MiruRecetas · Panel V1 · Ragú a la boloñesa</title>
+<title>MiruRecetas · Panel V1 · Dos caras de Ragú · Etiquetado</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Geist:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
-<link href="./panel.css?v=4" rel="stylesheet">
+<link href="./panel.css?v=5" rel="stylesheet">
 </head>
 <body>
 <div class="p1-shell">
@@ -19,7 +19,8 @@
 </header>
 <p class="p1-lab-note"><strong>Laboratorio · Panel V1 de impresión.</strong> Página independiente de ensayo, sin conexión con Airtable ni publicación en MiruRecetas. La ficha reproducida es <strong>Ragú a la boloñesa</strong> con datos públicos reales. Las etiquetas utilizan por ahora <strong>#r047</strong>: el resolvedor de URL corta aún está pendiente de desplegarse. El laboratorio histórico permanece sin cambios.</p>
 <main>
-<article class="p1-recipe" aria-label="Ficha de receta de Ragú a la boloñesa, réplica experimental">
+<article id="p1-recipe-card" class="p1-recipe" aria-label="Ficha de receta de Ragú a la boloñesa, réplica experimental">
+<section id="p1-front-face" class="p1-face" aria-label="Cara de ingredientes de Ragú a la boloñesa">
 <div class="p1-recipe-grid">
 <div class="p1-photo">
 <img src="https://mirurecetas.github.io/menu-anual-recetas/imagenes/ragu-a-la-bolonesa.webp" alt="Ragú a la boloñesa: fotografía publicada en MiruRecetas" loading="eager">
@@ -27,7 +28,10 @@
 </div>
 <div class="p1-main">
 <span class="p1-eyebrow">Recetario · ficha de prueba</span>
-<h1>Ragú a la boloñesa</h1>
+<div class="p1-title-row">
+<h1 id="p1-front-title" tabindex="-1">Ragú a la boloñesa</h1>
+<button id="p1-open" class="p1-print-circle" type="button" title="Imprimir etiqueta" aria-label="Imprimir etiqueta de Ragú a la boloñesa" aria-haspopup="dialog" aria-controls="p1-dialog"><svg class="p1-cta-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v7H6zM18 12h.01"/></svg></button>
+</div>
 <p class="p1-description">Salsa de ternera y verduras cocinada a fuego lento, con tomate y un toque cremoso de leche y queso.</p>
 <section class="p1-nutrition" aria-label="Nutrición oficial por ración">
 <div class="p1-ring"><div class="p1-ring-inside"><strong>251,89</strong><small>kcal/ración</small></div></div>
@@ -61,13 +65,46 @@
 <li><span>Sal</span><span>Al gusto</span></li>
 <li><span>Pimienta negra</span><span>Al gusto</span></li>
 </ul>
-<button id="p1-open" class="p1-cta" type="button" aria-haspopup="dialog" aria-controls="p1-dialog">
-<svg class="p1-cta-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v7H6zM18 12h.01"/></svg>
-Imprimir etiqueta
-</button>
-<p class="p1-under">La impresión representa siempre <strong>una ración por etiqueta</strong>. El selector de raciones anterior solo modifica los ingredientes de la ficha, no el valor de la etiqueta. El número de copias se selecciona en el panel.</p>
+
 </div>
 </div>
+</section>
+<section id="p1-cook-face" class="p1-face" aria-label="Modo cocina de Ragú a la boloñesa" hidden>
+<div class="p1-back-grid">
+<div class="p1-cooking-main">
+<span class="p1-eyebrow">Modo cocina · 4 raciones de referencia</span>
+<h2 class="p1-cook-title" id="p1-cook-heading" tabindex="-1">Ragú a la boloñesa</h2>
+<p id="p1-cook-servings" class="p1-description">4 raciones seleccionadas</p>
+<h3 class="p1-section-title">Elaboración</h3>
+<ol class="p1-cooking-steps">
+<li>Picar finamente los pimientos, la cebolla y la zanahoria y saltearlos con el AOVE a fuego suave.</li>
+<li>Subir el fuego y dorar la carne picada hasta que esté casi cocinada.</li>
+<li>Sin bajar el fuego, añadir el vino blanco y dejar que se reduzca.</li>
+<li>Añadir el tomate triturado, remover y tapar hasta que empiece a hervir.</li>
+<li>Bajar el fuego al mínimo y cocinar unas 2 horas, removiendo de vez en cuando.</li>
+<li>Incorporar la leche y el queso crema. Cocinar unos 3–4 minutos.</li>
+<li>Ajustar sal y pimienta negra recién molida y apagar el fuego.</li>
+</ol>
+<p class="p1-help">La elaboración se muestra aquí para comprobar la composición de la cara de cocina; los controles completos del temporizador permanecen en la web real.</p>
+</div>
+<aside class="p1-cook-side">
+<span class="p1-eyebrow">Temporizador</span>
+<div class="p1-timer-sample" aria-label="Representación del temporizador de la ficha real, sin cuenta atrás en el laboratorio">
+<div class="p1-timer-face" aria-hidden="true"><div class="p1-timer-center"><strong>03:00</strong><span>+ 0 h</span></div></div>
+<p>Gira o toca los minutos</p>
+<div class="p1-timer-preset" aria-hidden="true"><span>5 min</span><span>10 min</span><span>15 min</span><span>30 min</span></div>
+<div class="p1-timer-example-actions" aria-hidden="true"><span>▶</span><span>↺</span><span>◖))</span></div>
+<small>Temporizador ilustrativo en el laboratorio; la función de cocina real no se sustituye.</small>
+</div>
+<button id="p1-open-cooking" class="p1-cta p1-cook-print" type="button" aria-haspopup="dialog" aria-controls="p1-dialog"><svg class="p1-cta-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v7H6zM18 12h.01"/></svg><span>Imprimir etiqueta</span></button>
+<section class="p1-cook-notes" aria-label="Notas de Ragú a la boloñesa">
+<h3>Notas</h3>
+<p>Remover durante la cocción lenta para evitar que se agarre al fondo. Repartir en recipientes poco profundos y refrigerar pronto; consumir en un máximo de 48 horas o congelar por raciones. Descongelar en la nevera y recalentar solo la cantidad necesaria, removiendo hasta que toda la salsa esté bien caliente.</p>
+</section>
+</aside>
+</div>
+</section>
+<div class="p1-flipbar"><button id="p1-toggle-face" class="p1-flip" type="button" aria-controls="p1-front-face p1-cook-face" aria-expanded="false">Dar la vuelta · Modo cocina →</button></div>
 </article>
 <section class="p1-log-section" aria-labelledby="p1-log-title">
 <div class="p1-log-head">
@@ -81,7 +118,7 @@ Imprimir etiqueta
 <pre id="p1-log" class="p1-log" aria-live="polite" role="log" tabindex="0" aria-label="Registro de ejecución BLE y TSPL"></pre>
 </section>
 </main>
-<footer class="p1-footer">MiruRecetas · Página experimental CT230B. V0.6.2 vertical, V0.7.3 horizontal y V0.9 componente mantienen el diseño gráfico de referencia. El modo multicopia PRINT 1,2 está comprobado físicamente; cantidades superiores a dos siguen en ensayo. QR ampliado sin validar.</footer>
+<footer class="p1-footer">MiruRecetas · Página experimental CT230B. V0.6.2 vertical, V0.7.3 horizontal y V0.9 componente mantienen el diseño gráfico de referencia. El modo multicopia PRINT 1,2 está comprobado físicamente; cantidades superiores a dos siguen en ensayo. QR de 5 puntos/ECC M aprobado físicamente para 50×30; las versiones históricas se conservan.</footer>
 </div>
 <div id="p1-overlay" class="p1-overlay" hidden>
 <section id="p1-dialog" class="p1-dialog" role="dialog" aria-modal="true" aria-labelledby="p1-dialog-title" aria-describedby="p1-dialog-desc" tabindex="-1">
@@ -98,14 +135,7 @@ Imprimir etiqueta
 <option value="component">50 × 30 mm · Componente · V0.9</option>
 </select>
 </label>
-<label class="p1-field" id="p1-qr-test-field" hidden>
-<span>Ensayo del QR · solo etiqueta 50 × 30</span>
-<select id="p1-qr-size">
-<option value="original" selected>Original · 4 puntos por módulo (referencia)</option>
-<option value="large">Ampliado · 5 puntos por módulo (experimental)</option>
-</select>
-<small>Solo cambia el tamaño y la posición del QR; nombre, macros, notas y BLE se conservan. Prueba primero una etiqueta.</small>
-</label>
+
 <div class="p1-two">
 <label class="p1-field"><span>Envasado y congelación *</span><input type="date" id="p1-packed" required><small>Obligatorio para imprimir</small></label>
 <label class="p1-field"><span>Consumo preferente</span><input type="date" id="p1-expiry"><small>Opcional · en blanco: --/--/--</small></label>
@@ -120,11 +150,11 @@ Imprimir etiqueta
 <small>De 1 a 20 · un solo trabajo BLE. Dos copias verificadas; más de dos, pendientes de prueba física.</small>
 </div>
 <div class="p1-preview-box">
-<span class="p1-preview-title">Vista previa de etiqueta (QR de 5 puntos todavía experimental)</span>
+<span class="p1-preview-title">Vista previa de la composición aprobada</span>
 <canvas class="p1-preview" id="p1-preview" width="590" height="945" role="img" aria-label="Vista previa de la etiqueta con reserva para el código QR nativo"></canvas>
 <span class="p1-metrics" id="p1-metrics" aria-live="polite">Cargando fuentes e isotipo…</span>
 </div>
-<p class="p1-qr-note"><strong>QR corto de Ragú:</strong> <code>https://mirurecetas.github.io/#r047</code>. La versión de 4 puntos ha resultado difícil de escanear en la CT230B. En la opción experimental de 5 puntos, la matriz se amplía aproximadamente un 25 % y se reserva su margen blanco. El QR real se dibuja en la impresora; el destino puede no redirigir hasta que se publique el índice.</p>
+<p class="p1-qr-note"><strong>QR de receta:</strong> <code>https://mirurecetas.github.io/#r047</code>. El componente 50 × 30 utiliza <strong>5 puntos por módulo y corrección M, aprobados y escaneados</strong>, sin selector. Los QR de 50 × 80 conservan su configuración. La vista previa reserva el espacio; la matriz real se imprime con TSPL. La redirección web depende de la publicación del índice.</p>
 <div class="p1-connection">
 <div class="p1-state" role="status" id="p1-connection-text"><i class="p1-state-dot" id="p1-state-dot" aria-hidden="true"></i><span id="p1-status">Impresora desconectada</span></div>
 <div class="p1-connection-buttons">
@@ -138,6 +168,6 @@ Imprimir etiqueta
 </section>
 </div>
 <script src="./engine.js?v=3" defer></script>
-<script src="./app.js?v=4" defer></script>
+<script src="./app.js?v=5" defer></script>
 </body>
 </html>

@@ -71,3 +71,31 @@ Se han ejecutado **16 comprobaciones simuladas** de regresión: los trabajos ori
 **Siguiente prueba física:** seleccionar 50×30, «Ampliado · 5 puntos», **1 copia**, imprimir Ragú con fechas adecuadas y escanear el nuevo QR en el teléfono. Si no lo reconoce, compartir foto y log y no aumentar copias con esa variante. No se considera aprobado el QR ampliado hasta la prueba.
 
 Documentación técnica: [TSPL QRCODE (TSC)](https://fs.tscprinters.com/system/files/31-0000001-00_tspl_tspl2_programming_g.pdf), [DENSO WAVE: tamaño de módulo](https://www.qrcode.com/en/howto/cell.html/index.html) y [zona blanca obligatoria](https://www.qrcode.com/en/howto/code.html/index.html).
+
+
+## Iteración de interfaz: etiquetado desde las dos caras · 31/10/2026
+
+**Estado:** adaptación experimental de la ficha de Ragú siguiendo las capturas de la usuaria en Chrome Android (vertical y horizontal). No modifica aún la ficha oficial de MiruRecetas ni la PWA. Tras aprobar la nueva interfaz se trasladará a la fuente privada.
+
+### Accesos y jerarquía
+
+- **Icono elegido: printer**, de los tres propuestos (tag, receipt-text y printer), por identificar inequívocamente la acción de impresión; **mismo símbolo** en las dos caras.
+- **Cara ingredientes:** un solo botón circular con icono printer (46–48 px, pulsación accesible), colocado al **lado derecho del título de receta**, con grid de título de ancho flexible y columna fija para el icono. Se adapta a retrato, paisaje y nombres que ocupen varias líneas. **No** colocar un segundo botón largo tras los ingredientes.
+- **El botón previo «Dar la vuelta · Modo cocina →» se mantiene** al pie de la tarjeta y no se sustituye por «Imprimir etiqueta».
+- **Modo cocina:** botón verde con el mismo icono printer + texto **«Imprimir etiqueta»**, en el lateral **exactamente entre el temporizador y las notas**; en retrato se apila debajo del temporizador, y en paisaje queda en la columna de utilidades.
+- Los dos disparadores abren **el mismo panel** y conservan el foco de origen al cerrar. El cambio de cara no altera formato, fecha, copias ni Bluetooth.
+- Para poder probar la colocación, el laboratorio reproduce la cara de cocina con pasos y notas de la receta real y un **temporizador de muestra visual, no funcional**. En la web/PWA definitiva **se conservará el temporizador real** sin reemplazar su motor ni su interacción.
+
+### QR sin opción de tamaño en la interfaz de impresión
+
+- Para **50×30**, el controlador del panel utiliza **siempre QR nativo TSPL, 5 puntos por módulo, corrección M**, probado y aprobado físicamente. El panel **no ofrece selector** de 4 o 5 puntos. La función interna que permite comparar el estado anterior se preserva en el motor del laboratorio por trazabilidad, pero no se expone al usuario.
+- Para **50×80 vertical/horizontal**, se conservan los QR de referencia ya escaneados. Ningún rediseño ni ajuste para «unificar» tamaños.
+- Las páginas de pruebas históricas y sus versiones QR antiguas siguen en el index general del laboratorio.
+- El QR corto de Ragú se ha leído correctamente como https://mirurecetas.github.io/#r047; **la redirección real** no está validada hasta desplegar el resolvedor y el índice mediante la PR privada #46.
+- Sigue habiendo una ración por etiqueta, copias 1–20 (dos copias validadas físicamente), envasado hoy por defecto, consumo preferente opcional, conexión manual y confirmación para un único trabajo BLE.
+
+### QA antes de traslado privado
+
+Probar con Chrome Android retrato/paisaje: título e icono sin desbordamiento, navegación entre caras y conservación del CTA Modo cocina, posición del botón verde después del temporizador y antes de Notas, mismo diálogo accesible desde ambos botones, foco devuelto al acceso de origen, selección 50×30 sin control de puntos, previsualizaciones completas y registro BLE copiable. No atribuir a las comprobaciones estáticas una prueba de impresión adicional.
+
+**Referencia de futura integración:** el contrato de etiquetado en la fuente privada MiruRecetas/mirurecetas-web-source, documento docs/ETIQUETADO-CT230B-INTEGRACION-PLAN.md (PR documental #47). No editar fichas públicas ni mover archivos del laboratorio hasta aprobar esta maqueta.
