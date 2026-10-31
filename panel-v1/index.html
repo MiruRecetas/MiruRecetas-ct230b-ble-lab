@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#f6f2eb">
+<title>MiruRecetas · Prueba del panel de impresión V1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Geist:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+<link href="./panel.css?v=1" rel="stylesheet">
+</head>
+<body>
+<div class="p1-shell">
+<header class="p1-topbar">
+  <a class="p1-brand" href="../" title="Abrir el laboratorio histórico de pruebas"><img src="../assets/isotipo-bn.svg" alt="" width="32" height="32"><span>Miru<strong>Recetas</strong></span></a>
+  <nav class="p1-nav" aria-label="Laboratorio"><a href="../">Laboratorio histórico</a><a href="https://mirurecetas.github.io/menu-anual-recetas/recetas/pisto/" target="_blank" rel="noopener noreferrer">Ficha publicada ↗</a></nav>
+</header>
+<p class="p1-lab-note"><strong>Laboratorio · Panel V1 de impresión.</strong> Página independiente de ensayo, sin conexión con Airtable ni publicación en MiruRecetas. La ficha reproducida es <strong>Pisto</strong> con datos públicos reales. Las etiquetas utilizan por ahora <strong>#r001</strong>: el resolvedor de URL corta aún está pendiente de desplegarse. El laboratorio histórico permanece sin cambios.</p>
+<main>
+<article class="p1-recipe" aria-label="Ficha de receta de Pisto, réplica experimental">
+<div class="p1-recipe-grid">
+<div class="p1-photo">
+<img src="https://mirurecetas.github.io/menu-anual-recetas/imagenes/pisto.webp" alt="Pisto casero de verduras: fotografía publicada en MiruRecetas" loading="eager">
+<span class="p1-tag">Aperitivos y guarniciones</span>
+</div>
+<div class="p1-main">
+<span class="p1-eyebrow">Recetario · ficha de prueba</span>
+<h1>Pisto</h1>
+<p class="p1-description">Pisto casero de tomate, pimientos, calabacín y cebolla, pochados lentamente en aceite de oliva.</p>
+<section class="p1-nutrition" aria-label="Nutrición oficial por ración">
+<div class="p1-ring"><div class="p1-ring-inside"><strong>164,35</strong><small>kcal/ración</small></div></div>
+<div class="p1-macro-list">
+<div><span><i class="p1-macro-dot pr"></i>Proteínas</span><b>5,69 g</b></div>
+<div><span><i class="p1-macro-dot hc"></i>Hidratos</span><b>18,58 g</b></div>
+<div><span><i class="p1-macro-dot gr"></i>Grasas</span><b>7,84 g</b></div>
+</div>
+</section>
+<div class="p1-control-row">
+<strong>Cantidad a preparar</strong>
+<div class="p1-stepper" aria-label="Seleccionar raciones de cocina">
+<button id="p1-minus" type="button" aria-label="Restar una ración">−</button>
+<output id="p1-portions" aria-live="polite">6</output>
+<button id="p1-plus" type="button" aria-label="Sumar una ración">+</button>
+</div>
+<span>raciones</span>
+</div>
+<h2 class="p1-section-title">Ingredientes</h2>
+<ul class="p1-ingredients">
+<li><span>Tomate</span><span data-p1-base="1000" data-p1-unit="g">1000 g</span></li>
+<li><span>Pimiento rojo</span><span data-p1-base="450" data-p1-unit="g">450 g</span></li>
+<li><span>Pimiento verde</span><span data-p1-base="450" data-p1-unit="g">450 g</span></li>
+<li><span>Calabacín</span><span data-p1-base="575" data-p1-unit="g">575 g</span></li>
+<li><span>Cebolla</span><span data-p1-base="450" data-p1-unit="g">450 g</span></li>
+<li><span>AOVE</span><span data-p1-base="45" data-p1-unit="ml">45 ml</span></li>
+</ul>
+<button id="p1-open" class="p1-cta" type="button" aria-haspopup="dialog" aria-controls="p1-dialog">
+<svg class="p1-cta-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v7H6zM18 12h.01"/></svg>
+Imprimir etiqueta
+</button>
+<p class="p1-under">La impresión representa siempre <strong>una ración por etiqueta</strong>. El selector de raciones anterior solo modifica los ingredientes de la ficha, no el valor de la etiqueta. El número de copias se selecciona en el panel.</p>
+</div>
+</div>
+</article>
+<section class="p1-log-section" aria-labelledby="p1-log-title">
+<div class="p1-log-head">
+<h2 id="p1-log-title">Registro de ejecución BLE y TSPL</h2>
+<div class="p1-log-actions">
+<button id="p1-copy" type="button" class="p1-small-btn">Copiar registro</button>
+<button id="p1-clear" type="button" class="p1-small-btn">Limpiar registro</button>
+</div>
+</div>
+<p class="p1-help">Copia este registro tras cada prueba, como en el laboratorio histórico. Se genera en el navegador y no se envía a ningún servidor.</p>
+<pre id="p1-log" aria-live="polite" role="log"></pre>
+</section>
+</main>
+<footer class="p1-footer">MiruRecetas · Página experimental CT230B. V0.6.2 vertical, V0.7.3 horizontal y V0.9 componente mantienen el diseño gráfico de referencia. El modo multicopia PRINT 1,N requiere ensayo físico antes de considerarse aprobado.</footer>
+</div>
+<div id="p1-overlay" class="p1-overlay" hidden>
+<section id="p1-dialog" class="p1-dialog" role="dialog" aria-modal="true" aria-labelledby="p1-dialog-title" aria-describedby="p1-dialog-desc" tabindex="-1">
+<div class="p1-mobile-handle" aria-hidden="true"></div>
+<header class="p1-dialog-head">
+<div><span class="p1-eyebrow">MiruRecetas · Etiquetado</span><h2 id="p1-dialog-title">Preparar etiqueta</h2><span class="p1-help" id="p1-dialog-desc">Pisto · una ración por etiqueta</span></div>
+<button class="p1-close" id="p1-close" type="button" aria-label="Cerrar panel de impresión">×</button>
+</header>
+<label class="p1-field">
+<span>Formato de etiqueta</span>
+<select id="p1-format">
+<option value="vertical" selected>50 × 80 mm · Vertical · V0.6.2</option>
+<option value="horizontal">50 × 80 mm · Horizontal · V0.7.3</option>
+<option value="component">50 × 30 mm · Componente · V0.9</option>
+</select>
+</label>
+<div class="p1-two">
+<label class="p1-field"><span>Envasado y congelación *</span><input type="date" id="p1-packed" required><small>Obligatorio para imprimir</small></label>
+<label class="p1-field"><span>Consumo preferente</span><input type="date" id="p1-expiry"><small>Opcional · en blanco: --/--/--</small></label>
+</div>
+<label class="p1-field"><span>Número de etiquetas iguales</span><input id="p1-copies" type="number" min="1" max="20" step="1" value="1" inputmode="numeric"><small>De 1 a 20 · un solo trabajo BLE, PRINT 1,N (pendiente ensayo físico multicopia)</small></label>
+<div class="p1-preview-box">
+<span class="p1-preview-title">Vista previa de la composición aprobada</span>
+<canvas class="p1-preview" id="p1-preview" width="590" height="945" role="img" aria-label="Vista previa de la etiqueta con reserva para el código QR nativo"></canvas>
+<span class="p1-metrics" id="p1-metrics" aria-live="polite">Cargando fuentes e isotipo…</span>
+</div>
+<p class="p1-qr-note"><strong>QR de ensayo corto:</strong> <code>https://mirurecetas.github.io/#r001</code>. Por ahora puede no redirigir a Pisto; se verifica la reducción de densidad del QR impreso. En la vista previa solo se indica el espacio del QR: la matriz real la dibuja la impresora.</p>
+<div class="p1-connection">
+<div class="p1-state" role="status" id="p1-connection-text"><i class="p1-state-dot" id="p1-state-dot" aria-hidden="true"></i><span id="p1-status">Impresora desconectada</span></div>
+<div class="p1-connection-buttons">
+<button class="p1-connect" type="button" id="p1-connect">Conectar impresora CT230B</button>
+<button class="p1-disconnect" type="button" id="p1-disconnect" disabled>Desconectar</button>
+</div>
+</div>
+<p id="p1-error" class="p1-help p1-error" role="alert" hidden></p>
+<button class="p1-print" type="button" id="p1-print" disabled>Imprimir 1 etiqueta</button>
+<p class="p1-help" id="p1-help">Se requiere impresora conectada y fecha de envasado. La fecha de consumo preferente es opcional. Habrá una confirmación antes de enviar y no se reintentará automáticamente.</p>
+</section>
+</div>
+<script src="./engine.js?v=1" defer></script>
+<script src="./app.js?v=1" defer></script>
+</body>
+</html>
