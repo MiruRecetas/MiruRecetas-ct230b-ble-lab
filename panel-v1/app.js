@@ -98,7 +98,7 @@
   flip.setAttribute("aria-expanded",String(on));
   const target=on?$("p1-cook-heading"):$("p1-front-title");
   target?.focus({preventScroll:true});
-  $("p1-recipe-card").scrollIntoView({block:"start",behavior:"instant"});
+  $("p1-recipe-card").scrollIntoView({block:"start",behavior:"auto"});
   log(on?"Vista de prueba: Modo cocina (acceso a etiquetas después del temporizador).":
          "Vista de prueba: cara de ingredientes (impresora circular junto al título).");
  }
