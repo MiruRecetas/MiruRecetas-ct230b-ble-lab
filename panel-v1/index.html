@@ -98,6 +98,14 @@ Imprimir etiqueta
 <option value="component">50 × 30 mm · Componente · V0.9</option>
 </select>
 </label>
+<label class="p1-field" id="p1-qr-test-field" hidden>
+<span>Ensayo del QR · solo etiqueta 50 × 30</span>
+<select id="p1-qr-size">
+<option value="original" selected>Original · 4 puntos por módulo (referencia)</option>
+<option value="large">Ampliado · 5 puntos por módulo (experimental)</option>
+</select>
+<small>Solo cambia el tamaño y la posición del QR; nombre, macros, notas y BLE se conservan. Prueba primero una etiqueta.</small>
+</label>
 <div class="p1-two">
 <label class="p1-field"><span>Envasado y congelación *</span><input type="date" id="p1-packed" required><small>Obligatorio para imprimir</small></label>
 <label class="p1-field"><span>Consumo preferente</span><input type="date" id="p1-expiry"><small>Opcional · en blanco: --/--/--</small></label>
@@ -116,7 +124,7 @@ Imprimir etiqueta
 <canvas class="p1-preview" id="p1-preview" width="590" height="945" role="img" aria-label="Vista previa de la etiqueta con reserva para el código QR nativo"></canvas>
 <span class="p1-metrics" id="p1-metrics" aria-live="polite">Cargando fuentes e isotipo…</span>
 </div>
-<p class="p1-qr-note"><strong>QR de ensayo corto:</strong> <code>https://mirurecetas.github.io/#r047</code>. Por ahora puede no redirigir a la ficha de Ragú; se verifica la reducción de densidad del QR impreso. En la vista previa solo se indica el espacio del QR: la matriz real la dibuja la impresora.</p>
+<p class="p1-qr-note"><strong>QR corto de Ragú:</strong> <code>https://mirurecetas.github.io/#r047</code>. La versión de 4 puntos ha resultado difícil de escanear en la CT230B. En la opción experimental de 5 puntos, la matriz se amplía aproximadamente un 25 % y se reserva su margen blanco. El QR real se dibuja en la impresora; el destino puede no redirigir hasta que se publique el índice.</p>
 <div class="p1-connection">
 <div class="p1-state" role="status" id="p1-connection-text"><i class="p1-state-dot" id="p1-state-dot" aria-hidden="true"></i><span id="p1-status">Impresora desconectada</span></div>
 <div class="p1-connection-buttons">
@@ -129,7 +137,7 @@ Imprimir etiqueta
 <p class="p1-help" id="p1-help">Se requiere impresora conectada y fecha de envasado. La fecha de consumo preferente es opcional. Habrá una confirmación antes de enviar y no se reintentará automáticamente.</p>
 </section>
 </div>
-<script src="./engine.js?v=2" defer></script>
-<script src="./app.js?v=3" defer></script>
+<script src="./engine.js?v=3" defer></script>
+<script src="./app.js?v=4" defer></script>
 </body>
 </html>
