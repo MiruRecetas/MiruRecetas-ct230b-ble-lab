@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Geist:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
-<link href="./panel.css?v=2" rel="stylesheet">
+<link href="./panel.css?v=3" rel="stylesheet">
 </head>
 <body>
 <div class="p1-shell">
@@ -96,7 +96,15 @@ Imprimir etiqueta
 <label class="p1-field"><span>Envasado y congelación *</span><input type="date" id="p1-packed" required><small>Obligatorio para imprimir</small></label>
 <label class="p1-field"><span>Consumo preferente</span><input type="date" id="p1-expiry"><small>Opcional · en blanco: --/--/--</small></label>
 </div>
-<label class="p1-field"><span>Número de etiquetas iguales</span><input id="p1-copies" type="number" min="1" max="20" step="1" value="1" inputmode="numeric"><small>De 1 a 20 · un solo trabajo BLE, PRINT 1,N (pendiente ensayo físico multicopia)</small></label>
+<div class="p1-field p1-copies-field">
+<span id="p1-copies-label">Número de etiquetas iguales</span>
+<div class="p1-stepper p1-copies-stepper" role="group" aria-labelledby="p1-copies-label">
+<button id="p1-copies-minus" type="button" aria-label="Restar una etiqueta" disabled>−</button>
+<output id="p1-copies" aria-live="polite" aria-atomic="true">1</output>
+<button id="p1-copies-plus" type="button" aria-label="Añadir una etiqueta">+</button>
+</div>
+<small>De 1 a 20 · un solo trabajo BLE, PRINT 1,N (pendiente ensayo físico multicopia)</small>
+</div>
 <div class="p1-preview-box">
 <span class="p1-preview-title">Vista previa de la composición aprobada</span>
 <canvas class="p1-preview" id="p1-preview" width="590" height="945" role="img" aria-label="Vista previa de la etiqueta con reserva para el código QR nativo"></canvas>
@@ -116,6 +124,6 @@ Imprimir etiqueta
 </section>
 </div>
 <script src="./engine.js?v=1" defer></script>
-<script src="./app.js?v=1" defer></script>
+<script src="./app.js?v=2" defer></script>
 </body>
 </html>
