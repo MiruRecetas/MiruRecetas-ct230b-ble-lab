@@ -8,6 +8,7 @@ const PANEL_RECIPE=Object.freeze({
  slug:"pisto",qrId:"r001",name:"Pisto",
  kcal:164.35,protein:5.69,carbs:18.58,fat:7.84,
  kcalDisplay:"164,35",proteinDisplay:"5,69",carbsDisplay:"18,58",fatDisplay:"7,84",
+ url:"https://mirurecetas.github.io/#r001",
  shortUrl:"https://mirurecetas.github.io/#r001",
  canonicalUrl:"https://mirurecetas.github.io/menu-anual-recetas/recetas/pisto/"
 });
