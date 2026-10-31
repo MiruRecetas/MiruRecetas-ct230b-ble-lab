@@ -1,16 +1,22 @@
 "use strict";
 /* MiruRecetas · PANEL V1 · motor experimental compartido entre formatos de receta.
  * Basado por extracción fiel en V0.6.2, V0.7.3 y V0.9 validados físicamente.
- * Solo en laboratorio. Ficha real Pisto, QR de identificación futura #r001.
+ * Solo en laboratorio. Ficha real Ragú a la boloñesa, QR de identificación futura #r047.
  * SIN escribir en app privada ni reemplazar el laboratorio histórico.
  */
 const PANEL_RECIPE=Object.freeze({
- slug:"pisto",qrId:"r001",name:"Pisto",
- kcal:164.35,protein:5.69,carbs:18.58,fat:7.84,
- kcalDisplay:"164,35",proteinDisplay:"5,69",carbsDisplay:"18,58",fatDisplay:"7,84",
- url:"https://mirurecetas.github.io/#r001",
- shortUrl:"https://mirurecetas.github.io/#r001",
- canonicalUrl:"https://mirurecetas.github.io/menu-anual-recetas/recetas/pisto/"
+ slug:"ragu-a-la-bolonesa",qrId:"r047",name:"Ragú a la boloñesa",
+ portions:4,
+ kcal:251.89,protein:16.65,carbs:10.67,fat:15.78,
+ kcalDisplay:"251,89",proteinDisplay:"16,65",carbsDisplay:"10,67",fatDisplay:"15,78",
+ url:"https://mirurecetas.github.io/#r047",
+ shortUrl:"https://mirurecetas.github.io/#r047",
+ canonicalUrl:"https://mirurecetas.github.io/menu-anual-recetas/recetas/ragu-a-la-bolonesa/",
+ // Texto reducido exclusivamente de las notas de la ficha canónica de Ragú.
+ instructionLines:Object.freeze(["Descongelar en nevera","Recalentar removiendo"]),
+ noteLines:Object.freeze(["Refrigerar pronto o","congelar por raciones."]),
+ instruction:"Descongelar en la nevera. Recalentar removiendo hasta que toda la salsa esté bien caliente.",
+ note:"Refrigerar pronto o congelar por raciones."
 });
 const encoder=new TextEncoder();
 function joinBuffers(...parts){
@@ -169,11 +175,11 @@ function v6Render(dates){
  // Zona inferior en la columna izquierda, conservando el espacio nativo para el QR.
  v6Text(c,'700 26px "Bricolage Grotesque"',"DESCONGELACIÓN",28,581,310);
  v6Text(c,'700 26px "Bricolage Grotesque"',"Y CONSUMO",28,616,310);
- v6Text(c,'500 23px "Geist"',"En nevera · Recalentar",28,686,308);
- v6Text(c,'500 23px "Geist"',"tapado o en sartén",28,715,308);
+ v6Text(c,'500 23px "Geist"',PANEL_RECIPE.instructionLines[0],28,686,308);
+ v6Text(c,'500 23px "Geist"',PANEL_RECIPE.instructionLines[1],28,715,308);
  v6Text(c,'700 25px "Bricolage Grotesque"',"NOTA",28,767);
- v6Text(c,'italic 500 20px "Geist"',"El calabacín puede variar",28,797,300);
- v6Text(c,'italic 500 20px "Geist"',"de textura al congelar.",28,826,310);
+ v6Text(c,'italic 500 20px "Geist"',PANEL_RECIPE.noteLines[0],28,797,300);
+ v6Text(c,'italic 500 20px "Geist"',PANEL_RECIPE.noteLines[1],28,826,310);
  // Pie de firma aprobado: icono exacto BN + palabra en tipografía oficial.
  c.drawImage(v5Logo,156,888,43,43);
  v6Text(c,'600 37px "Bricolage Grotesque"',"MiruRecetas",216,921,340);
@@ -297,8 +303,8 @@ const V7_RECIPE=Object.freeze({
  name:PANEL_RECIPE.name,kcal:PANEL_RECIPE.kcalDisplay,
  protein:PANEL_RECIPE.proteinDisplay,carbs:PANEL_RECIPE.carbsDisplay,fat:PANEL_RECIPE.fatDisplay,
  heading:"DESCONGELACIÓN Y CONSUMO",
- instruction:"En nevera · Recalentar tapado o en sartén a fuego suave.",
- noteHeading:"NOTA",note:"El calabacín puede variar de textura al congelar.",
+ instruction:PANEL_RECIPE.instruction,
+ noteHeading:"NOTA",note:PANEL_RECIPE.note,
  url:PANEL_RECIPE.shortUrl
 });
 const v7ById=id=>document.getElementById(id);
@@ -457,7 +463,7 @@ function v7Build(d){
 }
 
 "use strict";
-/* V0.9 · SOLO LABORATORIO · Componente 50 × 30 mm · Pisto.
+/* V0.9 · SOLO LABORATORIO · Componente 50 × 30 mm · Ragú a la boloñesa.
  * Autoridad: SVG Canva aportado por usuaria (189 × 113, viewBox 141.75 × 84.75).
  * Transcripción geométrica A 590 × 354 dots; no modifica V0.7.3 ni V0.8.
  * Una ración por bolsa; NO mostrar raciones ni gramaje.
@@ -471,8 +477,8 @@ const V9_RECIPE=Object.freeze({
  name:PANEL_RECIPE.name,kcal:PANEL_RECIPE.kcalDisplay,
  protein:PANEL_RECIPE.proteinDisplay,carbs:PANEL_RECIPE.carbsDisplay,fat:PANEL_RECIPE.fatDisplay,
  heading:"DESCONGELACIÓN Y CONSUMO",
- instructions:Object.freeze(["En nevera · Recalentar tapado o","en sartén a fuego suave"]),
- noteTitle:"NOTA",note:Object.freeze(["El calabacín puede variar","de textura al congelar."]),
+ instructions:PANEL_RECIPE.instructionLines,
+ noteTitle:"NOTA",note:PANEL_RECIPE.noteLines,
  url:PANEL_RECIPE.shortUrl
 });
 let v9Ready=false,v9Preparing=false,v9Printing=false,v9NeedsRefresh=false;
@@ -511,7 +517,7 @@ function v9Draw(d){
  c.fillStyle="#fff";c.fillRect(0,0,V9_W,V9_H);
  c.fillStyle="#000";c.textBaseline="alphabetic";c.textAlign="left";
  // Geometría del SVG Canva: título a la izquierda; isotipo GRANDE a la derecha.
- v9Label(c,V9_RECIPE.name,11,46,46,"700","Bricolage Grotesque",475);
+ v9Label(c,V9_RECIPE.name,11,46,46,"700","Bricolage Grotesque",475,25);
  c.drawImage(logo,525,5,53,48);
  // Cabecera: banda gruesa de borde a borde (SVG: y≈60–73).
  c.fillRect(0,60,V9_W,12);
@@ -548,8 +554,8 @@ function v9Build(d){
  const canvas=v9Draw(d);
  // Raster partido: segunda zona NO invade QR nativo ni su quiet zone.
  const regions=[
-  {x:0,y:0,w:V9_W,h:174,label:"Pisto cabecera fechas nutrición"},
-  {x:0,y:174,w:405,h:180,label:"Pisto instrucciones y nota"}
+  {x:0,y:0,w:V9_W,h:174,label:"Ragú cabecera fechas nutrición"},
+  {x:0,y:174,w:405,h:180,label:"Ragú instrucciones y nota"}
  ];
  const tiles=[];
  for(const region of regions)tiles.push(...v62SparseRegion(canvas,region));
@@ -595,7 +601,7 @@ function panelQrPlaceholder(ctx,x,y,w,h,title){
  ctx.setLineDash([5,5]);ctx.strokeRect(x,y,w,h);ctx.setLineDash([]);
  ctx.fillStyle="#66746a";ctx.textAlign="center";
  ctx.font='600 16px "Geist"';ctx.fillText(title,x+w/2,y+h/2-6);
- ctx.font='500 12px "Geist"';ctx.fillText("#r001 · QR TSPL",x+w/2,y+h/2+15);
+ ctx.font='500 12px "Geist"';ctx.fillText("#"+PANEL_RECIPE.qrId+" · QR TSPL",x+w/2,y+h/2+15);
  ctx.restore();
 }
 function panelPreview(format,dates){
@@ -650,11 +656,11 @@ function panelBuild(format,dates,copies){
 }
 async function panelLoadIdentity(){
  const spec=[
-  ['700 66px "Bricolage Grotesque"','Pisto'],
-  ['700 46px "Bricolage Grotesque"','Pisto'],
+  ['700 66px "Bricolage Grotesque"',PANEL_RECIPE.name],
+  ['700 46px "Bricolage Grotesque"',PANEL_RECIPE.name],
   ['500 25px "Geist"','Envasado y congelación'],
   ['700 25px "Geist"','31/10/26'],
-  ['italic 500 20px "Geist"','El calabacín puede variar']
+  ['italic 500 20px "Geist"',PANEL_RECIPE.noteLines[0]]
  ];
  const loaded=await Promise.all(spec.map(([font,example])=>document.fonts.load(font,example)));
  if(loaded.some(group=>!group.length||group.some(face=>face.status!=="loaded")))
