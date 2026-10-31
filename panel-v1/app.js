@@ -13,7 +13,7 @@
        expiry=$("p1-expiry"),copies=$("p1-copies"),connect=$("p1-connect"),
        disconnect=$("p1-disconnect"),print=$("p1-print"),preview=$("p1-preview"),
        status=$("p1-status"),error=$("p1-error"),metrics=$("p1-metrics"),
-       logElement=$("p1-log");
+       logElement=$("p1-log"),qrSelect=$("p1-qr-size"),qrField=$("p1-qr-test-field");
  let origin=null,device=null,writeChannel=null,notifyChannel=null,busy=false,ready=false;
  let portions=engine.recipe.portions, labelCopies=1;
  function log(message){
@@ -25,6 +25,9 @@
   if(message)log("AVISO: "+message);
  }
  function connected(){return !!(device&&device.gatt&&device.gatt.connected&&writeChannel);}
+ function qrMode(){
+  return format.value==="component"?qrSelect.value:"original";
+ }
  function copiesValue(){
   if(!Number.isInteger(labelCopies)||labelCopies<1||labelCopies>20)
    throw Error("El número de etiquetas debe estar entre 1 y 20.");
@@ -39,6 +42,8 @@
   const dates=engine.dates(packed.value,expiry.value,required);
   const count=copiesValue();
   if(!Object.hasOwn(engine.formats,format.value))throw Error("Formato desconocido.");
+  if(!Object.hasOwn(engine.qrVariants,qrMode()))
+   throw Error("Variante QR desconocida.");
   return {dates,count};
  }
  function update(){
@@ -56,17 +61,18 @@
   print.textContent="Imprimir "+(n===1?"1 etiqueta":n+" etiquetas");
  }
  function refreshPreview(){
+  qrField.hidden=format.value!=="component";
   if(!ready)return;
   try{
    const dates=engine.dates(packed.value,expiry.value,false);
-   const art=engine.preview(format.value,dates);
+   const art=engine.preview(format.value,dates,qrMode());
    preview.width=art.width;preview.height=art.height;
    preview.className="p1-preview"+(format.value==="horizontal"?" p1-horizontal":format.value==="component"?" p1-component":"");
    preview.getContext("2d").drawImage(art,0,0);
    const n=labelCopies;
    metrics.textContent=engine.formats[format.value].label+
     " · "+engine.recipe.name+" · "+n+" "+(n===1?"etiqueta":"etiquetas")+
-    " · envasado "+dates.packed+" · consumo "+dates.expiry;
+    " · QR "+(qrMode()==="large"?"5 puntos (prueba)":"4 puntos / normal")+" · envasado "+dates.packed+" · consumo "+dates.expiry;
    if(!error.hidden)showError("");
   }catch(e){
    metrics.textContent="Error de vista previa: "+e.message;
@@ -97,7 +103,7 @@
   if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}
   else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}
  });
- for(const input of [format,packed,expiry]){
+ for(const input of [format,packed,expiry,qrSelect]){
   input.addEventListener("input",refreshPreview);
   input.addEventListener("change",refreshPreview);
  }
@@ -194,20 +200,20 @@
   let job,dates,count;
   try{
    const data=dataForPrint(true);dates=data.dates;count=data.count;
-   job=engine.build(format.value,dates,count);
+   job=engine.build(format.value,dates,count,qrMode());
   }catch(e){showError(e.message);return;}
   log("Trabajo preparado: "+job.format+" · "+count+" "+
      (count===1?"copia":"copias")+" · "+job.bytes+" bytes · "+
-     job.fragments+" fragmentos · "+job.tiles+" bandas raster.");
+     job.fragments+" fragmentos · "+job.tiles+" bandas raster · QR "+(job.qrModule||"estándar")+" puntos"+(job.qrVariant==="large"?" (EXPERIMENTAL)":"")+".");
   const text="¿Enviar UN trabajo BLE a la CLABEL para imprimir "+
    count+" "+(count===1?"etiqueta":"etiquetas")+" de "+engine.recipe.name+" ("+
    engine.formats[format.value].label+")?\n"+
    "Envasado: "+dates.packed+" · Consumo preferente: "+dates.expiry+
-   "\nQR corto #"+engine.recipe.qrId+" · PRINT 1,"+count+".\n"+
+   "\nQR corto #"+engine.recipe.qrId+" · QR "+(job.qrModule||"original")+" puntos"+(job.qrVariant==="large"?" EXPERIMENTAL":"")+" · PRINT 1,"+count+".\n"+
    "Sin reintentos. La multicopia todavía está pendiente de validación física.";
   if(!window.confirm(text)){log("Impresión cancelada antes del envío.");return;}
   busy=true;update();showError("");
-  try{await transmit(job.job,"PANEL V1 "+job.format+" · PRINT 1,"+count);}
+  try{await transmit(job.job,"PANEL V1 "+job.format+" · QR "+(job.qrModule||"normal")+" puntos · PRINT 1,"+count);}
   catch(e){log("ERROR DE TRANSPORTE: "+e.name+": "+e.message+
    ". Puede existir impresión parcial; NO repetir automáticamente.");showError("Transmisión interrumpida: revisar impresora antes de repetir.");}
   finally{busy=false;update();}
