@@ -678,12 +678,19 @@ function panelBuild(format,dates,copies,qrVariant=format==="component"?"large":"
    tiles:result.blocks??result.tiles??0,rasterBytes:result.rasterBytes??result.raster??0};
 }
 async function panelLoadIdentity(){
+ // Canvas may use a fallback immediately while an unrequested face loads.
+ // Await every weight/style used by all three renderers before enabling print.
+ // Include all label strings so unicode subsets are loaded as well.
+ const sample=[PANEL_RECIPE.name,PANEL_RECIPE.instruction,PANEL_RECIPE.note,
+  "MiruRecetas DESCONGELACIÓN Y CONSUMO NOTA Envasado y congelación Consumo preferente",
+  "Proteínas Hidratos Grasas PR HC GR kcal 0123456789 --/--/-- ,."].join(" ");
  const spec=[
-  ['700 66px "Bricolage Grotesque"',PANEL_RECIPE.name],
-  ['700 46px "Bricolage Grotesque"',PANEL_RECIPE.name],
-  ['500 25px "Geist"','Envasado y congelación'],
-  ['700 25px "Geist"','31/10/26'],
-  ['italic 500 20px "Geist"',PANEL_RECIPE.noteLines[0]]
+  ['700 46px "Bricolage Grotesque"',sample],
+  ['600 37px "Bricolage Grotesque"',sample],
+  ['400 20px "Geist"',sample],
+  ['500 25px "Geist"',sample],
+  ['700 25px "Geist"',sample],
+  ['italic 500 20px "Geist"',sample]
  ];
  const loaded=await Promise.all(spec.map(([font,example])=>document.fonts.load(font,example)));
  if(loaded.some(group=>!group.length||group.some(face=>face.status!=="loaded")))
