@@ -1,3 +1,5 @@
+> **CORTE HISTÓRICO DEL LABORATORIO · 03/11/2026.** Conservar las pruebas de las cuatro familias. En la web productiva el selector de CT230B incluye **solo tres formatos**: 50×80 vertical, 50×80 horizontal y 50×30 componente. La cuarta familia 30×20 ingrediente permanece en laboratorio. Ver [estado de producción](https://github.com/MiruRecetas/mirurecetas-web-source/blob/main/docs/ETIQUETADO-CT230B-ESTADO-PRODUCCION-2026-11-03.md).
+
 # P15 · Cuatro etiquetas Canva para prueba física — 30/10/2026
 
 > **ESTADO VIGENTE · 31/10/2026:** este documento describe el primer lote P15 histórico. Las **cuatro plantillas** están aprobadas, ambas **50×80 tienen QR legible**, y la solución de QR para **50×30 (5 puntos + corrección M)** ha sido probada y aprobada en el panel V1 con Ragú. Multicopia 1/2 y observación de uso tras 2–3 días en congelador: favorables. Fuente de estado actual: [acta de validación](VALIDACION-ETIQUETAS-CT230B-2026-10-31.md). No editar los motores históricos para corregir esta bitácora.
