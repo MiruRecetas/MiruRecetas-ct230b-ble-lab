@@ -1,3 +1,5 @@
+> **ACTA DE LABORATORIO DEL 31/10/2026 · SUPERADA EN PRODUCCIÓN EL 03/11/2026.** Las pruebas históricas se mantienen como evidencia original. En Chrome Android se validaron posteriormente los tres formatos de producción, nombres, plazos +60 días y `null`, fecha manual, nota especial, QR y dos copias compactas; PR #66/#69 integradas y publicadas mediante Actions. [Estado vigente](https://github.com/MiruRecetas/mirurecetas-web-source/blob/main/docs/ETIQUETADO-CT230B-ESTADO-PRODUCCION-2026-11-03.md). Este documento no autoriza publicar directamente desde el laboratorio.
+
 # Acta P15 · Aprobación física de etiquetas, QR y multicopia · 31/10/2026
 
 **Estado vigente y fuente:** validaciones físicas expresamente comunicadas por la usuaria, con fotografías de etiquetas, captura de lectura QR y registros BLE de Chrome Android. Esta acta **prevalece** sobre estados históricos de los ensayos anteriores; no constituye una autorización para modificar el código de producción.
