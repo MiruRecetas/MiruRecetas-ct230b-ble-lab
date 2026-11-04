@@ -1,0 +1,84 @@
+/* Conserva · Etiquetas de ingredientes · interfaz experimental autónoma
+   Identidad MiruRecetas: crema, salvia, terracota, Bricolage Grotesque y Geist. */
+:root{
+  color-scheme:light;
+  --bg:#f7f5ef;--paper:#fffefa;--ink:#2c3830;--muted:#637366;
+  --sage:#536c58;--sage-dark:#3b5441;--sage-soft:#e6ede5;
+  --line:#dae1d8;--terracotta:#af7251;--shadow:0 7px 28px rgb(31 54 40 / 6%);
+  font-family:"Geist",system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--bg);
+}
+*{box-sizing:border-box}
+body{margin:0;min-width:320px}
+button,input{font:inherit}
+button{touch-action:manipulation}
+a{color:inherit}
+.site-header{border-bottom:1px solid var(--line);background:var(--paper)}
+.site-header-inner{max-width:1120px;margin:auto;min-height:72px;padding:13px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.wordmark{display:inline-flex;gap:11px;align-items:center;font:700 23px/1 "Bricolage Grotesque",sans-serif;letter-spacing:-.8px}
+.wordmark img{width:34px;height:34px;object-fit:contain}
+.header-section{font:600 12px/1 "Geist",sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--sage);border-left:1px solid var(--line);padding-left:18px}
+.page{max-width:1120px;margin:0 auto;padding:35px 24px 64px}
+.eyebrow{margin:0 0 10px;color:var(--terracotta);font-size:12px;letter-spacing:.16em;font-weight:700;text-transform:uppercase}
+h1,h2,h3{font-family:"Bricolage Grotesque",system-ui,sans-serif;letter-spacing:-.035em}
+h1{font-size:clamp(31px,4.7vw,50px);line-height:1.06;margin:0 0 16px;font-weight:700}
+h2{font-size:21px;line-height:1.15;margin:0 0 6px}
+h3{font-size:15px}
+.intro{max-width:680px;font-size:16px;line-height:1.62;color:var(--muted);margin:0 0 30px}
+.content-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,.9fr);align-items:start;gap:24px}
+.left,.right{min-width:0;display:grid;gap:20px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:27px;box-shadow:var(--shadow)}
+.card-head{display:flex;align-items:start;gap:13px;margin-bottom:21px}
+.step{display:grid;place-items:center;flex:0 0 27px;width:27px;height:27px;background:var(--sage-soft);color:var(--sage);border-radius:50%;font-size:12px;font-weight:800}
+.small{font-size:13px;color:var(--muted);line-height:1.55;margin:0}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:17px}
+.field{display:grid;gap:8px;min-width:0;font-size:13px;font-weight:650}
+.field.full{grid-column:1/-1}
+.field input{width:100%;min-width:0;border:1px solid #b6c4b6;border-radius:11px;background:#fff;color:var(--ink);min-height:46px;padding:10px 13px;outline:none}
+.field input:focus-visible{outline:3px solid #adcdb2;outline-offset:2px;border-color:var(--sage)}
+.field input:disabled{background:#f0f1ee;color:#7b877c}
+.field-note{font-weight:400;font-size:11px;color:var(--muted)}
+.disclaimer{border-left:3px solid var(--terracotta);padding:10px 12px;margin:19px 0 0;background:#faf4ee;border-radius:0 9px 9px 0;font-size:12px;line-height:1.5;color:#655446}
+.preview-panel{position:relative}
+.preview-title{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.dimensions{font-size:11px;font-weight:700;color:#617064;padding:6px 9px;border:1px solid var(--line);border-radius:50px;white-space:nowrap}
+.preview-stage{background:#f0eee9;border:1px dashed #d3d0c7;border-radius:13px;padding:22px 13px;margin:17px 0;display:grid;place-items:center;min-height:225px}
+#preview{width:min(100%,354px);height:auto;aspect-ratio:354/236;background:#fff;border:1px solid #c9cfc7;box-shadow:0 9px 21px rgb(0 0 0 / 9%);image-rendering:auto}
+.status-line{font-size:12px;color:var(--muted);line-height:1.55;margin:8px 0 0}
+.device-status{display:inline-flex;gap:7px;align-items:center;font-size:13px;font-weight:650;margin:0 0 17px}
+.device-status:before{content:"";background:#a2a9a2;display:block;width:8px;height:8px;border-radius:50%}
+.device-status[data-connected="true"]:before{background:#428651}
+.buttons{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;justify-content:center;align-items:center;gap:7px;border:1px solid var(--sage);border-radius:11px;padding:12px 17px;min-height:45px;cursor:pointer;font-size:13px;font-weight:700;color:#fff;background:var(--sage);transition:background .15s ease}
+.btn:hover:not(:disabled){background:var(--sage-dark)}
+.btn.secondary{color:var(--sage);background:transparent;border-color:#a9bcae}
+.btn.secondary:hover:not(:disabled){background:var(--sage-soft)}
+.btn:focus-visible{outline:3px solid #adccb2;outline-offset:3px}
+.btn:disabled{opacity:.48;cursor:not-allowed}
+.btn.print{width:100%;min-height:50px;margin-top:17px}
+.checkbox-row{display:flex;align-items:flex-start;gap:10px;margin:20px 0 0;cursor:pointer;font-size:12px;line-height:1.55;color:#4f6052}
+.checkbox-row input{width:18px;height:18px;flex:none;margin:0;accent-color:var(--sage)}
+progress{display:block;width:100%;margin:14px 0 0;height:12px;accent-color:var(--sage)}
+progress[hidden]{display:none}
+.advanced{margin-top:18px;border-top:1px solid var(--line);padding-top:15px}
+.advanced summary{cursor:pointer;font-size:13px;font-weight:700;color:var(--sage);padding:7px 0}
+#log{color:#ddebe0;background:#1c3023;border-radius:9px;font:11px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace;padding:12px;min-height:70px;max-height:170px;white-space:pre-wrap;overflow-wrap:anywhere;overflow:auto}
+.advanced .buttons{margin:11px 0}
+.advanced .btn{min-height:35px;padding:8px 12px;font-size:12px}
+.footer{font-size:12px;color:var(--muted);line-height:1.7;padding:28px 0}
+code{font-family:ui-monospace,monospace}
+@media(max-width:760px){
+ .page{padding:25px 17px 44px}
+ .site-header-inner{min-height:62px;padding:12px 17px}
+ .wordmark{font-size:21px}
+ .content-grid{grid-template-columns:1fr;gap:16px}
+ .left,.right{gap:16px}
+ .card{padding:21px}
+ .intro{margin-bottom:25px}
+}
+@media(max-width:410px){
+ .fields{grid-template-columns:1fr}
+ .preview-stage{padding:15px 8px}
+ .buttons .btn{flex:1 1 auto}
+ .header-section{font-size:10px;padding-left:10px}
+}
+@media(prefers-reduced-motion:reduce){.btn{transition:none}}
