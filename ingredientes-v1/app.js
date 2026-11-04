@@ -21,6 +21,8 @@
   $("print").disabled=busy||!connected()||!ready||!valid||!$("confirm-paper").checked;
   $("print").textContent=busy?"Operación en curso…":"Imprimir 1 etiqueta · 30 × 20 mm";
   $("connection").textContent=connected()?"CT230B conectada":"Sin conexión CT230B";
+  $("connection").dataset.connected=String(connected());
+  for(const id of ["name","grams","packed","expiry"])$(id).disabled=busy;
  }
  async function ensureAssets(){
   if(!assetsPromise)assetsPromise=(async()=>{
@@ -126,6 +128,7 @@
      await channel.writeValueWithoutResponse(part);
     else throw Error("WRITE no compatible.");
     done++;$("progress").value=done;
+    $("progress").setAttribute("aria-valuetext",done+" de "+total+" fragmentos transmitidos");
     await new Promise(resolve=>setTimeout(resolve,75));
    }
    log("Transmitidos "+done+"/"+total+" fragmentos. Verificar físicamente impresión y alineación.");
