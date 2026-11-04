@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#536c58">
+<meta name="description" content="Prepara e imprime etiquetas de ingredientes para congelar con MiruRecetas y una CLABEL CT230B.">
+<title>Conserva · Etiquetas de ingredientes | MiruRecetas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Geist:ital,wght@0,400;0,500;0,700;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="wordmark"><img src="../assets/isotipo-bn.svg" alt="" width="34" height="34">MiruRecetas</div>
+    <div class="header-section">Conserva</div>
+  </div>
+</header>
+<main class="page">
+  <p class="eyebrow">Conserva / Ingredientes</p>
+  <h1>Etiquetas de ingredientes</h1>
+  <p class="intro">Prepara una etiqueta para cada ingrediente que congeles. Indica qué guardas, cuánto pesa y sus fechas; comprueba la vista previa e imprime directamente con tu CLABEL CT230B.</p>
+  <div class="content-grid">
+    <div class="left">
+      <section class="card" aria-labelledby="data-heading">
+        <div class="card-head">
+          <span class="step" aria-hidden="true">1</span>
+          <div>
+            <h2 id="data-heading">Datos del ingrediente</h2>
+            <p class="small">Personaliza la etiqueta sin modificar el diseño aprobado.</p>
+          </div>
+        </div>
+        <div class="fields">
+          <label class="field full" for="name">Nombre del ingrediente
+            <input id="name" type="text" maxlength="55" value="Carne Picada" autocomplete="off" required>
+            <span class="field-note">Si no cabe en una línea, utiliza un nombre más corto.</span>
+          </label>
+          <label class="field" for="grams">Cantidad · gramos
+            <input id="grams" type="number" inputmode="numeric" min="1" max="9999" step="1" value="500" required>
+          </label>
+          <label class="field" for="packed">Envasado y congelación
+            <input id="packed" type="date" required>
+          </label>
+          <label class="field" for="expiry">Consumo preferente
+            <input id="expiry" type="date" required>
+          </label>
+        </div>
+        <p class="disclaimer">El consumo preferente se elige manualmente: MiruRecetas no atribuye automáticamente plazos de conservación a ingredientes.</p>
+      </section>
+      <section class="card" aria-labelledby="device-heading">
+        <div class="card-head">
+          <span class="step" aria-hidden="true">3</span>
+          <div>
+            <h2 id="device-heading">Imprime tu etiqueta</h2>
+            <p class="small">Una etiqueta de 30 × 20 mm por envío.</p>
+          </div>
+        </div>
+        <p id="connection" class="device-status" data-connected="false" role="status" aria-live="polite">Sin conexión CT230B</p>
+        <div class="buttons">
+          <button class="btn" id="connect" type="button">Conectar impresora</button>
+          <button class="btn secondary" id="disconnect" type="button" disabled>Desconectar</button>
+        </div>
+        <label class="checkbox-row" for="confirm-paper">
+          <input id="confirm-paper" type="checkbox">
+          <span>Confirmo que hay papel de <strong>30 × 20 mm</strong> instalado y que he revisado ingrediente, cantidad y fechas.</span>
+        </label>
+        <button class="btn print" id="print" type="button" disabled>Imprimir 1 etiqueta · 30 × 20 mm</button>
+        <progress id="progress" hidden value="0" max="1" aria-label="Fragmentos Bluetooth transmitidos"></progress>
+        <p class="status-line">La impresión requiere Chrome Android, HTTPS, conexión BLE y confirmación. No se repiten envíos automáticamente.</p>
+        <details class="advanced">
+          <summary>Diagnóstico de impresión</summary>
+          <p class="small">Transporte TSPL de una copia con bandas raster. El envío Bluetooth completo no confirma por sí solo la salida física. Si falla, revisa la impresora antes de repetir.</p>
+          <div class="buttons">
+            <button class="btn secondary" id="copy" type="button">Copiar registro</button>
+            <button class="btn secondary" id="clear" type="button">Limpiar registro</button>
+          </div>
+          <pre id="log" aria-live="polite"></pre>
+        </details>
+      </section>
+    </div>
+    <div class="right">
+      <section class="card preview-panel" aria-labelledby="preview-heading">
+        <div class="card-head">
+          <span class="step" aria-hidden="true">2</span>
+          <div style="width:100%">
+            <div class="preview-title">
+              <h2 id="preview-heading">Vista previa</h2>
+              <span class="dimensions">30 × 20 mm</span>
+            </div>
+            <p class="small">Reproducción monocroma del arte que se imprimirá, sin QR.</p>
+          </div>
+        </div>
+        <div class="preview-stage">
+          <canvas id="preview" width="354" height="236" role="img" aria-label="Etiqueta con ingrediente, cantidad, fechas e isotipo MiruRecetas"></canvas>
+        </div>
+        <p id="design-status" class="status-line" role="status" aria-live="polite">Preparando las tipografías y el isotipo oficiales…</p>
+        <p id="metrics" class="status-line" aria-live="polite">Pendiente de generar.</p>
+      </section>
+    </div>
+  </div>
+  <footer class="footer">
+    Versión experimental en el laboratorio MiruRecetas. No guarda inventario, no establece caducidades y no se ha integrado en Conserva. La etiqueta V0.8 original y los formatos de recetas permanecen intactos.
+  </footer>
+</main>
+<script src="./engine.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>
