@@ -70,8 +70,11 @@ code{font-family:ui-monospace,monospace}
  .page{padding:25px 17px 44px}
  .site-header-inner{min-height:62px;padding:12px 17px}
  .wordmark{font-size:21px}
- .content-grid{grid-template-columns:1fr;gap:16px}
- .left,.right{gap:16px}
+ .content-grid{display:flex;flex-direction:column;gap:16px}
+ .left,.right{display:contents}
+ .left .card:first-child{order:1}
+ .right .card{order:2}
+ .left .card:last-child{order:3}
  .card{padding:21px}
  .intro{margin-bottom:25px}
 }
