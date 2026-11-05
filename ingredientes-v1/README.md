@@ -6,6 +6,26 @@ futura sección **Conserva** de la web MiruRecetas. No se ha integrado ni migrad
 ningún archivo a `MiruRecetas/mirurecetas-web-source`; no está publicado como
 página productiva ni registra existencias.
 
+## Cabecera aprobada · variante interior
+
+La cabecera provisional del primer prototipo ha sido reemplazada por el
+**componente oficial de interiores** de MiruRecetas, reutilizando el marcado
+de `mirurecetas-web-source/main:plantillas/cabecera.html`, el isotipo
+vectorial de `assets/marca/isotipo.svg` (seis piezas, recorte oficial) y copias
+idénticas de `assets/cabecera.css` y `assets/cabecera.js` en este directorio.
+
+Se conserva exactamente la navegación vigente: Cocina → recetario;
+Disfruta → planificador; Conserva → listas de la compra del planificador.
+Los apartados futuros no tienen enlaces inventados. El botón «Instalar»
+permanece oculto en el laboratorio porque aquí no está habilitado el
+controlador PWA productivo. **No se ha modificado ni re-publicado**
+`mirurecetas-web-source`, ni se ha añadido aún un enlace nuevo de
+«Etiquetas de ingredientes» al menú oficial.
+
+Para futuras actualizaciones debe contrastarse la cabecera del laboratorio
+con los tres archivos canónicos de `main` y conservar el modo
+`miru-header--interior`; nunca usar la variante Hero.
+
 ## Qué contiene
 
 - `index.html`: página completa, responsive y revisable editorialmente. No es
