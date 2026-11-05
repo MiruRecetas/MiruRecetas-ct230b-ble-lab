@@ -57,9 +57,14 @@ con la V0.8; no dar por validada esta modificación sin pruebas específicas.
 - Consumo preferente **opcional y visible siempre**: en blanco se imprime
   `--/--/--`; si se fija no puede ser anterior al envasado.
 - Tipografía Bricolage Grotesque / Geist, separadores raster, isotipo oficial
-  monocromo y pie configurable (sin texto, «Conservar en nevera» o
-  «Descongelar en nevera»). Las variantes sin peso/pie o para refrigeración
-  necesitan su propia verificación física; no alteran la V0.8 histórica.
+  monocromo y pie editable de hasta 32 caracteres (sujeto además a la anchura
+  física del pie: 285 puntos, tipografía Geist itálica 16–12 px).
+  «Refrigeración» precarga «Conservar en nevera»; «Congelación» precarga
+  «Descongelar en nevera»; «Otro tipo» deja el texto vacío para escribirlo.
+  «Mostrar nota» permite ocultar el pie sin perder lo escrito mientras se edita.
+  Cambiar el tipo de conservación sustituye la nota por el texto predeterminado.
+  Las variantes sin peso/pie o con texto personalizado necesitan verificación
+  física; no alteran la V0.8 histórica.
 - **Sin QR**, sin valores nutricionales, sin inventario ni lote.
 - TSPL `SIZE 30 mm,20 mm`, `GAP 2 mm,0 mm`, `DIRECTION 0`, `CLS`,
   `BITMAP` disperso de bandas ≤12 filas y **un solo `PRINT 1,n`**,
@@ -102,9 +107,10 @@ innecesario ni crear transportistas de publicación alternativos.
 5. Nunca fusionar ni integrar en `mirurecetas-web-source`, ni privatizar
    el laboratorio, sin autorización específica.
 
-La opción de conservación (refrigeración, congelación u otra) y el pie
-son elecciones manuales del usuario, sin inferir caducidades ni seguridad de
-conservación. La fecha del fabricante se introduce sin alterar su validez.
+El tipo de conservación (refrigeración, congelación u otro) determina
+el rótulo de envasado y el texto inicial de la nota, pero la nota es siempre
+editable. La casilla «Mostrar nota» es independiente. Estas opciones
+no infieren caducidades ni seguridad de conservación. La fecha del fabricante se introduce sin alterar su validez.
 
 El laboratorio actual es **público**. Las ramas y PR también pueden ser
 visibles. No introducir credenciales, lotes reales o información privada.

@@ -12,7 +12,8 @@
  }
  function connected(){return !!(device?.gatt?.connected&&channel);}
  function values(){return {name:$("name").value,grams:$("grams").value,
-  packed:$("packed").value,expiry:$("expiry").value,mode:$("mode").value,footer:$("footer").value};}
+  packed:$("packed").value,expiry:$("expiry").value,mode:$("mode").value,
+  notesEnabled:$("notes-enabled").checked,note:$("note").value};}
  function update(){
   let valid=false;
   try{E.normalize(values(),true);valid=true;}catch(_){}
@@ -26,7 +27,9 @@
   $("confirm-paper").disabled=busy;
   $("connection").textContent=connected()?"CT230B conectada":"Sin conexión CT230B";
   $("connection").dataset.connected=String(connected());
-  for(const id of ["name","grams","packed","expiry","mode","footer"])$(id).disabled=busy;
+  for(const id of ["name","grams","packed","expiry","mode"])$(id).disabled=busy;
+  $("notes-enabled").disabled=busy;
+  $("note").disabled=busy||!$("notes-enabled").checked;
  }
  async function ensureAssets(){
   if(!assetsPromise)assetsPromise=(async()=>{
@@ -168,8 +171,14 @@
   catch(err){log("No se pudo copiar el diagnóstico: "+err.message);}
  });
  $("clear").addEventListener("click",()=>{$("log").textContent="";});
- for(const id of ["name","grams","packed","expiry","mode","footer"])
+ for(const id of ["name","grams","packed","expiry","note"])
   for(const evt of ["input","change"])$(id).addEventListener(evt,refresh);
+ const noteDefaults={fridge:"Conservar en nevera",freeze:"Descongelar en nevera",other:""};
+ $("mode").addEventListener("change",()=>{
+  $("note").value=noteDefaults[$("mode").value];
+  void refresh();
+ });
+ $("notes-enabled").addEventListener("change",()=>{update();void refresh();});
  $("confirm-paper").addEventListener("change",update);
  const now=new Date();$("packed").value=now.getFullYear()+"-"+
   String(now.getMonth()+1).padStart(2,"0")+"-"+String(now.getDate()).padStart(2,"0");

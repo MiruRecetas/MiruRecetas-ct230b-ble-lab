@@ -16,7 +16,7 @@ test("V0.8: dimensiones y contrato de gramos/fecha",()=>{
  assert.equal(engine.height,236);
  assert.equal(engine.maxBytes,35000);
  assert.deepEqual(engine.normalize(sample),{
-  name:"Carne Picada",grams:500,mode:"freeze",footer:"none",packed:"04/11/26",expiry:"04/01/27"
+  name:"Carne Picada",grams:500,mode:"freeze",note:"",notesEnabled:false,packed:"04/11/26",expiry:"04/01/27"
  });
 });
 test("fechas válidas y no autocalculadas",()=>{
@@ -39,8 +39,12 @@ test("límites de nombre y cantidad",()=>{
  assert.equal(engine.normalize({...sample,grams:null}).grams,null);
  assert.equal(engine.normalize({...sample,mode:"fridge"}).mode,"fridge");
  assert.equal(engine.normalize({...sample,mode:"other"}).mode,"other");
- assert.equal(engine.normalize({...sample,footer:"fridge"}).footer,"fridge");
- assert.throws(()=>engine.normalize({...sample,footer:"invented"}),/Instrucción/);
+ assert.equal(engine.normalize({...sample,footer:"fridge"}).note,"Conservar en nevera");
+ assert.deepEqual(engine.normalize({...sample,notesEnabled:true,note:"Conservar en nevera"}).note,"Conservar en nevera");
+ assert.equal(engine.normalize({...sample,notesEnabled:false,note:"Mi texto"}).note,"");
+ assert.throws(()=>engine.normalize({...sample,notesEnabled:true,note:""}),/nota/);
+ assert.throws(()=>engine.normalize({...sample,notesEnabled:true,note:"X".repeat(33)}),/32 caracteres/);
+ assert.throws(()=>engine.normalize({...sample,notesEnabled:true,note:"Mal<texto>"}),/nota no es válida/);
  assert.throws(()=>engine.normalize({...sample,mode:"invented"}),/Tipo/);
 });
 function rasterFixture(){
@@ -89,7 +93,7 @@ test("página autónoma, campos y archivos enlazados",()=>{
  const html=source("index.html"),app=source("app.js"),css=source("style.css");
  for(const id of ["name","grams","packed","expiry","preview","metrics","design-status",
    "connection","connect","disconnect","confirm-paper","print","progress","copy","clear","log",
-   "mode","footer","copies-minus","copies-plus","copies","transport","transport-count","transport-percent","progress-fill"])
+   "mode","note","notes-enabled","copies-minus","copies-plus","copies","transport","transport-count","transport-percent","progress-fill"])
   assert.match(html,new RegExp('id="'+id+'"'));
  assert.match(html,/src="\.\/engine\.js"/);
  assert.match(html,/src="\.\/app\.js"/);
@@ -100,6 +104,9 @@ test("página autónoma, campos y archivos enlazados",()=>{
  assert.match(css,/#b96c4a/);
  assert.match(app,/progress\(done,total,"complete"\)/);
  assert.match(app,/work=E.build\(E.render\(d,logo\),copies\)/);
+ assert.match(app,/noteDefaults=\{fridge:"Conservar en nevera",freeze:"Descongelar en nevera",other:""\}/);
+ assert.match(html,/maxlength="32"/);
+ assert.match(html,/id="notes-enabled" type="checkbox" checked/);
  assert.doesNotMatch(app,/QRCODE|fetch\s*\(|localStorage|sessionStorage/);
 });
 

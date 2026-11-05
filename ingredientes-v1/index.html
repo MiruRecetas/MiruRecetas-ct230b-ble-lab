@@ -96,14 +96,16 @@
             <span class="field-note">Sin fecha: --/--/-- en la etiqueta.</span>
           </label>
         </div>
-        <label class="field full" for="footer">Indicación inferior
-          <select id="footer">
-            <option value="none" selected>Sin indicación</option>
-            <option value="fridge">Conservar en nevera</option>
-            <option value="defrost">Descongelar en nevera</option>
-          </select>
-          <span class="field-note">Se imprime exclusivamente la indicación que elijas. No se deduce del alimento.</span>
-        </label>
+        <div class="note-settings">
+          <label class="checkbox-row" for="notes-enabled">
+            <input id="notes-enabled" type="checkbox" checked>
+            <span><strong>Mostrar nota de conservación</strong></span>
+          </label>
+          <label class="field full" for="note">Nota de conservación
+            <input id="note" type="text" maxlength="32" value="Conservar en nevera" autocomplete="off" aria-describedby="note-hint">
+            <span id="note-hint" class="field-note">Se rellena según el tipo de conservación. Puedes editarla (máximo 32 caracteres, siempre sujeta al espacio real de impresión).</span>
+          </label>
+        </div>
         <p class="disclaimer">La fecha de consumo preferente debe introducirse desde el producto original o una referencia válida. El modo de conservación no calcula ni amplía su duración.</p>
       </section>
       <section class="card" aria-labelledby="device-heading">

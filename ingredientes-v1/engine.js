@@ -24,11 +24,17 @@
    throw Error("Si indicas cantidad, utiliza entre 1 y 9999 gramos enteros.");
   const mode=String(raw.mode||"freeze");
   if(!["freeze","fridge","other"].includes(mode))throw Error("Tipo de conservación no reconocido.");
-  const footer=String(raw.footer??"none");
-  if(!["none","defrost","fridge"].includes(footer))throw Error("Instrucción de conservación no reconocida.");
+  const notesEnabled=raw.notesEnabled===undefined?String(raw.footer??"none")!=="none":raw.notesEnabled===true;
+  let note=raw.note===undefined?({none:"",defrost:"Descongelar en nevera",fridge:"Conservar en nevera"}[String(raw.footer??"none")]):String(raw.note);
+  if(typeof note!=="string")throw Error("Instrucción de conservación no reconocida.");
+  note=note.trim().replace(/\s+/g," ");
+  if(note.length>32||/[<>]/.test(note)||[...note].some(ch=>ch.charCodeAt(0)<32))
+   throw Error("La nota no es válida (máximo 32 caracteres).");
+  if(notesEnabled&&!note)throw Error("Escribe una nota o desactiva «Mostrar nota».");
+  if(!notesEnabled)note="";
   const packed=String(raw.packed||""),expiry=String(raw.expiry||"");
   if(packed&&expiry&&expiry<packed)throw Error("El consumo preferente es anterior al envasado.");
-  return {name,grams:rawGrams===""?null:Number(rawGrams),mode,footer,
+  return {name,grams:rawGrams===""?null:Number(rawGrams),mode,note,notesEnabled,
    packed:isoDate(packed,requireDates),expiry:isoDate(expiry,false)};
  }
  function fit(ctx,text,x,y,weight,size,family,max,min){
@@ -73,8 +79,11 @@
   c.textAlign="center";
   if(data.grams!==null)fit(c,String(data.grams)+" g",128,195,"700",55,'"Bricolage Grotesque"',248,32);
   c.textAlign="left";c.drawImage(officialLogo,268,157,62,62);
-  const footerText={none:"",defrost:"Descongelar en nevera",fridge:"Conservar en nevera"}[data.footer];
-  if(footerText){c.font='italic 500 16px "Geist"';c.fillText(footerText,60,227);}
+  if(data.notesEnabled&&data.note){
+   c.textAlign="left";
+   try{fit(c,data.note,60,227,"italic 500",16,'"Geist"',285,12);}
+   catch(_){throw Error("La nota no cabe en la etiqueta 30 × 20; utiliza un texto más corto.");}
+  }
   return cv;
  }
  function sparse(canvas){
