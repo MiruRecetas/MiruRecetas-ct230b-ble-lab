@@ -41,9 +41,12 @@ con los tres archivos canónicos de `main` y conservar el modo
 La fuente de referencia experimental aprobada está en
 `../label-v08-ingredient.js` y
 `../V08-INGREDIENTE-30x20-CANVA-ENSAYO.md`. **No modificarla.** La V0.8
-fue impresa y aprobada en cinco ensayos (30/10/2026), pero la implementación
-separada de este directorio **aún no ha sido reimpresa ni comparada físicamente**
-con esos ejemplares. No convertir el éxito del transporte en una prueba física.
+fue impresa y aprobada en cinco ensayos (30/10/2026). La usuaria ha
+utilizado posteriormente este panel V1 para seis transmisiones BLE consecutivas
+de 5919 B / 296 fragmentos cada una (05/11/2026), pero la evidencia de consola
+**no acredita por sí sola la salida ni alineación física**. Las variantes
+nuevas con gramos o pie vacíos y multicopia no han sido contrastadas físicamente
+con la V0.8; no dar por validada esta modificación sin pruebas específicas.
 
 ## Contrato congelado de la etiqueta
 
