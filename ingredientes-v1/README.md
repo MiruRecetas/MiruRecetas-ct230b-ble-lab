@@ -32,7 +32,7 @@ con los tres archivos canónicos de `main` y conservar el modo
   el `index.html` histórico de experimentos CT230B.
 - `style.css`: presentación separada del motor, con crema/salvia/terracota,
   Bricolage Grotesque para titulares y Geist para texto.
-- `engine.js`: motor **independiente**, que valida cuatro campos, reproduce la
+- `engine.js`: motor **independiente**, que valida los datos, reproduce la
   geometría de la **V0.8 aprobada** en 354 × 236 puntos y compone TSPL.
 - `app.js`: interacción, carga estricta de tipografías/isotipo oficial,
   previsualización, conexión voluntaria, confirmación, transporte BLE, barra de
@@ -48,23 +48,32 @@ con esos ejemplares. No convertir el éxito del transporte en una prueba física
 ## Contrato congelado de la etiqueta
 
 - Papel **30 × 20 mm**, lienzo **354 × 236 puntos**; lectura horizontal.
-- Nombre editable, gramos enteros entre **1 y 9999**, fecha de envasado y
-  congelación, fecha manual de consumo preferente no anterior al envasado.
+- Nombre editable; gramos **opcionales** enteros entre **1 y 9999** si se indican.
+- Fecha de envasado **obligatoria y visible siempre**, con rótulo adaptado al
+  tipo de conservación elegido (congelación o envasado genérico).
+- Consumo preferente **opcional y visible siempre**: en blanco se imprime
+  `--/--/--`; si se fija no puede ser anterior al envasado.
 - Tipografía Bricolage Grotesque / Geist, separadores raster, isotipo oficial
-  monocromo y pie «Descongelar en nevera», como la V0.8.
+  monocromo y pie configurable (sin texto, «Conservar en nevera» o
+  «Descongelar en nevera»). Las variantes sin peso/pie o para refrigeración
+  necesitan su propia verificación física; no alteran la V0.8 histórica.
 - **Sin QR**, sin valores nutricionales, sin inventario ni lote.
 - TSPL `SIZE 30 mm,20 mm`, `GAP 2 mm,0 mm`, `DIRECTION 0`, `CLS`,
-  `BITMAP` disperso de bandas ≤12 filas y **un solo `PRINT 1,1`**.
+  `BITMAP` disperso de bandas ≤12 filas y **un solo `PRINT 1,n`**,
+  con selector de **1–20 copias**. No se generan múltiples trabajos BLE.
 - Máximo 35.000 bytes, BLE UART CT230B, fragmentos de 20 bytes con pausa
   de 75 ms y sin reintentos automáticos. Los controles bloquean envíos
-  incompletos o con datos inválidos.
+  incompletos o con datos inválidos. Barra terracota con fragmentos
+  enviados/restantes y porcentaje de transporte (no certifica impresión física).
+- Antes de enviar varias copias, verificar alineación en papel real;
+  una transmisión correcta no garantiza el número de copias impresas.
 
 ## Límites de la pantalla
 
 La página es un **candidato de producto** y evita lenguaje o controles de
 experimentos históricos. Durante su estancia en el laboratorio conserva un
 aviso de alcance en el pie. No contiene selector de los tres formatos
-de recetas. El nombre y los gramos son introducidos manualmente: todavía
+de recetas. El nombre y, cuando se indique, el peso son introducidos manualmente: todavía
 no hay un contrato de catálogo canónico de ingredientes para esta sección.
 Las fechas no se deducen de pautas generales de conservación.
 
@@ -89,6 +98,10 @@ innecesario ni crear transportistas de publicación alternativos.
    anomalías. La aprobación física histórica no sustituye esta regresión.
 5. Nunca fusionar ni integrar en `mirurecetas-web-source`, ni privatizar
    el laboratorio, sin autorización específica.
+
+La opción de conservación (refrigeración, congelación u otra) y el pie
+son elecciones manuales del usuario, sin inferir caducidades ni seguridad de
+conservación. La fecha del fabricante se introduce sin alterar su validez.
 
 El laboratorio actual es **público**. Las ramas y PR también pueden ser
 visibles. No introducir credenciales, lotes reales o información privada.
