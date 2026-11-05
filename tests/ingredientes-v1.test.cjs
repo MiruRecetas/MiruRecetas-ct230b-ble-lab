@@ -126,7 +126,7 @@ test("página autónoma, campos y archivos enlazados",()=>{
    "mode","note","notes-enabled","copies-minus","copies-plus","copies","transport","transport-count","transport-percent","progress-fill"])
   assert.match(html,new RegExp('id="'+id+'"'));
  assert.match(html,/src="\.\/engine\.js\?v=20261106-otro-tipo"/);
- assert.match(html,/src="\.\/app\.js\?v=20261106-otro-tipo"/);
+ assert.match(html,/src="\.\/app\.js\?v=20261106-selector-formatos"/);
  assert.match(html,/href="\.\/style\.css"/);
  assert.ok(html.includes('class="miru-isotipo"'));
  assert.match(app,/E\.logo\("\.\.\/assets\/isotipo-bn\.svg"\)/);
@@ -138,6 +138,27 @@ test("página autónoma, campos y archivos enlazados",()=>{
  assert.match(html,/maxlength="32"/);
  assert.match(html,/id="notes-enabled" type="checkbox" checked/);
  assert.doesNotMatch(app,/QRCODE|fetch\s*\(|localStorage|sessionStorage/);
+});
+
+
+test("Mis etiquetas: selector único de formato vinculado a los tres pasos",()=>{
+ const html=source("index.html"),app=source("app.js"),css=source("style.css");
+ assert.ok(html.indexOf('class="card format-card"')>html.indexOf('class="intro"'));
+ assert.ok(html.indexOf('class="card format-card"')<html.indexOf('class="content-grid"'));
+ assert.equal(html.split('data-label-format').length-1,3);
+ for(const format of ["horizontal","component","ingredient"])
+  assert.match(html,new RegExp('value="'+format+'" data-label-format'));
+ assert.match(html,/value="ingredient" data-label-format checked/);
+ for(const id of ["ingredient-fields","ingredient-preview","ingredient-print",
+  "alternate-fields","alternate-preview","alternate-print",
+  "data-subtitle","preview-subtitle","preview-dimensions","print-subtitle"]){
+  assert.match(html,new RegExp('id="'+id+'"'));
+ }
+ assert.match(app,/selectedFormat!=="ingredient"\|\|busy/);
+ assert.match(app,/function changeFormat\(format\)/);
+ assert.match(app,/\+\+refreshSeq/);
+ assert.match(css,/\.format-option input:checked/);
+ assert.ok(!html.includes('value="vertical" data-label-format'));
 });
 
 test("cabecera interior canónica MiruRecetas en página de ingredientes",()=>{

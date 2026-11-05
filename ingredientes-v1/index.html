@@ -60,9 +60,34 @@
 </header>
 
 <main class="page">
-  <p class="eyebrow">Conserva / Ingredientes</p>
-  <h1>Etiquetas de ingredientes</h1>
-  <p class="intro">Etiqueta ingredientes refrigerados, congelados o conservados, con o sin cantidad indicada. Comprueba el diseño y envía una o varias copias a tu CLABEL CT230B.</p>
+  <p class="eyebrow">Conserva / Mis etiquetas</p>
+  <h1>Mis etiquetas</h1>
+  <p class="intro">Prepara tus propias etiquetas de conservación, elige un formato y envía una o varias copias a tu CLABEL CT230B.</p>
+  <section class="card format-card" aria-labelledby="format-heading">
+    <div class="card-head">
+      <div>
+        <h2 id="format-heading">Elige un formato</h2>
+        <p class="small">Selecciona el diseño que quieres preparar. Los pasos 1, 2 y 3 se adaptan a tu elección.</p>
+      </div>
+    </div>
+    <div class="format-options" role="radiogroup" aria-label="Formato de etiqueta">
+      <label class="format-option">
+        <input type="radio" name="label-format" value="horizontal" data-label-format>
+        <span class="format-option-body"><strong>50 × 80 mm</strong><span>Receta · Horizontal</span><small>En desarrollo</small></span>
+      </label>
+      <label class="format-option">
+        <input type="radio" name="label-format" value="component" data-label-format>
+        <span class="format-option-body"><strong>50 × 30 mm</strong><span>Componente</span><small>En desarrollo</small></span>
+      </label>
+      <label class="format-option">
+        <input type="radio" name="label-format" value="ingredient" data-label-format checked>
+        <span class="format-option-body"><strong>30 × 20 mm</strong><span>Ingrediente</span><small>Disponible para imprimir</small></span>
+      </label>
+      <div class="format-option format-future" aria-label="Otros formatos futuros">
+        <span class="format-option-body"><strong>Otros formatos</strong><span>Conservas y nuevos diseños</span><small>Próximamente</small></span>
+      </div>
+    </div>
+  </section>
   <div class="content-grid">
     <div class="left">
       <section class="card" aria-labelledby="data-heading">
@@ -70,9 +95,10 @@
           <span class="step" aria-hidden="true">1</span>
           <div>
             <h2 id="data-heading">Datos del ingrediente</h2>
-            <p class="small">Personaliza la etiqueta sin modificar el diseño aprobado.</p>
+            <p id="data-subtitle" class="small">Personaliza la etiqueta sin modificar el diseño aprobado.</p>
           </div>
         </div>
+        <div id="ingredient-fields">
         <div class="fields">
           <label class="field full" for="name">Nombre del ingrediente
             <input id="name" type="text" maxlength="55" value="Carne Picada" autocomplete="off" required>
@@ -107,15 +133,21 @@
           </label>
         </div>
         <p class="disclaimer">La fecha de consumo preferente debe introducirse desde el producto original o una referencia válida. El modo de conservación no calcula ni amplía su duración.</p>
+        </div>
+        <div id="alternate-fields" class="format-placeholder" hidden>
+          <strong id="alternate-fields-title"></strong>
+          <p>El formulario editable de este modelo se incorporará conservando su composición aprobada. No hay campos ni valores ficticios.</p>
+        </div>
       </section>
       <section class="card" aria-labelledby="device-heading">
         <div class="card-head">
           <span class="step" aria-hidden="true">3</span>
           <div>
             <h2 id="device-heading">Imprime tu etiqueta</h2>
-            <p class="small">De 1 a 20 copias iguales, en un solo trabajo BLE.</p>
+            <p id="print-subtitle" class="small">De 1 a 20 copias iguales, en un solo trabajo BLE.</p>
           </div>
         </div>
+        <div id="ingredient-print">
         <p id="connection" class="device-status" data-connected="false" role="status" aria-live="polite">Sin conexión CT230B</p>
         <div class="buttons">
           <button class="btn" id="connect" type="button">Conectar impresora</button>
@@ -154,6 +186,11 @@
           </div>
           <pre id="log" aria-live="polite"></pre>
         </details>
+        </div>
+        <div id="alternate-print" class="format-placeholder" hidden>
+          <strong>Impresión aún no disponible para este formato</strong>
+          <p>El motor de etiquetas libres correspondiente se incorporará y comprobará con la CT230B antes de habilitar el botón de impresión.</p>
+        </div>
       </section>
     </div>
     <div class="right">
@@ -163,16 +200,22 @@
           <div style="width:100%">
             <div class="preview-title">
               <h2 id="preview-heading">Vista previa</h2>
-              <span class="dimensions">30 × 20 mm</span>
+              <span id="preview-dimensions" class="dimensions">30 × 20 mm</span>
             </div>
-            <p class="small">Reproducción monocroma del arte que se imprimirá, sin QR.</p>
+            <p id="preview-subtitle" class="small">Reproducción monocroma del arte que se imprimirá, sin QR.</p>
           </div>
         </div>
+        <div id="ingredient-preview">
         <div class="preview-stage">
           <canvas id="preview" width="354" height="236" role="img" aria-label="Etiqueta con ingrediente, cantidad, fechas e isotipo MiruRecetas"></canvas>
         </div>
         <p id="design-status" class="status-line" role="status" aria-live="polite">Preparando las tipografías y el isotipo oficiales…</p>
         <p id="metrics" class="status-line" aria-live="polite">Pendiente de generar.</p>
+        </div>
+        <div id="alternate-preview" class="format-placeholder" hidden>
+          <strong>Vista previa pendiente</strong>
+          <p>La vista previa mostrará exclusivamente la composición validada para el formato seleccionado. No se presenta un diseño simulado como si estuviera listo para imprimir.</p>
+        </div>
       </section>
     </div>
   </div>
@@ -181,7 +224,7 @@
   </footer>
 </main>
 <script src="./engine.js?v=20261106-otro-tipo"></script>
-<script src="./app.js?v=20261106-otro-tipo"></script>
+<script src="./app.js?v=20261106-selector-formatos"></script>
 <script src="./cabecera.js" defer></script>
 </body>
 </html>
