@@ -125,8 +125,8 @@ test("página autónoma, campos y archivos enlazados",()=>{
    "connection","connect","disconnect","confirm-paper","print","progress","copy","clear","log",
    "mode","note","notes-enabled","copies-minus","copies-plus","copies","transport","transport-count","transport-percent","progress-fill"])
   assert.match(html,new RegExp('id="'+id+'"'));
- assert.match(html,/src="\.\/engine\.js"/);
- assert.match(html,/src="\.\/app\.js"/);
+ assert.match(html,/src="\.\/engine\.js\?v=20261106-otro-tipo"/);
+ assert.match(html,/src="\.\/app\.js\?v=20261106-otro-tipo"/);
  assert.match(html,/href="\.\/style\.css"/);
  assert.ok(html.includes('class="miru-isotipo"'));
  assert.match(app,/E\.logo\("\.\.\/assets\/isotipo-bn\.svg"\)/);
