@@ -60,7 +60,7 @@ con la V0.8; no dar por validada esta modificación sin pruebas específicas.
   monocromo y pie editable de hasta 32 caracteres (sujeto además a la anchura
   física del pie: 285 puntos, tipografía Geist itálica 16–12 px).
   «Refrigeración» precarga «Conservar en nevera»; «Congelación» precarga
-  «Descongelar en nevera»; «Otro tipo» deja el texto vacío para escribirlo.
+  «Descongelar en nevera»; «Otro tipo» cambia el rótulo de la fecha a «Conservación» y deja el texto de la nota vacío y editable, sin bloquear la vista previa ni la impresión.
   «Mostrar nota» permite ocultar el pie sin perder lo escrito mientras se edita.
   Cambiar el tipo de conservación sustituye la nota por el texto predeterminado.
   Las variantes sin peso/pie o con texto personalizado necesitan verificación
