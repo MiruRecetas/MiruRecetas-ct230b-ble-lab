@@ -6,7 +6,7 @@
  const SERVICE="49535343-fe7d-4ae5-8fa9-9fafd205e455";
  const WRITE="49535343-8841-43f4-a8d4-ecbe34729bb3";
  const NOTIFY="49535343-1e4d-4bd9-ba61-23c647249616";
- let device=null,channel=null,logo=null,assetsPromise=null,busy=false,ready=false,refreshSeq=0,copies=1;
+ let device=null,channel=null,logo=null,assetsPromise=null,busy=false,ready=false,refreshSeq=0,copies=1,selectedFormat="ingredient";
  function log(s){
   $("log").textContent+="["+new Date().toLocaleTimeString("es-ES")+"] "+s+"\n";
  }
@@ -19,7 +19,7 @@
   try{E.normalize(values(),true);valid=true;}catch(_){}
   $("connect").disabled=busy||connected();
   $("disconnect").disabled=busy||!connected();
-  $("print").disabled=busy||!connected()||!ready||!valid||!$("confirm-paper").checked;
+  $("print").disabled=selectedFormat!=="ingredient"||busy||!connected()||!ready||!valid||!$("confirm-paper").checked;
   $("print").textContent=busy?"Operación en curso…":"Imprimir "+copies+(copies===1?" etiqueta":" etiquetas")+" · 30 × 20 mm";
   $("copies").textContent=String(copies);
   $("copies-minus").disabled=busy||copies<=1;
@@ -47,6 +47,7 @@
   return assetsPromise;
  }
  async function refresh(){
+  if(selectedFormat!=="ingredient")return;
   const n=++refreshSeq;
   ready=false;update();
   try{
@@ -129,7 +130,7 @@
   disconnect();
  });
  $("print").addEventListener("click",async()=>{
-  if(busy||!ready||!connected()||!$("confirm-paper").checked)return;
+  if(selectedFormat!=="ingredient"||busy||!ready||!connected()||!$("confirm-paper").checked)return;
   let d,work;
   try{
    d=E.normalize(values(),true);
@@ -179,6 +180,33 @@
   void refresh();
  });
  $("notes-enabled").addEventListener("change",()=>{update();void refresh();});
+ const formats={
+  ingredient:{title:"Datos del ingrediente",subtitle:"Personaliza la etiqueta sin modificar el diseño aprobado.",dimensions:"30 × 20 mm"},
+  component:{title:"Datos del componente",subtitle:"Plantilla libre de componente en preparación.",dimensions:"50 × 30 mm"},
+  horizontal:{title:"Datos de la receta",subtitle:"Plantilla libre horizontal en preparación.",dimensions:"50 × 80 mm"}
+ };
+ function changeFormat(format){
+  if(busy||!Object.hasOwn(formats,format))return;
+  selectedFormat=format;
+  const ingredient=format==="ingredient",data=formats[format];
+  $("data-heading").textContent=data.title;
+  $("data-subtitle").textContent=data.subtitle;
+  $("preview-dimensions").textContent=data.dimensions;
+  $("preview-subtitle").textContent=ingredient?"Reproducción monocroma del arte que se imprimirá, sin QR.":"La composición del nuevo formato se incorporará tras validación, sin QR.";
+  $("print-subtitle").textContent=ingredient?"De 1 a 20 copias iguales, en un solo trabajo BLE.":"La impresión de este formato se habilitará tras validar su diseño y motor.";
+  $("alternate-fields-title").textContent=format==="component"?"Componente · 50 × 30 mm":"Receta horizontal · 50 × 80 mm";
+  for(const [id,visible] of [
+   ["ingredient-fields",ingredient],["ingredient-preview",ingredient],["ingredient-print",ingredient],
+   ["alternate-fields",!ingredient],["alternate-preview",!ingredient],["alternate-print",!ingredient]
+  ])$(id).hidden=!visible;
+  for(const input of document.querySelectorAll("[data-label-format]"))
+   input.checked=input.value===format;
+  if(!ingredient)++refreshSeq;
+  update();
+  if(ingredient)void refresh();
+ }
+ for(const input of document.querySelectorAll("[data-label-format]"))
+  input.addEventListener("change",()=>{if(input.checked)changeFormat(input.value);});
  $("confirm-paper").addEventListener("change",update);
  const now=new Date();$("packed").value=now.getFullYear()+"-"+
   String(now.getMonth()+1).padStart(2,"0")+"-"+String(now.getDate()).padStart(2,"0");
