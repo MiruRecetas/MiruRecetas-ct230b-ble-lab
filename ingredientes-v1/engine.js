@@ -1,13 +1,13 @@
 "use strict";
 /* MiruRecetas · Conserva · ingredientes V1 (laboratorio).
- * Mantiene geometría aprobada V0.8: 354x236, sin QR, 1 copia.
+ * Conserva geometría V0.8: 354x236, sin QR. Opciones nuevas experimentales.
  * Sin importaciones del laboratorio histórico ni de la PWA.
  */
 (function(root){
  const W=354,H=236,MAX=35000,STRIPE=12;
  const enc=new TextEncoder();
  function isoDate(s,mandatory){
-  if(!s){if(mandatory)throw Error("Selecciona las dos fechas.");return "__/__/__";}
+  if(!s){if(mandatory)throw Error("Indica la fecha de envasado.");return "--/--/--";}
   if(!/^\d{4}-\d{2}-\d{2}$/.test(s))throw Error("Fecha con formato inválido.");
   const y=Number(s.slice(0,4)),m=Number(s.slice(5,7)),d=Number(s.slice(8,10));
   const date=new Date(Date.UTC(y,m-1,d));
@@ -19,13 +19,17 @@
   const name=String(raw.name||"").trim().replace(/\s+/g," ");
   if(!name||name.length>55||/[<>\x00-\x1f\x7f]/.test(name))
    throw Error("Nombre no válido (máximo 55 caracteres).");
-  const rawGrams=String(raw.grams??"");
-  if(!/^\d{1,4}$/.test(rawGrams)||Number(rawGrams)<1||Number(rawGrams)>9999)
-   throw Error("Indica entre 1 y 9999 gramos enteros.");
+  const rawGrams=String(raw.grams??"").trim();
+  if(rawGrams!==""&&(!/^\d{1,4}$/.test(rawGrams)||Number(rawGrams)<1||Number(rawGrams)>9999))
+   throw Error("Si indicas cantidad, utiliza entre 1 y 9999 gramos enteros.");
+  const mode=String(raw.mode||"freeze");
+  if(!["freeze","fridge","other"].includes(mode))throw Error("Tipo de conservación no reconocido.");
+  const footer=String(raw.footer??"none");
+  if(!["none","defrost","fridge"].includes(footer))throw Error("Instrucción de conservación no reconocida.");
   const packed=String(raw.packed||""),expiry=String(raw.expiry||"");
   if(packed&&expiry&&expiry<packed)throw Error("El consumo preferente es anterior al envasado.");
-  return {name,grams:Number(rawGrams),packed:isoDate(packed,requireDates),
-   expiry:isoDate(expiry,requireDates)};
+  return {name,grams:rawGrams===""?null:Number(rawGrams),mode,footer,
+   packed:isoDate(packed,requireDates),expiry:isoDate(expiry,false)};
  }
  function fit(ctx,text,x,y,weight,size,family,max,min){
   let n=size;
@@ -61,15 +65,16 @@
   c.fillStyle="#000";c.textBaseline="alphabetic";c.textAlign="left";
   fit(c,data.name,8,32,"700",29,'"Bricolage Grotesque"',337,17);
   c.fillRect(0,48,354,9);
-  c.font='400 17px "Geist"';c.fillText("Envasado y congelación",8,91);
+  c.font='400 17px "Geist"';c.fillText(data.mode==="freeze"?"Envasado y congelación":"Envasado",8,91);
   c.fillText("Consumo preferente",8,124);
   c.font='700 17px "Geist"';c.textAlign="right";
   c.fillText(data.packed,337,91);c.fillText(data.expiry,337,124);
   c.textAlign="left";c.fillRect(0,136,354,9);
   c.textAlign="center";
-  fit(c,String(data.grams)+" g",128,195,"700",55,'"Bricolage Grotesque"',248,32);
+  if(data.grams!==null)fit(c,String(data.grams)+" g",128,195,"700",55,'"Bricolage Grotesque"',248,32);
   c.textAlign="left";c.drawImage(officialLogo,268,157,62,62);
-  c.font='italic 500 16px "Geist"';c.fillText("Descongelar en nevera",60,227);
+  const footerText={none:"",defrost:"Descongelar en nevera",fridge:"Conservar en nevera"}[data.footer];
+  if(footerText){c.font='italic 500 16px "Geist"';c.fillText(footerText,60,227);}
   return cv;
  }
  function sparse(canvas){
@@ -98,7 +103,8 @@
   }
   return blocks;
  }
- function build(canvas){
+ function build(canvas,copies=1){
+  if(!Number.isInteger(copies)||copies<1||copies>20)throw Error("Número de copias fuera del intervalo 1–20.");
   const tiles=sparse(canvas),parts=[enc.encode("SIZE 30 mm,20 mm\r\nGAP 2 mm,0 mm\r\nDIRECTION 0\r\nCLS\r\n")];
   for(const b of tiles){
    if(b.height>12||b.x<0||b.y<0||b.x+b.widthBytes*8>W+7||b.y+b.height>H)
@@ -106,12 +112,12 @@
    parts.push(enc.encode("BITMAP "+b.x+","+b.y+","+b.widthBytes+","+b.height+",0,"));
    parts.push(b.bytes,enc.encode("\r\n"));
   }
-  parts.push(enc.encode("PRINT 1,1\r\n"));
+  parts.push(enc.encode("PRINT 1,"+copies+"\r\n"));
   const size=parts.reduce((s,b)=>s+b.length,0);
   if(size>MAX)throw Error("Trabajo demasiado grande ("+size+" bytes).");
   const job=new Uint8Array(size);let offset=0;
   for(const part of parts){job.set(part,offset);offset+=part.length;}
-  return {job,tiles:tiles.length,bytes:size,fragments:Math.ceil(size/20)};
+  return {job,tiles:tiles.length,bytes:size,fragments:Math.ceil(size/20),copies};
  }
  const api=Object.freeze({width:W,height:H,maxBytes:MAX,normalize,render,logo,sparse,build});
  if(typeof module!=="undefined"&&module.exports)module.exports=api;

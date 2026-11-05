@@ -6,23 +6,27 @@
  const SERVICE="49535343-fe7d-4ae5-8fa9-9fafd205e455";
  const WRITE="49535343-8841-43f4-a8d4-ecbe34729bb3";
  const NOTIFY="49535343-1e4d-4bd9-ba61-23c647249616";
- let device=null,channel=null,logo=null,assetsPromise=null,busy=false,ready=false,refreshSeq=0;
+ let device=null,channel=null,logo=null,assetsPromise=null,busy=false,ready=false,refreshSeq=0,copies=1;
  function log(s){
   $("log").textContent+="["+new Date().toLocaleTimeString("es-ES")+"] "+s+"\n";
  }
  function connected(){return !!(device?.gatt?.connected&&channel);}
  function values(){return {name:$("name").value,grams:$("grams").value,
-  packed:$("packed").value,expiry:$("expiry").value};}
+  packed:$("packed").value,expiry:$("expiry").value,mode:$("mode").value,footer:$("footer").value};}
  function update(){
   let valid=false;
   try{E.normalize(values(),true);valid=true;}catch(_){}
   $("connect").disabled=busy||connected();
   $("disconnect").disabled=busy||!connected();
   $("print").disabled=busy||!connected()||!ready||!valid||!$("confirm-paper").checked;
-  $("print").textContent=busy?"Operación en curso…":"Imprimir 1 etiqueta · 30 × 20 mm";
+  $("print").textContent=busy?"Operación en curso…":"Imprimir "+copies+(copies===1?" etiqueta":" etiquetas")+" · 30 × 20 mm";
+  $("copies").textContent=String(copies);
+  $("copies-minus").disabled=busy||copies<=1;
+  $("copies-plus").disabled=busy||copies>=20;
+  $("confirm-paper").disabled=busy;
   $("connection").textContent=connected()?"CT230B conectada":"Sin conexión CT230B";
   $("connection").dataset.connected=String(connected());
-  for(const id of ["name","grams","packed","expiry"])$(id).disabled=busy;
+  for(const id of ["name","grams","packed","expiry","mode","footer"])$(id).disabled=busy;
  }
  async function ensureAssets(){
   if(!assetsPromise)assetsPromise=(async()=>{
@@ -31,7 +35,7 @@
     document.fonts.load('700 55px "Bricolage Grotesque"',"500 g"),
     document.fonts.load('400 17px "Geist"',"Envasado y congelación"),
     document.fonts.load('700 17px "Geist"',"30/10/26"),
-    document.fonts.load('italic 500 16px "Geist"',"Descongelar en nevera")
+    document.fonts.load('italic 500 16px "Geist"',"Descongelar en nevera Conservar en nevera")
    ]);
    if(faces.some(f=>!f.length||f.some(x=>x.status!=="loaded")))
     throw Error("No se cargaron las fuentes oficiales.");
@@ -49,11 +53,11 @@
    const canvas=$("preview");
    canvas.getContext("2d").clearRect(0,0,E.width,E.height);
    canvas.getContext("2d").drawImage(cv,0,0);
-   let message="Vista previa con fecha pendiente; completa ambos calendarios para imprimir.";
+   let message="Vista previa con fecha de envasado pendiente; el consumo preferente es opcional.";
    try{
-    const strict=E.normalize(values(),true),full=E.build(E.render(strict,logo));
+    const strict=E.normalize(values(),true),full=E.build(E.render(strict,logo),copies);
     message=full.bytes+" B · "+full.fragments+" fragmentos BLE · "+full.tiles+
-     " bandas raster · 1 copia · sin QR.";
+     " bandas raster · "+copies+(copies===1?" copia":" copias")+" · sin QR.";
     ready=true;
    }catch(err){message="Sin envío: "+err.message;}
    $("metrics").textContent=message;
@@ -68,6 +72,25 @@
  }
  function disconnect(){
   channel=null;update();
+ }
+ function progress(done,total,state){
+  const box=$("transport"),pct=total?Math.min(100,Math.round(done*100/total)):0;
+  box.hidden=false;box.dataset.state=state;
+  $("progress-fill").style.width=pct+"%";
+  $("progress").setAttribute("aria-valuenow",String(pct));
+  $("progress").setAttribute("aria-valuetext",done+" de "+total+" fragmentos transmitidos");
+  $("transport-percent").textContent=pct+" %";
+  $("transport-count").textContent=done+" enviados · "+Math.max(0,total-done)+" restantes";
+  $("transport-title").textContent=state==="sending"?"Enviando "+copies+(copies===1?" etiqueta":" etiquetas"):
+   state==="complete"?"Transmisión completa; comprobar impresión física":
+   state==="error"?"Transmisión interrumpida: revisar impresora":"Preparando impresión…";
+ }
+ for(const [id,delta] of [["copies-minus",-1],["copies-plus",1]]){
+  $(id).addEventListener("click",()=>{
+   if(busy)return;
+   copies=Math.max(1,Math.min(20,copies+delta));
+   update();void refresh();
+  });
  }
  $("connect").addEventListener("click",async()=>{
   if(!navigator.bluetooth||!window.isSecureContext){
@@ -107,17 +130,18 @@
   let d,work;
   try{
    d=E.normalize(values(),true);
-   work=E.build(E.render(d,logo));
+   work=E.build(E.render(d,logo),copies);
   }catch(err){log("Impresión bloqueada: "+err.message);update();return;}
-  if(!window.confirm("Confirmar UNA etiqueta 30 × 20 mm: "+d.name+
-    " · "+d.grams+" g · envasado "+d.packed+
-    " · consumo preferente "+d.expiry+
-    ".\nRollo 30 × 20 mm instalado; no se reintentará automáticamente."))return;
+  if(!window.confirm("Confirmar "+copies+(copies===1?" etiqueta":" etiquetas")+" de 30 × 20 mm: "+d.name+
+    (d.grams!==null?" · "+d.grams+" g":" · sin cantidad indicada")+
+    " · envasado "+d.packed+" · consumo preferente "+d.expiry+
+    ".\nSe enviará un solo trabajo TSPL PRINT 1,"+copies+
+    "; no se reintentará automáticamente. Comprueba el rollo y la alineación."))return;
   busy=true;update();
   let done=0;
   const total=work.fragments;
-  $("progress").hidden=false;$("progress").value=0;$("progress").max=total;
-  log("Envío único de "+work.bytes+" B; "+total+" fragmentos BLE y "+work.tiles+" bandas; sin QR.");
+  progress(0,total,"sending");
+  log("Envío único de "+work.bytes+" B; "+total+" fragmentos BLE y "+work.tiles+" bandas; "+copies+" copias TSPL; sin QR.");
   try{
    for(let i=0;i<work.job.length;i+=20){
     if(!connected())throw Error("Se perdió la conexión BLE durante el envío.");
@@ -127,12 +151,13 @@
     else if(channel.properties.writeWithoutResponse&&typeof channel.writeValueWithoutResponse==="function")
      await channel.writeValueWithoutResponse(part);
     else throw Error("WRITE no compatible.");
-    done++;$("progress").value=done;
-    $("progress").setAttribute("aria-valuetext",done+" de "+total+" fragmentos transmitidos");
+    done++;progress(done,total,"sending");
     await new Promise(resolve=>setTimeout(resolve,75));
    }
-   log("Transmitidos "+done+"/"+total+" fragmentos. Verificar físicamente impresión y alineación.");
+   progress(done,total,"complete");
+   log("Transmitidos "+done+"/"+total+" fragmentos para "+copies+" copias. Verificar físicamente impresión y alineación.");
   }catch(err){
+   progress(done,total,"error");
    log("ERROR: "+err.message+"; enviados "+done+"/"+total+". No reintentar sin revisar la impresora.");
   }finally{
    busy=false;$("confirm-paper").checked=false;update();
@@ -143,7 +168,7 @@
   catch(err){log("No se pudo copiar el diagnóstico: "+err.message);}
  });
  $("clear").addEventListener("click",()=>{$("log").textContent="";});
- for(const id of ["name","grams","packed","expiry"])
+ for(const id of ["name","grams","packed","expiry","mode","footer"])
   for(const evt of ["input","change"])$(id).addEventListener(evt,refresh);
  $("confirm-paper").addEventListener("change",update);
  const now=new Date();$("packed").value=now.getFullYear()+"-"+

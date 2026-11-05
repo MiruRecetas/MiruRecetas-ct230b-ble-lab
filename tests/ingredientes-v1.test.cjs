@@ -16,15 +16,16 @@ test("V0.8: dimensiones y contrato de gramos/fecha",()=>{
  assert.equal(engine.height,236);
  assert.equal(engine.maxBytes,35000);
  assert.deepEqual(engine.normalize(sample),{
-  name:"Carne Picada",grams:500,packed:"04/11/26",expiry:"04/01/27"
+  name:"Carne Picada",grams:500,mode:"freeze",footer:"none",packed:"04/11/26",expiry:"04/01/27"
  });
 });
 test("fechas válidas y no autocalculadas",()=>{
- assert.throws(()=>engine.normalize({...sample,expiry:""}),/dos fechas/);
+ assert.equal(engine.normalize({...sample,expiry:""}).expiry,"--/--/--");
+ assert.throws(()=>engine.normalize({...sample,packed:""}),/fecha de envasado/);
  assert.throws(()=>engine.normalize({...sample,expiry:"2026-10-31"}),/anterior/);
  assert.throws(()=>engine.normalize({...sample,packed:"2026-02-30"}),/calendario/);
  assert.throws(()=>engine.normalize({...sample,packed:"2025-13-04"}),/calendario/);
- assert.equal(engine.normalize({...sample,expiry:""},false).expiry,"__/__/__");
+ assert.equal(engine.normalize({...sample,packed:""},false).packed,"--/--/--");
 });
 test("límites de nombre y cantidad",()=>{
  for(const bad of [
@@ -34,6 +35,13 @@ test("límites de nombre y cantidad",()=>{
   {...sample,grams:12.5},{...sample,grams:"1e3"}
  ])assert.throws(()=>engine.normalize(bad));
  assert.equal(engine.normalize({...sample,grams:"9999"}).grams,9999);
+ assert.equal(engine.normalize({...sample,grams:""}).grams,null);
+ assert.equal(engine.normalize({...sample,grams:null}).grams,null);
+ assert.equal(engine.normalize({...sample,mode:"fridge"}).mode,"fridge");
+ assert.equal(engine.normalize({...sample,mode:"other"}).mode,"other");
+ assert.equal(engine.normalize({...sample,footer:"fridge"}).footer,"fridge");
+ assert.throws(()=>engine.normalize({...sample,footer:"invented"}),/Instrucción/);
+ assert.throws(()=>engine.normalize({...sample,mode:"invented"}),/Tipo/);
 });
 function rasterFixture(){
  const pixels=new Uint8ClampedArray(engine.width*engine.height*4);
@@ -59,20 +67,29 @@ test("raster en bandas ≤12 y dentro de 30 × 20",()=>{
   assert.equal(b.bytes.length,b.widthBytes*b.height);
  }
 });
-test("TSPL único, impresión de una copia y ausencia de QR",()=>{
+test("TSPL: un trabajo y copias 1–20, sin QR ni retransmisiones",()=>{
  const result=engine.build(rasterFixture());
  const bytes=result.job,text=new TextDecoder("latin1").decode(bytes);
  assert.ok(text.startsWith("SIZE 30 mm,20 mm\r\nGAP 2 mm,0 mm\r\nDIRECTION 0\r\nCLS\r\n"));
  assert.ok(text.endsWith("PRINT 1,1\r\n"));
  assert.equal(text.split("PRINT 1,1\r\n").length-1,1);
  assert.doesNotMatch(text,/QRCODE|PRINT 1,[2-9]/);
+ for(const count of [2,6,20]){
+  const multiple=engine.build(rasterFixture(),count);
+  const cmd=new TextDecoder("latin1").decode(multiple.job);
+  assert.ok(cmd.endsWith("PRINT 1,"+count+"\r\n"));
+  assert.equal(multiple.copies,count);
+  assert.equal(cmd.split("PRINT 1,").length-1,1);
+ }
+ for(const bad of [-1,0,1.5,21,NaN,"2"])assert.throws(()=>engine.build(rasterFixture(),bad),/copias/);
  assert.ok(result.bytes<35000);
  assert.equal(result.fragments,Math.ceil(result.bytes/20));
 });
 test("página autónoma, campos y archivos enlazados",()=>{
  const html=source("index.html"),app=source("app.js"),css=source("style.css");
  for(const id of ["name","grams","packed","expiry","preview","metrics","design-status",
-   "connection","connect","disconnect","confirm-paper","print","progress","copy","clear","log"])
+   "connection","connect","disconnect","confirm-paper","print","progress","copy","clear","log",
+   "mode","footer","copies-minus","copies-plus","copies","transport","transport-count","transport-percent","progress-fill"])
   assert.match(html,new RegExp('id="'+id+'"'));
  assert.match(html,/src="\.\/engine\.js"/);
  assert.match(html,/src="\.\/app\.js"/);
@@ -80,6 +97,9 @@ test("página autónoma, campos y archivos enlazados",()=>{
  assert.ok(html.includes('class="miru-isotipo"'));
  assert.match(app,/E\.logo\("\.\.\/assets\/isotipo-bn\.svg"\)/);
  assert.match(css,/--sage:/);
+ assert.match(css,/#b96c4a/);
+ assert.match(app,/progress\(done,total,"complete"\)/);
+ assert.match(app,/work=E.build\(E.render\(d,logo\),copies\)/);
  assert.doesNotMatch(app,/QRCODE|fetch\s*\(|localStorage|sessionStorage/);
 });
 
