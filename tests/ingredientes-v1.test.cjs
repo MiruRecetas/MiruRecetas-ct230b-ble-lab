@@ -62,9 +62,9 @@ function rasterFixture(){
   getContext:()=>({getImageData:()=>({data:pixels})})};
 }
 test("rótulo de fecha cambia en los tres modos y admite pie vacío",()=>{
- const original=global.document;
+ const original=globalThis.document;
  let lines=[];
- global.document={createElement:()=>{
+ globalThis.document={createElement:()=>{
   const ctx={
    fillRect(){},drawImage(){},fillText(t){lines.push(String(t));},
    measureText(t){return {width:String(t).length*8}},
@@ -87,7 +87,7 @@ test("rótulo de fecha cambia en los tres modos y admite pie vacío",()=>{
    assert.equal(lines.includes(note),Boolean(note));
    if(mode==="other")assert.ok(!lines.includes("Envasado"));
   }
- }finally{global.document=original;}
+ }finally{globalThis.document=original;}
 });
 
 test("raster en bandas ≤12 y dentro de 30 × 20",()=>{
