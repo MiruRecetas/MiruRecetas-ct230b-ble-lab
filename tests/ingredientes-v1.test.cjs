@@ -42,7 +42,8 @@ test("límites de nombre y cantidad",()=>{
  assert.equal(engine.normalize({...sample,footer:"fridge"}).note,"Conservar en nevera");
  assert.deepEqual(engine.normalize({...sample,notesEnabled:true,note:"Conservar en nevera"}).note,"Conservar en nevera");
  assert.equal(engine.normalize({...sample,notesEnabled:false,note:"Mi texto"}).note,"");
- assert.throws(()=>engine.normalize({...sample,notesEnabled:true,note:""}),/nota/);
+ assert.equal(engine.normalize({...sample,notesEnabled:true,note:""}).note,"");
+ assert.equal(engine.normalize({...sample,mode:"other",notesEnabled:true,note:""}).notesEnabled,true);
  assert.throws(()=>engine.normalize({...sample,notesEnabled:true,note:"X".repeat(33)}),/32 caracteres/);
  assert.throws(()=>engine.normalize({...sample,notesEnabled:true,note:"Mal<texto>"}),/nota no es válida/);
  assert.throws(()=>engine.normalize({...sample,mode:"invented"}),/Tipo/);
@@ -60,6 +61,35 @@ function rasterFixture(){
  return {width:engine.width,height:engine.height,
   getContext:()=>({getImageData:()=>({data:pixels})})};
 }
+test("rótulo de fecha cambia en los tres modos y admite pie vacío",()=>{
+ const original=globalThis.document;
+ let lines=[];
+ globalThis.document={createElement:()=>{
+  const ctx={
+   fillRect(){},drawImage(){},fillText(t){lines.push(String(t));},
+   measureText(t){return {width:String(t).length*8}},
+   set font(v){this._font=v},get font(){return this._font},
+   fillStyle:"",textBaseline:"",textAlign:""
+  };
+  return {width:0,height:0,getContext:()=>ctx};
+ }};
+ try{
+  for(const [mode,label,note] of [
+   ["fridge","Envasado","Conservar en nevera"],
+   ["freeze","Envasado y congelación","Descongelar en nevera"],
+   ["other","Conservación",""]
+  ]){
+   lines=[];
+   const data=engine.normalize({...sample,mode,note,notesEnabled:true});
+   const result=engine.render(data,{});
+   assert.equal(result.width,354);assert.equal(result.height,236);
+   assert.ok(lines.includes(label),"no aparece el rótulo "+label);
+   assert.equal(lines.includes(note),Boolean(note));
+   if(mode==="other")assert.ok(!lines.includes("Envasado"));
+  }
+ }finally{globalThis.document=original;}
+});
+
 test("raster en bandas ≤12 y dentro de 30 × 20",()=>{
  const blocks=engine.sparse(rasterFixture());
  assert.ok(blocks.length>=2);
@@ -95,8 +125,8 @@ test("página autónoma, campos y archivos enlazados",()=>{
    "connection","connect","disconnect","confirm-paper","print","progress","copy","clear","log",
    "mode","note","notes-enabled","copies-minus","copies-plus","copies","transport","transport-count","transport-percent","progress-fill"])
   assert.match(html,new RegExp('id="'+id+'"'));
- assert.match(html,/src="\.\/engine\.js"/);
- assert.match(html,/src="\.\/app\.js"/);
+ assert.match(html,/src="\.\/engine\.js\?v=20261106-otro-tipo"/);
+ assert.match(html,/src="\.\/app\.js\?v=20261106-otro-tipo"/);
  assert.match(html,/href="\.\/style\.css"/);
  assert.ok(html.includes('class="miru-isotipo"'));
  assert.match(app,/E\.logo\("\.\.\/assets\/isotipo-bn\.svg"\)/);

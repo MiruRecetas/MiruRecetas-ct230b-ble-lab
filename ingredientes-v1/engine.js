@@ -30,7 +30,7 @@
   note=note.trim().replace(/\s+/g," ");
   if(note.length>32||/[<>]/.test(note)||[...note].some(ch=>ch.charCodeAt(0)<32))
    throw Error("La nota no es válida (máximo 32 caracteres).");
-  if(notesEnabled&&!note)throw Error("Escribe una nota o desactiva «Mostrar nota».");
+  // Una nota en blanco es válida: «Otro tipo» queda editable y sin pie impreso.
   if(!notesEnabled)note="";
   const packed=String(raw.packed||""),expiry=String(raw.expiry||"");
   if(packed&&expiry&&expiry<packed)throw Error("El consumo preferente es anterior al envasado.");
@@ -71,7 +71,7 @@
   c.fillStyle="#000";c.textBaseline="alphabetic";c.textAlign="left";
   fit(c,data.name,8,32,"700",29,'"Bricolage Grotesque"',337,17);
   c.fillRect(0,48,354,9);
-  c.font='400 17px "Geist"';c.fillText(data.mode==="freeze"?"Envasado y congelación":"Envasado",8,91);
+  c.font='400 17px "Geist"';c.fillText(data.mode==="freeze"?"Envasado y congelación":data.mode==="other"?"Conservación":"Envasado",8,91);
   c.fillText("Consumo preferente",8,124);
   c.font='700 17px "Geist"';c.textAlign="right";
   c.fillText(data.packed,337,91);c.fillText(data.expiry,337,124);
