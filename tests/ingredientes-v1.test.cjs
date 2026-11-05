@@ -77,7 +77,7 @@ test("página autónoma, campos y archivos enlazados",()=>{
  assert.match(html,/src="\.\/engine\.js"/);
  assert.match(html,/src="\.\/app\.js"/);
  assert.match(html,/href="\.\/style\.css"/);
- assert.match(html,/src="\.\.\/assets\/isotipo-bn\.svg"/);
+ assert.ok(html.includes('class="miru-isotipo"'));
  assert.match(app,/E\.logo\("\.\.\/assets\/isotipo-bn\.svg"\)/);
  assert.match(css,/--sage:/);
  assert.doesNotMatch(app,/QRCODE|fetch\s*\(|localStorage|sessionStorage/);
@@ -85,23 +85,23 @@ test("página autónoma, campos y archivos enlazados",()=>{
 
 test("cabecera interior canónica MiruRecetas en página de ingredientes",()=>{
  const html=source("index.html"),css=source("cabecera.css"),js=source("cabecera.js");
- assert.equal((html.match(/<header\\s/g)||[]).length,1);
- assert.match(html,/class="miru-header miru-header--interior" data-miru-header="interior"/);
- assert.doesNotMatch(html,/class="site-header"|class="miru-header--hero"/);
- assert.equal((html.match(/class="miru-trigger"/g)||[]).length,3);
- assert.equal((html.match(/class="miru-panel"/g)||[]).length,3);
- assert.equal((html.match(/<path id="pieza-/g)||[]).length,6);
- assert.match(html,/aria-label="MiruRecetas — ir a la portada"/);
+ assert.equal(html.split("<header ").length-1,1);
+ assert.ok(html.includes('class="miru-header miru-header--interior" data-miru-header="interior"'));
+ assert.ok(!html.includes('class="site-header"')&&!html.includes('miru-header--hero'));
+ assert.equal(html.split('class="miru-trigger"').length-1,3);
+ assert.equal(html.split('class="miru-panel"').length-1,3);
+ assert.equal(html.split('<path id="pieza-').length-1,6);
+ assert.ok(html.includes('aria-label="MiruRecetas — ir a la portada"'));
  for(const [label,path] of [["Explorar recetas","recetario/"],["Menús de temporada","planificador/"],["Listas de la compra","planificador/"]]){
   assert.ok(html.includes(label));
   assert.ok(html.includes('href="https://mirurecetas.github.io/menu-anual-recetas/'+path+'"'));
  }
- assert.match(html,/href="\\.\\/cabecera\\.css"/);
- assert.match(html,/src="\\.\\/cabecera\\.js" defer/);
- assert.match(css,/\\.miru-header--interior/);
- assert.match(css,/position:sticky/);
- assert.match(js,/aria-expanded/);
- assert.match(js,/Escape/);
- assert.match(html,/class="miru-install" data-miru-install[^>]*hidden/);
- assert.doesNotMatch(source("style.css"),/\\.site-header[ {]/);
+ assert.ok(html.includes('href="./cabecera.css"'));
+ assert.ok(html.includes('src="./cabecera.js" defer'));
+ assert.ok(css.includes(".miru-header--interior"));
+ assert.ok(css.includes("position:sticky"));
+ assert.ok(js.includes("aria-expanded"));
+ assert.ok(js.includes("Escape"));
+ assert.ok(html.includes('class="miru-install" data-miru-install aria-label="Instalar MiruRecetas" hidden'));
+ assert.ok(!source("style.css").includes(".site-header"));
 });
