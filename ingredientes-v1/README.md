@@ -1,10 +1,28 @@
-# Conserva · Etiquetas de ingredientes (candidato de interfaz V1)
+# Conserva · «Mis etiquetas» (laboratorio · interfaz experimental)
 
 **Estado: desarrollo experimental exclusivamente en la rama de laboratorio.**
-Este directorio es una página autónoma y el punto de partida previsto para la
-futura sección **Conserva** de la web MiruRecetas. No se ha integrado ni migrado
+Este directorio contiene la página autónoma **«Mis etiquetas»**, con
+selector de formatos aprobado y con **Pequeña 30 × 20** operativa en laboratorio.
+Las variantes libres de **Compacta 50 × 30** y **Amplia 50 × 80 horizontal**
+continúan pendientes de implementación. No se ha integrado ni migrado
 ningún archivo a `MiruRecetas/mirurecetas-web-source`; no está publicado como
 página productiva ni registra existencias.
+
+## Contrato de producto y diseño aprobado (06/11/2026)
+
+**Documento rector:** [MIS-ETIQUETAS-VISION-Y-HOJA-DE-RUTA.md](MIS-ETIQUETAS-VISION-Y-HOJA-DE-RUTA.md).
+Contiene las decisiones de la usuaria y diferencia entre diseños aprobados,
+motor actual, formatos futuros, banco JSON, «Mis reservas» y requisitos P10.
+
+El **selector visual de cuatro tarjetas en una sola fila** fue aprobado
+expresamente por la usuaria, con iconos SVG actuales de **Amplia 50 × 80**,
+**Compacta 50 × 30**, **Pequeña 30 × 20** y **Más formatos · Próximamente**.
+No añadir textos de disponibilidad a las tres primeras ni alterar sus iconos
+sin nueva aprobación; registro final en [PR #40](https://github.com/MiruRecetas/MiruRecetas-ct230b-ble-lab/pull/40).
+Sus radios controlan los tres pasos. Solo Pequeña imprime a día de hoy.
+
+El término «receta/componente/ingrediente» se reserva para documentación y
+formulario específico, no como subtítulo del selector de formatos.
 
 ## Cabecera aprobada · variante interior
 
@@ -80,9 +98,12 @@ con la V0.8; no dar por validada esta modificación sin pruebas específicas.
 
 La página es un **candidato de producto** y evita lenguaje o controles de
 experimentos históricos. Durante su estancia en el laboratorio conserva un
-aviso de alcance en el pie. No contiene selector de los tres formatos
-de recetas. El nombre y, cuando se indique, el peso son introducidos manualmente: todavía
-no hay un contrato de catálogo canónico de ingredientes para esta sección.
+aviso de alcance en el pie. El selector incluye los **tres formatos libres previstos** (no incorpora
+50 × 80 vertical con anillo) y una tarjeta futura. La selección de Compacta
+o Amplia muestra el estado pendiente dentro de los pasos, sin motor imprimible
+ni previsualización inventada. El nombre y, cuando se indique, el peso en
+Pequeña son introducidos manualmente; todavía no hay un catálogo de ingredientes
+para esta sección. El peso no forma parte de Compacta ni Amplia.
 Las fechas no se deducen de pautas generales de conservación.
 
 Se utiliza la ruta relativa `../assets/isotipo-bn.svg`, disponible

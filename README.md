@@ -2,6 +2,21 @@
 
 # MiruRecetas · Laboratorio BLE CT230B
 
+
+> **NUEVO MÓDULO EXPERIMENTAL «MIS ETIQUETAS» (06/11/2026).** Además de
+> los ensayos históricos, este repositorio contiene una **página autónoma
+> publicada en laboratorio**: [Mis etiquetas](https://mirurecetas.github.io/MiruRecetas-ct230b-ble-lab/ingredientes-v1/).
+> La usuaria ha aprobado expresamente el selector de cuatro formatos y sus
+> iconos actuales (PR #40). **Solo Pequeña 30 × 20 es imprimible aquí**;
+> Compacta 50 × 30 y Amplia horizontal 50 × 80 son desarrollos futuros.
+> Consulta el [contrato de producto y hoja de ruta](ingredientes-v1/MIS-ETIQUETAS-VISION-Y-HOJA-DE-RUTA.md)
+> y el [README técnico del módulo](ingredientes-v1/README.md).
+> El módulo es experimental, **no está integrado en la web privada de
+> producción y no crea inventario ni datos personales**. Las referencias
+> históricas del laboratorio contenidas más abajo no describen el estado
+> actual de este nuevo módulo.
+
+
 > **ACTA VIGENTE · 31/10/2026:** las cuatro familias de etiqueta están **aprobadas físicamente**. QR de **50×30: módulo 5 puntos + ECC M**, escaneado correctamente; QR de las dos 50×80, escaneables sin modificación; V0.8 ingrediente sin QR. **PRINT 1,2** validado con dos etiquetas en una transmisión; etiquetas en congelador 2–3 días y manipulación en buen estado. Ver [acta consolidada](VALIDACION-ETIQUETAS-CT230B-2026-10-31.md). Los estados «pendiente» de ensayos anteriores se conservan como historia.
 
 
