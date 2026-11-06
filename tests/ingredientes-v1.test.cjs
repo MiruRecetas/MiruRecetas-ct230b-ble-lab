@@ -159,6 +159,17 @@ test("Mis etiquetas: selector único de formato vinculado a los tres pasos",()=>
  assert.match(app,/\+\+refreshSeq/);
  assert.match(css,/\.format-option input:checked/);
  assert.ok(!html.includes('value="vertical" data-label-format'));
+ assert.equal(html.split('class="format-icon"').length-1,4);
+ for(const label of ["Amplia","Compacta","Pequeña","Más formatos"])
+  assert.ok(html.includes("<strong>"+label+"</strong>"));
+ for(const dimension of ["50 × 80 mm","50 × 30 mm","30 × 20 mm"])
+  assert.ok(html.includes("<span>"+dimension+"</span>"));
+ assert.ok(!html.includes("En desarrollo</small>"));
+ assert.ok(!html.includes("Disponible para imprimir"));
+ assert.ok(html.includes("<span>Próximamente</span>"));
+ assert.match(css,/grid-template-columns:repeat\(4,minmax\(0,1fr\)\)/);
+ assert.ok(!css.includes("grid-template-columns:repeat(2,minmax(0,1fr))"));
+
 });
 
 test("cabecera interior canónica MiruRecetas en página de ingredientes",()=>{
