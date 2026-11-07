@@ -66,7 +66,7 @@ test("vista previa es raster que entra al mismo generador TSPL; 1–20 copias",(
    assert.doesNotMatch(command,/QRCODE|PRINT 1,\d+\r\nPRINT/);
    assert.equal(w.copies,count);
   }
-  assert.throws(()=>C.build(canvas,21),/Copias/);
+  assert.throws(()=>C.build(canvas,21),/copias/);
  }finally{globalThis.document=old;}
 });
 test("tres pasos comparten datos de Compacta y Pequeña no se altera",()=>{
