@@ -2,7 +2,8 @@
 /* Prototipo autónomo de ingredientes para Conserva. No importa el motor de
  * etiquetas de recetas ni escribe en Airtable, inventario o backend. */
 (function(){
- const E=window.MiruIngredient,C=window.MiruCompactFree,$=id=>document.getElementById(id);
+ const Motor=window.MiruLabelEngine,E=Motor.forFormat("ingredient"),C=Motor.forFormat("component"),
+  $=id=>document.getElementById(id);
  const SERVICE="49535343-fe7d-4ae5-8fa9-9fafd205e455";
  const WRITE="49535343-8841-43f4-a8d4-ecbe34729bb3";
  const NOTIFY="49535343-1e4d-4bd9-ba61-23c647249616";
