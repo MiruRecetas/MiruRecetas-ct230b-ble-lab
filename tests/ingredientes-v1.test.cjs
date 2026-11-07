@@ -126,7 +126,8 @@ test("página autónoma, campos y archivos enlazados",()=>{
    "mode","note","notes-enabled","copies-minus","copies-plus","copies","transport","transport-count","transport-percent","progress-fill"])
   assert.match(html,new RegExp('id="'+id+'"'));
  assert.match(html,/src="\.\/engine\.js\?v=20261106-otro-tipo"/);
- assert.match(html,/src="\.\/app\.js\?v=20261106-selector-formatos"/);
+ assert.match(html,/src="\.\/app\.js\?v=20261107-compacta-libre"/);
+ assert.match(html,/src="\.\/compacta-engine\.js\?v=20261107-compacta-libre"/);
  assert.match(html,/href="\.\/style\.css"/);
  assert.ok(html.includes('class="miru-isotipo"'));
  assert.match(app,/E\.logo\("\.\.\/assets\/isotipo-bn\.svg"\)/);
@@ -154,7 +155,7 @@ test("Mis etiquetas: selector único de formato vinculado a los tres pasos",()=>
   "data-subtitle","preview-subtitle","preview-dimensions","print-subtitle"]){
   assert.match(html,new RegExp('id="'+id+'"'));
  }
- assert.match(app,/selectedFormat!=="ingredient"\|\|busy/);
+ assert.match(app,/selectedFormat==="horizontal"\|\|busy/);
  assert.match(app,/function changeFormat\(format\)/);
  assert.match(app,/\+\+refreshSeq/);
  assert.match(css,/\.format-option input:checked/);
