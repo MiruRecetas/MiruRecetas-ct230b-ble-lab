@@ -10,7 +10,7 @@
  function register({id,width,height,paper,normalize,draw}){
   if(!/^[a-z][a-z-]*$/.test(id)||templates.has(id)
    ||!Number.isInteger(width)||!Number.isInteger(height)
-   ||!/^\\d+ mm,\\d+ mm$/.test(paper)
+   ||!/^\d+ mm,\d+ mm$/.test(paper)
    ||typeof normalize!=="function"||typeof draw!=="function")
    throw Error("Plantilla libre no válida o duplicada.");
   templates.set(id,Object.freeze({id,width,height,paper,normalize,draw}));
@@ -18,7 +18,7 @@
  function get(id){const item=templates.get(id);if(!item)throw Error("Formato de etiqueta libre desconocido: "+id);return item;}
  function date(s,mandatory=false,message="Indica la fecha de envasado."){
   if(!s){if(mandatory)throw Error(message);return "--/--/--";}
-  if(!/^\\d{4}-\\d{2}-\\d{2}$/.test(s))throw Error("Fecha con formato inválido.");
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(s))throw Error("Fecha con formato inválido.");
   const y=Number(s.slice(0,4)),m=Number(s.slice(5,7)),d=Number(s.slice(8,10));
   const value=new Date(Date.UTC(y,m-1,d));
   if(!Number.isFinite(value.valueOf())||value.getUTCFullYear()!==y
@@ -30,7 +30,7 @@
   if(packed&&expiry&&expiry<packed)throw Error("El consumo preferente es anterior al envasado.");
  }
  function clean(s,max,label,required=false){
-  const value=String(s??"").trim().replace(/\\s+/g," ");
+  const value=String(s??"").trim().replace(/\s+/g," ");
   if((required&&!value)||value.length>max||/[<>]/.test(value)||[...value].some(c=>c.charCodeAt(0)<32))
    throw Error(label+" no válido (máximo "+max+" caracteres).");
   return value;
@@ -38,7 +38,7 @@
  function numeric(s,label){
   const value=String(s??"").trim().replace(",",".");
   if(!value)return null;
-  if(!/^(?:\\d{1,4})(?:\\.\\d{1,2})?$/.test(value)||Number(value)>9999)
+  if(!/^(?:\d{1,4})(?:\.\d{1,2})?$/.test(value)||Number(value)>9999)
    throw Error(label+": introduce un número positivo con hasta dos decimales.");
   return Number(value).toLocaleString("es-ES",{maximumFractionDigits:2,useGrouping:false});
  }
@@ -129,14 +129,14 @@
  function build(id,canvas,copies=1){
   const t=get(id),W=t.width,H=t.height;
   if(!Number.isInteger(copies)||copies<1||copies>20)throw Error("Número de copias fuera del intervalo 1–20.");
-  const tiles=sparse(id,canvas),parts=[enc.encode("SIZE "+t.paper+"\\r\\nGAP 2 mm,0 mm\\r\\nDIRECTION 0\\r\\nCLS\\r\\n")];
+  const tiles=sparse(id,canvas),parts=[enc.encode("SIZE "+t.paper+"\r\nGAP 2 mm,0 mm\r\nDIRECTION 0\r\nCLS\r\n")];
   for(const b of tiles){
    if(b.height>12||b.x<0||b.y<0||b.x+b.widthBytes*8>W+7||b.y+b.height>H)
     throw Error("Banda fuera de los límites del papel.");
    parts.push(enc.encode("BITMAP "+b.x+","+b.y+","+b.widthBytes+","+b.height+",0,"));
-   parts.push(b.bytes,enc.encode("\\r\\n"));
+   parts.push(b.bytes,enc.encode("\r\n"));
   }
-  parts.push(enc.encode("PRINT 1,"+copies+"\\r\\n"));
+  parts.push(enc.encode("PRINT 1,"+copies+"\r\n"));
   const bytes=parts.reduce((sum,part)=>sum+part.length,0);
   if(bytes>MAX_BYTES)throw Error("Trabajo demasiado grande ("+bytes+" bytes).");
   const job=new Uint8Array(bytes);let offset=0;
