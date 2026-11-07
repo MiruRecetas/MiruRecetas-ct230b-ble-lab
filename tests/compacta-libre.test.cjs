@@ -67,7 +67,7 @@ test("vista previa es raster que entra al mismo generador TSPL; 1–20 copias",(
 });
 test("tres pasos comparten datos de Compacta y Pequeña no se altera",()=>{
  const app=read("app.js"),html=read("index.html");
- assert.match(app,/selectedFormat==="component"\?C:E/);
+ assert.match(app,/compact\?C:E/);
  assert.match(app,/C\.render\(d,logo\)/);
  assert.match(app,/\["compact-preview",compact\]/);
  assert.match(app,/\["ingredient-preview",ingredient\]/);
