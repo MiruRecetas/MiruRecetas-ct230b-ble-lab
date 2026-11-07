@@ -126,14 +126,15 @@ test("página autónoma, campos y archivos enlazados",()=>{
    "mode","note","notes-enabled","copies-minus","copies-plus","copies","transport","transport-count","transport-percent","progress-fill"])
   assert.match(html,new RegExp('id="'+id+'"'));
  assert.match(html,/src="\.\/engine\.js\?v=20261106-otro-tipo"/);
- assert.match(html,/src="\.\/app\.js\?v=20261106-selector-formatos"/);
+ assert.match(html,/src="\.\/app\.js\?v=20261107-compacta-libre"/);
+ assert.match(html,/src="\.\/compacta-engine\.js\?v=20261107-compacta-libre"/);
  assert.match(html,/href="\.\/style\.css"/);
  assert.ok(html.includes('class="miru-isotipo"'));
  assert.match(app,/E\.logo\("\.\.\/assets\/isotipo-bn\.svg"\)/);
  assert.match(css,/--sage:/);
  assert.match(css,/#b96c4a/);
  assert.match(app,/progress\(done,total,"complete"\)/);
- assert.match(app,/work=E.build\(E.render\(d,logo\),copies\)/);
+ assert.match(app,/work=motor.build\(motor.render\(d,logo\),copies\)/);
  assert.match(app,/noteDefaults=\{fridge:"Conservar en nevera",freeze:"Descongelar en nevera",other:""\}/);
  assert.match(html,/maxlength="32"/);
  assert.match(html,/id="notes-enabled" type="checkbox" checked/);
@@ -154,7 +155,7 @@ test("Mis etiquetas: selector único de formato vinculado a los tres pasos",()=>
   "data-subtitle","preview-subtitle","preview-dimensions","print-subtitle"]){
   assert.match(html,new RegExp('id="'+id+'"'));
  }
- assert.match(app,/selectedFormat!=="ingredient"\|\|busy/);
+ assert.match(app,/selectedFormat==="horizontal"\|\|busy/);
  assert.match(app,/function changeFormat\(format\)/);
  assert.match(app,/\+\+refreshSeq/);
  assert.match(css,/\.format-option input:checked/);

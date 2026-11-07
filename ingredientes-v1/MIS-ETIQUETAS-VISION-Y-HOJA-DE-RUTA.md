@@ -64,6 +64,40 @@ Código: `ingredientes-v1/engine.js`, `app.js`, `index.html`, `style.css`; proto
 - El contador del progreso mide **transmisión BLE, no número de etiquetas físicamente impresas**. Historial de consola: seis envíos de 5919 B, 296 fragmentos cada uno (05/11); eso no certifica por sí solo la salida física. La V0.8 de referencia histórica sí fue ensayada físicamente; **no atribuir esa validación a todas las variantes libres** ni a tiradas 3–20.
 - Un fallo real descubierto al elegir «Otro tipo» se corrigió en PR #37; la selección de formatos se añadió en PR #38 y el diseño definitivo del selector en #39/#40.
 
+## 4 bis. Compacta libre 50 × 30 — DESARROLLO EXPERIMENTAL (07/11/2026)
+
+Nueva plantilla **`ingredientes-v1/compacta-engine.js`**, aislada de
+`label-v09-component.js` (ensayo histórico) y del motor productivo de
+`mirurecetas-web-source`. Se ha transcrito la geometría V0.9 como referencia
+**sin importar ningún módulo ni mantener enlace operativo** entre ambas
+versiones. Una modificación posterior del diseño libre **no podrá alterar**
+la etiqueta existente de recetas. La V0.9 original con QR permanece aprobada
+e inmutable. La nueva versión **sin QR** no está aprobada visual ni físicamente.
+
+- Lienzo 590 × 354; título grande e isotipo superior, barra gruesa horizontal
+  a y=60, fechas a izquierda (y=100,135), nutrición a derecha, separador fino
+  parcial y=149, instrucciones y nota en la mitad izquierda inferior.
+- El espacio inferior derecho antes ocupado por el QR se deja **en blanco
+  intencionadamente**; la usuaria decidirá si redistribuirlo al ver esta primera
+  versión publicada. No copiar QR, URL de receta, raciones ni gramaje.
+- Formulario propio editable: título, tipo de conservación, fecha primaria
+  obligatoria, consumo preferente opcional, kcal y tres macros independientes
+  (todos opcionales), instrucciones y nota manuales.
+- Controles de visibilidad de **bloque nutricional**, instrucciones y nota;
+  campos nutricionales individuales vacíos **se omiten**, no se imputan a cero.
+  El ocultamiento de bloques no mueve otros bloques arbitrariamente, y los
+  textos demasiado largos se bloquean si no caben en la geometría.
+- Vista previa del raster **real**, TSPL 50 × 30 sin QR, multicopia 1–20 y
+  transporte BLE compartido con la herramienta de laboratorio. La salida
+  real y la alineación requieren ensayo físico en CT230B antes de calificar
+  esta variante como validada.
+- **Sin enlace, import, dependencia, actualización cruzada, metadatos de
+  receta o sistema de publicación conjunto** con el motor de producción.
+  Comparar con V0.9 se permite únicamente para QA visual.
+
+Esta fase no constituye aprobación definitiva de la composición libre; el
+detalle del diseño debe decidirse tras revisar su vista previa en Android.
+
 ## 5. Motor y formularios futuros — DECISIÓN DE DIRECCIÓN, NO IMPLEMENTADOS
 Arquitectura deseada: un **motor de etiquetas libres compartido**, con un único contrato interno `format + data + visibility`, plantillas independientes para cada dimensión, raster y TSPL comunes, transporte BLE y progreso comunes. Reutilizar reglas contrastadas del motor productivo de recetas, **sin modificarlo ni importarlo directamente como dependencia del laboratorio** y sin alterar los originales aprobados.
 
@@ -74,7 +108,7 @@ Para 50 × 30 y 50 × 80 horizontal:
 - Valor incompleto de macro: no inventar, no usar `0` salvo que se haya indicado expresamente; kcal independientes de reparto macro manual. **Sin anillo y sin QR** para las etiquetas libres.
 - Vista previa debe reflejar exactamente el raster que se va a enviar; impedir imprimir formatos en desarrollo hasta motor, pruebas automatizadas y comprobación física CT230B.
 
-**Orden de trabajo acordado:** 1) selector/interfaz global (hecho); 2) estabilizar Pequeña en módulo común (funcional en laboratorio); 3) añadir Compacta 50 × 30; 4) añadir Amplia horizontal 50 × 80; 5) banco de ingredientes JSON; 6) ampliar funcionalidades. No demorar la interfaz general hasta completar el banco.
+**Orden de trabajo acordado:** 1) selector/interfaz global (hecho); 2) estabilizar Pequeña en módulo común (funcional en laboratorio); 3) añadir Compacta 50 × 30 (primer prototipo libre experimental); 4) añadir Amplia horizontal 50 × 80; 5) banco de ingredientes JSON; 6) ampliar funcionalidades. No demorar la interfaz general hasta completar el banco.
 
 ## 6. Banco de ingredientes — PROPUESTA APROBADA EN PRINCIPIO; CATÁLOGO PENDIENTE
 Propuesta de **JSON versionado autónomo**, con selección **Categoría → Ingrediente** (p. ej. carne/pescado/verduras → ternera/salmón/pimiento) y **presentación** adicional solo si cambia la orientación de conservación (p. ej. ternera picada frente a filete). Admitir **«Otro / Escribir manualmente»** y alias para buscar. Los selectores precargan el **nombre**; no deben impedir etiquetas libres.

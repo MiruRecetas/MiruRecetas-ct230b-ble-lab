@@ -2,11 +2,11 @@
 /* Prototipo autónomo de ingredientes para Conserva. No importa el motor de
  * etiquetas de recetas ni escribe en Airtable, inventario o backend. */
 (function(){
- const E=window.MiruIngredient,$=id=>document.getElementById(id);
+ const E=window.MiruIngredient,C=window.MiruCompactFree,$=id=>document.getElementById(id);
  const SERVICE="49535343-fe7d-4ae5-8fa9-9fafd205e455";
  const WRITE="49535343-8841-43f4-a8d4-ecbe34729bb3";
  const NOTIFY="49535343-1e4d-4bd9-ba61-23c647249616";
- let device=null,channel=null,logo=null,assetsPromise=null,busy=false,ready=false,refreshSeq=0,copies=1,selectedFormat="ingredient";
+ let device=null,channel=null,logo=null,assetsPromise=null,busy=false,ready=false,refreshSeq=0,copies=1,selectedFormat="ingredient",cReady=false,cRefreshSeq=0;
  function log(s){
   $("log").textContent+="["+new Date().toLocaleTimeString("es-ES")+"] "+s+"\n";
  }
@@ -14,13 +14,20 @@
  function values(){return {name:$("name").value,grams:$("grams").value,
   packed:$("packed").value,expiry:$("expiry").value,mode:$("mode").value,
   notesEnabled:$("notes-enabled").checked,note:$("note").value};}
+ function compactValues(){return {name:$("c-name").value,mode:$("c-mode").value,
+  packed:$("c-packed").value,expiry:$("c-expiry").value,
+  showNutrition:$("c-nutrition-enabled").checked,kcal:$("c-kcal").value,
+  protein:$("c-protein").value,carbs:$("c-carbs").value,fat:$("c-fat").value,
+  showInstruction:$("c-instruction-enabled").checked,instruction:$("c-instruction").value,
+  showNote:$("c-note-enabled").checked,note:$("c-note").value};}
  function update(){
   let valid=false;
-  try{E.normalize(values(),true);valid=true;}catch(_){}
+  try{if(selectedFormat==="component")C.normalize(compactValues(),true);
+   else E.normalize(values(),true);valid=true;}catch(_){}
   $("connect").disabled=busy||connected();
   $("disconnect").disabled=busy||!connected();
-  $("print").disabled=selectedFormat!=="ingredient"||busy||!connected()||!ready||!valid||!$("confirm-paper").checked;
-  $("print").textContent=busy?"Operación en curso…":"Imprimir "+copies+(copies===1?" etiqueta":" etiquetas")+" · 30 × 20 mm";
+  $("print").disabled=selectedFormat==="horizontal"||busy||!connected()||!(selectedFormat==="component"?cReady:ready)||!valid||!$("confirm-paper").checked;
+  $("print").textContent=busy?"Operación en curso…":"Imprimir "+copies+(copies===1?" etiqueta":" etiquetas")+" · "+(selectedFormat==="component"?"50 × 30":"30 × 20")+" mm";
   $("copies").textContent=String(copies);
   $("copies-minus").disabled=busy||copies<=1;
   $("copies-plus").disabled=busy||copies>=20;
@@ -28,6 +35,12 @@
   $("connection").textContent=connected()?"CT230B conectada":"Sin conexión CT230B";
   $("connection").dataset.connected=String(connected());
   for(const id of ["name","grams","packed","expiry","mode"])$(id).disabled=busy;
+  for(const id of ["c-name","c-mode","c-packed","c-expiry","c-kcal","c-protein","c-carbs","c-fat",
+   "c-instruction","c-note","c-nutrition-enabled","c-instruction-enabled","c-note-enabled"])$(id).disabled=busy;
+  $("c-nutrition-fields").hidden=!$("c-nutrition-enabled").checked;
+  $("c-instruction").disabled=busy||!$("c-instruction-enabled").checked;
+  $("c-note").disabled=busy||!$("c-note-enabled").checked;
+  for(const input of document.querySelectorAll("[data-label-format]"))input.disabled=busy;
   $("notes-enabled").disabled=busy;
   $("note").disabled=busy||!$("notes-enabled").checked;
  }
@@ -45,6 +58,24 @@
    logo=await E.logo("../assets/isotipo-bn.svg");
   })();
   return assetsPromise;
+ }
+ async function compactRefresh(){
+  if(selectedFormat!=="component")return;
+  const n=++cRefreshSeq;cReady=false;update();
+  try{
+   await ensureAssets();
+   if(n!==cRefreshSeq||selectedFormat!=="component")return;
+   const d=C.normalize(compactValues(),false),cv=C.render(d,logo);
+   const canvas=$("c-preview");canvas.getContext("2d").clearRect(0,0,C.width,C.height);
+   canvas.getContext("2d").drawImage(cv,0,0);
+   $("c-status").textContent="Borrador libre sin QR basado en la geometría histórica; distribución inferior revisable.";
+   try{const strict=C.normalize(compactValues(),true),job=C.build(C.render(strict,logo),copies);
+    $("c-metrics").textContent=job.bytes+" B · "+job.fragments+" fragmentos BLE · "+job.tiles+" bandas · "+copies+" copias · sin QR.";
+    cReady=true;
+   }catch(err){$("c-metrics").textContent="Impresión bloqueada: "+err.message;}
+  }catch(err){if(n===cRefreshSeq){$("c-status").textContent="No se puede mostrar: "+err.message;
+   $("c-metrics").textContent="Corrige la composición antes de imprimir.";}}
+  finally{if(n===cRefreshSeq)update();}
  }
  async function refresh(){
   if(selectedFormat!=="ingredient")return;
@@ -93,7 +124,7 @@
   $(id).addEventListener("click",()=>{
    if(busy)return;
    copies=Math.max(1,Math.min(20,copies+delta));
-   update();void refresh();
+   update();void (selectedFormat==="component"?compactRefresh():refresh());
   });
  }
  $("connect").addEventListener("click",async()=>{
@@ -130,16 +161,17 @@
   disconnect();
  });
  $("print").addEventListener("click",async()=>{
-  if(selectedFormat!=="ingredient"||busy||!ready||!connected()||!$("confirm-paper").checked)return;
+  if(selectedFormat==="horizontal"||busy||!(selectedFormat==="component"?cReady:ready)||!connected()||!$("confirm-paper").checked)return;
   let d,work;
+  const compact=selectedFormat==="component",motor=compact?C:E;
   try{
-   d=E.normalize(values(),true);
-   work=E.build(E.render(d,logo),copies);
+   d=motor.normalize(compact?compactValues():values(),true);
+   work=motor.build(motor.render(d,logo),copies);
   }catch(err){log("Impresión bloqueada: "+err.message);update();return;}
-  if(!window.confirm("Confirmar "+copies+(copies===1?" etiqueta":" etiquetas")+" de 30 × 20 mm: "+d.name+
-    (d.grams!==null?" · "+d.grams+" g":" · sin cantidad indicada")+
-    " · envasado "+d.packed+" · consumo preferente "+d.expiry+
-    ".\nSe enviará un solo trabajo TSPL PRINT 1,"+copies+
+  if(!window.confirm("Confirmar "+copies+(copies===1?" etiqueta":" etiquetas")+" de "+(compact?"50 × 30":"30 × 20")+" mm: "+d.name+
+    (compact?" · sin QR (versión libre experimental)":d.grams!==null?" · "+d.grams+" g":" · sin cantidad")+
+    " · fecha "+d.packed+" · consumo preferente "+d.expiry+
+    ".\\nTrabajo único TSPL PRINT 1,"+copies+
     "; no se reintentará automáticamente. Comprueba el rollo y la alineación."))return;
   busy=true;update();
   let done=0;
@@ -172,6 +204,10 @@
   catch(err){log("No se pudo copiar el diagnóstico: "+err.message);}
  });
  $("clear").addEventListener("click",()=>{$("log").textContent="";});
+ for(const id of ["c-name","c-packed","c-expiry","c-kcal","c-protein","c-carbs","c-fat","c-instruction","c-note"])
+  for(const evt of ["input","change"])$(id).addEventListener(evt,compactRefresh);
+ for(const id of ["c-mode","c-nutrition-enabled","c-instruction-enabled","c-note-enabled"])
+  $(id).addEventListener("change",()=>{update();void compactRefresh();});
  for(const id of ["name","grams","packed","expiry","note"])
   for(const evt of ["input","change"])$(id).addEventListener(evt,refresh);
  const noteDefaults={fridge:"Conservar en nevera",freeze:"Descongelar en nevera",other:""};
@@ -182,35 +218,42 @@
  $("notes-enabled").addEventListener("change",()=>{update();void refresh();});
  const formats={
   ingredient:{title:"Datos del ingrediente",subtitle:"Personaliza la etiqueta sin modificar el diseño aprobado.",dimensions:"30 × 20 mm"},
-  component:{title:"Datos del componente",subtitle:"Plantilla libre de componente en preparación.",dimensions:"50 × 30 mm"},
+  component:{title:"Datos de la etiqueta Compacta",subtitle:"Personaliza los bloques de la etiqueta libre 50 × 30 mm, sin QR.",dimensions:"50 × 30 mm"},
   horizontal:{title:"Datos de la receta",subtitle:"Plantilla libre horizontal en preparación.",dimensions:"50 × 80 mm"}
  };
  function changeFormat(format){
   if(busy||!Object.hasOwn(formats,format))return;
   selectedFormat=format;
-  const ingredient=format==="ingredient",data=formats[format];
+  const ingredient=format==="ingredient",compact=format==="component",active=ingredient||compact,data=formats[format];
   $("data-heading").textContent=data.title;
   $("data-subtitle").textContent=data.subtitle;
   $("preview-dimensions").textContent=data.dimensions;
-  $("preview-subtitle").textContent=ingredient?"Reproducción monocroma del arte que se imprimirá, sin QR.":"La composición del nuevo formato se incorporará tras validación, sin QR.";
-  $("print-subtitle").textContent=ingredient?"De 1 a 20 copias iguales, en un solo trabajo BLE.":"La impresión de este formato se habilitará tras validar su diseño y motor.";
+  $("preview-subtitle").textContent=active?"Vista previa real del raster monocromo que se enviará, sin QR.":"La composición del nuevo formato se incorporará tras validación, sin QR.";
+  $("print-subtitle").textContent=active?"De 1 a 20 copias iguales en un único trabajo BLE.":"La impresión de este formato se habilitará tras validar su diseño y motor.";
+  $("paper-dimensions").textContent=compact?"50 × 30 mm":"30 × 20 mm";
   $("alternate-fields-title").textContent=format==="component"?"Componente · 50 × 30 mm":"Receta horizontal · 50 × 80 mm";
   for(const [id,visible] of [
-   ["ingredient-fields",ingredient],["ingredient-preview",ingredient],["ingredient-print",ingredient],
-   ["alternate-fields",!ingredient],["alternate-preview",!ingredient],["alternate-print",!ingredient]
+   ["ingredient-fields",ingredient],["ingredient-preview",ingredient],["compact-fields",compact],
+   ["compact-preview",compact],["ingredient-print",active],
+   ["alternate-fields",!active],["alternate-preview",!active],["alternate-print",!active]
   ])$(id).hidden=!visible;
   for(const input of document.querySelectorAll("[data-label-format]"))
    input.checked=input.value===format;
   if(!ingredient)++refreshSeq;
+  if(!compact)++cRefreshSeq;
+  $("transport").hidden=true;
+  $("confirm-paper").checked=false;
   update();
   if(ingredient)void refresh();
+  if(compact)void compactRefresh();
  }
  for(const input of document.querySelectorAll("[data-label-format]"))
   input.addEventListener("change",()=>{if(input.checked)changeFormat(input.value);});
  $("confirm-paper").addEventListener("change",update);
  const now=new Date();$("packed").value=now.getFullYear()+"-"+
   String(now.getMonth()+1).padStart(2,"0")+"-"+String(now.getDate()).padStart(2,"0");
- if(!E){$("design-status").textContent="No se ha cargado el motor de ingredientes.";return;}
- log("Módulo aislado de Conserva: solo ingredientes 30 × 20. Impresión no crea inventario.");
+ $("c-packed").value=$("packed").value;
+ if(!E||!C){$("design-status").textContent="Falta un motor libre del laboratorio.";return;}
+ log("Mis etiquetas: Pequeña 30 × 20 y Compacta libre 50 × 30; sin integración con recetas ni inventario.");
  update();void refresh();
 })();

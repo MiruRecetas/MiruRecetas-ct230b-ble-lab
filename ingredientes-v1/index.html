@@ -134,6 +134,61 @@
         </div>
         <p class="disclaimer">La fecha de consumo preferente debe introducirse desde el producto original o una referencia válida. El modo de conservación no calcula ni amplía su duración.</p>
         </div>
+<div id="compact-fields" hidden>
+          <div class="fields">
+            <label class="field full" for="c-name">Nombre de la preparación
+              <input id="c-name" type="text" maxlength="70" value="Pisto casero" required autocomplete="off">
+              <span class="field-note">Se ajusta al espacio real de la cabecera; no se imprimen raciones ni gramos.</span>
+            </label>
+            <label class="field" for="c-mode">Tipo de conservación
+              <select id="c-mode">
+                <option value="freeze" selected>Congelación</option><option value="fridge">Refrigeración</option>
+                <option value="other">Otro tipo</option>
+              </select>
+            </label>
+            <label class="field" for="c-packed">Fecha de envasado (obligatoria)
+              <input id="c-packed" type="date" required>
+            </label>
+            <label class="field" for="c-expiry">Consumo preferente (opcional)
+              <input id="c-expiry" type="date">
+              <span class="field-note">En blanco: --/--/--. Siempre visible en la etiqueta.</span>
+            </label>
+          </div>
+          <label class="checkbox-row" for="c-nutrition-enabled">
+            <input type="checkbox" id="c-nutrition-enabled" checked>
+            <span><strong>Mostrar información nutricional</strong></span>
+          </label>
+          <div id="c-nutrition-fields" class="fields">
+            <label class="field" for="c-kcal">Energía · kcal (opcional)
+              <input id="c-kcal" type="text" inputmode="decimal" value="164,35" placeholder="Sin dato">
+            </label>
+            <label class="field" for="c-protein">Proteínas · g (opcional)
+              <input id="c-protein" type="text" inputmode="decimal" value="5,69" placeholder="Sin dato">
+            </label>
+            <label class="field" for="c-carbs">Hidratos · g (opcional)
+              <input id="c-carbs" type="text" inputmode="decimal" value="18,58" placeholder="Sin dato">
+            </label>
+            <label class="field" for="c-fat">Grasas · g (opcional)
+              <input id="c-fat" type="text" inputmode="decimal" value="7,84" placeholder="Sin dato">
+            </label>
+          </div>
+          <p class="disclaimer">Los valores son datos que introduces tú, no cálculos ni nutrientes oficiales de MiruRecetas. Cada campo vacío se omite; no se sustituye por cero.</p>
+          <label class="checkbox-row" for="c-instruction-enabled">
+            <input type="checkbox" id="c-instruction-enabled" checked>
+            <span><strong>Mostrar instrucciones de conservación</strong></span>
+          </label>
+          <label class="field full" for="c-instruction">Instrucciones (máximo dos líneas impresas)
+            <textarea id="c-instruction" maxlength="90" rows="2">Descongelar en nevera. Recalentar a fuego suave.</textarea>
+          </label>
+          <label class="checkbox-row" for="c-note-enabled">
+            <input type="checkbox" id="c-note-enabled" checked>
+            <span><strong>Mostrar nota</strong></span>
+          </label>
+          <label class="field full" for="c-note">Nota personal (opcional)
+            <textarea id="c-note" maxlength="90" rows="2">La textura puede variar después de congelar.</textarea>
+          </label>
+          <p class="disclaimer">Sin QR. La composición usa una copia aislada de la geometría histórica 50 × 30: revisar en pantalla y en impresión física antes de aprobar esta variante.</p>
+        </div>
         <div id="alternate-fields" class="format-placeholder" hidden>
           <strong id="alternate-fields-title"></strong>
           <p>El formulario editable de este modelo se incorporará conservando su composición aprobada. No hay campos ni valores ficticios.</p>
@@ -164,7 +219,7 @@
         </div>
         <label class="checkbox-row" for="confirm-paper">
           <input id="confirm-paper" type="checkbox">
-          <span>Confirmo que hay papel de <strong>30 × 20 mm</strong> instalado y que he revisado los datos y el número de copias.</span>
+          <span>Confirmo que hay papel de <strong id="paper-dimensions">30 × 20 mm</strong> instalado y que he revisado los datos y el número de copias.</span>
         </label>
         <button class="btn print" id="print" type="button" disabled>Imprimir 1 etiqueta · 30 × 20 mm</button>
         <div id="transport" class="transport" hidden aria-live="off">
@@ -212,6 +267,13 @@
         <p id="design-status" class="status-line" role="status" aria-live="polite">Preparando las tipografías y el isotipo oficiales…</p>
         <p id="metrics" class="status-line" aria-live="polite">Pendiente de generar.</p>
         </div>
+        <div id="compact-preview" hidden>
+          <div class="preview-stage">
+            <canvas id="c-preview" width="590" height="354" role="img" aria-label="Etiqueta libre Compacta 50 por 30 milímetros sin código QR"></canvas>
+          </div>
+          <p id="c-status" class="status-line" role="status" aria-live="polite">Preparando la etiqueta Compacta…</p>
+          <p id="c-metrics" class="status-line" aria-live="polite">Pendiente de generar.</p>
+        </div>
         <div id="alternate-preview" class="format-placeholder" hidden>
           <strong>Vista previa pendiente</strong>
           <p>La vista previa mostrará exclusivamente la composición validada para el formato seleccionado. No se presenta un diseño simulado como si estuviera listo para imprimir.</p>
@@ -224,7 +286,8 @@
   </footer>
 </main>
 <script src="./engine.js?v=20261106-otro-tipo"></script>
-<script src="./app.js?v=20261106-selector-formatos"></script>
+<script src="./compacta-engine.js?v=20261107-compacta-libre"></script>
+<script src="./app.js?v=20261107-compacta-libre"></script>
 <script src="./cabecera.js" defer></script>
 </body>
 </html>
