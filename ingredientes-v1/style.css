@@ -135,3 +135,14 @@ code{font-family:ui-monospace,monospace}
  .format-option-body>span:not(.format-option-body){font-size:9px}
 }
 @media(prefers-reduced-motion:reduce){.format-option-body{transition:none}}
+
+/* Compacta libre: componentes autónomos del formulario, sin estilos de producción. */
+#compact-fields{display:grid;gap:17px}
+#compact-fields[hidden],#compact-preview[hidden],#c-nutrition-fields[hidden]{display:none!important}
+#compact-fields textarea{width:100%;min-width:0;resize:vertical;max-height:160px;
+ border:1px solid #b6c4b6;border-radius:11px;background:#fff;color:var(--ink);padding:12px;
+ font:inherit;font-weight:500;line-height:1.5}
+#compact-fields textarea:focus-visible{outline:3px solid #adcdb2;outline-offset:2px}
+#compact-fields .checkbox-row{margin:2px 0 0}
+#c-nutrition-fields{margin-bottom:0}
+#c-preview{width:100%;height:auto;display:block;image-rendering:auto}
