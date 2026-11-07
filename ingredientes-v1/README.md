@@ -24,6 +24,29 @@ Sus radios controlan los tres pasos. Solo Pequeña imprime a día de hoy.
 El término «receta/componente/ingrediente» se reserva para documentación y
 formulario específico, no como subtítulo del selector de formatos.
 
+## Compacta libre 50 × 30 · variante experimental independiente (07/11/2026)
+
+Archivo nuevo `compacta-engine.js`: motor independiente que reproduce la
+**geometría histórica** de V0.9 de forma autónoma y elimina el QR. No importa
+`label-v09-component.js`, no depende del motor web privado y no comparte
+archivos con las etiquetas de recetas aprobadas. **No modificar la V0.9
+original**: esta variante tiene ciclo de vida y futuras revisiones propias.
+
+El formulario compacto admite nutrición manual opcional, instrucciones y
+nota libre con casillas de visibilidad, nombre y ambas fechas (primera obligatoria;
+segunda opcional con `--/--/--`). El preview usa el raster de 590 × 354
+que genera el mismo motor de TSPL; la impresión CT230B usa los controles BLE
+ya existentes y multicopia `PRINT 1,n`. El área que antes ocupaba QR se
+mantiene libre para **revisión visual posterior**. La geometría sin QR,
+los bloques ocultos y las series multicopia **no tienen aprobación física
+por herencia** de la V0.9 original. Ver
+[MIS-ETIQUETAS-VISION-Y-HOJA-DE-RUTA.md](MIS-ETIQUETAS-VISION-Y-HOJA-DE-RUTA.md).
+
+**Limitación:** aunque las plantillas comparten el transporte en `app.js`,
+aún tienen compositores raster independientes. Factorizar el raster/TSPL en
+un motor común requiere PR propia y regresión física; no introducir imports
+hacia las etiquetas productivas ni reescribir los diseños fuente.
+
 ## Cabecera aprobada · variante interior
 
 La cabecera provisional del primer prototipo ha sido reemplazada por el
