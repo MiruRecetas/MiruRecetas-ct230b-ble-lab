@@ -3,8 +3,8 @@
 **Estado: desarrollo experimental exclusivamente en la rama de laboratorio.**
 Este directorio contiene la página autónoma **«Mis etiquetas»**, con
 selector de formatos aprobado y con **Pequeña 30 × 20** operativa en laboratorio.
-Las variantes libres de **Compacta 50 × 30** y **Amplia 50 × 80 horizontal**
-continúan pendientes de implementación. No se ha integrado ni migrado
+**Compacta libre 50 × 30** está implementada en laboratorio pendiente de
+revisión y pruebas físicas. **Amplia 50 × 80 horizontal** sigue pendiente. No se ha integrado ni migrado
 ningún archivo a `MiruRecetas/mirurecetas-web-source`; no está publicado como
 página productiva ni registra existencias.
 
@@ -19,18 +19,19 @@ expresamente por la usuaria, con iconos SVG actuales de **Amplia 50 × 80**,
 **Compacta 50 × 30**, **Pequeña 30 × 20** y **Más formatos · Próximamente**.
 No añadir textos de disponibilidad a las tres primeras ni alterar sus iconos
 sin nueva aprobación; registro final en [PR #40](https://github.com/MiruRecetas/MiruRecetas-ct230b-ble-lab/pull/40).
-Sus radios controlan los tres pasos. Solo Pequeña imprime a día de hoy.
+Sus radios controlan los tres pasos. Pequeña y Compacta generan e imprimen
+etiquetas libres; Compacta sigue pendiente de revisión visual y ensayo físico.
 
 El término «receta/componente/ingrediente» se reserva para documentación y
 formulario específico, no como subtítulo del selector de formatos.
 
 ## Compacta libre 50 × 30 · variante experimental independiente (07/11/2026)
 
-Archivo nuevo `compacta-engine.js`: motor independiente que reproduce la
-**geometría histórica** de V0.9 de forma autónoma y elimina el QR. No importa
-`label-v09-component.js`, no depende del motor web privado y no comparte
-archivos con las etiquetas de recetas aprobadas. **No modificar la V0.9
-original**: esta variante tiene ciclo de vida y futuras revisiones propias.
+La geometría de la **V0.9** se conserva en `plantilla-compacta.js` como
+**plantilla de composición**, sin QR. Se registra en el motor único
+`motor-libre.js`, completamente independiente de `label-v09-component.js`,
+del motor web privado y de las etiquetas productivas. **No modificar la V0.9
+original**: la plantilla libre tiene ciclo de vida y futuras revisiones propias.
 
 El formulario compacto admite nutrición manual opcional, instrucciones y
 nota libre con casillas de visibilidad, nombre y ambas fechas (primera obligatoria;
@@ -42,10 +43,14 @@ los bloques ocultos y las series multicopia **no tienen aprobación física
 por herencia** de la V0.9 original. Ver
 [MIS-ETIQUETAS-VISION-Y-HOJA-DE-RUTA.md](MIS-ETIQUETAS-VISION-Y-HOJA-DE-RUTA.md).
 
-**Limitación:** aunque las plantillas comparten el transporte en `app.js`,
-aún tienen compositores raster independientes. Factorizar el raster/TSPL en
-un motor común requiere PR propia y regresión física; no introducir imports
-hacia las etiquetas productivas ni reescribir los diseños fuente.
+**Arquitectura unificada (07/11/2026):** `motor-libre.js` contiene una única
+implementación de fechas y utilidades de validación, carga del isotipo, ajuste
+tipográfico, salto de líneas, renderización Canvas, raster 1 bit en bandas,
+construcción TSPL y validación de multicopia. `plantilla-pequena.js` y
+`plantilla-compacta.js` **solo** registran reglas particulares de datos y
+coordenadas gráficas. `app.js` gestiona una única conexión/transporte BLE.
+No importar ni modificar los motores históricos o productivos. La unificación
+no constituye aprobación física de las nuevas variantes.
 
 ## Cabecera aprobada · variante interior
 
@@ -73,8 +78,12 @@ con los tres archivos canónicos de `main` y conservar el modo
   el `index.html` histórico de experimentos CT230B.
 - `style.css`: presentación separada del motor, con crema/salvia/terracota,
   Bricolage Grotesque para titulares y Geist para texto.
-- `engine.js`: motor **independiente**, que valida los datos, reproduce la
-  geometría de la **V0.8 aprobada** en 354 × 236 puntos y compone TSPL.
+- `motor-libre.js`: **motor único de etiquetas libres** (raster, TSPL, tipografía,
+  fechas, ajuste de textos y carga del isotipo).
+- `plantilla-pequena.js`: composición y reglas de datos de 30 × 20, sin motor
+  TSPL propio y sin modificar el diseño de referencia V0.8.
+- `plantilla-compacta.js`: composición y reglas de datos de 50 × 30, sin QR,
+  aislada de la V0.9 original, con diseño libre todavía experimental.
 - `app.js`: interacción, carga estricta de tipografías/isotipo oficial,
   previsualización, conexión voluntaria, confirmación, transporte BLE, barra de
   progreso y registro local.
