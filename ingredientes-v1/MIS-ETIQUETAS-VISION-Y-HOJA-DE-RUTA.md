@@ -50,7 +50,7 @@ Navegación futura aprobada conceptualmente: menú **Conserva → Listas de la c
 - Esta aprobación del **selector** no equivale a aprobación de las composiciones *libres* de 50 × 30 / 50 × 80 ni de sus futuros ensayos físicos.
 
 ## 4. Pequeña 30 × 20: estado actual — IMPLEMENTADO EN LAB
-Código: `ingredientes-v1/engine.js`, `app.js`, `index.html`, `style.css`; protocolos y pruebas `ingredientes-v1/README.md` y `tests/ingredientes-v1.test.cjs`. El motor libre replica las referencias gráficas V0.8 de 354 × 236 puntos; la referencia histórica `label-v08-ingredient.js` no debe editarse.
+Código: `ingredientes-v1/motor-libre.js`, `plantilla-pequena.js`, `app.js`, `index.html`, `style.css`; protocolos y pruebas `ingredientes-v1/README.md`, `tests/ingredientes-v1.test.cjs` y `tests/motor-libre.test.cjs`. La plantilla libre replica la geometría V0.8 de 354 × 236 puntos; la referencia histórica `label-v08-ingredient.js` no debe editarse.
 
 **Campos/validación actual:**
 - Nombre manual ajustado progresivamente a anchura, entrada máxima actual 55 caracteres pero el motor rechaza nombres que no caben; gramos **opcionales**, 1–9999 enteros cuando se introducen.
@@ -66,7 +66,7 @@ Código: `ingredientes-v1/engine.js`, `app.js`, `index.html`, `style.css`; proto
 
 ## 4 bis. Compacta libre 50 × 30 — DESARROLLO EXPERIMENTAL (07/11/2026)
 
-Nueva plantilla **`ingredientes-v1/compacta-engine.js`**, aislada de
+Nueva plantilla **`ingredientes-v1/plantilla-compacta.js`**, registrada en el motor común e independiente de
 `label-v09-component.js` (ensayo histórico) y del motor productivo de
 `mirurecetas-web-source`. Se ha transcrito la geometría V0.9 como referencia
 **sin importar ningún módulo ni mantener enlace operativo** entre ambas
@@ -98,8 +98,12 @@ e inmutable. La nueva versión **sin QR** no está aprobada visual ni físicamen
 Esta fase no constituye aprobación definitiva de la composición libre; el
 detalle del diseño debe decidirse tras revisar su vista previa en Android.
 
-## 5. Motor y formularios futuros — DECISIÓN DE DIRECCIÓN, NO IMPLEMENTADOS
-Arquitectura deseada: un **motor de etiquetas libres compartido**, con un único contrato interno `format + data + visibility`, plantillas independientes para cada dimensión, raster y TSPL comunes, transporte BLE y progreso comunes. Reutilizar reglas contrastadas del motor productivo de recetas, **sin modificarlo ni importarlo directamente como dependencia del laboratorio** y sin alterar los originales aprobados.
+## 5. Motor único de etiquetas libres — IMPLEMENTADO EN LABORATORIO (07/11/2026)
+La arquitectura **ya está unificada**: `ingredientes-v1/motor-libre.js` centraliza carga de isotipo, fechas y validaciones comunes, ajuste progresivo de texto, composición Canvas, raster 1 bit por bandas, ensamblado TSPL y multicopia. `plantilla-pequena.js` (30 × 20) y `plantilla-compacta.js` (50 × 30) registran únicamente reglas de campos y coordenadas visuales; **no existen motores TSPL completos separados**. `app.js` mantiene un único transporte BLE compartido y la vista por formato, con seguimiento de fragmentos. El contrato interno es formato + datos + visibilidad; Amplia futura se añadirá como una tercera plantilla sin replicar motor. No se importa, enlaza ni modifica código de V0.9 histórica, V0.8 histórica o etiquetas de producción.
+
+La refactorización reemplaza los archivos `engine.js` y `compacta-engine.js` (retirados de esta página). Las **19 pruebas de contrato** y la comparación de cuatro casos equivalentes de render y TSPL respaldan la ausencia de cambios intencionados en los diseños actuales; no equivalen a ensayo físico con CT230B. La geometría libre de Compacta **sigue pendiente de revisión visual y física** y podrá modificarse después **exclusivamente en su plantilla**.
+
+### Desarrollo posterior de Amplia y ajustes visuales
 
 Para 50 × 30 y 50 × 80 horizontal:
 - Formularios adaptativos al formato para nombre, kcal, proteínas, hidratos, grasas, fechas, instrucciones y notas disponibles en la composición original.
@@ -108,7 +112,7 @@ Para 50 × 30 y 50 × 80 horizontal:
 - Valor incompleto de macro: no inventar, no usar `0` salvo que se haya indicado expresamente; kcal independientes de reparto macro manual. **Sin anillo y sin QR** para las etiquetas libres.
 - Vista previa debe reflejar exactamente el raster que se va a enviar; impedir imprimir formatos en desarrollo hasta motor, pruebas automatizadas y comprobación física CT230B.
 
-**Orden de trabajo acordado:** 1) selector/interfaz global (hecho); 2) estabilizar Pequeña en módulo común (funcional en laboratorio); 3) añadir Compacta 50 × 30 (primer prototipo libre experimental); 4) añadir Amplia horizontal 50 × 80; 5) banco de ingredientes JSON; 6) ampliar funcionalidades. No demorar la interfaz general hasta completar el banco.
+**Orden de trabajo acordado:** 1) selector/interfaz global (hecho); 2) Pequeña y Compacta integradas en motor común (hecho, pendiente de pruebas físicas nuevas); 3) ajustar el diseño libre Compacta tras revisión de la usuaria; 4) añadir Amplia horizontal 50 × 80; 5) banco de ingredientes JSON; 6) ampliar funcionalidades. No demorar la interfaz general hasta completar el banco.
 
 ## 6. Banco de ingredientes — PROPUESTA APROBADA EN PRINCIPIO; CATÁLOGO PENDIENTE
 Propuesta de **JSON versionado autónomo**, con selección **Categoría → Ingrediente** (p. ej. carne/pescado/verduras → ternera/salmón/pimiento) y **presentación** adicional solo si cambia la orientación de conservación (p. ej. ternera picada frente a filete). Admitir **«Otro / Escribir manualmente»** y alias para buscar. Los selectores precargan el **nombre**; no deben impedir etiquetas libres.

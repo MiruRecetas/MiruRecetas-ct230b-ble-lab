@@ -7,7 +7,10 @@ const assert=require("node:assert/strict");
 const fs=require("node:fs");
 const path=require("node:path");
 const base=path.resolve(__dirname,"../ingredientes-v1");
-const engine=require(path.join(base,"engine.js"));
+const motor=require(path.join(base,"motor-libre.js"));
+require(path.join(base,"plantilla-pequena.js"));
+require(path.join(base,"plantilla-compacta.js"));
+const engine=motor.forFormat("ingredient");
 const source=name=>fs.readFileSync(path.join(base,name),"utf8");
 const sample={name:"Carne Picada",grams:500,packed:"2026-11-04",expiry:"2027-01-04"};
 
@@ -125,9 +128,10 @@ test("página autónoma, campos y archivos enlazados",()=>{
    "connection","connect","disconnect","confirm-paper","print","progress","copy","clear","log",
    "mode","note","notes-enabled","copies-minus","copies-plus","copies","transport","transport-count","transport-percent","progress-fill"])
   assert.match(html,new RegExp('id="'+id+'"'));
- assert.match(html,/src="\.\/engine\.js\?v=20261106-otro-tipo"/);
- assert.match(html,/src="\.\/app\.js\?v=20261107-compacta-libre"/);
- assert.match(html,/src="\.\/compacta-engine\.js\?v=20261107-compacta-libre"/);
+ assert.match(html,/src="\.\/motor-libre\.js\?v=20261107-motor-unico"/);
+ assert.match(html,/src="\.\/plantilla-pequena\.js\?v=20261107-motor-unico"/);
+ assert.match(html,/src="\.\/app\.js\?v=20261107-motor-unico"/);
+ assert.match(html,/src="\.\/plantilla-compacta\.js\?v=20261107-motor-unico"/);
  assert.match(html,/href="\.\/style\.css"/);
  assert.ok(html.includes('class="miru-isotipo"'));
  assert.match(app,/E\.logo\("\.\.\/assets\/isotipo-bn\.svg"\)/);

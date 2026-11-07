@@ -7,8 +7,11 @@
 > los ensayos históricos, este repositorio contiene una **página autónoma
 > publicada en laboratorio**: [Mis etiquetas](https://mirurecetas.github.io/MiruRecetas-ct230b-ble-lab/ingredientes-v1/).
 > La usuaria ha aprobado expresamente el selector de cuatro formatos y sus
-> iconos actuales (PR #40). **Solo Pequeña 30 × 20 es imprimible aquí**;
-> Compacta 50 × 30 y Amplia horizontal 50 × 80 son desarrollos futuros.
+> iconos actuales (PR #40). **Pequeña 30 × 20** y **Compacta libre
+> 50 × 30** comparten ahora un **motor único** de etiquetas libres, con
+> composiciones independientes. Compacta es experimental: su diseño sin QR
+> aún no ha sido aprobado visualmente ni ensayado físicamente. **Amplia
+> horizontal 50 × 80** permanece pendiente de desarrollo.
 > Consulta el [contrato de producto y hoja de ruta](ingredientes-v1/MIS-ETIQUETAS-VISION-Y-HOJA-DE-RUTA.md)
 > y el [README técnico del módulo](ingredientes-v1/README.md).
 > El módulo es experimental, **no está integrado en la web privada de

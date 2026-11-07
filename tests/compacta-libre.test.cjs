@@ -3,15 +3,19 @@ const test=require("node:test");
 const assert=require("node:assert/strict");
 const fs=require("node:fs");
 const path=require("node:path");
-const C=require("../ingredientes-v1/compacta-engine.js");
+const motor=require("../ingredientes-v1/motor-libre.js");
+require("../ingredientes-v1/plantilla-pequena.js");
+require("../ingredientes-v1/plantilla-compacta.js");
+const C=motor.forFormat("component");
 const read=p=>fs.readFileSync(path.join(__dirname,"..","ingredientes-v1",p),"utf8");
 const example={name:"Pisto",mode:"freeze",packed:"2026-11-07",expiry:"",
  kcal:"164,35",protein:"5,69",carbs:"18,58",fat:"7,84",
  instruction:"Descongelar en nevera. Recalentar tapado o en sartén",
  note:"La textura puede variar al congelar.",showNutrition:true,showInstruction:true,showNote:true};
 test("motor libre es propio y no importa V0.9 ni web productiva",()=>{
- const src=read("compacta-engine.js");
- assert.doesNotMatch(src,/import\s|require\(|v9Draw|V9_RECIPE|QRCODE\s|#r047|\/recetas\/pisto/);
+ const src=read("plantilla-compacta.js");
+ assert.doesNotMatch(src,/v9Draw|V9_RECIPE|QRCODE\s|#r047|\/recetas\/pisto/);
+ assert.match(src,/require\("\.\/motor-libre\.js"\)/);
  assert.equal(C.width,590);assert.equal(C.height,354);
 });
 test("fechas siempre visibles y consumo opcional",()=>{
@@ -37,7 +41,7 @@ test("no hay gramos, QR ni raciones y los bloques pueden ocultarse",()=>{
  assert.match(html,/id="c-name"/);assert.match(html,/id="c-nutrition-enabled"/);
  assert.match(html,/id="c-instruction-enabled"/);assert.match(html,/id="c-note-enabled"/);
  assert.match(html,/id="c-preview" width="590" height="354"/);
- assert.match(html,/src="\.\/compacta-engine\.js\?v=/);
+ assert.match(html,/src="\.\/plantilla-compacta\.js\?v=/);
 });
 test("vista previa es raster que entra al mismo generador TSPL; 1–20 copias",()=>{
  const old=globalThis.document,painted=[];
@@ -62,7 +66,7 @@ test("vista previa es raster que entra al mismo generador TSPL; 1–20 copias",(
    assert.doesNotMatch(command,/QRCODE|PRINT 1,\d+\r\nPRINT/);
    assert.equal(w.copies,count);
   }
-  assert.throws(()=>C.build(canvas,21),/Copias/);
+  assert.throws(()=>C.build(canvas,21),/copias/);
  }finally{globalThis.document=old;}
 });
 test("tres pasos comparten datos de Compacta y Pequeña no se altera",()=>{
