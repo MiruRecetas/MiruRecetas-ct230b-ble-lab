@@ -134,7 +134,7 @@ test("página autónoma, campos y archivos enlazados",()=>{
  assert.match(css,/--sage:/);
  assert.match(css,/#b96c4a/);
  assert.match(app,/progress\(done,total,"complete"\)/);
- assert.match(app,/work=E.build\(E.render\(d,logo\),copies\)/);
+ assert.match(app,/work=motor.build\(motor.render\(d,logo\),copies\)/);
  assert.match(app,/noteDefaults=\{fridge:"Conservar en nevera",freeze:"Descongelar en nevera",other:""\}/);
  assert.match(html,/maxlength="32"/);
  assert.match(html,/id="notes-enabled" type="checkbox" checked/);
