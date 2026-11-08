@@ -87,7 +87,7 @@ test("Impresión no pierde funciones, pero elimina textos accesorios",()=>{
   "confirm-paper","print","transport","progress","copy","clear","log"])
   assert.ok(main.includes('id="'+id+'"'),id);
  assert.ok(!main.includes('id="print-subtitle"'));
- assert.ok(!main.includes('class="intro"'));
+ assert.equal((main.match(/class="intro"/g)||[]).length,1);
  assert.ok(!main.includes('class="footer"'));
  assert.ok(!main.includes("La multicopia usa PRINT"));
  assert.ok(!main.includes("Este indicador mide la transmisión"));
@@ -101,5 +101,5 @@ test("La vista previa mantiene accesibilidad y sólo revela errores de construcc
  for(const id of ["design-status","c-status","a-status"])
   assert.ok(app.includes('$("'+id+'").dataset.error="true"'));
  assert.match(html,/src="\.\/app\.js\?v=20261108-layout-v1"/);
- assert.match(html,/href="\.\/style\.css\?v=20261108-layout-v1"/);
+ assert.match(html,/href="\.\/style\.css\?v=20261108-conserva-heading-v1"/);
 });
