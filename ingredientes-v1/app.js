@@ -282,7 +282,7 @@
   $(id).addEventListener("change",()=>{update();void wideRefresh();});
  for(const id of ["name","grams","packed","expiry","note"])
   for(const evt of ["input","change"])$(id).addEventListener(evt,refresh);
- const noteDefaults={fridge:"Conservar en nevera",freeze:"Descongelar en nevera",other:""};
+ const noteDefaults={fridge:"Conservar en nevera",freeze:"Descongelar en nevera",pantry:"",preserve:"",other:""};
  // Contrato de Pequeña: cada cambio de conservación reemplaza el texto guiado.
  // Compacta lo sitúa en instrucciones y limpia la nota personal previa,
  // evitando instrucciones contradictorias o duplicadas en ambas secciones.
