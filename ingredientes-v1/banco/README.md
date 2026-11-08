@@ -113,8 +113,8 @@ comerciales. **Fuente canónica original:** el archivo
 **Contraste del FoodKeeper original:**
 
 - ID **48, 51, 61, 67, 69 y 72**: `DOP_Refrigerate`
-  **3–5 días**; `DOP_Freeze` **4–12 meses**. Conforme al motor
-  económico/editorial del banco (máximo de frío y mínimo de congelación,
+  **3–5 días**; `DOP_Freeze` **4–12 meses**. Conforme al protocolo
+  editorial del banco (máximo de frío y mínimo de congelación,
   1 mes = 30 días), se registran **5 y 120 días**.
 - ID **73** (cerdo molido/picado): refrigeración **1–2 días**,
   congelación **3–4 meses**: se registran **2 y 90 días**. La
