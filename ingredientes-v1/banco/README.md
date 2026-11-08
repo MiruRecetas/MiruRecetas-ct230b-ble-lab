@@ -33,6 +33,26 @@
 
 La tabla conserva los nombres de categorías de origen, incluidas las expresiones no habituales en español de España. La clasificación, denominaciones y número de registros que aparezcan en el **catálogo derivado** serán decisiones editoriales propias de MiruRecetas.
 
+## Categorías editoriales MiruRecetas aprobadas (08/11/2026)
+
+**11 categorías principales**, distintas de la tabla FoodKeeper original anterior:
+
+1. Carne
+2. Pescado
+3. Marisco
+4. Frutas
+5. Verduras
+6. Cereales y Legumbres
+7. Frutos secos y semillas
+8. Conservas
+9. Condimentos
+10. Lácteos y huevos
+11. Hongos y algas
+
+«Cereales y Legumbres» agrupa los alimentos para los que en algún momento se diseñarán subcategorías de arroz, pasta, cereales, harinas y legumbres; las subcategorías **no están aprobadas ni implementadas**. «Condimentos» es el nombre definitivo de la antigua propuesta «Especias y hierbas». Las aves son Carne, los tubérculos Verduras y los cefalópodos (incluido pulpo) Marisco. «Lácteos y huevos» se mantiene definida aun si queda vacía. «Conservas» se reserva para preparados caseros futuros, no conservas comerciales.
+
+Estas categorías **no implican importar ni crear productos**: solo ingredientes reales comprados a granel y útiles para la etiqueta Pequeña; nunca productos comerciales envasados, sal, vinagre, aceites/grasas o proteínas vegetales comerciales. Las masas y preparaciones pertenecen a otras etiquetas (Compacta). La ficha original FoodKeeper permanece sin alterar y aún no se ha creado el derivado.
+
 ## Contrato vigente para el catálogo derivado (08/11/2026)
 
 La clasificación de la tabla anterior es **solo original FoodKeeper**; no forma parte de la UI ni se importará completa. El futuro JSON **MiruRecetas** tendrá categorías/subcategorías/nombres es-ES y se limita a **ingredientes reales comprados a granel**, como carnes, pescados, mariscos, verduras, frutas o frutos secos; también contempla, más adelante, **conservas caseras**. **Nunca se etiquetarán productos comerciales envasados** en esta función. Compacta y Amplia conservan sus usos independientes.
