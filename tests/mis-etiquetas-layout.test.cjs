@@ -11,6 +11,20 @@ const css=fs.readFileSync(path.join(folder,"style.css"),"utf8");
 const app=fs.readFileSync(path.join(folder,"app.js"),"utf8");
 const main=html.slice(html.indexOf('<main class="page">'),html.indexOf('</main>')+7);
 
+test("Encabezado de Conserva como el recetario, con subtítulo breve",()=>{
+ const eyebrow=main.indexOf('<p class="eyebrow">Conserva</p>');
+ const heading=main.indexOf('<h1>Mis etiquetas</h1>');
+ const subtitle=main.indexOf('<p class="intro">Crea e imprime tus etiquetas de conservación.</p>');
+ const layout=main.indexOf('<div class="layout-grid">');
+ assert.ok(eyebrow>=0&&eyebrow<heading&&heading<subtitle&&subtitle<layout);
+ assert.match(css,/\.eyebrow\{[^}]*color:#b96c4a;[^}]*font-size:\.7rem;[^}]*letter-spacing:\.16em;[^}]*font-weight:700;[^}]*text-transform:uppercase/);
+ assert.match(css,/\.intro\{[^}]*font-size:16px;[^}]*line-height:1\.5;[^}]*color:#67756b/);
+ assert.match(html,/href="\.\/style\.css\?v=20261108-conserva-heading-v1"/);
+ // No se modifican los elementos visuales aprobados de las etiquetas ni la cabecera interior.
+ assert.equal((main.match(/class="card format-card"/g)||[]).length,1);
+ assert.equal((main.match(/class="card step-card"/g)||[]).length,2);
+});
+
 test("Una tarjeta fija agrupa exactamente selector, cuatro opciones y tres vistas previas",()=>{
  assert.equal((main.match(/class="card format-card"/g)||[]).length,1);
  assert.equal((main.match(/class="format-preview"/g)||[]).length,1);
@@ -73,7 +87,7 @@ test("Impresión no pierde funciones, pero elimina textos accesorios",()=>{
   "confirm-paper","print","transport","progress","copy","clear","log"])
   assert.ok(main.includes('id="'+id+'"'),id);
  assert.ok(!main.includes('id="print-subtitle"'));
- assert.ok(!main.includes('class="intro"'));
+ assert.equal((main.match(/class="intro"/g)||[]).length,1);
  assert.ok(!main.includes('class="footer"'));
  assert.ok(!main.includes("La multicopia usa PRINT"));
  assert.ok(!main.includes("Este indicador mide la transmisión"));
@@ -87,5 +101,5 @@ test("La vista previa mantiene accesibilidad y sólo revela errores de construcc
  for(const id of ["design-status","c-status","a-status"])
   assert.ok(app.includes('$("'+id+'").dataset.error="true"'));
  assert.match(html,/src="\.\/app\.js\?v=20261108-layout-v1"/);
- assert.match(html,/href="\.\/style\.css\?v=20261108-layout-v1"/);
+ assert.match(html,/href="\.\/style\.css\?v=20261108-conserva-heading-v1"/);
 });
