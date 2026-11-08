@@ -10,6 +10,15 @@
 > [decisión canónica](MIS-ETIQUETAS-VISION-Y-HOJA-DE-RUTA.md#corrección-del-banco-y-preservación-del-diseño-08112026).
 >
 
+**Incidencia posterior a PR #69, corregida en rama de laboratorio:**
+la restauración de la plantilla histórica no evitaba el solapamiento de
+«500 g» con el isotipo. `M.fit` anulaba el centrado previo. El
+valor en gramos ahora se centra explícitamente en `x=128`, se limita
+a 240 puntos de ancho y reserva 20 puntos hasta el isotipo. No cambia
+el motor común ni los demás elementos. Refrescar el recurso versionado
+en navegador y comprobarlo visualmente. Registro en
+[hoja de ruta](MIS-ETIQUETAS-VISION-Y-HOJA-DE-RUTA.md).
+
 **Estado: desarrollo experimental exclusivamente en la rama de laboratorio.**
 Este directorio contiene la página autónoma **«Mis etiquetas»**, con
 selector de formatos aprobado y con **Pequeña 30 × 20** operativa en laboratorio.
