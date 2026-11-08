@@ -44,7 +44,7 @@ test("Móvil ordenado y escritorio repartido en dos columnas, selector nunca ple
  assert.match(css,/\.layout-grid\{display:grid;grid-template-columns:minmax\(0,1fr\) minmax\(0,1\.06fr\)/);
  assert.match(css,/\.format-column\{grid-column:2;grid-row:1/);
  assert.match(css,/\.steps-column\{grid-column:1;grid-row:1/);
- assert.match(css,/@media\(max-width:900px\)\{[\s\S]*?\.layout-grid\{display:flex;flex-direction:column/);
+ assert.match(css,/@media\(max-width:679px\),\(max-width:900px\) and \(orientation:portrait\)\{[\s\S]*?\.layout-grid\{display:flex;flex-direction:column/);
  assert.ok(!main.includes('class="content-grid"'));
 });
 
