@@ -220,8 +220,6 @@ code{font-family:ui-monospace,monospace}
 .bank-item-meta{color:var(--muted);font-size:12px;line-height:1.35}
 .bank-item-mark{font-weight:750;color:var(--sage-dark);flex:none}
 .bank-empty{color:var(--muted);font-size:14px;padding:15px}
-.bank-source-info{font:500 11px/1.4 "Geist",sans-serif;color:var(--muted);margin:0;min-height:0}
-.bank-source-info a{text-decoration:underline;color:var(--sage-dark)}
 .bank-sheet-actions{border-top:1px solid var(--line);padding-top:12px}
 .bank-sheet-actions .btn{width:100%;margin:0}
 @media(min-width:700px) and (orientation:landscape){
