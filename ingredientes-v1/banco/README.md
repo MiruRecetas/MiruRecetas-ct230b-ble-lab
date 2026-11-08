@@ -1,5 +1,18 @@
 # FoodKeeper ES · archivo fuente original (solo consulta)
 
+> **Decisión posterior 08/11/2026:** la UI del banco muestra únicamente
+> conservaciones aplicables a cada ficha. Ya no se ofrecen métodos desconocidos
+> por el mero hecho de tener un booleano, y `false` expresa «no ofrecido
+> para esta presentación en el banco». Carne (FoodKeeper 59) y lechuga
+> (FoodKeeper 290) quedan `verificado` con fuente global `agregación` por
+> combinar plazos originales con exclusiones editoriales aprobadas; sus IDs
+> se preservan aquí aunque `id_fuente` en el derivado sea `null`.
+> Pulpo y salsa de tomate siguen archivados `sin_datos`, pero no son
+> seleccionables sin una modalidad documentada. Fuente FoodKeeper original
+> inalterada. La interfaz no enlaza el JSON bruto; la documentación mantiene
+> su procedencia. Véase [contrato corregido](../MIS-ETIQUETAS-VISION-Y-HOJA-DE-RUTA.md).
+>
+
 **Estado (08/11/2026):** archivo español facilitado por la usuaria, conservado **sin alteraciones** como referencia para construir un banco **derivado y editorialmente propio de MiruRecetas**. No es todavía el catálogo de búsqueda ni se usa para imprimir etiquetas.
 
 - Archivo original: [`fuentes/foodkeeper-es-original.json`](fuentes/foodkeeper-es-original.json).

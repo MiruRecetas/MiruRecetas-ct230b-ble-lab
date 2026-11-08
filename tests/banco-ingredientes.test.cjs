@@ -55,13 +55,17 @@ test("el origen es GLOBAL y los datos no conocidos no reciben plazos inventados"
 test("plazos del archivo original: sin extrapolar datos de otros alimentos",()=>{
  const meat=byName("Carne picada de ternera"),potato=byName("Patata"),lettuce=byName("Lechuga");
  const apricot=byName("Orejones");
- assert.equal(meat.id_fuente,"59");assert.equal(meat.refrigeracion_dias,2);
+ assert.equal(meat.estado_recomendacion,"verificado");assert.equal(meat.fuente,"agregación");
+ assert.equal(meat.id_fuente,null);assert.equal(meat.refrigeracion_dias,2);
+ assert.equal(meat.despensa,false);assert.equal(meat.conserva,false);
  assert.equal(meat.congelacion_dias,90);
  assert.equal(potato.id_fuente,"297");assert.equal(potato.refrigeracion_dias,14);
- assert.equal(potato.despensa_dias,null);assert.equal(potato.congelacion_dias,null);
- assert.equal(lettuce.id_fuente,"290");assert.equal(lettuce.refrigeracion_dias,14);
+ assert.equal(potato.despensa_dias,null);assert.equal(potato.congelacion,false);assert.equal(potato.congelacion_dias,null);
+ assert.equal(lettuce.estado_recomendacion,"verificado");assert.equal(lettuce.fuente,"agregación");
+ assert.equal(lettuce.id_fuente,null);assert.equal(lettuce.refrigeracion_dias,14);
+ assert.equal(lettuce.despensa,false);assert.equal(lettuce.conserva,false);
  assert.equal(lettuce.congelacion,false);
- assert.equal(apricot.id_fuente,"379");assert.equal(apricot.despensa_dias,180);
+ assert.equal(apricot.id_fuente,"379");assert.equal(apricot.despensa_dias,180);assert.equal(apricot.refrigeracion,false);
  assert.ok(apricot.sinonimos.includes("Albaricoques deshidratados"));
  assert.equal(byName("Pulpo").estado_recomendacion,"sin_datos");
  assert.equal(byName("Salsa de tomate").estado_recomendacion,"sin_datos");
@@ -78,6 +82,13 @@ test("Pequeña tiene chips y panel, sin alterar Compacta/Amplia ni el motor com�
  assert.match(js,/sinonimos/);
  assert.match(js,/Tiempo recomendado: /);
  assert.match(html,/Restablecer recomendación/);
+ assert.doesNotMatch(html,/bank-source-info|Consultar fuente/);
+ assert.doesNotMatch(js,/foodkeeper-es-original\.json|bank-source-info/);
+ assert.match(js,/notePresets/);
+ assert.match(js,/setModeOptions\(item/);
+ assert.match(js,/allowedModes\(item\)/);
+ assert.match(js,/appliedItem\(\)/);
+ assert.match(app,/\?"other":\$\("mode"\)\.value/);
  assert.match(js,/bank-reset-date/);
  assert.match(css,/\.bank-overlay/);
  assert.doesNotMatch(engine,/bank-(?:sheet|open|free)|catalogo\.json/);
@@ -85,12 +96,27 @@ test("Pequeña tiene chips y panel, sin alterar Compacta/Amplia ni el motor com�
  assert.ok(html.includes('id="c-preview"')&&html.includes('id="a-preview"'));
  assert.doesNotThrow(()=>new vm.Script(js));
 });
-test("el selector existente de Pequeña admite dos modos adicionales",()=>{
+test("restaurada la plantilla aprobada y tres modos originales sin cambios",()=>{
  const motor=require(path.join(dir,"motor-libre.js"));
  require(path.join(dir,"plantilla-pequena.js"));
  const label=motor.forFormat("ingredient");
- for(const mode of ["fridge","freeze","pantry","preserve","other"]){
+ for(const mode of ["fridge","freeze","other"]){
   const d=label.normalize({name:"Patata",grams:"",mode,packed:"2026-11-08",expiry:"",note:"",notesEnabled:false});
   assert.equal(d.mode,mode);
  }
+ assert.throws(()=>label.normalize({name:"Patata",mode:"preserve"}),/Tipo/);
+ assert.throws(()=>label.normalize({name:"Patata",mode:"pantry"}),/Tipo/);
+ const template=read("plantilla-pequena.js");
+ assert.ok(template.includes('data.mode==="other"?"Conservación":"Envasado"'));
+});
+test("los métodos del banco solo aparecen cuando están habilitados",()=>{
+ const options={fridge:"refrigeracion",freeze:"congelacion",pantry:"despensa",preserve:"conserva"};
+ const permitted=item=>item.estado_recomendacion==="sin_datos"?[]:
+  Object.entries(options).filter(([,key])=>item[key]===true).map(([mode])=>mode);
+ assert.deepEqual(permitted(byName("Carne picada de ternera")),["fridge","freeze"]);
+ assert.deepEqual(permitted(byName("Lechuga")),["fridge"]);
+ assert.deepEqual(permitted(byName("Patata")),["fridge","pantry"]);
+ assert.deepEqual(permitted(byName("Orejones")),["pantry"]);
+ assert.deepEqual(permitted(byName("Pulpo")),[]);
+ assert.deepEqual(permitted(byName("Salsa de tomate")),[]);
 });

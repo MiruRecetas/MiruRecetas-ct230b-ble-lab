@@ -1,5 +1,15 @@
 # Conserva · «Mis etiquetas» (laboratorio · interfaz experimental)
 
+> **Actualización correctiva 08/11/2026 (prevalece sobre pasajes históricos):**
+> restaurada la plantilla Pequeña previa a #68; el banco ofrece solo métodos
+> aplicables y notas editoriales, conserva el modo libre independiente, oculta
+> borradores sin modalidad validada y retira el enlace al JSON fuente de la UI.
+> Carne picada: frío/congelación; lechuga: solo frío; patata: frío/despensa
+> (plazo de despensa aún pendiente); orejones: despensa. Es una corrección en
+> laboratorio pendiente de revisión visual y ensayos físicos. Ver
+> [decisión canónica](MIS-ETIQUETAS-VISION-Y-HOJA-DE-RUTA.md#corrección-del-banco-y-preservación-del-diseño-08112026).
+>
+
 **Estado: desarrollo experimental exclusivamente en la rama de laboratorio.**
 Este directorio contiene la página autónoma **«Mis etiquetas»**, con
 selector de formatos aprobado y con **Pequeña 30 × 20** operativa en laboratorio.
