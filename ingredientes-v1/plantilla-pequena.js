@@ -47,8 +47,10 @@
   if(data.grams!==null)fit(c,String(data.grams)+" g",128,195,"700",55,'"Bricolage Grotesque"',240,32,"center");
   c.textAlign="left";c.drawImage(officialLogo,268,157,62,62);
   if(data.notesEnabled&&data.note){
-   c.textAlign="left";
-   try{fit(c,data.note,60,227,"italic 500",16,'"Geist"',285,12);}
+   // Centrar la nota dentro de la misma zona libre que los gramos:
+   // x=8…248, sin alcanzar el isotipo situado desde x=268.
+   // M.fit recibe align="center" expresamente para no volver a la izquierda.
+   try{fit(c,data.note,128,227,"italic 500",16,'"Geist"',240,12,"center");}
    catch(_){throw Error("La nota no cabe en la etiqueta 30 × 20; utiliza un texto más corto.");}
   }
  }
