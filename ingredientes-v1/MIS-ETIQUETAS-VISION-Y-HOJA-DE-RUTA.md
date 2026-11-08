@@ -64,7 +64,7 @@ Código: `ingredientes-v1/motor-libre.js`, `plantilla-pequena.js`, `app.js`, `in
 - El contador del progreso mide **transmisión BLE, no número de etiquetas físicamente impresas**. Historial de consola: seis envíos de 5919 B, 296 fragmentos cada uno (05/11); eso no certifica por sí solo la salida física. La V0.8 de referencia histórica sí fue ensayada físicamente; **no atribuir esa validación a todas las variantes libres** ni a tiradas 3–20.
 - Un fallo real descubierto al elegir «Otro tipo» se corrigió en PR #37; la selección de formatos se añadió en PR #38 y el diseño definitivo del selector en #39/#40.
 
-## 4 bis. Compacta libre 50 × 30 — DESARROLLO EXPERIMENTAL (07/11/2026)
+## 4 bis. Compacta libre 50 × 30 — DISEÑO APROBADO Y VALIDADO VISUALMENTE (08/11/2026)
 
 Nueva plantilla **`ingredientes-v1/plantilla-compacta.js`**, registrada en el motor común e independiente de
 `label-v09-component.js` (ensayo histórico) y del motor productivo de
@@ -72,7 +72,7 @@ Nueva plantilla **`ingredientes-v1/plantilla-compacta.js`**, registrada en el mo
 **sin importar ningún módulo ni mantener enlace operativo** entre ambas
 versiones. Una modificación posterior del diseño libre **no podrá alterar**
 la etiqueta existente de recetas. La V0.9 original con QR permanece aprobada
-e inmutable. La nueva versión **sin QR** ha recibido una decisión de diseño explícita el 08/11/2026 (PR [#45](https://github.com/MiruRecetas/MiruRecetas-ct230b-ble-lab/pull/45)); **la impresión física sigue sin validar**.
+e inmutable. El diseño libre sin QR se desarrolló en PR [#45](https://github.com/MiruRecetas/MiruRecetas-ct230b-ble-lab/pull/45), se corrigió en PR [#46](https://github.com/MiruRecetas/MiruRecetas-ct230b-ble-lab/pull/46) y quedó **aprobado y validado visualmente por la usuaria el 08/11/2026 sobre GitHub Pages**. Esta confirmación no especifica que se haya realizado una **impresión física CT230B** de la nueva variante; mantener ese ensayo como verificación independiente pendiente de evidencia.
 
 - Lienzo 590 × 354. **Corrección 08/11/2026 tras comparar capturas Android**:
   cabecera idéntica a V0.9, título Bricolage Grotesque (x=11, y=46, 46 px),
@@ -116,15 +116,13 @@ La composición visual libre de Compacta fue elegida el 08/11/2026 utilizando
 la imagen de referencia aportada por la usuaria. El isotipo de esa ilustración
 **no sustituye** al isotipo oficial BN ni a las fuentes oficiales Bricolage
 Grotesque y Geist, que se cargan de los recursos del laboratorio. El diseño
-está implementado en [PR #45](https://github.com/MiruRecetas/MiruRecetas-ct230b-ble-lab/pull/45), pendiente de
-revisión del raster publicado en Android y validación física CT230B; no se
-considera una etiqueta probada hasta entonces.
+está implementado en [PR #46](https://github.com/MiruRecetas/MiruRecetas-ct230b-ble-lab/pull/46), y la **usuaria confirmó expresamente su aceptación y validación visual en la página publicada el 08/11/2026**. Solo resta distinguir esta aceptación de la prueba de impresión física y su registro; no inventar evidencia de papel.
 
 ## 5. Motor único de etiquetas libres — IMPLEMENTADO EN LABORATORIO (07/11/2026)
 La arquitectura **ya está unificada**: `ingredientes-v1/motor-libre.js` centraliza carga de isotipo, fechas y validaciones comunes, ajuste progresivo de texto, composición Canvas, raster 1 bit por bandas, ensamblado TSPL y multicopia. `plantilla-pequena.js` (30 × 20) y `plantilla-compacta.js` (50 × 30) registran únicamente reglas de campos y coordenadas visuales; **no existen motores TSPL completos separados**. `app.js` mantiene un único transporte BLE compartido y la vista por formato, con seguimiento de fragmentos. El contrato interno es formato + datos + visibilidad; Amplia futura se añadirá como una tercera plantilla sin replicar motor. No se importa, enlaza ni modifica código de V0.9 histórica, V0.8 histórica o etiquetas de producción.
 
 La refactorización reemplaza los archivos `engine.js` y `compacta-engine.js` (retirados de esta página). Las **19 pruebas de contrato** y la comparación de cuatro casos equivalentes de render y TSPL respaldan la ausencia de cambios intencionados en los diseños actuales; no equivalen a ensayo físico con CT230B. La geometría libre de Compacta recoge la decisión de diseño del 08/11/2026;
-la vista previa publicada sigue sujeta a aceptación final y a prueba física.
+la vista previa publicada **ya ha sido aprobada y validada visualmente por la usuaria**; la validación física CT230B no está acreditada en este registro.
 Los cambios de composición pertenecen **exclusivamente a su plantilla**.
 
 ### Desarrollo posterior de Amplia y ajustes visuales
@@ -136,7 +134,15 @@ Para 50 × 30 y 50 × 80 horizontal:
 - Valor incompleto de macro: no inventar, no usar `0` salvo que se haya indicado expresamente; kcal independientes de reparto macro manual. **Sin anillo y sin QR** para las etiquetas libres.
 - Vista previa debe reflejar exactamente el raster que se va a enviar; impedir imprimir formatos en desarrollo hasta motor, pruebas automatizadas y comprobación física CT230B.
 
-**Orden de trabajo acordado:** 1) selector/interfaz global (hecho); 2) Pequeña y Compacta integradas en motor común (hecho, pendiente de pruebas físicas nuevas); 3) ajustar el diseño libre Compacta tras revisión de la usuaria; 4) añadir Amplia horizontal 50 × 80; 5) banco de ingredientes JSON; 6) ampliar funcionalidades. No demorar la interfaz general hasta completar el banco.
+**Orden de trabajo acordado:** 1) selector/interfaz global (**hecho**); 2) Pequeña y Compacta integradas en motor común (**hecho**, regresiones físicas independientes pendientes cuando proceda); 3) diseño libre Compacta corregido y aprobado visualmente (**hecho, 08/11/2026**); 4) **siguiente fase: Amplia horizontal 50 × 80**, referenciada en V0.7.3, pendiente de validación del diseño de la variante libre antes de desarrollarla; 5) banco de ingredientes JSON; 6) ampliar funcionalidades. No demorar la interfaz general hasta completar el banco.
+
+### Siguiente hito — preparación de Amplia libre 50 × 80 horizontal (08/11/2026)
+
+**Referencia visual y técnica histórica, exclusivamente de consulta:** `label-v07.js` (V0.7.3), `V07-HORIZONTAL-PURE-CALABAZA-CALABACIN.md` y el SVG original documentado. La composición editorial se organiza sobre **945 × 590 puntos horizontales** y se gira para un papel físico 50 × 80 (raster **590 × 945**), con nombre grande, isotipo BN, banda superior, fechas, kcal/PR/HC/GR, instrucciones y nota. La V0.7.3 histórica contiene un QR y un límite preventivo propio de 36.000 B: **no trasladar QR, URL, código ni excepciones de tamaño** al nuevo motor libre.
+
+**Decisiones ya aprobadas aplicables a Amplia:** formato horizontal 50 × 80, etiqueta libre autónoma, **sin QR ni anillo**, sin gramos/raciones, campos introducidos manualmente, fechas siempre visibles (primera obligatoria, segunda opcional), macros opcionales sin imputaciones, plantilla específica registrada en el **único `motor-libre.js`**, render fiel al raster transmitido, transporte BLE existente y sin escritura en inventario. No cambiar el selector de cuatro tarjetas.
+
+**Pendiente de aprobación de producto y diseño antes de implementar:** distribución de los bloques al retirar el QR; disposición cuando se ocultan kcal/macros; jerarquía de instrucciones y nota con contenidos vacíos; comportamiento editorial de la cabecera y separadores de V0.7.3 frente al espacio liberado. Proponer una opción fiel a la referencia histórica para revisión **antes** de fijar geometría o fusionar código. No asumir que todas las redistribuciones de Compacta se heredan automáticamente a Amplia. Tras la decisión, desarrollar `plantilla-amplia.js` sobre el motor libre, ampliar el formulario y pruebas, publicar solo mediante PR/Pages del laboratorio y verificar después CT230B física cuando proceda.
 
 ## 6. Banco de ingredientes — PROPUESTA APROBADA EN PRINCIPIO; CATÁLOGO PENDIENTE
 Propuesta de **JSON versionado autónomo**, con selección **Categoría → Ingrediente** (p. ej. carne/pescado/verduras → ternera/salmón/pimiento) y **presentación** adicional solo si cambia la orientación de conservación (p. ej. ternera picada frente a filete). Admitir **«Otro / Escribir manualmente»** y alias para buscar. Los selectores precargan el **nombre**; no deben impedir etiquetas libres.
@@ -180,6 +186,7 @@ Para todo cambio:
 | 06/11/2026 | «Mis reservas» como futuro inventario remoto autenticado; no usar caché local como BD | Requisito arquitectónico futuro |
 | 08/11/2026 | Compacta libre: diseño de la imagen aportada; isotipo oficial BN y Bricolage Grotesque/Geist; macros activos = fechas izquierda/nutrición derecha; macros ocultos = fechas a dos columnas; títulos inferiores siempre, contenidos opcionales y huecos preservados | Diseño autorizado; primera implementación PR #45, sustituida por las correcciones visuales de PR #46; pendiente validación física |
 | 08/11/2026 | Comparativa con etiqueta V0.9 y capturas Android: restaurar exactamente título/isotipo/banda; suprimir separadores extra; centrar dos columnas sin macros; alinear rótulos/fechas con macros; redondear kcal y airear nutrientes; aplicar títulos y presets aprobados de Pequeña al cambiar conservación | Autorizado, implementado en PR [#46](https://github.com/MiruRecetas/MiruRecetas-ct230b-ble-lab/pull/46), pendiente de revisión visual publicada y ensayo físico CT230B |
+| 08/11/2026 | La usuaria confirma «Está perfecta, aprobada y validada» tras revisar la versión publicada de la Compacta libre corregida en PR #46 | **Aprobación y validación visual final de Compacta en laboratorio**; evidencia de impresión física CT230B de esta variante no aportada. Se pasa a **Amplia 50 × 80 horizontal**, sin autorizar todavía un diseño libre nuevo. |
 | Futuro | Etiquetas de tarros, sesiones, favoritos, reimpresión, datos de cuenta | Propuestas por concretar |
 
 **Este documento debe actualizarse en la misma PR que cambie el alcance o acepte nuevas decisiones; no esperar a recordar el contexto conversacional.**

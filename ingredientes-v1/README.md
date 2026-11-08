@@ -5,8 +5,10 @@ Este directorio contiene la página autónoma **«Mis etiquetas»**, con
 selector de formatos aprobado y con **Pequeña 30 × 20** operativa en laboratorio.
 **Compacta libre 50 × 30** está implementada con las correcciones visuales
 de la [PR #46](https://github.com/MiruRecetas/MiruRecetas-ct230b-ble-lab/pull/46),
-a raíz de la revisión de la PR #45. Pendiente de aceptación de la nueva vista previa y
-validación física CT230B. **Amplia 50 × 80 horizontal** sigue pendiente. No se ha integrado ni migrado
+a raíz de la revisión de la PR #45. **Aprobada y validada visualmente por la usuaria
+el 08/11/2026 en la página publicada**; no consta todavía ensayo físico CT230B
+para esta variante libre. **Amplia 50 × 80 horizontal** es la siguiente fase,
+pendiente de concretar el diseño libre basado en V0.7.3. No se ha integrado ni migrado
 ningún archivo a `MiruRecetas/mirurecetas-web-source`; no está publicado como
 página productiva ni registra existencias.
 
@@ -22,7 +24,8 @@ expresamente por la usuaria, con iconos SVG actuales de **Amplia 50 × 80**,
 No añadir textos de disponibilidad a las tres primeras ni alterar sus iconos
 sin nueva aprobación; registro final en [PR #40](https://github.com/MiruRecetas/MiruRecetas-ct230b-ble-lab/pull/40).
 Sus radios controlan los tres pasos. Pequeña y Compacta generan e imprimen
-etiquetas libres; Compacta sigue pendiente de revisión visual y ensayo físico.
+etiquetas libres; Compacta tiene diseño **aceptado y validado visualmente**, y
+su eventual prueba física sigue siendo una comprobación separada.
 
 El término «receta/componente/ingrediente» se reserva para documentación y
 formulario específico, no como subtítulo del selector de formatos.
@@ -49,8 +52,8 @@ El título, el isotipo BN y la banda negra superiores conservan exactamente
 las coordenadas y tamaños V0.9, sin texto añadido bajo el isotipo. El preview usa el raster de 590 × 354
 que genera el mismo motor de TSPL; la impresión CT230B usa los controles BLE
 ya existentes y multicopia `PRINT 1,n`. El espacio del antiguo QR se ha aprovechado para extender las secciones de
-texto a todo el ancho según el diseño elegido. La geometría sin QR,
-las variantes sin texto y las series multicopia **no tienen aprobación física
+texto a todo el ancho según el diseño elegido. La geometría sin QR **está aprobada visualmente por la usuaria**;
+las variantes sin texto y las series multicopia **no adquieren aprobación física
 por herencia** de la V0.9 original. Ver
 [MIS-ETIQUETAS-VISION-Y-HOJA-DE-RUTA.md](MIS-ETIQUETAS-VISION-Y-HOJA-DE-RUTA.md).
 
