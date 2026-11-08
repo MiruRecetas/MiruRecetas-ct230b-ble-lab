@@ -72,7 +72,7 @@ El archivo [**`catalogo.json`**](catalogo.json) ya está creado y contiene **sei
 |---|---|---|---|
 | Carne picada de ternera | Carnes y Aves / Vacuno | `parcial`, FoodKeeper `59` | Refrigeración **2 días**; congelación **90 días** |
 | Pulpo | Pescados y Mariscos / Cefalópodos | `sin_datos` | Ninguno, `null` |
-| Patata | Frutas y Verduras / Tubérculos | `parcial`, FoodKeeper `297` | Refrigeración **14 días**; despensa **60 días** (entera) |
+| Patata | Frutas y Verduras / Tubérculos | `parcial`, FoodKeeper `297` | Refrigeración **14 días**; despensa **sin plazo fijado** (rango 1–2 meses en la fuente) |
 | Lechuga | Frutas y Verduras / Verduras de hoja | `parcial`, FoodKeeper `290` | Refrigeración **14 días** (iceberg o romana) |
 | Orejones | Frutas y Verduras / Frutas | `parcial`, FoodKeeper `379` | Despensa **180 días**; sinónimo «Albaricoques deshidratados» |
 | Salsa de tomate | Despensa / Conservas | `sin_datos` | Ninguno, `null` |
