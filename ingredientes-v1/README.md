@@ -170,6 +170,23 @@ con la V0.8; no dar por validada esta modificación sin pruebas específicas.
 - Antes de enviar varias copias, verificar alineación en papel real;
   una transmisión correcta no garantiza el número de copias impresas.
 
+## Encabezado editorial e incidencia anotada (08/11/2026)
+
+La página «Mis etiquetas» muestra la sección **«Conserva»** sobre su título,
+con la misma ceja editorial que **«Todas tus recetas»** del recetario oficial:
+Geist, mayúsculas, tamaño `0.7rem`, peso 700, `0.16em` y terracota `#b96c4a`.
+Bajo el título figura el subtítulo breve **«Crea e imprime tus etiquetas de
+conservación.»**, con Geist 16 px y color `#67756b`. Las tarjetas, formularios y
+vistas previas no cambian.
+
+**Incidencia fuera del alcance actual:** la usuaria informa de una cabecera
+interior aparentemente duplicada en altura, tanto en el recetario publicado
+como en este laboratorio (captura Android del 08/11/2026). Se remite al
+**responsable técnico Web/PWA** para una revisión posterior del componente
+canónico de la web oficial. Sin diagnóstico confirmado, sin corrección
+inmediata y **sin tocar** `cabecera.css`, `cabecera.js`, PWA ni producción.
+Esta observación no afecta al raster ni equivale a validación física CT230B.
+
 ## Página compacta y responsive · decisión de 08/11/2026
 
 El selector aprobado de cuatro tarjetas y la vista previa comparten **una única tarjeta no plegable**, titulada exactamente «Elige un formato», con subtítulo «Selecciona el diseño que quieres imprimir»; los raster monocromos son los mismos que se transmitirán. No se muestran anotaciones, cifras de transporte ni títulos adicionales bajo el selector; solo se permite mostrar un error cuando la vista previa falle. La página contiene **dos tarjetas** adicionales con títulos fijos: **1. Datos de la etiqueta** (abierta de inicio) y **2. Imprime tu etiqueta** (cerrada). Son desplegables de forma excluyente, sin duplicar ni alterar el formulario por formato.
