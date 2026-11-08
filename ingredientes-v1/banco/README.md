@@ -96,10 +96,44 @@ La usuaria ha confirmado expresamente la incorporación de **FoodKeeper Product.
 
 | ID MiruRecetas | Nombre visible (es-ES) | Denominación fuente / alias | FoodKeeper Product.ID |
 |---|---|---|---:|
-| `CAR-VAC-002` | **Redondo de vacuno** | Asado redondo | 36 |
-| `CAR-VAC-003` | **Solomillo de vacuno entero** | Lomillo, entero (beef tenderloin, whole) | 37 |
-| `CAR-VAC-004` | **Filetes de vacuno** | Filetes | 40 |
-| `CAR-VAC-005` | **Carne de vacuno para guisar** | Carne para guisar (stew cubes) | 41 |
+| `CAR-VAC-002` | **Redondo de ternera** | Asado redondo | 36 |
+| `CAR-VAC-003` | **Solomillo de ternera** | Lomillo, entero (beef tenderloin, whole) | 37 |
+| `CAR-VAC-004` | **Filetes de ternera** | Filetes | 40 |
+| `CAR-VAC-005` | **Ternera para guisar** | Carne para guisar (stew cubes) | 41 |
+
+**Normalización editorial posterior, autorizada por la usuaria (08/11/2026):**
+los nombres visibles usan «ternera» de forma uniforme en la subcategoría
+Vacuno, manteniendo inalterados los ID y el origen real de FoodKeeper.
+Las presentaciones aprobadas quedan exactamente así:
+
+| Ficha | `presentacion` | Interpretación editorial |
+|---|---|---|
+| Redondo de ternera | `"Pieza entera"` | Pieza cruda entera |
+| Solomillo de ternera | `null` | Una sola ficha tanto para pieza entera como para **medallones crudos de 3–4 cm**; no crear duplicado |
+| Filetes de ternera | `"Filetes"` | Filetes crudos |
+| Ternera para guisar | `"Dados"` | Carne cruda troceada en dados para guiso |
+
+**Contraste de solomillo:** la tabla oficial de [FoodSafety.gov](https://www.foodsafety.gov/food-safety-charts/cold-food-storage-charts)
+incluye vacuno/ternera frescos tanto en filetes como en piezas para asar
+en los mismos intervalos (**3–5 días** de refrigeración y **4–12 meses**
+de congelación). Así, los medallones que siguen siendo **cortes
+musculares enteros, sin picar** pueden compartir los **5/120 días**
+operativos del solomillo entero; el grosor de 3–4 cm no exige un
+registro distinto. Esto no se extrapola a carne picada, guiso en dados
+ni carne previamente manipulada o reenvasada con tiempos consumidos.
+La refrigeración requiere 4 °C o menos y los plazos congelados son
+orientativos de calidad a −18 °C.
+
+**Precisión sobre los nombres de origen:** FoodKeeper ES conserva
+`Name: "Carne de Res"` (`beef`) para los ID 36/37/40/41;
+`"Ternera"` (`veal`) figura en otros registros del archivo.
+La traducción «ternera» es **la etiqueta editorial elegida** en el banco
+doméstico, **no una afirmación de que FoodKeeper clasifique esos cuatro
+IDs como `veal`**, ni sustituye la denominación legal de venta de una
+pieza concreta en España. La procedencia permanece trazable y los
+intervalos frescos de filetes/asados son comunes a `beef` y `veal`
+en FoodSafety.gov. Se mantienen los sinónimos anteriores para buscar
+sin duplicar fichas.
 
 **Datos originales contrastados:** para cada producto, `DOP_Refrigerate_Min=3`, `DOP_Refrigerate_Max=5`, unidad `Días`; `DOP_Freeze_Min=4`, `DOP_Freeze_Max=12`, unidad `Meses`. En todos están vacíos los consejos propios de refrigeración/congelación y los campos de despensa. El origen `DOP` remite a fecha de compra; en el flujo doméstico aprobado **envasado = compra o preparación** (no reiniciar plazos al reenvasar).
 
