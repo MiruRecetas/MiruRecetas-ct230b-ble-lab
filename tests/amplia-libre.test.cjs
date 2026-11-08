@@ -164,10 +164,13 @@ test("Formulario, preview y bloqueo de impresión de Amplia en fase visual",()=>
   "a-nutrition-enabled","a-kcal","a-protein","a-carbs","a-fat",
   "a-instruction","a-note","a-preview","a-status","a-metrics"])
   assert.ok(html.includes('id="'+id+'"'),id);
- assert.ok(html.includes('src="./plantilla-amplia.js?v=20261108-amplia-b-v1"'));
+ assert.ok(html.includes('src="./plantilla-amplia.js?v=20261108-amplia-b-v2"'));
  assert.ok(app.includes('A=Motor.forFormat("horizontal")'));
  assert.ok(app.includes('selectedFormat==="horizontal"||busy'));
  assert.ok(app.includes('$("a-instruction").value=noteDefaults[mode]'));
  assert.ok(app.includes('$("a-note").value=""'));
  assert.ok(css.includes("#a-preview{width:100%"));
+ assert.ok(css.includes("#compact-fields textarea,#wide-fields textarea"));
+ assert.ok(css.includes("font:inherit;font-weight:500;line-height:1.5"));
+ assert.ok(html.includes('href="./style.css?v=20261108-amplia-multiline"'));
 });
