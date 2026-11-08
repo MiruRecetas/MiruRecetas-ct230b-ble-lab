@@ -150,3 +150,22 @@ test("Cancelación y trabajos fuera de límite nunca transmiten",async()=>{
  assert.equal(s.writes.length,0);
  assert.equal(s.get("confirm-paper").checked,true,"El usuario canceló, no hubo transmisión");
 });
+
+test("Paneles de Datos e Impresión mutuamente excluyentes y persistentes al cambiar formato",async()=>{
+ const s=await prepare();
+ const data=s.get("data-step"),print=s.get("print-step");
+ assert.equal(data.open,true);
+ assert.equal(print.open,false);
+ print.open=true;
+ print.listeners.toggle();
+ assert.equal(data.open,false,"Al desplegar Impresión, Datos se pliega");
+ assert.equal(print.open,true);
+ data.open=true;
+ data.listeners.toggle();
+ assert.equal(print.open,false,"Al desplegar Datos, Impresión se pliega");
+ s.radios[1].checked=true;
+ s.radios[1].listeners.change();
+ await s.flush();
+ assert.equal(data.open,true,"El cambio de formato no reinicia el panel abierto");
+ assert.equal(print.open,false);
+});
