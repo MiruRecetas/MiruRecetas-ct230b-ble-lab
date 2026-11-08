@@ -72,21 +72,25 @@ Nueva plantilla **`ingredientes-v1/plantilla-compacta.js`**, registrada en el mo
 **sin importar ningún módulo ni mantener enlace operativo** entre ambas
 versiones. Una modificación posterior del diseño libre **no podrá alterar**
 la etiqueta existente de recetas. La V0.9 original con QR permanece aprobada
-e inmutable. La nueva versión **sin QR** no está aprobada visual ni físicamente.
+e inmutable. La nueva versión **sin QR** ha recibido una decisión de diseño explícita el 08/11/2026 (PR [#45](https://github.com/MiruRecetas/MiruRecetas-ct230b-ble-lab/pull/45)); **la impresión física sigue sin validar**.
 
 - Lienzo 590 × 354; título grande e isotipo superior, barra gruesa horizontal
   a y=60, fechas a izquierda (y=100,135), nutrición a derecha, separador fino
   parcial y=149, instrucciones y nota en la mitad izquierda inferior.
-- El espacio inferior derecho antes ocupado por el QR se deja **en blanco
-  intencionadamente**; la usuaria decidirá si redistribuirlo al ver esta primera
-  versión publicada. No copiar QR, URL de receta, raciones ni gramaje.
+- El espacio inferior derecho antes ocupado por el QR se aprovecha en el
+  diseño aprobado: las secciones inferiores ocupan el ancho disponible. No
+  copiar QR, URL de receta, raciones ni gramaje.
 - Formulario propio editable: título, tipo de conservación, fecha primaria
   obligatoria, consumo preferente opcional, kcal y tres macros independientes
   (todos opcionales), instrucciones y nota manuales.
-- Controles de visibilidad de **bloque nutricional**, instrucciones y nota;
-  campos nutricionales individuales vacíos **se omiten**, no se imputan a cero.
-  El ocultamiento de bloques no mueve otros bloques arbitrariamente, y los
-  textos demasiado largos se bloquean si no caben en la geometría.
+- Control de visibilidad del **bloque nutricional** y del **texto** de
+  instrucciones y nota. Con nutrición activa, las fechas van en filas a la
+  izquierda y los macros a la derecha. Al desactivarla, las dos fechas
+  ocupan columnas de igual anchura, sin conservar el hueco nutricional.
+  Los encabezados «CONSERVACIÓN Y CONSUMO» y «NOTA» **se imprimen siempre**,
+  incluso cuando el contenido opcional está en blanco u oculto; sus posiciones
+  y espacios no se desplazan. Campos nutricionales vacíos se omiten sin ceros
+  ficticios. Los textos que no caben bloquean la impresión.
 - Vista previa del raster **real**, TSPL 50 × 30 sin QR, multicopia 1–20 y
   transporte BLE compartido con la herramienta de laboratorio. La salida
   real y la alineación requieren ensayo físico en CT230B antes de calificar
@@ -95,20 +99,27 @@ e inmutable. La nueva versión **sin QR** no está aprobada visual ni físicamen
   receta o sistema de publicación conjunto** con el motor de producción.
   Comparar con V0.9 se permite únicamente para QA visual.
 
-Esta fase no constituye aprobación definitiva de la composición libre; el
-detalle del diseño debe decidirse tras revisar su vista previa en Android.
+La composición visual libre de Compacta fue elegida el 08/11/2026 utilizando
+la imagen de referencia aportada por la usuaria. El isotipo de esa ilustración
+**no sustituye** al isotipo oficial BN ni a las fuentes oficiales Bricolage
+Grotesque y Geist, que se cargan de los recursos del laboratorio. El diseño
+está implementado en [PR #45](https://github.com/MiruRecetas/MiruRecetas-ct230b-ble-lab/pull/45), pendiente de
+revisión del raster publicado en Android y validación física CT230B; no se
+considera una etiqueta probada hasta entonces.
 
 ## 5. Motor único de etiquetas libres — IMPLEMENTADO EN LABORATORIO (07/11/2026)
 La arquitectura **ya está unificada**: `ingredientes-v1/motor-libre.js` centraliza carga de isotipo, fechas y validaciones comunes, ajuste progresivo de texto, composición Canvas, raster 1 bit por bandas, ensamblado TSPL y multicopia. `plantilla-pequena.js` (30 × 20) y `plantilla-compacta.js` (50 × 30) registran únicamente reglas de campos y coordenadas visuales; **no existen motores TSPL completos separados**. `app.js` mantiene un único transporte BLE compartido y la vista por formato, con seguimiento de fragmentos. El contrato interno es formato + datos + visibilidad; Amplia futura se añadirá como una tercera plantilla sin replicar motor. No se importa, enlaza ni modifica código de V0.9 histórica, V0.8 histórica o etiquetas de producción.
 
-La refactorización reemplaza los archivos `engine.js` y `compacta-engine.js` (retirados de esta página). Las **19 pruebas de contrato** y la comparación de cuatro casos equivalentes de render y TSPL respaldan la ausencia de cambios intencionados en los diseños actuales; no equivalen a ensayo físico con CT230B. La geometría libre de Compacta **sigue pendiente de revisión visual y física** y podrá modificarse después **exclusivamente en su plantilla**.
+La refactorización reemplaza los archivos `engine.js` y `compacta-engine.js` (retirados de esta página). Las **19 pruebas de contrato** y la comparación de cuatro casos equivalentes de render y TSPL respaldan la ausencia de cambios intencionados en los diseños actuales; no equivalen a ensayo físico con CT230B. La geometría libre de Compacta recoge la decisión de diseño del 08/11/2026;
+la vista previa publicada sigue sujeta a aceptación final y a prueba física.
+Los cambios de composición pertenecen **exclusivamente a su plantilla**.
 
 ### Desarrollo posterior de Amplia y ajustes visuales
 
 Para 50 × 30 y 50 × 80 horizontal:
 - Formularios adaptativos al formato para nombre, kcal, proteínas, hidratos, grasas, fechas, instrucciones y notas disponibles en la composición original.
 - Bloques opcionales de nutrición/instrucciones/notas según capacidad; **fechas siempre visibles**; no introducir gramos.
-- Ocultar bloque = no imprimir sus valores ni ceros/textos de relleno; conservar geometría aprobada, reglas de nombres largos, ajuste progresivo y tamaños mínimos. Revisar separadores y lugares vacíos antes de aceptar variantes.
+- Ocultar nutrición = redistribuir las fechas en dos columnas; no imprimir sus valores ni ceros de relleno. Ocultar instrucciones/nota = preservar títulos y huecos sin imprimir texto. Mantener geometría aprobada, reglas de nombres largos, ajuste progresivo y tamaños mínimos.
 - Valor incompleto de macro: no inventar, no usar `0` salvo que se haya indicado expresamente; kcal independientes de reparto macro manual. **Sin anillo y sin QR** para las etiquetas libres.
 - Vista previa debe reflejar exactamente el raster que se va a enviar; impedir imprimir formatos en desarrollo hasta motor, pruebas automatizadas y comprobación física CT230B.
 
@@ -154,6 +165,7 @@ Para todo cambio:
 | 06/11/2026 | **Selector de cuatro tarjetas en una fila, SVG definitivos de PR #40, títulos y tamaños sin disponibilidad** | **Diseño aprobado expresamente** |
 | 06/11/2026 | Banco JSON con filtros guiados; después de los dos modelos de etiquetas libres | Dirección aceptada, pendiente de desarrollo |
 | 06/11/2026 | «Mis reservas» como futuro inventario remoto autenticado; no usar caché local como BD | Requisito arquitectónico futuro |
+| 08/11/2026 | Compacta libre: diseño de la imagen aportada; isotipo oficial BN y Bricolage Grotesque/Geist; macros activos = fechas izquierda/nutrición derecha; macros ocultos = fechas a dos columnas; títulos inferiores siempre, contenidos opcionales y huecos preservados | Diseño autorizado; implementación PR #45, pendiente de prueba física y aceptación del raster publicado |
 | Futuro | Etiquetas de tarros, sesiones, favoritos, reimpresión, datos de cuenta | Propuestas por concretar |
 
 **Este documento debe actualizarse en la misma PR que cambie el alcance o acepte nuevas decisiones; no esperar a recordar el contexto conversacional.**
