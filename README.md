@@ -1,3 +1,12 @@
+> **Banco · nombres editoriales aprobados (08/11/2026):**
+> CAR-VAC-002…005: Redondo de ternera (Pieza entera),
+> Solomillo de ternera (presentación null, incluye medallones
+> crudos de 3–4 cm), Filetes de ternera (Filetes) y
+> Ternera para guisar (Dados). Alias anteriores conservados.
+> Sin alterar plazos 5/120 o 2/90, los IDs de origen ni el
+> diseño del panel. FoodKeeper conserva la distinción beef/veal,
+> documentada en [banco/README.md](ingredientes-v1/banco/README.md).
+>
 > **Banco de ingredientes · vacuno, incorporación 08/11/2026:**
 > cuatro fichas solicitadas por la usuaria, correspondientes a
 > FoodKeeper IDs **36, 37, 40 y 41**, añadidas a Vacuno.
