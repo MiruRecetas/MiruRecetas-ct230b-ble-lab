@@ -200,6 +200,26 @@ Para 50 × 30 y 50 × 80 horizontal:
 - **Envasado al vacío:** situación habitual del usuario, **no incremento automático** de plazos FoodKeeper por utilizar vacío. La selección del máximo para refrigeración **no equivale a garantía de seguridad**: correcta refrigeración e higiene siguen siendo imprescindibles. Una recomendación de calidad no sustituye condiciones seguras de manipulación.
 - **Despensa y conserva casera:** se mantienen como familias de metadatos pensadas para futuras etiquetas; no extrapolar a conservas domésticas los tiempos de conservas comerciales. Un consejo como «Una vez abierto, consumir en 5 días» puede ser solo un **texto corto**, sin añadir por ahora campos de seguimiento de apertura.
 
+### Clasificación editorial aprobada · 11 categorías (08/11/2026)
+
+Las siguientes son las **11 categorías principales de MiruRecetas**, independientes de las 14 categorías originales de FoodKeeper; su orden se mantiene para preparar la futura clasificación del banco:
+
+1. **Carne**
+2. **Pescado**
+3. **Marisco**
+4. **Frutas**
+5. **Verduras**
+6. **Cereales y Legumbres**
+7. **Frutos secos y semillas**
+8. **Conservas**
+9. **Condimentos**
+10. **Lácteos y huevos**
+11. **Hongos y algas**
+
+**Decisiones de clasificación:** «Cereales y Legumbres» unifica las anteriores opciones de arroz, pasta, cereales, harinas y legumbres, cuyas **subcategorías aún están pendientes de diseñar**; no crear fichas por el mero hecho de existir una subcategoría. «Condimentos» reemplaza «Especias y hierbas» y tendrá las subcategorías pertinentes; no incluir productos comerciales como sal ni vinagre. **Carne incluye aves**; **Verduras incluye tubérculos**; **Marisco incluye cefalópodos**, como el pulpo. «Lácteos y huevos» permanece definida aunque **inicialmente pueda estar vacía**. «Conservas» se reserva para **conservas caseras futuras**, no comerciales.
+
+**Criterio de inclusión por encima de la categoría:** solo ingredientes reales adquiridos a granel que se vayan a etiquetar. No crear registros de productos envasados comerciales, grasas/aceites, proteínas vegetales comerciales ni masas/preparaciones que pertenecen a Compacta. Las categorías vacías son válidas. El esquema y catálogo derivados permanecen pendientes, y el original FoodKeeper no se modifica.
+
 ### Metadatos mínimos para discutir antes de definir JSON Schema
 
 La relación siguiente recoge los **campos aprobados por la usuaria**, manteniendo el catálogo mínimo. No es todavía el esquema JSON implementado:
@@ -298,6 +318,7 @@ Para todo cambio:
 | 08/11/2026 | Cerrar enum y metadatos futuros de búsqueda/preparación | **Aprobado:** `verificado` y `sin_datos`, `sinonimos` y `tips_preparacion_conservacion`; la interpretación inicial «por modo» y la combinación de estados/fuentes por cada método **fueron corregidas**: estado y fuente son **globales de la ficha**. **JSON Schema y catálogo pendientes.** |
 | 08/11/2026 | Aclaración expresa: `estado_recomendacion` y `fuente` pertenecen a **toda la ficha**, no a cada conservación | **Decisión vigente en su ámbito global**: no existen estados/fuentes por método. La enumeración histórica de dos estados queda **ampliada posteriormente** a tres mediante `parcial`; `fuente: null` sigue obligatoria para `sin_datos`. |
 | 08/11/2026 | Añadir `parcial` y el ID global de fuente sin duplicar FoodKeeper | **Aprobado**: `estado_recomendacion` global `verificado`/`parcial`/`sin_datos`; en `parcial` (fuente externa incompleta), modos sin datos con booleano `true` pero tiempo/tips `null` y sin fecha sugerida; al completar, fuente `usuario` o `agregación`; `id_fuente` único opcional (ID como texto / `null` usuario-agregación-sin datos / `"sin_datos"` si fuente externa sin ID único). JSON Schema, catálogo y app pendientes. |
+| 08/11/2026 | Aprobar clasificación editorial inicial del banco | **11 categorías**, unificando Cereales y Legumbres; Condimentos como nombre definitivo; aves→Carne, tubérculos→Verduras y pulpo/cefalópodos→Marisco. «Lácteos y huevos» se conserva aunque vacía; conservas solo caseras futuras. No crear registros comerciales; **subcategorías y esquema aún por definir**. |
 | Futuro | Etiquetas de tarros, sesiones, favoritos, reimpresión, datos de cuenta | Propuestas por concretar |
 
 **Este documento debe actualizarse en la misma PR que cambie el alcance o acepte nuevas decisiones; no esperar a recordar el contexto conversacional.**
