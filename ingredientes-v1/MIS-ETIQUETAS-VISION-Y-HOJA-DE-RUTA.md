@@ -1,5 +1,30 @@
 # MiruRecetas · «Mis etiquetas» · visión, decisiones y hoja de ruta
 
+## Corrección de cantidad frente al isotipo · 08/11/2026
+
+La usuaria confirma después del despliegue de la PR #69 que «500 g» sigue
+solapándose con el isotipo en **Pequeña 30 × 20**. La causa queda localizada:
+`motor-libre.js::fit` establece `textAlign="left"` si no recibe una
+alineación explícita; la plantilla histórica preparaba
+`c.textAlign="center"` pero la llamada a `fit` lo anulaba.
+
+**Corrección mínima autorizada por incidencia:** la única línea de cantidad
+pasa a `align: "center"` con el centro original `x=128`; su ancho máximo
+se ajusta a 240 puntos. Por tanto su zona está siempre en `x=8…248` y
+el isotipo empieza en `x=268`: **mínimo 20 puntos de separación**
+independientemente del texto o de la tipografía real, dado que `fit`
+mide con Canvas y adapta el tamaño de 55 a mínimo 32 px si hace falta.
+No cambiar coordenadas, tamaños predeterminados, isotipo, fechas, notas,
+motor común, raster, TSPL ni Bluetooth. Los pesos se mantienen
+opcionales y entre 1 y 9999 g; cuando no se indica peso no se dibuja.
+Se versiona la referencia del JS para evitar caché en Chrome Android.
+
+**Verificación:** regresión automatizable con tamaños 1 g, 500 g y
+9999 g y límite geométrico del texto; comprobar después en Pages el
+raster real en Chrome Android y finalmente en CT230B cuando se retomen
+las impresiones físicas acordadas. Una PR fusionada o un despliegue
+Pages exitoso **no equivalen** a validación visual ni física.
+
 ## Corrección del banco y preservación del diseño (08/11/2026)
 
 Tras la revisión visual de la usuaria, se corrige la PR #68 **solo en el
