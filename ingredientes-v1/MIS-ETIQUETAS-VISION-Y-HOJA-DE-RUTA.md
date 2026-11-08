@@ -136,6 +136,14 @@ Para 50 × 30 y 50 × 80 horizontal:
 
 **Orden de trabajo acordado:** 1) selector/interfaz global (**hecho**); 2) Pequeña y Compacta integradas en motor común (**hecho**, regresiones físicas independientes pendientes cuando proceda); 3) diseño libre Compacta corregido y aprobado visualmente (**hecho, 08/11/2026**); 4) **siguiente fase: Amplia horizontal 50 × 80**, referenciada en V0.7.3, pendiente de validación del diseño de la variante libre antes de desarrollarla; 5) banco de ingredientes JSON; 6) ampliar funcionalidades. No demorar la interfaz general hasta completar el banco.
 
+### Siguiente hito — preparación de Amplia libre 50 × 80 horizontal (08/11/2026)
+
+**Referencia visual y técnica histórica, exclusivamente de consulta:** `label-v07.js` (V0.7.3), `V07-HORIZONTAL-PURE-CALABAZA-CALABACIN.md` y el SVG original documentado. La composición editorial se organiza sobre **945 × 590 puntos horizontales** y se gira para un papel físico 50 × 80 (raster **590 × 945**), con nombre grande, isotipo BN, banda superior, fechas, kcal/PR/HC/GR, instrucciones y nota. La V0.7.3 histórica contiene un QR y un límite preventivo propio de 36.000 B: **no trasladar QR, URL, código ni excepciones de tamaño** al nuevo motor libre.
+
+**Decisiones ya aprobadas aplicables a Amplia:** formato horizontal 50 × 80, etiqueta libre autónoma, **sin QR ni anillo**, sin gramos/raciones, campos introducidos manualmente, fechas siempre visibles (primera obligatoria, segunda opcional), macros opcionales sin imputaciones, plantilla específica registrada en el **único `motor-libre.js`**, render fiel al raster transmitido, transporte BLE existente y sin escritura en inventario. No cambiar el selector de cuatro tarjetas.
+
+**Pendiente de aprobación de producto y diseño antes de implementar:** distribución de los bloques al retirar el QR; disposición cuando se ocultan kcal/macros; jerarquía de instrucciones y nota con contenidos vacíos; comportamiento editorial de la cabecera y separadores de V0.7.3 frente al espacio liberado. Proponer una opción fiel a la referencia histórica para revisión **antes** de fijar geometría o fusionar código. No asumir que todas las redistribuciones de Compacta se heredan automáticamente a Amplia. Tras la decisión, desarrollar `plantilla-amplia.js` sobre el motor libre, ampliar el formulario y pruebas, publicar solo mediante PR/Pages del laboratorio y verificar después CT230B física cuando proceda.
+
 ## 6. Banco de ingredientes — PROPUESTA APROBADA EN PRINCIPIO; CATÁLOGO PENDIENTE
 Propuesta de **JSON versionado autónomo**, con selección **Categoría → Ingrediente** (p. ej. carne/pescado/verduras → ternera/salmón/pimiento) y **presentación** adicional solo si cambia la orientación de conservación (p. ej. ternera picada frente a filete). Admitir **«Otro / Escribir manualmente»** y alias para buscar. Los selectores precargan el **nombre**; no deben impedir etiquetas libres.
 
