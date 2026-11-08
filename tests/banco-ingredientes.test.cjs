@@ -24,9 +24,9 @@ test("catálogo de diecisiete ingredientes, con ID único y taxonomía aprobada"
  assert.deepEqual(new Set(records.map(x=>x.nombre)),new Set([
   "Carne picada de ternera","Redondo de ternera","Solomillo de ternera",
   "Filetes de ternera","Ternera para guisar",
-  "Paletilla o media pierna de cordero para asar","Chuletas de cordero",
-  "Lomo de cerdo sin hueso","Solomillo de cerdo","Costillas de cerdo",
-  "Carne picada de cerdo","Lomo de cerdo en dados",
+  "Paletilla de lechazo","Chuletillas de lechazo",
+  "Lomo de cerdo","Solomillo de cerdo","Costillas de cerdo",
+  "Carne picada de cerdo","Cerdo para guisar",
   "Pulpo","Patata","Lechuga","Orejones","Salsa de tomate"
  ]));
  assert.equal(categories.length,4);
@@ -193,13 +193,13 @@ test("lote ovino/porcino: 8 ID FoodKeeper trazados en 7 fichas y 2 métodos",()=
  const original=JSON.parse(read("banco/fuentes/foodkeeper-es-original.json"));
  const products=original.sheets.find(x=>x.name==="Product").data.map(row=>Object.assign({},...row));
  const specs=[
-  {id:"CAR-OVI-001",name:"Paletilla o media pierna de cordero para asar",presentation:"Pieza entera",category:"Ovino",source:[48],days:[5,120]},
-  {id:"CAR-OVI-002",name:"Chuletas de cordero",presentation:"Costilla o lomo",category:"Ovino",source:[51],days:[5,120]},
-  {id:"CAR-POR-001",name:"Lomo de cerdo sin hueso",presentation:"Pieza entera",category:"Porcino",source:[61],days:[5,120]},
+  {id:"CAR-OVI-001",name:"Paletilla de lechazo",presentation:"Pieza entera",category:"Ovino",source:[48],days:[5,120]},
+  {id:"CAR-OVI-002",name:"Chuletillas de lechazo",presentation:null,category:"Ovino",source:[51],days:[5,120]},
+  {id:"CAR-POR-001",name:"Lomo de cerdo",presentation:null,category:"Porcino",source:[61],days:[5,120]},
   {id:"CAR-POR-002",name:"Solomillo de cerdo",presentation:null,category:"Porcino",source:[67,69],days:[5,120]},
   {id:"CAR-POR-003",name:"Costillas de cerdo",presentation:null,category:"Porcino",source:[72],days:[5,120]},
-  {id:"CAR-POR-004",name:"Carne picada de cerdo",presentation:"Picada",category:"Porcino",source:[73],days:[2,90]},
-  {id:"CAR-POR-005",name:"Lomo de cerdo en dados",presentation:"Dados",category:"Porcino",source:[75],days:[2,90]}
+  {id:"CAR-POR-004",name:"Carne picada de cerdo",presentation:"picada",category:"Porcino",source:[73],days:[2,90]},
+  {id:"CAR-POR-005",name:"Cerdo para guisar",presentation:"Dados",category:"Porcino",source:[75],days:[2,90]}
  ];
  for(const spec of specs){
   const entry=records.find(x=>x.id===spec.id);
@@ -240,6 +240,10 @@ test("lote ovino/porcino: 8 ID FoodKeeper trazados en 7 fichas y 2 métodos",()=
  assert.equal(records.filter(x=>x.nombre==="Solomillo de cerdo").length,1);
  assert.equal(records.filter(x=>x.subcategoria==="Ovino").length,2);
  assert.equal(records.filter(x=>x.subcategoria==="Porcino").length,5);
+ const loin=records.find(x=>x.id==="CAR-POR-001");
+ assert.equal(loin.presentacion,null);
+ assert.ok(loin.sinonimos.includes("Filetes de lomo adobados"));
+ assert.ok(loin.sinonimos.includes("Filetes de lomo sin adobar"));
  const allIds=records.map(x=>x.id_fuente).filter(Boolean);
  assert.equal(new Set(allIds).size,allIds.length,"IDs de procedencia únicos (ID 69 queda en expediente)");
 });

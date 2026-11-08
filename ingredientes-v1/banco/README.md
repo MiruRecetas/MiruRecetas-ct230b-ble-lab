@@ -90,7 +90,69 @@ El archivo [**`catalogo.json`**](catalogo.json) se creó inicialmente con **seis
 | Orejones | Frutas y Verduras / Frutas | `parcial`, FoodKeeper `379` | Despensa **180 días**; sinónimo «Albaricoques deshidratados» |
 | Salsa de tomate | Despensa / Conservas | `sin_datos` | Ninguno, `null` |
 
-## Ampliación autorizada · cordero y cerdo (08/11/2026)
+## Normalización editorial vigente · lechazo y cerdo (08/11/2026)
+
+**Procedimiento acordado para el laboratorio público:** las incorporaciones
+y correcciones exclusivamente de datos se integran mediante **commit directo
+a `main`**, validación ligera de catálogo y documentación, sin PR por lote.
+Pages se despliega automáticamente; no ejecutar una auditoría completa
+de interfaz o impresión para simples cambios de nombre.
+
+**Ovino.** `CAR-OVI-001` se llama **Paletilla de lechazo**
+(`presentacion: "Pieza entera"`) y `CAR-OVI-002` **Chuletillas
+de lechazo** (`presentacion: null`). Mantienen los ID FoodKeeper
+**48** y **51** y plazos **5 días refrigerados / 120 congelados**.
+La fuente describe *cordero/lamb* genérico, no certifica la condición de
+*lechazo* (cordero lechal) ni su origen geográfico/IGP: el nombre
+se refiere solamente a carne que efectivamente sea de lechazo.
+El FoodKeeper 48 comprende paletilla y media pierna, pero la ficha
+editorial queda restringida a paletilla; no se mantiene media pierna
+como sinónimo de paletilla. Referencia para el significado del término:
+[pliego Lechazo de Castilla y León](https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=CELEX:32018D1130%2801%29).
+
+**Porcino.** `CAR-POR-001`: **Lomo de cerdo**, `null`,
+comprende la pieza entera y filetes frescos, adobados domésticamente
+o sin adobar; `CAR-POR-002`: **Solomillo de cerdo**, `null`;
+`CAR-POR-003`: **Costillas de cerdo**, `null`;
+`CAR-POR-004`: **Carne picada de cerdo**, `"picada"`;
+`CAR-POR-005`: **Cerdo para guisar**, `"Dados"`.
+Se preservan los tiempos previos y los identificadores: 5/120
+para lomo/solomillo/costillas; 2/90 para picada/dados.
+
+**Filetes de lomo sin duplicación:** el FoodKeeper 61 (lomo sin hueso
+en pieza) y los registros 63/64 (chuletas de lomo, con/sin hueso)
+presentan **3–5 días refrigerados** y **4–12 meses congelados**.
+También lo confirma la [tabla oficial FoodSafety.gov](https://www.foodsafety.gov/food-safety-charts/cold-food-storage-charts):
+asados y filetes/chuletas frescos de cerdo comparten rango.
+Por eso **una sola ficha Lomo de cerdo con `presentacion: null`**
+mantiene los plazos editoriales **5/120** de la pieza entera y
+añade sinónimos de filetes. No se crea una ficha nueva ni se
+modifica su `id_fuente: "61"`.
+
+**Adobo:** según [USDA FSIS](https://ask.fsis.usda.gov/article/Cu%C3%A1nto-tiempo-se-pueden-marinar-carnes-y-aves),
+se marina siempre en nevera y un marinado prolongado puede deteriorar
+la textura, aunque no equivale por sí mismo a un proceso de conservación.
+El adobo casero **no prolonga ni reinicia** los plazos desde la
+compra/preparación. **Adobados comerciales o marinadas con otros
+ingredientes/condiciones**: respetar siempre las instrucciones y
+fecha del fabricante o cualquier límite más restrictivo; no asumir
+automáticamente los 5/120 de la carne fresca del banco.
+Los periodos de congelación son orientativos de calidad a −18 °C.
+
+**Cerdo para guisar:** la denominación es editorial; el FoodKeeper
+original **75** describe específicamente *lomo en cubos*. La ficha
+sigue referida a **dados de carne de cerdo cruda**, con el plazo
+prudente previamente contrastado **2 días / 90 días**, fuente global
+`"agregación"` e `id_fuente: null`; no extrapolar a mezclas ya
+adobadas, elaboradas o comerciales.
+
+**Invariantes:** siete ID internos, estados, fuentes, plazos y
+modalidades del banco intactos. Sin modificar HTML, CSS,
+`banco-ui.js`, etiquetas, TSPL, motor BLE, PWA ni producción.
+Los nombres históricos permanecen documentados en secciones
+anteriores y los sinónimos permiten búsquedas compatibles.
+
+## Ampliación autorizada · cordero y cerdo (08/11/2026, histórico)
 
 La usuaria confirmó **8 Product.ID originales de FoodKeeper ES** en
 `Category.ID=10` (Carnes → Frescos). Se incorporan como **7 fichas
@@ -102,13 +164,13 @@ comerciales. **Fuente canónica original:** el archivo
 
 | ID MiruRecetas | Subcategoría | Nombre visible | Presentación | Product.ID originales | Nevera | Congelación |
 |---|---|---|---|---|---:|---:|
-| `CAR-OVI-001` | Ovino | Paletilla o media pierna de cordero para asar | Pieza entera | 48 | 5 días | 120 días |
-| `CAR-OVI-002` | Ovino | Chuletas de cordero | Costilla o lomo | 51 | 5 días | 120 días |
-| `CAR-POR-001` | Porcino | Lomo de cerdo sin hueso | Pieza entera | 61 | 5 días | 120 días |
+| `CAR-OVI-001` | Ovino | Paletilla de lechazo | Pieza entera | 48 | 5 días | 120 días |
+| `CAR-OVI-002` | Ovino | Chuletillas de lechazo | `null` | 51 | 5 días | 120 días |
+| `CAR-POR-001` | Porcino | Lomo de cerdo | `null` | 61 | 5 días | 120 días |
 | `CAR-POR-002` | Porcino | Solomillo de cerdo | `null` | **67 y 69, unificados** | 5 días | 120 días |
 | `CAR-POR-003` | Porcino | Costillas de cerdo | `null` | 72 | 5 días | 120 días |
-| `CAR-POR-004` | Porcino | Carne picada de cerdo | Picada | 73 | **2 días** | **90 días** |
-| `CAR-POR-005` | Porcino | Lomo de cerdo en dados | Dados | 75 | **2 días** | **90 días** |
+| `CAR-POR-004` | Porcino | Carne picada de cerdo | picada | 73 | **2 días** | **90 días** |
+| `CAR-POR-005` | Porcino | Cerdo para guisar | Dados | 75 | **2 días** | **90 días** |
 
 **Contraste del FoodKeeper original:**
 

@@ -1,3 +1,16 @@
+> **Normalización del banco · lechazo/cerdo (08/11/2026, vigente):**
+> Paletilla de lechazo (Pieza entera), Chuletillas de lechazo (null),
+> Lomo de cerdo (null, incluye pieza y filetes crudos adobados en
+> casa o sin adobar), Solomillo de cerdo (null), Costillas de cerdo
+> (null), Carne picada de cerdo ("picada"), Cerdo para guisar
+> ("Dados"). Sin variar plazos: 5/120 días o 2/90 para picada
+> y dados; 17 fichas, mismos IDs. Adobar no alarga el plazo;
+> los productos comerciales adobados siguen su propio etiquetado.
+> FoodKeeper no distingue específicamente lechazo.
+> Datos de laboratorio: commit directo a main, Pages automático,
+> comprobaciones ligeras, sin PR por lote.
+> [Expediente](ingredientes-v1/banco/README.md).
+>
 > **Banco de ingredientes · Ovino y Porcino (08/11/2026):**
 > 2 nuevas fichas de cordero y 5 de cerdo, desde FoodKeeper
 > 48/51/61/67/69/72/73/75 (67 + 69 unidos en un único

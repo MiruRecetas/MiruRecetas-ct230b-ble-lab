@@ -165,14 +165,16 @@ test("cuatro cortes de vacuno: búsqueda por nombre/alias, notas y plazos de con
 
 test("cordero y cerdo: 7 fichas, notas, días y búsqueda por sinónimos",async()=>{
  const cases=[
-  ["Paletilla de cordero","Paletilla o media pierna de cordero para asar",5,120],
-  ["Chuletas de cordero","Chuletas de cordero",5,120],
-  ["Lomo de cerdo sin hueso","Lomo de cerdo sin hueso",5,120],
+  ["Paletilla de cordero","Paletilla de lechazo",5,120],
+  ["Chuletas de cordero","Chuletillas de lechazo",5,120],
+  ["Lomo de cerdo sin hueso","Lomo de cerdo",5,120],
   ["Solomillo de cerdo","Solomillo de cerdo",5,120],
   ["Medallones de solomillo de cerdo","Solomillo de cerdo",5,120],
   ["Costillar de cerdo","Costillas de cerdo",5,120],
   ["Cerdo picado","Carne picada de cerdo",2,90],
-  ["Lomo de cerdo en dados","Lomo de cerdo en dados",2,90]
+  ["Filetes de lomo adobados","Lomo de cerdo",5,120],
+  ["Filetes de lomo sin adobar","Lomo de cerdo",5,120],
+  ["Lomo de cerdo en dados","Cerdo para guisar",2,90]
  ];
  for(const [term,name,fridge,freeze] of cases){
   const {el,mode,aplicar}=entorno();

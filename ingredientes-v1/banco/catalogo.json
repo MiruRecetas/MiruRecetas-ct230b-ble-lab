@@ -148,10 +148,11 @@
       "categoria": "Carnes y Aves",
       "subcategoria": "Ovino",
       "presentacion": "Pieza entera",
-      "nombre": "Paletilla o media pierna de cordero para asar",
+      "nombre": "Paletilla de lechazo",
       "sinonimos": [
         "Paletilla de cordero",
-        "Media pierna de cordero",
+        "Paletilla de cordero lechal",
+        "Paletilla de lechal",
         "Asado de corte delantero de cordero"
       ],
       "estado_recomendacion": "verificado",
@@ -175,9 +176,11 @@
       "id": "CAR-OVI-002",
       "categoria": "Carnes y Aves",
       "subcategoria": "Ovino",
-      "presentacion": "Costilla o lomo",
-      "nombre": "Chuletas de cordero",
+      "presentacion": null,
+      "nombre": "Chuletillas de lechazo",
       "sinonimos": [
+        "Chuletas de cordero",
+        "Chuletillas de cordero lechal",
         "Chuletas de costilla de cordero",
         "Chuletas de lomo de cordero",
         "Chuletas de cordero de costilla o lomo"
@@ -203,11 +206,17 @@
       "id": "CAR-POR-001",
       "categoria": "Carnes y Aves",
       "subcategoria": "Porcino",
-      "presentacion": "Pieza entera",
-      "nombre": "Lomo de cerdo sin hueso",
+      "presentacion": null,
+      "nombre": "Lomo de cerdo",
       "sinonimos": [
+        "Lomo de cerdo sin hueso",
         "Lomo de cerdo sin hueso, pieza entera",
-        "Asado de lomo de cerdo sin hueso"
+        "Asado de lomo de cerdo sin hueso",
+        "Filetes de lomo de cerdo",
+        "Filetes de lomo sin adobar",
+        "Filetes de lomo adobados",
+        "Lomo de cerdo en filetes",
+        "Lomo de cerdo adobado"
       ],
       "estado_recomendacion": "verificado",
       "fuente": "FoodKeeper",
@@ -285,7 +294,7 @@
       "id": "CAR-POR-004",
       "categoria": "Carnes y Aves",
       "subcategoria": "Porcino",
-      "presentacion": "Picada",
+      "presentacion": "picada",
       "nombre": "Carne picada de cerdo",
       "sinonimos": [
         "Cerdo picado",
@@ -313,8 +322,10 @@
       "categoria": "Carnes y Aves",
       "subcategoria": "Porcino",
       "presentacion": "Dados",
-      "nombre": "Lomo de cerdo en dados",
+      "nombre": "Cerdo para guisar",
       "sinonimos": [
+        "Carne de cerdo para guisar",
+        "Lomo de cerdo en dados",
         "Lomo de cerdo troceado",
         "Dados de lomo de cerdo",
         "Cerdo en dados"

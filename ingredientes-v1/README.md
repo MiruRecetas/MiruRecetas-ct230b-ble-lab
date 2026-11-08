@@ -1,6 +1,19 @@
 # Conserva · «Mis etiquetas» (laboratorio · interfaz experimental)
 
-> **Banco ovino y porcino · ampliación 08/11/2026:**
+> **Normalización del banco · lechazo/cerdo (08/11/2026, vigente):**
+> Paletilla de lechazo (Pieza entera), Chuletillas de lechazo (null),
+> Lomo de cerdo (null, incluye pieza y filetes crudos adobados en
+> casa o sin adobar), Solomillo de cerdo (null), Costillas de cerdo
+> (null), Carne picada de cerdo ("picada"), Cerdo para guisar
+> ("Dados"). Sin variar plazos: 5/120 días o 2/90 para picada
+> y dados; 17 fichas, mismos IDs. Adobar no alarga el plazo;
+> los productos comerciales adobados siguen su propio etiquetado.
+> FoodKeeper no distingue específicamente lechazo.
+> Datos de laboratorio: commit directo a main, Pages automático,
+> comprobaciones ligeras, sin PR por lote.
+> [Expediente](banco/README.md).
+>
+> **Banco ovino y porcino · ampliación 08/11/2026 (histórico):**
 > 8 registros FoodKeeper elegidos (48, 51, 61, 67, 69, 72, 73 y 75)
 > se incorporan como **7 fichas**: 2 Ovino, 5 Porcino. Solomillo
 > entero y medallones de cerdo (67/69) comparten una ficha,
