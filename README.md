@@ -1,3 +1,13 @@
+> **Banco de aves · incorporación 08/11/2026:**
+> cinco registros FoodKeeper aprobados se derivan en seis fichas
+> (5 Pollo, 1 Pavo), separando Pechuga de pollo (Pieza entera)
+> y Pechuga de pollo (Filetes). Nevera 2 días todas;
+> congelador 360 días entero, 270 piezas, 90 picada.
+> Filetes de pechuga: fuente agregada, origen FoodKeeper 117
+> trazado en expediente. Banco vigente: **23 fichas**.
+> Commit directo en main; sin modificar diseño ni motor.
+> [Expediente](ingredientes-v1/banco/README.md).
+>
 > **Normalización del banco · lechazo/cerdo (08/11/2026, vigente):**
 > Paletilla de lechazo (Pieza entera), Chuletillas de lechazo (null),
 > Lomo de cerdo (null, incluye pieza y filetes crudos adobados en

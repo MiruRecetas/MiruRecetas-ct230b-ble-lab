@@ -90,6 +90,70 @@ El archivo [**`catalogo.json`**](catalogo.json) se creó inicialmente con **seis
 | Orejones | Frutas y Verduras / Frutas | `parcial`, FoodKeeper `379` | Despensa **180 días**; sinónimo «Albaricoques deshidratados» |
 | Salsa de tomate | Despensa / Conservas | `sin_datos` | Ninguno, `null` |
 
+## Banco · incorporación de pollo y pavo (08/11/2026, vigente)
+
+**Decisión de la usuaria:** incorporar seis variantes de carne de ave
+cruda y a granel, basadas en cinco entradas del FoodKeeper ES original
+(`Product.ID 113, 117, 118, 115 y 120`):
+
+| ID MiruRecetas | Subcategoría | Nombre visible | Presentación | Fuente original | Refrigeración | Congelación |
+|---|---|---|---|---|---:|---:|
+| `CAR-POL-001` | Pollo | Pollo | Pieza entera | 113 | 2 días | 360 días |
+| `CAR-POL-002` | Pollo | Pechuga de pollo | Pieza entera | 117 | 2 días | 270 días |
+| `CAR-POL-003` | Pollo | Pechuga de pollo | Filetes | 117 (derivado) | 2 días | 270 días |
+| `CAR-POL-004` | Pollo | Muslo de pollo | Pieza entera | 118 | 2 días | 270 días |
+| `CAR-POL-005` | Pollo | Carne picada de pollo | Picada | 115 | 2 días | 90 días |
+| `CAR-PAV-001` | Pavo | Pechuga de pavo | Pieza entera | 120 | 2 días | 270 días |
+
+**Contraste:** los cinco registros conservan `Category.ID=15`.
+FoodKeeper declara **1–2 días** de refrigeración y **12 meses**
+de congelación para pollo entero, **9 meses** para piezas y
+**3–4 meses** para carne picada de pollo o pavo. El criterio
+MiruRecetas toma el máximo refrigerado y el mínimo congelado;
+mes = 30 días. Los mismos rangos figuran en
+[FoodSafety.gov, Cold Food Storage Chart](https://www.foodsafety.gov/food-safety-charts/cold-food-storage-charts)
+y en [USDA FSIS, congelación del pollo](https://ask.fsis.usda.gov/article/How-long-can-you-freeze-chicken).
+Los meses congelados son referencias de **calidad**, no garantía
+de inocuidad.
+
+**Dos pechugas de pollo sin duplicación de identidad:** la usuaria
+ha solicitado **dos fichas independientes con el mismo nombre**
+pero con `presentacion` distinta. El ID **117** describe la
+media pechuga deshuesada; no existe en el original una ficha aparte
+de filetes de pechuga. Por eso `CAR-POL-002` conserva
+`fuente: "FoodKeeper"`, `id_fuente: "117"` y
+`CAR-POL-003` se registra con `fuente: "agregación"` e
+`id_fuente: null`, aplicando los intervalos oficiales a
+filetes crudos obtenidos de la pechuga. La trazabilidad de
+FoodKeeper 117 queda expresamente en este documento y sin
+duplicar el `id_fuente` de dos fichas. El panel ya identifica
+la presentación junto al nombre; **no se modifica** su lógica,
+diseño ni la plantilla de impresión.
+
+**Muslo:** FoodKeeper 118 comprende muslos y contramuslos, pero
+solo se incluye **«Muslo de pollo»**, tal como se aprobó;
+«contramuslo» no se añade como alias ni se registra otra ficha.
+
+**Modalidades:** únicamente refrigeración y congelación.
+No se ofrece despensa ni conserva casera para carne de ave cruda.
+`false` implica tiempo/tip `null`; las modalidades disponibles
+llevan `tips_refrigeracion: ""` y `tips_descongelacion: ""`,
+para usar los presets editoriales editables ya existentes
+«Conservar en nevera» y «Descongelar en nevera»; no atribuir
+estos textos al archivo original. `tips_preparacion_conservacion: null`.
+Conservar en nevera a ≤4 °C, congelar a ≤−18 °C, sin
+prolongar el plazo por envasado al vacío ni por reenvasar.
+Fecha base compra/preparación en el flujo aprobado.
+
+**Estado del banco:** **23 fichas**: 5 Vacuno, 2 Ovino,
+5 Porcino, 5 Pollo, 1 Pavo y 5 de otras familias.
+No se han incorporado las variantes de ave no seleccionadas.
+**Publicación de datos acordada:** commit directo a `main`,
+validación ligera de JSON, identidad/taxonomía, fuente y plazos,
+GitHub Pages automático; sin PR ni nuevas pruebas integrales.
+No se modifica la web de producción, HTML/CSS, banco-ui.js,
+plantillas, motor de impresión, TSPL, BLE, PWA o Airtable.
+
 ## Normalización editorial vigente · lechazo y cerdo (08/11/2026)
 
 **Procedimiento acordado para el laboratorio público:** las incorporaciones

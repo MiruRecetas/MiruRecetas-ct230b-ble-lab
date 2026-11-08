@@ -18,8 +18,9 @@ const categories=props.categoria.enum;
 const subcategories=Object.fromEntries(allOf.slice(0,4).map(r=>[r.if.properties.categoria.const,r.then.properties.subcategoria.enum]));
 const byName=name=>records.find(x=>x.nombre===name);
 
-test("catálogo de diecisiete ingredientes, con ID único y taxonomía aprobada",()=>{
- assert.equal(records.length,17);
+test("catálogo de veintitrés fichas, con ID y variante únicos",()=>{
+ assert.equal(records.length,23);
+ assert.equal(new Set(records.map(x=>x.nombre+"|"+String(x.presentacion))).size,records.length);
  assert.equal(new Set(records.map(x=>x.id)).size,records.length);
  assert.deepEqual(new Set(records.map(x=>x.nombre)),new Set([
   "Carne picada de ternera","Redondo de ternera","Solomillo de ternera",
@@ -27,6 +28,7 @@ test("catálogo de diecisiete ingredientes, con ID único y taxonomía aprobada"
   "Paletilla de lechazo","Chuletillas de lechazo",
   "Lomo de cerdo","Solomillo de cerdo","Costillas de cerdo",
   "Carne picada de cerdo","Cerdo para guisar",
+  "Pollo","Pechuga de pollo","Muslo de pollo","Carne picada de pollo","Pechuga de pavo",
   "Pulpo","Patata","Lechuga","Orejones","Salsa de tomate"
  ]));
  assert.equal(categories.length,4);
@@ -246,4 +248,29 @@ test("lote ovino/porcino: 8 ID FoodKeeper trazados en 7 fichas y 2 métodos",()=
  assert.ok(loin.sinonimos.includes("Filetes de lomo sin adobar"));
  const allIds=records.map(x=>x.id_fuente).filter(Boolean);
  assert.equal(new Set(allIds).size,allIds.length,"IDs de procedencia únicos (ID 69 queda en expediente)");
+});
+
+test("pollo y pavo: 6 variantes, ID de FoodKeeper y solo frío/congelación",()=>{
+ const original=JSON.parse(read("banco/fuentes/foodkeeper-es-original.json"));
+ const products=original.sheets.find(s=>s.name==="Product").data.map(r=>Object.assign({},...r));
+ const expected=[{"id":"CAR-POL-001","sub":"Pollo","name":"Pollo","presentation":"Pieza entera","sourceID":113,"freeze":360,"aggregate":false},{"id":"CAR-POL-002","sub":"Pollo","name":"Pechuga de pollo","presentation":"Pieza entera","sourceID":117,"freeze":270,"aggregate":false},{"id":"CAR-POL-003","sub":"Pollo","name":"Pechuga de pollo","presentation":"Filetes","sourceID":117,"freeze":270,"aggregate":true},{"id":"CAR-POL-004","sub":"Pollo","name":"Muslo de pollo","presentation":"Pieza entera","sourceID":118,"freeze":270,"aggregate":false},{"id":"CAR-POL-005","sub":"Pollo","name":"Carne picada de pollo","presentation":"Picada","sourceID":115,"freeze":90,"aggregate":false},{"id":"CAR-PAV-001","sub":"Pavo","name":"Pechuga de pavo","presentation":"Pieza entera","sourceID":120,"freeze":270,"aggregate":false}];
+ for(const e of expected){
+  const r=records.find(x=>x.id===e.id),p=products.find(x=>x.ID===e.sourceID);
+  assert.ok(r&&p&&p.Category_ID===15);
+  assert.equal(r.nombre,e.name);assert.equal(r.subcategoria,e.sub);
+  assert.equal(r.presentacion,e.presentation);
+  assert.equal(r.fuente,e.aggregate?"agregación":"FoodKeeper");
+  assert.equal(r.id_fuente,e.aggregate?null:String(e.sourceID));
+  assert.equal(r.refrigeracion,true);assert.equal(r.refrigeracion_dias,2);
+  assert.equal(r.congelacion,true);assert.equal(r.congelacion_dias,e.freeze);
+  assert.equal(r.despensa,false);assert.equal(r.conserva,false);
+  assert.equal(r.despensa_dias,null);assert.equal(r.conserva_dias,null);
+  assert.equal(r.tips_refrigeracion,"");assert.equal(r.tips_descongelacion,"");
+  assert.equal(p.DOP_Refrigerate_Max,2);
+  assert.equal(p.DOP_Freeze_Min*30,e.freeze);
+ }
+ assert.equal(records.filter(x=>x.nombre==="Pechuga de pollo").length,2);
+ assert.deepEqual(records.filter(x=>x.nombre==="Pechuga de pollo").map(x=>x.presentacion),["Pieza entera","Filetes"]);
+ assert.equal(records.filter(x=>x.subcategoria==="Pollo").length,5);
+ assert.equal(records.filter(x=>x.subcategoria==="Pavo").length,1);
 });
