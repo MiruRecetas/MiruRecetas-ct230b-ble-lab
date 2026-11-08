@@ -1,5 +1,38 @@
 # MiruRecetas · «Mis etiquetas» · visión, decisiones y hoja de ruta
 
+## Cierre visual del panel del banco · 08/11/2026
+
+Tras la aprobación funcional del banco de ingredientes, la usuaria solicita
+solo dos ajustes visuales: **barra gris corta centrada en la parte superior**
+y **botón de cierre exclusivamente «×» circular en la esquina derecha**,
+sin el antiguo botón rectangular verde «Cerrar». El fondo del panel debe
+coincidir exactamente con el panel oficial **«Preparar etiqueta»**.
+
+**Referencia canónica contrastada en** `MiruRecetas/mirurecetas-web-source/main`:
+`assets/estilo.css` define `--paper: #fffcf7`; el panel oficial
+`assets/etiquetas.css` utiliza `background: var(--paper)`,
+`.p1-mobile-handle` (46 × 5 px, fondo `#c1c9bf`, bordes redondeados)
+y `.p1-close` (44 × 44 px, borde circular, blanco, color `#29352e`,
+borde `#e4dfd5`, fuente 1.6rem). Su HTML canónico está en
+`plantillas/etiquetas-panel.html`.
+
+**Implementación exclusiva en el laboratorio:** `.bank-sheet` usa
+`background: #fffcf7` (sin alterar la variable de papel del resto
+de la página); se incorpora `.bank-mobile-handle` solo en móvil y se
+convierte `#bank-close` a botón circular con el carácter «×» y su
+`aria-label` existente. Se reserva espacio superior para que la
+barra no tape el encabezado. **Sin cambios** en filtros, categorías,
+búsqueda, selección, botón «Aplicar a etiqueta», fechas, notas,
+borradores, datos JSON, etiquetas, motor, TSPL o BLE. El evento de
+cierre existente permanece intacto. El CSS lleva versión nueva para
+evitar caché de Chrome Android.
+
+La validación visual real en Chrome Android sigue siendo posterior al
+despliegue; el resto del banco está aprobado funcionalmente. Tras la
+validación de este último ajuste, **siguiente fase: poblar el banco
+de ingredientes** con fichas verificadas según las reglas vigentes,
+no ampliar funciones de esta pantalla.
+
 ## Corrección del centrado horizontal de la nota · Pequeña 30 × 20 (08/11/2026)
 
 Tras validar la cantidad en la PR #70, la usuaria detecta el mismo
