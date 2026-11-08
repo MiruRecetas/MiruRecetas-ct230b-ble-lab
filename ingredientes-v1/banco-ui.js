@@ -154,6 +154,18 @@
    box.append(empty);
   }
   $("bank-apply").disabled=!items.some(x=>x.id===selectedId);
+  const source=$("bank-source-info");source.replaceChildren();
+  const selected=items.find(x=>x.id===selectedId);
+  if(selected){
+   source.textContent=selected.fuente
+    ?"Fuente: "+selected.fuente+(selected.id_fuente?" · ID "+selected.id_fuente:"")
+    :"Datos pendientes";
+   if(selected.fuente==="FoodKeeper"){
+    const link=document.createElement("a");
+    link.href="./banco/fuentes/foodkeeper-es-original.json";link.target="_blank";link.rel="noopener";
+    link.textContent="Consultar fuente";source.append(" · ",link);
+   }
+  }
  }
  function closeSheet(){
   if($("bank-overlay").hidden)return;
