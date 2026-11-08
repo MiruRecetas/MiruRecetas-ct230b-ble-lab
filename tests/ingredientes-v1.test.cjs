@@ -129,8 +129,8 @@ test("página autónoma, campos y archivos enlazados",()=>{
    "mode","note","notes-enabled","copies-minus","copies-plus","copies","transport","transport-count","transport-percent","progress-fill"])
   assert.match(html,new RegExp('id="'+id+'"'));
  assert.match(html,/src="\.\/motor-libre\.js\?v=20261108-raster-regiones-v1"/);
- assert.match(html,/src="\.\/plantilla-pequena\.js\?v=20261107-motor-unico"/);
- assert.match(html,/src="\.\/app\.js\?v=20261108-raster-regiones-v1"/);
+ assert.match(html,/src="\.\/plantilla-pequena\.js\?v=20261108-banco-modos-v1"/);
+ assert.match(html,/src="\.\/app\.js\?v=20261108-banco-integration-v1"/);
  assert.match(html,/src="\.\/plantilla-compacta\.js\?v=20261108-compacta-qa2"/);
  assert.match(html,/src="\.\/plantilla-amplia\.js\?v=20261108-amplia-b-v2"/);
  assert.match(html,/href="\.\/style\.css\?v=20261108-banco-panel-v1"/);
