@@ -33,25 +33,20 @@
 
 La tabla conserva los nombres de categorías de origen, incluidas las expresiones no habituales en español de España. La clasificación, denominaciones y número de registros que aparezcan en el **catálogo derivado** serán decisiones editoriales propias de MiruRecetas.
 
-## Categorías editoriales MiruRecetas aprobadas (08/11/2026)
+## Clasificación vigente: cuatro categorías (08/11/2026)
 
-**11 categorías principales**, distintas de la tabla FoodKeeper original anterior:
+La tabla que figura más arriba con 14 categorías es únicamente **FoodKeeper original**. MiruRecetas ha sustituido su clasificación previa de 11 categorías por **cuatro**:
 
-1. Carne
-2. Pescado
-3. Marisco
-4. Frutas
-5. Verduras
-6. Cereales y Legumbres
-7. Frutos secos y semillas
-8. Conservas
-9. Condimentos
-10. Lácteos y huevos
-11. Hongos y algas
+| Categoría | Subcategorías aprobadas |
+|---|---|
+| **Carnes y Aves** | Vacuno; Porcino; Ovino; Pollo; Pavo; Otras aves; Caza |
+| **Pescados y Mariscos** | Pescado blanco; Pescado azul; Crustáceos y moluscos; Cefalópodos |
+| **Frutas y Verduras** | Frutas; Hortalizas; Verduras de hoja; Tubérculos; Hongos; Algas |
+| **Despensa** | **Sin subcategorías aprobadas todavía**; presentar propuesta antes de fijarlas |
 
-«Cereales y Legumbres» agrupa los alimentos para los que en algún momento se diseñarán subcategorías de arroz, pasta, cereales, harinas y legumbres; las subcategorías **no están aprobadas ni implementadas**. «Condimentos» es el nombre definitivo de la antigua propuesta «Especias y hierbas». Las aves son Carne, los tubérculos Verduras y los cefalópodos (incluido pulpo) Marisco. «Lácteos y huevos» se mantiene definida aun si queda vacía. «Conservas» se reserva para preparados caseros futuros, no conservas comerciales.
+**Panel de selección:** **los chips de categorías sin ningún ingrediente registrado seleccionable no aparecen**, aun cuando esas categorías existan en la taxonomía. No crear alimentos de relleno; presentar solo chips con contenido.
 
-Estas categorías **no implican importar ni crear productos**: solo ingredientes reales comprados a granel y útiles para la etiqueta Pequeña; nunca productos comerciales envasados, sal, vinagre, aceites/grasas o proteínas vegetales comerciales. Las masas y preparaciones pertenecen a otras etiquetas (Compacta). La ficha original FoodKeeper permanece sin alterar y aún no se ha creado el derivado.
+Aves quedan dentro de Carnes y Aves; pulpo dentro de Cefalópodos; hongos y algas dentro de Frutas y Verduras. Se **elimina Lácteos y huevos** del banco, por no utilizarse con ingredientes a granel para etiquetar. La antigua clasificación de Cereales y Legumbres, Frutos secos y semillas, Condimentos y Conservas queda sustituida por **Despensa** con subcategorías pendientes de aprobación; conservas solo caseras en una fase futura. No incorporar productos comerciales envasados (incluidos sal, vinagre, grasas/aceites o proteínas vegetales comerciales); las masas/preparaciones de otros formatos tampoco pertenecen aquí. Aún no se ha creado el JSON derivado ni implementado la UI.
 
 ## Contrato vigente para el catálogo derivado (08/11/2026)
 
