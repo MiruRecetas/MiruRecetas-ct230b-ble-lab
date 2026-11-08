@@ -12,20 +12,33 @@ Redondo de vacuno, Solomillo de vacuno entero, Filetes de vacuno y
 Carne de vacuno para guisar; las denominaciones elegidas de FoodKeeper
 se conservan como sinónimos para la búsqueda.
 
-**Revisión de conservación:** los cuatro originales dan refrigeración
-`3–5 días` y congelación `4–12 meses` (campos `DOP_*`).
-Por el protocolo de `banco/README.md` se fija **refrigeración 5 días**
-(máximo del intervalo) y **congelación 120 días** (mínimo, 4 meses ×
-30 días). **Despensa y Conserva doméstica no se ofrecen** en esas
-fichas de carne cruda: `false`, días/tips `null`; esto no describe
-todo posible procesado industrial o transformación alimentaria.
-Fuente global única **FoodKeeper** e ID original respectivo; estado
-global `verificado` por modalidades editoriales cerradas, no
-certificación sanitaria. La fuente no aporta notas particulares;
-`tips_refrigeracion` y `tips_descongelacion` son cadenas vacías
-para que el panel existente utilice sus notas editoriales editables
-«Conservar en nevera» y «Descongelar en nevera».
-`tips_preparacion_conservacion` permanece `null`.
+**Revisión de conservación:** los cuatro registros originales del
+FoodKeeper ES v128 dan refrigeración `3–5 días` y congelación
+`4–12 meses` (campos `DOP_*`). **Para Redondo, Solomillo entero
+y Filetes** se usan `5 días` refrigerados y `120 días` congelados,
+aplicando la regla de máximo refrigerado, mínimo congelado y
+mes = 30 días. **Para Carne de vacuno para guisar cruda, cortada en
+dados**, una segunda comprobación reveló discrepancia con la
+recomendación específica de carne para guisar: las tablas de
+[Universidad de Nebraska](https://food.unl.edu/free-resource/food-storage/)
+y [NSF](https://www.nsf.org/consumer-resources/articles/cold-frozen-food-storage)
+señalan `1–2 días` y `3–4 meses`. Para no extender indebidamente
+el plazo de carne troceada, la ficha se fija en `2 días` refrigerados
+y `90 días` congelados, documentando sin sobrescribir el origen
+FoodKeeper ID `41`.
+
+En las cuatro fichas **Despensa y Conserva doméstica no se ofrecen**
+(`false`, días/tips `null`); eso no equivale a una prohibición
+de cualquier proceso profesional validado. Estado global
+`verificado` por modalidades editoriales cerradas, no certificación
+sanitaria. `fuente: "FoodKeeper"` e ID original para los tres
+primeros; `fuente: "agregación"` e `id_fuente: null` para guisar,
+con trazabilidad de FoodKeeper 41 y fuentes adicionales en el
+[expediente del banco](banco/README.md). Los cuatro FoodKeeper no
+traen consejos particulares: `tips_refrigeracion` y
+`tips_descongelacion` son cadenas vacías y el panel existente
+utiliza sus notas editoriales editables «Conservar en nevera» y
+«Descongelar en nevera». `tips_preparacion_conservacion` es `null`.
 
 Las fechas se cuentan desde la compra o preparación, coincidente con
 la fecha de envasado del flujo doméstico aprobado, **sin prolongarlas
