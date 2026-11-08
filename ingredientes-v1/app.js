@@ -2,12 +2,12 @@
 /* Prototipo autónomo de ingredientes para Conserva. No importa el motor de
  * etiquetas de recetas ni escribe en Airtable, inventario o backend. */
 (function(){
- const Motor=window.MiruLabelEngine,E=Motor.forFormat("ingredient"),C=Motor.forFormat("component"),
+ const Motor=window.MiruLabelEngine,E=Motor.forFormat("ingredient"),C=Motor.forFormat("component"),A=Motor.forFormat("horizontal"),
   $=id=>document.getElementById(id);
  const SERVICE="49535343-fe7d-4ae5-8fa9-9fafd205e455";
  const WRITE="49535343-8841-43f4-a8d4-ecbe34729bb3";
  const NOTIFY="49535343-1e4d-4bd9-ba61-23c647249616";
- let device=null,channel=null,logo=null,assetsPromise=null,busy=false,ready=false,refreshSeq=0,copies=1,selectedFormat="ingredient",cReady=false,cRefreshSeq=0;
+ let device=null,channel=null,logo=null,assetsPromise=null,busy=false,ready=false,refreshSeq=0,copies=1,selectedFormat="ingredient",cReady=false,cRefreshSeq=0,aReady=false,aRefreshSeq=0;
  function log(s){
   $("log").textContent+="["+new Date().toLocaleTimeString("es-ES")+"] "+s+"\n";
  }
@@ -21,9 +21,16 @@
   protein:$("c-protein").value,carbs:$("c-carbs").value,fat:$("c-fat").value,
   showInstruction:$("c-instruction-enabled").checked,instruction:$("c-instruction").value,
   showNote:$("c-note-enabled").checked,note:$("c-note").value};}
+ function wideValues(){return {name:$("a-name").value,mode:$("a-mode").value,
+  packed:$("a-packed").value,expiry:$("a-expiry").value,
+  showNutrition:$("a-nutrition-enabled").checked,kcal:$("a-kcal").value,
+  protein:$("a-protein").value,carbs:$("a-carbs").value,fat:$("a-fat").value,
+  showInstruction:$("a-instruction-enabled").checked,instruction:$("a-instruction").value,
+  showNote:$("a-note-enabled").checked,note:$("a-note").value};}
  function update(){
   let valid=false;
   try{if(selectedFormat==="component")C.normalize(compactValues(),true);
+   else if(selectedFormat==="horizontal")A.normalize(wideValues(),true);
    else E.normalize(values(),true);valid=true;}catch(_){}
   $("connect").disabled=busy||connected();
   $("disconnect").disabled=busy||!connected();
@@ -41,6 +48,11 @@
   $("c-nutrition-fields").hidden=!$("c-nutrition-enabled").checked;
   $("c-instruction").disabled=busy||!$("c-instruction-enabled").checked;
   $("c-note").disabled=busy||!$("c-note-enabled").checked;
+  for(const id of ["a-name","a-mode","a-packed","a-expiry","a-kcal","a-protein","a-carbs","a-fat",
+   "a-instruction","a-note","a-nutrition-enabled","a-instruction-enabled","a-note-enabled"])$(id).disabled=busy;
+  $("a-nutrition-fields").hidden=!$("a-nutrition-enabled").checked;
+  $("a-instruction").disabled=busy||!$("a-instruction-enabled").checked;
+  $("a-note").disabled=busy||!$("a-note-enabled").checked;
   for(const input of document.querySelectorAll("[data-label-format]"))input.disabled=busy;
   $("notes-enabled").disabled=busy;
   $("note").disabled=busy||!$("notes-enabled").checked;
@@ -52,13 +64,41 @@
     document.fonts.load('700 55px "Bricolage Grotesque"',"500 g"),
     document.fonts.load('400 17px "Geist"',"Envasado y congelación"),
     document.fonts.load('700 17px "Geist"',"30/10/26"),
-    document.fonts.load('italic 500 16px "Geist"',"Descongelar en nevera Conservar en nevera")
+    document.fonts.load('italic 500 16px "Geist"',"Descongelar en nevera Conservar en nevera"),
+    document.fonts.load('700 66px "Bricolage Grotesque"',"Pisto casero"),
+    document.fonts.load('700 53px "Bricolage Grotesque"',"164,35"),
+    document.fonts.load('700 29px "Geist"',"Consumo preferente"),
+    document.fonts.load('400 27px "Geist"',"Envasado y congelación"),
+    document.fonts.load('italic 500 24px "Geist"',"La textura puede variar")
    ]);
    if(faces.some(f=>!f.length||f.some(x=>x.status!=="loaded")))
     throw Error("No se cargaron las fuentes oficiales.");
    logo=await E.logo("../assets/isotipo-bn.svg");
   })();
   return assetsPromise;
+ }
+ async function wideRefresh(){
+  if(selectedFormat!=="horizontal")return;
+  const n=++aRefreshSeq;aReady=false;update();
+  try{
+   await ensureAssets();
+   if(n!==aRefreshSeq||selectedFormat!=="horizontal")return;
+   const d=A.normalize(wideValues(),false),physical=A.render(d,logo);
+   // El raster de impresión se gira a horizontal SOLO para mostrarlo;
+   // los píxeles que se envían a CT230B permanecen en 590 × 945.
+   const canvas=$("a-preview"),ctx=canvas.getContext("2d");
+   ctx.clearRect(0,0,canvas.width,canvas.height);ctx.save();
+   ctx.translate(canvas.width,0);ctx.rotate(Math.PI/2);ctx.drawImage(physical,0,0);ctx.restore();
+   $("a-status").textContent="Amplia B · composición de raster real en lectura horizontal. Vista previa para aprobación visual; impresión física aún no habilitada.";
+   try{
+    const strict=A.normalize(wideValues(),true),job=A.build(A.render(strict,logo),copies);
+    $("a-metrics").textContent=job.bytes+" B · "+job.fragments+" fragmentos BLE · "+job.tiles+" bandas · sin QR. Envío pendiente de validación física.";
+    aReady=true;
+   }catch(err){$("a-metrics").textContent="Vista previa generada; trabajo no listo: "+err.message;}
+  }catch(err){if(n===aRefreshSeq){
+   $("a-status").textContent="No se puede mostrar: "+err.message;
+   $("a-metrics").textContent="Corrige los campos o la composición.";
+  }}finally{if(n===aRefreshSeq)update();}
  }
  async function compactRefresh(){
   if(selectedFormat!=="component")return;
@@ -209,6 +249,10 @@
   for(const evt of ["input","change"])$(id).addEventListener(evt,compactRefresh);
  for(const id of ["c-nutrition-enabled","c-instruction-enabled","c-note-enabled"])
   $(id).addEventListener("change",()=>{update();void compactRefresh();});
+ for(const id of ["a-name","a-packed","a-expiry","a-kcal","a-protein","a-carbs","a-fat","a-instruction","a-note"])
+  for(const evt of ["input","change"])$(id).addEventListener(evt,wideRefresh);
+ for(const id of ["a-nutrition-enabled","a-instruction-enabled","a-note-enabled"])
+  $(id).addEventListener("change",()=>{update();void wideRefresh();});
  for(const id of ["name","grams","packed","expiry","note"])
   for(const evt of ["input","change"])$(id).addEventListener(evt,refresh);
  const noteDefaults={fridge:"Conservar en nevera",freeze:"Descongelar en nevera",other:""};
@@ -221,6 +265,12 @@
   $("c-note").value="";
   update();void compactRefresh();
  });
+ $("a-mode").addEventListener("change",()=>{
+  const mode=$("a-mode").value;
+  $("a-instruction").value=noteDefaults[mode];
+  $("a-note").value="";
+  update();void wideRefresh();
+ });
  $("mode").addEventListener("change",()=>{
   $("note").value=noteDefaults[$("mode").value];
   void refresh();
@@ -229,33 +279,35 @@
  const formats={
   ingredient:{title:"Datos del ingrediente",subtitle:"Personaliza la etiqueta sin modificar el diseño aprobado.",dimensions:"30 × 20 mm"},
   component:{title:"Datos de la etiqueta Compacta",subtitle:"Personaliza los bloques de la etiqueta libre 50 × 30 mm, sin QR.",dimensions:"50 × 30 mm"},
-  horizontal:{title:"Datos de la receta",subtitle:"Plantilla libre horizontal en preparación.",dimensions:"50 × 80 mm"}
+  horizontal:{title:"Datos de la etiqueta Amplia",subtitle:"Plantilla libre horizontal B sin QR. Revisa la vista previa antes de su aceptación física.",dimensions:"50 × 80 mm"}
  };
  function changeFormat(format){
   if(busy||!Object.hasOwn(formats,format))return;
   selectedFormat=format;
-  const ingredient=format==="ingredient",compact=format==="component",active=ingredient||compact,data=formats[format];
+  const ingredient=format==="ingredient",compact=format==="component",wide=format==="horizontal",active=ingredient||compact,data=formats[format];
   $("data-heading").textContent=data.title;
   $("data-subtitle").textContent=data.subtitle;
   $("preview-dimensions").textContent=data.dimensions;
-  $("preview-subtitle").textContent=active?"Vista previa real del raster monocromo que se enviará, sin QR.":"La composición del nuevo formato se incorporará tras validación, sin QR.";
-  $("print-subtitle").textContent=active?"De 1 a 20 copias iguales en un único trabajo BLE.":"La impresión de este formato se habilitará tras validar su diseño y motor.";
+  $("preview-subtitle").textContent=wide?"Raster monocromo de impresión girado a horizontal para su lectura, sin QR.": "Vista previa real del raster monocromo que se enviará, sin QR.";
+  $("print-subtitle").textContent=active?"De 1 a 20 copias iguales en un único trabajo BLE.":"La impresión de Amplia se habilitará tras validar la vista previa y el ensayo CT230B.";
   $("paper-dimensions").textContent=compact?"50 × 30 mm":"30 × 20 mm";
-  $("alternate-fields-title").textContent=format==="component"?"Componente · 50 × 30 mm":"Receta horizontal · 50 × 80 mm";
+  $("alternate-fields-title").textContent="Formato futuro";
   for(const [id,visible] of [
    ["ingredient-fields",ingredient],["ingredient-preview",ingredient],["compact-fields",compact],
-   ["compact-preview",compact],["ingredient-print",active],
-   ["alternate-fields",!active],["alternate-preview",!active],["alternate-print",!active]
+   ["compact-preview",compact],["wide-fields",wide],["wide-preview",wide],["ingredient-print",active],
+   ["alternate-fields",false],["alternate-preview",false],["alternate-print",wide]
   ])$(id).hidden=!visible;
   for(const input of document.querySelectorAll("[data-label-format]"))
    input.checked=input.value===format;
   if(!ingredient)++refreshSeq;
   if(!compact)++cRefreshSeq;
+  if(!wide)++aRefreshSeq;
   $("transport").hidden=true;
   $("confirm-paper").checked=false;
   update();
   if(ingredient)void refresh();
   if(compact)void compactRefresh();
+  if(wide)void wideRefresh();
  }
  for(const input of document.querySelectorAll("[data-label-format]"))
   input.addEventListener("change",()=>{if(input.checked)changeFormat(input.value);});
@@ -263,7 +315,8 @@
  const now=new Date();$("packed").value=now.getFullYear()+"-"+
   String(now.getMonth()+1).padStart(2,"0")+"-"+String(now.getDate()).padStart(2,"0");
  $("c-packed").value=$("packed").value;
- if(!E||!C){$("design-status").textContent="Falta un motor libre del laboratorio.";return;}
- log("Mis etiquetas: Pequeña 30 × 20 y Compacta libre 50 × 30; sin integración con recetas ni inventario.");
+ $("a-packed").value=$("packed").value;
+ if(!E||!C||!A){$("design-status").textContent="Falta un motor libre del laboratorio.";return;}
+ log("Mis etiquetas: Pequeña, Compacta y Amplia B (vista previa sin impresión); sin integración con recetas ni inventario.");
  update();void refresh();
 })();

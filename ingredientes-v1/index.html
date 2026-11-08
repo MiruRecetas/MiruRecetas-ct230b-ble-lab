@@ -191,6 +191,64 @@
           </label>
           <p class="disclaimer">Sin QR y sin gramaje. La vista previa usa el isotipo y las fuentes oficiales. Con la nutrición oculta, ambas fechas ocupan dos columnas; los encabezados de conservación y nota permanecen visibles incluso sin texto. Diseño pendiente de prueba física CT230B.</p>
         </div>
+        <div id="wide-fields" hidden>
+          <div class="fields">
+            <label class="field full" for="a-name">Nombre de la preparación
+              <input id="a-name" type="text" maxlength="90" value="Pisto casero" required autocomplete="off">
+              <span class="field-note">Amplia horizontal 50 × 80. Nombre libre, sin QR, raciones ni gramos.</span>
+            </label>
+            <label class="field" for="a-mode">Tipo de conservación
+              <select id="a-mode">
+                <option value="freeze" selected>Congelación</option>
+                <option value="fridge">Refrigeración</option>
+                <option value="other">Otro tipo</option>
+              </select>
+            </label>
+            <label class="field" for="a-packed">Fecha de envasado (obligatoria)
+              <input id="a-packed" type="date" required>
+            </label>
+            <label class="field" for="a-expiry">Consumo preferente (opcional)
+              <input id="a-expiry" type="date">
+              <span class="field-note">En blanco: --/--/--. Nunca se calcula automáticamente.</span>
+            </label>
+          </div>
+          <label class="checkbox-row" for="a-nutrition-enabled">
+            <input id="a-nutrition-enabled" type="checkbox" checked>
+            <span><strong>Mostrar información nutricional</strong></span>
+          </label>
+          <div id="a-nutrition-fields" class="fields">
+            <label class="field" for="a-kcal">Energía · kcal (opcional)
+              <input id="a-kcal" type="text" inputmode="decimal" value="164,35" placeholder="Sin dato">
+            </label>
+            <label class="field" for="a-protein">Proteínas · g (opcional)
+              <input id="a-protein" type="text" inputmode="decimal" value="5,69" placeholder="Sin dato">
+            </label>
+            <label class="field" for="a-carbs">Hidratos · g (opcional)
+              <input id="a-carbs" type="text" inputmode="decimal" value="18,58" placeholder="Sin dato">
+            </label>
+            <label class="field" for="a-fat">Grasas · g (opcional)
+              <input id="a-fat" type="text" inputmode="decimal" value="7,84" placeholder="Sin dato">
+            </label>
+          </div>
+          <p class="disclaimer">Valores manuales ilustrativos: no se calculan ni se sustituyen datos ausentes por cero.</p>
+          <label class="checkbox-row" for="a-instruction-enabled">
+            <input id="a-instruction-enabled" type="checkbox" checked>
+            <span><strong>Mostrar texto de conservación y consumo</strong> (encabezado siempre visible)</span>
+          </label>
+          <label class="field full" for="a-instruction">Instrucciones de conservación y consumo
+            <textarea id="a-instruction" rows="3" maxlength="180">Descongelar en nevera. Recalentar tapado.</textarea>
+            <span class="field-note">Al cambiar la conservación se propone el texto de Pequeña. Puedes editarlo libremente.</span>
+          </label>
+          <label class="checkbox-row" for="a-note-enabled">
+            <input id="a-note-enabled" type="checkbox" checked>
+            <span><strong>Mostrar texto de la nota</strong> (encabezado siempre visible)</span>
+          </label>
+          <label class="field full" for="a-note">Nota personal (opcional)
+            <textarea id="a-note" rows="3" maxlength="140">La textura puede variar al descongelar.</textarea>
+            <span class="field-note">La nota se limpia al cambiar conservación; su encabezado permanece.</span>
+          </label>
+          <p class="disclaimer">Propuesta B en raster real: encabezados inversos redondeados conectados por línea hasta los bordes, kcal en caja redondeada y macros debajo. Con nutrición: fechas en cuatro filas. Sin nutrición: fechas en dos columnas. Sin QR ni anillo. Pendiente de tu validación visual y del ensayo físico CT230B.</p>
+        </div>
         <div id="alternate-fields" class="format-placeholder" hidden>
           <strong id="alternate-fields-title"></strong>
           <p>El formulario editable de este modelo se incorporará conservando su composición aprobada. No hay campos ni valores ficticios.</p>
@@ -245,8 +303,8 @@
         </details>
         </div>
         <div id="alternate-print" class="format-placeholder" hidden>
-          <strong>Impresión aún no disponible para este formato</strong>
-          <p>El motor de etiquetas libres correspondiente se incorporará y comprobará con la CT230B antes de habilitar el botón de impresión.</p>
+          <strong>Amplia · Vista previa real disponible</strong>
+          <p>Ya puedes revisar la composición horizontal con y sin macronutrientes. La impresión de Amplia permanecerá deshabilitada hasta aceptar la vista previa y completar las comprobaciones físicas CT230B. No se envía ningún trabajo al abrir esta sección.</p>
         </div>
       </section>
     </div>
@@ -276,6 +334,13 @@
           <p id="c-status" class="status-line" role="status" aria-live="polite">Preparando la etiqueta Compacta…</p>
           <p id="c-metrics" class="status-line" aria-live="polite">Pendiente de generar.</p>
         </div>
+        <div id="wide-preview" hidden>
+          <div class="preview-stage">
+            <canvas id="a-preview" width="945" height="590" role="img" aria-label="Etiqueta libre Amplia 50 por 80 milímetros, composición B en lectura horizontal sin QR"></canvas>
+          </div>
+          <p id="a-status" class="status-line" role="status" aria-live="polite">Preparando Amplia horizontal con fuentes e isotipo oficiales…</p>
+          <p id="a-metrics" class="status-line" aria-live="polite">Pendiente de generar raster.</p>
+        </div>
         <div id="alternate-preview" class="format-placeholder" hidden>
           <strong>Vista previa pendiente</strong>
           <p>La vista previa mostrará exclusivamente la composición validada para el formato seleccionado. No se presenta un diseño simulado como si estuviera listo para imprimir.</p>
@@ -290,7 +355,8 @@
 <script src="./motor-libre.js?v=20261107-motor-unico"></script>
 <script src="./plantilla-pequena.js?v=20261107-motor-unico"></script>
 <script src="./plantilla-compacta.js?v=20261108-compacta-qa2"></script>
-<script src="./app.js?v=20261108-compacta-qa2"></script>
+<script src="./plantilla-amplia.js?v=20261108-amplia-b-v1"></script>
+<script src="./app.js?v=20261108-amplia-b-v1"></script>
 <script src="./cabecera.js" defer></script>
 </body>
 </html>
