@@ -1,3 +1,13 @@
+> **Corrección de superposición de gramos (posterior a PR #69):**
+> Pages desplegó PR #69, pero «500 g» seguía invadiendo el isotipo porque
+> `motor-libre.js::fit` restablecía la alineación izquierda. La plantilla
+> Pequeña ahora pide alineación central **solo para la cantidad**, con zona
+> horizontal 8…248 y 20 puntos de separación del isotipo. Se actualiza
+> el query de versión del script para Chrome Android. La revisión visual
+> con navegador real y la impresión física siguen siendo comprobaciones
+> independientes. Detalle en
+> [hoja de ruta](ingredientes-v1/MIS-ETIQUETAS-VISION-Y-HOJA-DE-RUTA.md).
+>
 > **Corrección de «Mis etiquetas» 08/11/2026:** restitución del diseño original
 > Pequeña, restauración de notas de refrigeración/descongelación, conservaciones
 > del banco limitadas a los métodos aplicables, y supresión del enlace al JSON

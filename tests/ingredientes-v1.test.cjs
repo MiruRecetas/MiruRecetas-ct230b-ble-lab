@@ -93,6 +93,48 @@ test("rótulo de fecha cambia en los tres modos y admite pie vacío",()=>{
  }finally{globalThis.document=original;}
 });
 
+test("cantidad centrada no invade el isotipo para 1, 500 y 9999 g",()=>{
+ const original=globalThis.document;
+ const label=[];
+ globalThis.document={createElement:()=>{
+  const ctx={
+   font:"",textAlign:"left",textBaseline:"alphabetic",
+   fillRect(){},
+   drawImage(img,x,y,w,h){label.push({type:"isotipo",x,y,w,h});},
+   measureText(t){
+    // Mock tipográfico conservador: los límites deben seguir siendo
+    // correctos con el ancho real que devuelva Canvas en Android.
+    const size=Number(this.font.match(/(\\d+)px/)?.[1]||17);
+    return {width:String(t).length*size*0.65};
+   },
+   fillText(t,x,y){
+    const size=Number(this.font.match(/(\\d+)px/)?.[1]||17);
+    label.push({type:"texto",text:String(t),x,y,align:this.textAlign,
+     width:this.measureText(t).width,size});
+   }
+  };
+  return {width:0,height:0,getContext:()=>ctx};
+ }};
+ try{
+  for(const grams of [1,500,9999]){
+   label.length=0;
+   const data=engine.normalize({...sample,name:"Patata",grams,mode:"fridge"},true);
+   engine.render(data,{});
+   const amount=label.find(x=>x.type==="texto"&&x.text===grams+" g");
+   const logo=label.find(x=>x.type==="isotipo");
+   assert.ok(amount&&logo);
+   assert.equal(amount.align,"center","M.fit debe recibir align=center");
+   assert.equal(amount.x,128);
+   assert.equal(logo.x,268);
+   assert.ok(amount.width<=240,"debe ajustar texto al ancho disponible");
+   const left=amount.x-amount.width/2,right=amount.x+amount.width/2;
+   assert.ok(left>=8,"no invadir el margen izquierdo");
+   assert.ok(right<=logo.x-20,"separar 20 puntos del isotipo");
+   assert.ok(amount.size>=32&&amount.size<=55);
+  }
+ }finally{globalThis.document=original;}
+});
+
 test("raster en bandas ≤12 y dentro de 30 × 20",()=>{
  const blocks=engine.sparse(rasterFixture());
  assert.ok(blocks.length>=2);
@@ -129,7 +171,7 @@ test("página autónoma, campos y archivos enlazados",()=>{
    "mode","note","notes-enabled","copies-minus","copies-plus","copies","transport","transport-count","transport-percent","progress-fill"])
   assert.match(html,new RegExp('id="'+id+'"'));
  assert.match(html,/src="\.\/motor-libre\.js\?v=20261108-raster-regiones-v1"/);
- assert.match(html,/src="\.\/plantilla-pequena\.js\?v=20261107-motor-unico-restaurada-v2"/);
+ assert.match(html,/src="\.\/plantilla-pequena\.js\?v=20261108-cantidad-isotipo-v3"/);
  assert.match(html,/src="\.\/app\.js\?v=20261108-banco-correcciones-v2"/);
  assert.match(html,/src="\.\/plantilla-compacta\.js\?v=20261108-compacta-qa2"/);
  assert.match(html,/src="\.\/plantilla-amplia\.js\?v=20261108-amplia-b-v2"/);

@@ -28,8 +28,8 @@
    packed:M.date(packed,requireDates),expiry:M.date(expiry,false)};
  }
 
- function fit(c,text,x,y,weight,size,family,max,min){
-  return M.fit(c,text,{x,y,style:weight,size,family,max,min,
+ function fit(c,text,x,y,weight,size,family,max,min,align="left"){
+  return M.fit(c,text,{x,y,style:weight,size,family,max,min,align,
    error:"El nombre o la cantidad no caben en el formato 30 × 20; abrevia el nombre."});
  }
  function draw(c,data,officialLogo){
@@ -40,8 +40,11 @@
   c.font='700 17px "Geist"';c.textAlign="right";
   c.fillText(data.packed,337,91);c.fillText(data.expiry,337,124);
   c.textAlign="left";c.fillRect(0,136,354,9);
-  c.textAlign="center";
-  if(data.grams!==null)fit(c,String(data.grams)+" g",128,195,"700",55,'"Bricolage Grotesque"',248,32);
+  // M.fit restablece textAlign="left" si no se indica alineación.
+  // Zona de gramos: centro x=128 y ancho máximo 240 -> x 8…248;
+  // el isotipo comienza en x=268: separación mínima real de 20 puntos.
+  // No reducir la fuente salvo que el valor no quepa en esa zona reservada.
+  if(data.grams!==null)fit(c,String(data.grams)+" g",128,195,"700",55,'"Bricolage Grotesque"',240,32,"center");
   c.textAlign="left";c.drawImage(officialLogo,268,157,62,62);
   if(data.notesEnabled&&data.note){
    c.textAlign="left";
