@@ -32,6 +32,7 @@ test("Compacta conserva geometría y no integra gramos de ingrediente",()=>{
  assert.equal("grams" in compact.normalize({...sample,grams:500}),false);
  const p=preview(sample);
  assert.equal(p.logos.length,1);
+ assert.ok(where(p,"MiruRecetas"),"La firma oficial debe ser visible");
  assert.match(where(p,"Pisto casero").font,/Bricolage Grotesque/);
  assert.match(where(p,"Envasado y").font,/Geist/);
 });
