@@ -1,3 +1,14 @@
+> **Banco de ingredientes · Ovino y Porcino (08/11/2026):**
+> 2 nuevas fichas de cordero y 5 de cerdo, desde FoodKeeper
+> 48/51/61/67/69/72/73/75 (67 + 69 unidos en un único
+> solomillo con alias de medallones). Cortes enteros y chuletas
+> 5 días en frío / 120 congelados; picada y dados de cerdo
+> 2/90 (dados: agregado de fuentes, ID FoodKeeper 75
+> documentado). Únicamente refrigeración y congelación;
+> **17 fichas totales**. No cambia el panel, las plantillas,
+> el motor ni la web oficial.
+> [Expediente](ingredientes-v1/banco/README.md).
+>
 > **Banco · nombres editoriales aprobados (08/11/2026):**
 > CAR-VAC-002…005: Redondo de ternera (Pieza entera),
 > Solomillo de ternera (presentación null, incluye medallones
