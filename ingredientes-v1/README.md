@@ -10,6 +10,13 @@
 > [decisión canónica](MIS-ETIQUETAS-VISION-Y-HOJA-DE-RUTA.md#corrección-del-banco-y-preservación-del-diseño-08112026).
 >
 
+**Corrección adicional de nota · Pequeña:** la nota mantiene sin
+cambios su posición vertical `y=227`, se centra horizontalmente en
+`x=128` con ancho máximo `240`, en la misma zona que la cantidad,
+y deja 20 puntos hasta el isotipo. No cambia la posición vertical ni
+se modifica el resto del diseño. Referencia detallada en
+[hoja de ruta](MIS-ETIQUETAS-VISION-Y-HOJA-DE-RUTA.md).
+
 **Incidencia posterior a PR #69, corregida en rama de laboratorio:**
 la restauración de la plantilla histórica no evitaba el solapamiento de
 «500 g» con el isotipo. `M.fit` anulaba el centrado previo. El
