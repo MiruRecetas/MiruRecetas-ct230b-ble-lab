@@ -114,7 +114,7 @@ como sinónimo de paletilla. Referencia para el significado del término:
 comprende la pieza entera y filetes frescos, adobados domésticamente
 o sin adobar; `CAR-POR-002`: **Solomillo de cerdo**, `null`;
 `CAR-POR-003`: **Costillas de cerdo**, `null`;
-`CAR-POR-004`: **Carne picada de cerdo**, `"picada"`;
+`CAR-POR-004`: **Carne picada de cerdo**, `"Picada"`;
 `CAR-POR-005`: **Cerdo para guisar**, `"Dados"`.
 Se preservan los tiempos previos y los identificadores: 5/120
 para lomo/solomillo/costillas; 2/90 para picada/dados.
@@ -169,7 +169,7 @@ comerciales. **Fuente canónica original:** el archivo
 | `CAR-POR-001` | Porcino | Lomo de cerdo | `null` | 61 | 5 días | 120 días |
 | `CAR-POR-002` | Porcino | Solomillo de cerdo | `null` | **67 y 69, unificados** | 5 días | 120 días |
 | `CAR-POR-003` | Porcino | Costillas de cerdo | `null` | 72 | 5 días | 120 días |
-| `CAR-POR-004` | Porcino | Carne picada de cerdo | picada | 73 | **2 días** | **90 días** |
+| `CAR-POR-004` | Porcino | Carne picada de cerdo | Picada | 73 | **2 días** | **90 días** |
 | `CAR-POR-005` | Porcino | Cerdo para guisar | Dados | 75 | **2 días** | **90 días** |
 
 **Contraste del FoodKeeper original:**

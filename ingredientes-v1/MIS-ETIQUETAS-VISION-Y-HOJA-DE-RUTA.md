@@ -24,7 +24,7 @@ como sinónimo de paletilla. Referencia para el significado del término:
 comprende la pieza entera y filetes frescos, adobados domésticamente
 o sin adobar; `CAR-POR-002`: **Solomillo de cerdo**, `null`;
 `CAR-POR-003`: **Costillas de cerdo**, `null`;
-`CAR-POR-004`: **Carne picada de cerdo**, `"picada"`;
+`CAR-POR-004`: **Carne picada de cerdo**, `"Picada"`;
 `CAR-POR-005`: **Cerdo para guisar**, `"Dados"`.
 Se preservan los tiempos previos y los identificadores: 5/120
 para lomo/solomillo/costillas; 2/90 para picada/dados.

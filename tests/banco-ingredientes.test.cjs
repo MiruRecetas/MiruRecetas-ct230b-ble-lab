@@ -198,7 +198,7 @@ test("lote ovino/porcino: 8 ID FoodKeeper trazados en 7 fichas y 2 métodos",()=
   {id:"CAR-POR-001",name:"Lomo de cerdo",presentation:null,category:"Porcino",source:[61],days:[5,120]},
   {id:"CAR-POR-002",name:"Solomillo de cerdo",presentation:null,category:"Porcino",source:[67,69],days:[5,120]},
   {id:"CAR-POR-003",name:"Costillas de cerdo",presentation:null,category:"Porcino",source:[72],days:[5,120]},
-  {id:"CAR-POR-004",name:"Carne picada de cerdo",presentation:"picada",category:"Porcino",source:[73],days:[2,90]},
+  {id:"CAR-POR-004",name:"Carne picada de cerdo",presentation:"Picada",category:"Porcino",source:[73],days:[2,90]},
   {id:"CAR-POR-005",name:"Cerdo para guisar",presentation:"Dados",category:"Porcino",source:[75],days:[2,90]}
  ];
  for(const spec of specs){

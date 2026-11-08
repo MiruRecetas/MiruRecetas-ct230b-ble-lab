@@ -2,7 +2,7 @@
 > Paletilla de lechazo (Pieza entera), Chuletillas de lechazo (null),
 > Lomo de cerdo (null, incluye pieza y filetes crudos adobados en
 > casa o sin adobar), Solomillo de cerdo (null), Costillas de cerdo
-> (null), Carne picada de cerdo ("picada"), Cerdo para guisar
+> (null), Carne picada de cerdo ("Picada"), Cerdo para guisar
 > ("Dados"). Sin variar plazos: 5/120 días o 2/90 para picada
 > y dados; 17 fichas, mismos IDs. Adobar no alarga el plazo;
 > los productos comerciales adobados siguen su propio etiquetado.
