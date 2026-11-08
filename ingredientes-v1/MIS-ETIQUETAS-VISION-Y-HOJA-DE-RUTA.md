@@ -74,9 +74,13 @@ versiones. Una modificación posterior del diseño libre **no podrá alterar**
 la etiqueta existente de recetas. La V0.9 original con QR permanece aprobada
 e inmutable. La nueva versión **sin QR** ha recibido una decisión de diseño explícita el 08/11/2026 (PR [#45](https://github.com/MiruRecetas/MiruRecetas-ct230b-ble-lab/pull/45)); **la impresión física sigue sin validar**.
 
-- Lienzo 590 × 354; título grande e isotipo superior, barra gruesa horizontal
-  a y=60, fechas a izquierda (y=100,135), nutrición a derecha, separador fino
-  parcial y=149, instrucciones y nota en la mitad izquierda inferior.
+- Lienzo 590 × 354; título grande y firma superior compuesta por **isotipo BN oficial**
+  y «MiruRecetas» en Bricolage Grotesque. Barra superior a y=69; panel de
+  fechas/nutrición a y≈90–174 y separador a y=180. Con macros activos, fechas
+  en dos filas a la izquierda y nutrición a la derecha; con macros ocultos,
+  fechas en dos columnas de ancho equilibrado. Los encabezados negros de
+  conservación y nota a y≈191 y y≈274, con textos opcionales extendidos a todo
+  el ancho y espacio reservado que no se contrae al vaciar los campos.
 - El espacio inferior derecho antes ocupado por el QR se aprovecha en el
   diseño aprobado: las secciones inferiores ocupan el ancho disponible. No
   copiar QR, URL de receta, raciones ni gramaje.
