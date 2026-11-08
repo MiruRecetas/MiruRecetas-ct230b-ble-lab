@@ -69,15 +69,16 @@ test("plazos del archivo original: sin extrapolar datos de otros alimentos",()=>
 test("Pequeña tiene chips y panel, sin alterar Compacta/Amplia ni el motor común",()=>{
  const html=read("index.html"),js=read("banco-ui.js"),css=read("style.css");
  const app=read("app.js"),engine=read("motor-libre.js");
- assert.match(html,/id="bank-free"[^>]*Ingrediente libre/);
- assert.match(html,/id="bank-open"[^>]*Cargar del banco/);
+ assert.match(html,/id="bank-free"[^>]*>Ingrediente libre/);
+ assert.match(html,/id="bank-open"[^>]*>Cargar del banco/);
  assert.match(html,/id="bank-sheet"/);
  assert.ok(html.indexOf('id="ingredient-bank-controls"')<html.indexOf('id="data-step"'));
  assert.match(html,/src="\.\/banco-ui\.js\?v=/);
  assert.match(js,/fetch\("\.\/banco\/catalogo\.json"/);
  assert.match(js,/sinonimos/);
  assert.match(js,/Tiempo recomendado: /);
- assert.match(js,/Restablecer recomendación/);
+ assert.match(html,/Restablecer recomendación/);
+ assert.match(js,/bank-reset-date/);
  assert.match(css,/\.bank-overlay/);
  assert.doesNotMatch(engine,/bank-(?:sheet|open|free)|catalogo\.json/);
  assert.match(app,/noteDefaults=/);
