@@ -1,5 +1,34 @@
 # MiruRecetas · «Mis etiquetas» · visión, decisiones y hoja de ruta
 
+## Banco · normalización de nombres y presentaciones de ternera (08/11/2026)
+
+**Decisión expresa posterior a la PR #73:** en las cuatro fichas
+`CAR-VAC-002…005`, los nombres visibles pasan a **Redondo de ternera,
+Solomillo de ternera, Filetes de ternera y Ternera para guisar**.
+Las presentaciones son respectivamente `"Pieza entera"`, `null`,
+`"Filetes"` y `"Dados"`. No añadir diferenciación artificial de
+«entero» cuando el solomillo también se compra en **medallones crudos
+de 3–4 cm**: FoodSafety.gov confirma iguales intervalos para
+`steaks` y `roasts` frescos tanto de `beef` como de `veal`;
+se aplican los mismos **5 días refrigerados / 120 días congelados**
+ya registrados para el solomillo. Los 2/90 días de dados para guisar
+siguen siendo distintos. Tampoco cambia la carne picada.
+
+**Trazabilidad:** se conservan los IDs FoodKeeper 36/37/40/41 y sus
+valores; el original clasifica esos cuatro como `Carne de Res (beef)`
+y otros productos como `Ternera (veal)`. «Ternera» es una adaptación
+editorial española solicitada y **no una reasignación de las categorías
+del original ni una certificación de la edad del animal**. Las
+denominaciones anteriores pasan a sinónimos de búsqueda. El
+[expediente en el README del banco](banco/README.md) detalla la
+comparación oficial de plazos, límite de interpretación y las
+presentaciones aprobadas.
+
+**Alcance:** solo editar `nombre`, `presentacion` y
+`sinonimos` en las cuatro fichas, junto a documentación y pruebas.
+Preservar exactamente los cuatro métodos, los plazos, las fuentes
+globales, los IDs estables, el diseño, la UI y el BLE.
+
 ## Banco de ingredientes · ampliación inicial de vacuno (08/11/2026)
 
 La usuaria confirmó cuatro entradas del archivo FoodKeeper ES original:
