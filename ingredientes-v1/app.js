@@ -69,7 +69,7 @@
    const d=C.normalize(compactValues(),false),cv=C.render(d,logo);
    const canvas=$("c-preview");canvas.getContext("2d").clearRect(0,0,C.width,C.height);
    canvas.getContext("2d").drawImage(cv,0,0);
-   $("c-status").textContent="Diseño libre elegido: encabezados fijos y fechas en dos columnas sin nutrición. Pendiente de ensayo físico CT230B.";
+   $("c-status").textContent="Compacta libre: cabecera V0.9, fechas adaptadas al bloque nutricional y encabezados inferiores fijos. Pendiente de ensayo físico CT230B.";
    try{const strict=C.normalize(compactValues(),true),job=C.build(C.render(strict,logo),copies);
     $("c-metrics").textContent=job.bytes+" B · "+job.fragments+" fragmentos BLE · "+job.tiles+" bandas · "+copies+" copias · sin QR.";
     cReady=true;
@@ -207,11 +207,20 @@
  $("clear").addEventListener("click",()=>{$("log").textContent="";});
  for(const id of ["c-name","c-packed","c-expiry","c-kcal","c-protein","c-carbs","c-fat","c-instruction","c-note"])
   for(const evt of ["input","change"])$(id).addEventListener(evt,compactRefresh);
- for(const id of ["c-mode","c-nutrition-enabled","c-instruction-enabled","c-note-enabled"])
+ for(const id of ["c-nutrition-enabled","c-instruction-enabled","c-note-enabled"])
   $(id).addEventListener("change",()=>{update();void compactRefresh();});
  for(const id of ["name","grams","packed","expiry","note"])
   for(const evt of ["input","change"])$(id).addEventListener(evt,refresh);
  const noteDefaults={fridge:"Conservar en nevera",freeze:"Descongelar en nevera",other:""};
+ // Contrato de Pequeña: cada cambio de conservación reemplaza el texto guiado.
+ // Compacta lo sitúa en instrucciones y limpia la nota personal previa,
+ // evitando instrucciones contradictorias o duplicadas en ambas secciones.
+ $("c-mode").addEventListener("change",()=>{
+  const mode=$("c-mode").value;
+  $("c-instruction").value=noteDefaults[mode];
+  $("c-note").value="";
+  update();void compactRefresh();
+ });
  $("mode").addEventListener("change",()=>{
   $("note").value=noteDefaults[$("mode").value];
   void refresh();
