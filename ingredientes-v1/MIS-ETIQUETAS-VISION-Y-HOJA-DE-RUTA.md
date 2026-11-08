@@ -1,4 +1,65 @@
 # MiruRecetas · «Mis etiquetas» · visión, decisiones y hoja de ruta
+
+## Corrección del banco y preservación del diseño (08/11/2026)
+
+Tras la revisión visual de la usuaria, se corrige la PR #68 **solo en el
+laboratorio**. Se restaura **byte a byte** `plantilla-pequena.js` de antes de
+#68: ninguna coordenada, tipografía, raster, geometría ni BLE de la etiqueta
+aprobada cambia. Los modos nuevos Despensa/Conserva se interpretan en el
+controlador como el rótulo gráfico histórico «Conservación», sin tocar la
+plantilla. Refrigeración y Congelación mantienen sus rótulos anteriores.
+
+**Banco ≠ ingrediente libre.** Al seleccionar una ficha del banco, el selector
+ofrece únicamente las conservaciones respaldadas para esa presentación;
+«Otro tipo» y las modalidades no aplicables desaparecen. El modo
+**Ingrediente libre** recupera todas las opciones originales, el borrador
+manual y la edición completa. El banco no restringe las etiquetas libres.
+
+- Carne picada de ternera cruda: **Refrigeración (2 días)** y **Congelación
+  (90 días)**. No se ofrece Despensa ni Conserva doméstica para esta ficha.
+- Lechuga iceberg o romana fresca: **solo Refrigeración (14 días)**.
+  Congelación no recomendada por FoodKeeper; Despensa y Conserva doméstica
+  excluidas de esta ficha.
+- Patata entera: Refrigeración (14 días) y Despensa (**sin plazo elegido**).
+  La congelación citada por FoodKeeper corresponde a patata cocida y machacada,
+  no a la ficha de patata entera. Conserva doméstica no ofrecida.
+- Orejones: solo Despensa (180 días) en la presentación del banco.
+- Pulpo y salsa de tomate: se preservan como borradores `sin_datos` en
+  el JSON, **no aparecen como fichas seleccionables** hasta disponer de
+  una conservación aplicable y suficientemente definida. En modo libre pueden
+  etiquetarse manualmente.
+
+En estas fichas, `true` **significa modalidad ofrecida en el banco** y
+`false` **no ofrecida para este ingrediente/presentación**, no una prohibición
+universal de cualquier proceso industrial o doméstico especializado. Un
+`null` de días nunca genera fecha. El estado global `verificado` de carne
+y lechuga refleja un conjunto cerrado editorialmente de modos de esta ficha,
+**no una certificación de seguridad**; `fuente: "agregación"` y
+`id_fuente: null` distinguen los plazos originales de FoodKeeper
+(**Product.ID 59 y 290**) de las exclusiones solicitadas por la usuaria.
+La ficha de patata sigue parcial porque su intervalo de despensa no tiene
+criterio de selección aprobado. Fuente original preservada.
+
+**Notas**: si FoodKeeper no trae un consejo específico, se recuperan los
+textos predeterminados de MiruRecetas: «Conservar en nevera»,
+«Descongelar en nevera» o «Guardar en lugar fresco y seco» según el modo.
+Son **textos editoriales**, no citas de FoodKeeper. Si existe un consejo
+específico adecuado, prevalece (p. ej. patata refrigerada puede oscurecerse
+al cocinar). La nota sigue editable y puede ocultarse voluntariamente.
+
+Se elimina del panel el bloque «Fuente · ID · Consultar fuente» y el vínculo
+directo al JSON original (no aprobado y no legible para uso doméstico).
+La trazabilidad permanece en catálogo/documentación interna. Se separa el
+ingrediente **seleccionado en el panel** del último **aplicado al formulario**;
+explorar no cambia fechas, notas ni conservaciones aplicadas. Las fechas
+introducidas manualmente tienen prioridad y el cálculo sugerido conserva su
+restablecimiento explícito.
+
+**Pendiente:** revisión visual real de esta corrección y prueba física final
+de los formatos libres. No se edita producción, PWA, catálogo nutricional,
+Airtable, impresora histórica ni inventario; este cambio no acredita
+ninguna impresión física.
+
 **Consolidación de decisiones de producto: 06/11/2026 (Europe/Madrid).**
 **Ámbito:** laboratorio público `MiruRecetas/MiruRecetas-ct230b-ble-lab`, página [Mis etiquetas](https://mirurecetas.github.io/MiruRecetas-ct230b-ble-lab/ingredientes-v1/). **No es integración productiva ni autorización para alterar el recetario, Airtable o la PWA.**
 
