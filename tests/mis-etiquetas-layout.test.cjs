@@ -40,7 +40,7 @@ test("Dos únicos pasos: 1 abierto y 2 cerrado inicialmente, sin paso intermedio
 
 test("Móvil ordenado y escritorio repartido en dos columnas, selector nunca plegable",()=>{
  assert.ok(main.indexOf('class="format-column"')<main.indexOf('class="steps-column"'));
- assert.ok(main.indexOf('class="format-card"')<main.indexOf('<details'));
+ assert.ok(main.indexOf('class="card format-card"')<main.indexOf('<details'));
  assert.match(css,/\.layout-grid\{display:grid;grid-template-columns:minmax\(0,1fr\) minmax\(0,1\.06fr\)/);
  assert.match(css,/\.format-column\{grid-column:2;grid-row:1/);
  assert.match(css,/\.steps-column\{grid-column:1;grid-row:1/);
