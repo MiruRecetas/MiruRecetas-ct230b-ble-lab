@@ -8,6 +8,19 @@
 > `assets/estilo.css`. Pendiente comprobación visual final en Android;
 > fase siguiente: poblar las fichas del banco sin cambiar la interfaz.
 >
+> **Ampliación de banco · Vacuno (08/11/2026):**
+> incorporadas cuatro fichas FoodKeeper 36, 37, 40 y 41, con IDs
+> CAR-VAC-002…005. Redondo, solomillo entero, filetes y carne
+> para guisar. **Redondo, solomillo y filetes:** refrigeración
+> **5 días** y congelación **120 días**. **Carne para guisar en dados:**
+> refrigeración **2 días** y congelación **90 días**, por el contraste
+> específico con otras fuentes de conservación doméstica frente al
+> FoodKeeper ES original ID 41 (registrado como `agregación`).
+> Solo se ofrecen frío y congelación; despensa/conserva no se ofrecen.
+> Notas editoriales de nevera/descongelación existentes y sin cambios
+> de diseño ni impresión. Catálogo: **10 fichas**, cinco de Vacuno.
+> [Expediente y discrepancia documentados](banco/README.md).
+>
 > **Actualización correctiva 08/11/2026 (prevalece sobre pasajes históricos):**
 > restaurada la plantilla Pequeña previa a #68; el banco ofrece solo métodos
 > aplicables y notas editoriales, conserva el modo libre independiente, oculta
@@ -88,9 +101,9 @@ AESAN queda como fuente de contraste. **`estado_recomendacion`, `fuente` e `id_f
 
 Esta clasificación reúne **4 categorías y 26 subcategorías aprobadas** y sustituye las once categorías editoriales anteriores, excluyendo «Lácteos y huevos». La última subcategoría de Despensa se denomina simplemente **«Conservas»** en el panel, aunque se reservará a conservas caseras; nunca a productos comerciales. Los **chips de categorías vacías no aparecerán en el panel**: para mostrarse, una categoría debe contener al menos un ingrediente seleccionable. Nunca crear registros ficticios ni incluir productos comerciales envasados. El [JSON Schema del banco](banco/catalogo.schema.json) **ya está creado** (4 categorías, 26 subcategorías y metadatos aprobados), y el **catálogo mínimo y el panel ya están implementados en laboratorio**, aún pendientes de validación visual; no es el catálogo definitivo. [Contrato del banco](banco/README.md).
 
-## Banco JSON de Pequeña · patrón D implementado para seis fichas (08/11/2026)
+## Banco JSON de Pequeña · patrón D con diez fichas (08/11/2026)
 
-**Estado actual del banco:** ver [seis fichas de prueba y fuentes](banco/README.md), su [JSON](banco/catalogo.json) y el controlador [banco-ui.js](banco-ui.js). Los chips, el sheet y la precarga editable están en laboratorio; la usuaria **aún no ha validado visualmente** esta nueva interacción. La opción libre, Compacta y Amplia mantienen su uso. El selector de Pequeña incorpora Despensa y Conserva como modos adicionales, sin cambiar el arte aprobado de los modos anteriores.
+**Estado actual del banco:** ver [diez fichas y fuentes](banco/README.md), su [JSON](banco/catalogo.json) y el controlador [banco-ui.js](banco-ui.js). Los chips, el sheet y la precarga editable están en laboratorio; la usuaria **aún no ha validado visualmente** esta nueva interacción. La opción libre, Compacta y Amplia mantienen su uso. El selector de Pequeña incorpora Despensa y Conserva como modos adicionales, sin cambiar el arte aprobado de los modos anteriores.
 
 La usuaria ha aprobado **dos chips bajo la vista previa de Pequeña**:
 **«Ingrediente libre»** (por defecto) y **«Cargar del banco»**. Este último

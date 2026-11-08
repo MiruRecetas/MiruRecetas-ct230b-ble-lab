@@ -18,11 +18,12 @@ const categories=props.categoria.enum;
 const subcategories=Object.fromEntries(allOf.slice(0,4).map(r=>[r.if.properties.categoria.const,r.then.properties.subcategoria.enum]));
 const byName=name=>records.find(x=>x.nombre===name);
 
-test("catálogo de seis ingredientes, con ID único y taxonomía aprobada",()=>{
- assert.equal(records.length,6);
+test("catálogo de diez ingredientes, con ID único y taxonomía aprobada",()=>{
+ assert.equal(records.length,10);
  assert.equal(new Set(records.map(x=>x.id)).size,6);
  assert.deepEqual(new Set(records.map(x=>x.nombre)),new Set([
-  "Carne picada de ternera","Pulpo","Patata","Lechuga","Orejones","Salsa de tomate"
+  "Carne picada de ternera","Redondo de vacuno","Solomillo de vacuno entero",
+  "Filetes de vacuno","Carne de vacuno para guisar","Pulpo","Patata","Lechuga","Orejones","Salsa de tomate"
  ]));
  assert.equal(categories.length,4);
  assert.equal(Object.values(subcategories).flat().length,26);
@@ -135,4 +136,45 @@ test("panel banco replica el cierre, asa móvil y papel de impresión oficiales 
  assert.match(css,/background:#c1c9bf;pointer-events:none/);
  assert.match(html,/href="\.\/style\.css\?v=20261108-banco-panel-canonico-v3"/);
  assert.match(js,/\$\("bank-close"\)\.addEventListener\("click",closeSheet\)/);
+});
+
+test("vacuno aprobado 36/37/40/41: procedencia exacta, plazos y métodos aplicables",()=>{
+ const foodkeeper=JSON.parse(read("banco/fuentes/foodkeeper-es-original.json"));
+ const source=foodkeeper.sheets.find(x=>x.name==="Product").data.map(row=>Object.assign({},...row));
+ const specs=[
+  ["CAR-VAC-002",36,"Redondo de vacuno","Asado redondo"],
+  ["CAR-VAC-003",37,"Solomillo de vacuno entero","Lomillo entero"],
+  ["CAR-VAC-004",40,"Filetes de vacuno","Filetes de ternera"],
+  ["CAR-VAC-005",41,"Carne de vacuno para guisar","Carne para guisar"]
+ ];
+ for(const [id,sourceId,name,alias] of specs){
+  const r=records.find(x=>x.id===id),p=source.find(x=>x.ID===sourceId);
+  assert.ok(r&&p,"ID original y ficha derivada");
+  assert.equal(p.Category_ID,10);assert.equal(p.Name,"Carne de Res");
+  assert.equal(p.DOP_Refrigerate_Min,3);assert.equal(p.DOP_Refrigerate_Max,5);
+  assert.equal(p.DOP_Refrigerate_Metric,"Días");
+  assert.equal(p.DOP_Freeze_Min,4);assert.equal(p.DOP_Freeze_Max,12);
+  assert.equal(p.DOP_Freeze_Metric,"Meses");
+  assert.equal(r.nombre,name);assert.ok(r.sinonimos.includes(alias));
+  assert.equal(r.categoria,"Carnes y Aves");assert.equal(r.subcategoria,"Vacuno");
+  assert.equal(r.estado_recomendacion,"verificado");
+  // FoodKeeper ES 41 discrepa del criterio especializado para carne de guiso
+  // troceada: se aplican 2 días / 3 meses de USDA y la fuente es agregada.
+  if(sourceId===41){
+   assert.equal(r.fuente,"agregación");assert.equal(r.id_fuente,null);
+   assert.equal(r.refrigeracion_dias,2);assert.equal(r.congelacion_dias,90);
+  }else{
+   assert.equal(r.fuente,"FoodKeeper");assert.equal(r.id_fuente,String(sourceId));
+   assert.equal(r.refrigeracion_dias,5);assert.equal(r.congelacion_dias,120);
+  }
+  assert.equal(r.refrigeracion,true);assert.equal(r.tips_refrigeracion,"");
+  assert.equal(r.congelacion,true);assert.equal(r.tips_descongelacion,"");
+  for(const m of ["despensa","conserva"]){
+   assert.equal(r[m],false);assert.equal(r[m+"_dias"],null);
+   assert.equal(r["tips_"+m],null);
+  }
+  assert.equal(r.tips_preparacion_conservacion,null);
+ }
+ assert.equal(new Set(records.map(x=>x.id_fuente).filter(Boolean)).size,
+  records.filter(x=>x.id_fuente).length,"ningún origen FoodKeeper duplicado");
 });

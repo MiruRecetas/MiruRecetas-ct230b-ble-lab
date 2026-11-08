@@ -1,5 +1,62 @@
 # MiruRecetas · «Mis etiquetas» · visión, decisiones y hoja de ruta
 
+## Banco de ingredientes · ampliación inicial de vacuno (08/11/2026)
+
+La usuaria confirmó cuatro entradas del archivo FoodKeeper ES original:
+`Product.ID 36` (Asado redondo), `37` (Lomillo entero), `40`
+(Filetes) y `41` (Carne para guisar), todas de **carne de res cruda
+y fresca**, no elaboraciones cocinadas. Se incorporan exclusivamente a
+`ingredientes-v1/banco/catalogo.json`, en **Carnes y Aves → Vacuno**,
+con IDs `CAR-VAC-002` a `CAR-VAC-005`. Nombres visibles españoles:
+Redondo de vacuno, Solomillo de vacuno entero, Filetes de vacuno y
+Carne de vacuno para guisar; las denominaciones elegidas de FoodKeeper
+se conservan como sinónimos para la búsqueda.
+
+**Revisión de conservación:** los cuatro registros originales del
+FoodKeeper ES v128 dan refrigeración `3–5 días` y congelación
+`4–12 meses` (campos `DOP_*`). **Para Redondo, Solomillo entero
+y Filetes** se usan `5 días` refrigerados y `120 días` congelados,
+aplicando la regla de máximo refrigerado, mínimo congelado y
+mes = 30 días. **Para Carne de vacuno para guisar cruda, cortada en
+dados**, una segunda comprobación reveló discrepancia con la
+recomendación específica de carne para guisar: las tablas de
+[Universidad de Nebraska](https://food.unl.edu/free-resource/food-storage/)
+y [NSF](https://www.nsf.org/consumer-resources/articles/cold-frozen-food-storage)
+señalan `1–2 días` y `3–4 meses`. Para no extender indebidamente
+el plazo de carne troceada, la ficha se fija en `2 días` refrigerados
+y `90 días` congelados, documentando sin sobrescribir el origen
+FoodKeeper ID `41`.
+
+En las cuatro fichas **Despensa y Conserva doméstica no se ofrecen**
+(`false`, días/tips `null`); eso no equivale a una prohibición
+de cualquier proceso profesional validado. Estado global
+`verificado` por modalidades editoriales cerradas, no certificación
+sanitaria. `fuente: "FoodKeeper"` e ID original para los tres
+primeros; `fuente: "agregación"` e `id_fuente: null` para guisar,
+con trazabilidad de FoodKeeper 41 y fuentes adicionales en el
+[expediente del banco](banco/README.md). Los cuatro FoodKeeper no
+traen consejos particulares: `tips_refrigeracion` y
+`tips_descongelacion` son cadenas vacías y el panel existente
+utiliza sus notas editoriales editables «Conservar en nevera» y
+«Descongelar en nevera». `tips_preparacion_conservacion` es `null`.
+
+Las fechas se cuentan desde la compra o preparación, coincidente con
+la fecha de envasado del flujo doméstico aprobado, **sin prolongarlas
+por el uso de bolsas al vacío ni por un reenvasado posterior**.
+Los tiempos de congelación son referencias de calidad bajo frío
+continuado, no garantías de inocuidad. Original FoodKeeper intacto.
+
+**Alcance estricto:** añadir cuatro registros y pruebas de
+búsqueda/filtrado, notas y fechas; no tocar las tres plantillas,
+la vista previa, CSS, HTML, interfaz del panel del banco,
+`banco-ui.js`, `motor-libre.js`, raster, BLE, PWA, web
+productiva, Airtable ni inventario. El conjunto pasa de **6 a
+10 fichas**, cinco de ellas en la subcategoría Vacuno.
+Las futuras incorporaciones seguirán por subcategoría con
+selección explícita de la usuaria. Ver
+[banco/README.md](banco/README.md) para la trazabilidad de
+los datos originales.
+
 ## Cierre visual del panel del banco · 08/11/2026
 
 Tras la aprobación funcional del banco de ingredientes, la usuaria solicita

@@ -75,20 +75,41 @@ Aves quedan dentro de Carnes y Aves; pulpo dentro de Cefalópodos; hongos y alga
 - `fuente` e `id_fuente` son una pareja única por ficha, no por método. En `sin_datos`, ambos `null`; cuando `fuente` es `usuario` o `agregación`, `id_fuente` es `null`.
 - **No modifica ni gobierna el uso de las etiquetas libres**: el banco solo precarga campos editables y un plazo desconocido no genera fecha automática. Los criterios editoriales de selección del banco no son prohibiciones de etiquetado.
 
-No hay todavía **`catalogo.json`** ni registros creados por esta operación. Tampoco se cambia el original [FoodKeeper](fuentes/foodkeeper-es-original.json).
+Esta frase describía la fase histórica de diseño del esquema. **Estado vigente:** `catalogo.json` existe y contiene diez fichas, de las cuales cuatro son los nuevos cortes de vacuno. El original [FoodKeeper](fuentes/foodkeeper-es-original.json) permanece sin cambios.
 
-## Catálogo mínimo experimental: seis ingredientes (08/11/2026)
+## Catálogo inicial de seis ingredientes (histórico, 08/11/2026)
 
-El archivo [**`catalogo.json`**](catalogo.json) ya está creado y contiene **seis fichas**. Es un conjunto inicial para probar la interfaz, no el banco definitivo ni una obligación de registrar nuevos alimentos.
+El archivo [**`catalogo.json`**](catalogo.json) se creó inicialmente con **seis fichas**. Esta tabla documenta la primera fase experimental; el catálogo vigente contiene **diez fichas** tras la ampliación de vacuno, documentada debajo.
 
 | Ingrediente | Clasificación | Estado y fuente | Plazos actualmente disponibles |
 |---|---|---|---|
-| Carne picada de ternera | Carnes y Aves / Vacuno | `parcial`, FoodKeeper `59` | Refrigeración **2 días**; congelación **90 días** |
+| Carne picada de ternera | Carnes y Aves / Vacuno | `verificado`, `agregación` (plazos FoodKeeper `59` y exclusiones editoriales) | Refrigeración **2 días**; congelación **90 días** |
 | Pulpo | Pescados y Mariscos / Cefalópodos | `sin_datos` | Ninguno, `null` |
 | Patata | Frutas y Verduras / Tubérculos | `parcial`, FoodKeeper `297` | Refrigeración **14 días**; despensa **sin plazo fijado** (rango 1–2 meses en la fuente) |
-| Lechuga | Frutas y Verduras / Verduras de hoja | `parcial`, FoodKeeper `290` | Refrigeración **14 días** (iceberg o romana) |
+| Lechuga | Frutas y Verduras / Verduras de hoja | `verificado`, `agregación` (plazo FoodKeeper `290` y exclusiones editoriales) | Refrigeración **14 días** (iceberg o romana) |
 | Orejones | Frutas y Verduras / Frutas | `parcial`, FoodKeeper `379` | Despensa **180 días**; sinónimo «Albaricoques deshidratados» |
 | Salsa de tomate | Despensa / Conservas | `sin_datos` | Ninguno, `null` |
+
+## Ampliación autorizada · cuatro cortes de vacuno (08/11/2026)
+
+La usuaria ha confirmado expresamente la incorporación de **FoodKeeper Product.ID 36, 37, 40 y 41** a la categoría **Carnes y Aves → Vacuno**. Son **cortes frescos y crudos**, no asados preparados, estofados cocinados ni conservas. Se registran como ingredientes a granel; no corresponden a productos comerciales. Se mantiene intacto el archivo [FoodKeeper ES original](fuentes/foodkeeper-es-original.json).
+
+| ID MiruRecetas | Nombre visible (es-ES) | Denominación fuente / alias | FoodKeeper Product.ID |
+|---|---|---|---:|
+| `CAR-VAC-002` | **Redondo de vacuno** | Asado redondo | 36 |
+| `CAR-VAC-003` | **Solomillo de vacuno entero** | Lomillo, entero (beef tenderloin, whole) | 37 |
+| `CAR-VAC-004` | **Filetes de vacuno** | Filetes | 40 |
+| `CAR-VAC-005` | **Carne de vacuno para guisar** | Carne para guisar (stew cubes) | 41 |
+
+**Datos originales contrastados:** para cada producto, `DOP_Refrigerate_Min=3`, `DOP_Refrigerate_Max=5`, unidad `Días`; `DOP_Freeze_Min=4`, `DOP_Freeze_Max=12`, unidad `Meses`. En todos están vacíos los consejos propios de refrigeración/congelación y los campos de despensa. El origen `DOP` remite a fecha de compra; en el flujo doméstico aprobado **envasado = compra o preparación** (no reiniciar plazos al reenvasar).
+
+**Selección canónica de plazos:** en **Redondo, Solomillo y Filetes (IDs 36, 37, 40)**, refrigeración = **5 días** (máximo de 3–5) y congelación = **120 días** (mínimo de 4–12 meses; 4 × 30 días). **Carne para guisar cruda en dados (ID 41)** presenta una discrepancia importante entre el dato tabular FoodKeeper ES (`3–5 días`/`4–12 meses`) y las guías específicas de **carne para guisar troceada** (`1–2 días`/`3–4 meses`). Se elige la recomendación más específica **2 días refrigerada y 90 días congelada**. Contraste documental: [Universidad de Nebraska, tabla de almacenamiento doméstico](https://food.unl.edu/free-resource/food-storage/), [NSF, tabla de conservación](https://www.nsf.org/consumer-resources/articles/cold-frozen-food-storage) y [FoodKeeper, tabla de carne fresca](https://ifdaonline.org/wp-content/uploads/2024/02/food-keeper-2015-pdf.pdf). No silenciar ni reemplazar en el archivo original el dato divergente del ID 41.
+
+Solo **refrigeración y congelación** aparecen en las cuatro fichas. **Despensa** y **Conserva casera** quedan `false` y con días/tips `null`: no se ofrecen para carne cruda en esta presentación, sin extender esta exclusión a un proceso industrial o a una receta transformada con método validado.
+
+**Metadatos:** estado `verificado` para el conjunto editorial de modos ya decidido; en IDs 36, 37 y 40, `fuente: "FoodKeeper"` e `id_fuente` como texto (`"36"`, `"37"`, `"40"`). Para ID 41, por la combinación contrastada de fuentes, `fuente: "agregación"` e `id_fuente: null`; el **ID FoodKeeper 41** queda documentado en esta tabla, sin añadir más campos al JSON. Las modalidades habilitadas llevan `tips_refrigeracion: ""` y `tips_descongelacion: ""`, porque el FoodKeeper original no aporta consejos individuales para estos cuatro productos: la UI aplica las notas editoriales existentes «Conservar en nevera» y «Descongelar en nevera» (no atribuirlas a FoodKeeper). La recomendación de descongelar en nevera es coherente con [AESAN](https://www.aesan.gob.es/AECOSAN/docs/documentos/publicaciones/seguridad_alimentaria/congelar_descongelar.pdf). `tips_preparacion_conservacion` continúa `null` por ausencia de consejo específico de esos productos.
+
+Los plazos de congelación indican principalmente **calidad a −18 °C**, no fecha garantizada de seguridad. La conservación en frío requiere cadena de frío adecuada; **el envasado doméstico al vacío no amplía por sí mismo ningún plazo**. El modo **Ingrediente libre** sigue completamente independiente. La ampliación solo afecta a `catalogo.json`, pruebas y documentación: no modifica el panel, fichas visuales, JS de impresión ni otros repositorios.
 
 **Sin extrapolaciones:** la fuente FoodKeeper 297 solo aporta congelación para patatas cocidas y machacadas (no patatas enteras). Para lechuga se concreta la presentación iceberg/romana. Pulpo no tiene ficha propia en el archivo y «Salsa de tomate» no implica automáticamente una conserva procesada concreta: no asignar plazos que no corresponden. Se conserva el [original de FoodKeeper](fuentes/foodkeeper-es-original.json) sin alteraciones. El campo fuente es **global de la ficha**.
 
@@ -123,4 +144,4 @@ Para congelación, `tip_descongelacion` puede aplicarse a la nota de etiqueta; e
 
 **Ejemplo del original:** `FoodKeeper Product.ID=59` («Ternera — Carne molida») tiene `DOP_Refrigerate=1–2 días` y `DOP_Freeze=3–4 meses`. La futura ficha `CAR-VAC-001` usará **2 días** de refrigeración y **90 días** de congelación; la referencia fuente bastará para consultar de nuevo los campos originales.
 
-**Estado:** el [JSON Schema](catalogo.schema.json) y el [catálogo mínimo de seis fichas](catalogo.json) existen; chips y panel están **implementados en laboratorio, pendientes de revisión visual**, y el catálogo definitivo aún no está poblado. Véase el [protocolo canónico](../MIS-ETIQUETAS-VISION-Y-HOJA-DE-RUTA.md).
+**Estado vigente:** el [JSON Schema](catalogo.schema.json) y el [catálogo de diez fichas](catalogo.json) existen; cinco registros corresponden a Vacuno. Los chips y el panel están implementados en laboratorio, sin alteraciones durante el lote de vacuno. La población de las restantes subcategorías sigue pendiente. Véase el [protocolo canónico](../MIS-ETIQUETAS-VISION-Y-HOJA-DE-RUTA.md).
