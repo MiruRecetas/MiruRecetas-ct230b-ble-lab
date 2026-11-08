@@ -135,6 +135,46 @@ test("cantidad centrada no invade el isotipo para 1, 500 y 9999 g",()=>{
  }finally{globalThis.document=original;}
 });
 
+test("nota centrada en área libre; no invade isotipo ni sale del borde",()=>{
+ const original=globalThis.document;
+ const draws=[];
+ globalThis.document={createElement:()=>({
+  width:0,height:0,getContext:()=>({
+   font:"",textAlign:"left",fillStyle:"",textBaseline:"alphabetic",
+   fillRect(){},drawImage(_image,x,y,w,h){draws.push({type:"logo",x,y,w,h});},
+   measureText(text){
+    const px=Number(this.font.match(/(\\d+)px/)?.[1]||16);
+    return {width:String(text).length*px*0.56};
+   },
+   fillText(text,x,y){
+    draws.push({type:"text",text:String(text),x,y,align:this.textAlign,
+     width:this.measureText(text).width,font:this.font});
+   }
+  })
+ })};
+ try{
+  for(const note of ["Conservar en nevera","Descongelar en nevera",
+   "Descongelar en nevera prueba pru"]){
+   draws.length=0;
+   const sampleNote=engine.normalize({...sample,grams:500,notesEnabled:true,note},true);
+   engine.render(sampleNote,{});
+   const line=draws.find(x=>x.type==="text"&&x.text===note);
+   const logo=draws.find(x=>x.type==="logo");
+   assert.ok(line&&logo,"deben dibujarse nota e isotipo");
+   assert.equal(line.align,"center","la nota debe pedir centrado a M.fit");
+   assert.equal(line.x,128);
+   assert.equal(line.y,227);
+   assert.ok(line.width<=240,"ancho de nota no mayor que la zona libre");
+   assert.ok(line.x-line.width/2>=8,"la nota no cruza el margen izquierdo");
+   assert.ok(line.x+line.width/2<=logo.x-20,"la nota no invade el isotipo");
+   assert.equal(logo.x,268);
+  }
+  draws.length=0;
+  engine.render(engine.normalize({...sample,grams:500,notesEnabled:false,note:"Ignorada"},true),{});
+  assert.ok(!draws.some(x=>x.text==="Ignorada"),"se respeta ocultar la nota");
+ }finally{globalThis.document=original;}
+});
+
 test("raster en bandas ≤12 y dentro de 30 × 20",()=>{
  const blocks=engine.sparse(rasterFixture());
  assert.ok(blocks.length>=2);
@@ -171,7 +211,7 @@ test("página autónoma, campos y archivos enlazados",()=>{
    "mode","note","notes-enabled","copies-minus","copies-plus","copies","transport","transport-count","transport-percent","progress-fill"])
   assert.match(html,new RegExp('id="'+id+'"'));
  assert.match(html,/src="\.\/motor-libre\.js\?v=20261108-raster-regiones-v1"/);
- assert.match(html,/src="\.\/plantilla-pequena\.js\?v=20261108-cantidad-isotipo-v3"/);
+ assert.match(html,/src="\.\/plantilla-pequena\.js\?v=20261108-nota-centrada-v4"/);
  assert.match(html,/src="\.\/app\.js\?v=20261108-banco-correcciones-v2"/);
  assert.match(html,/src="\.\/plantilla-compacta\.js\?v=20261108-compacta-qa2"/);
  assert.match(html,/src="\.\/plantilla-amplia\.js\?v=20261108-amplia-b-v2"/);
