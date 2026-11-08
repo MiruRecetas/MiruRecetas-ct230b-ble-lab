@@ -94,6 +94,8 @@ fijos aunque los textos estén ocultos o vacíos. Formulario con campos
 manuales y rótulos adaptados al tipo de conservación; primera fecha obligatoria
 y segunda opcional. Mismo motor `motor-libre.js` y raster TSPL común.
 
+**Revisión de formulario y textos (08/11/2026):** la usuaria ha aprobado visualmente la composición Amplia B y ha solicitado corregir dos comportamientos: los textarea de conservación y nota usan ahora **el mismo Geist, peso y estilo de Compacta**, y la plantilla libre de Amplia preserva los Enter (LF/CRLF y líneas internas vacías) a la hora de imprimir texto. Se conserva el ajuste automático de cada línea a la anchura de su caja, hasta 5 líneas de conservación o 6 de nota; si no cabe, se bloquea sin truncar. El **motor común y las plantillas Pequeña y Compacta no se modifican**. Nueva revisión de la vista previa pendiente.
+
 **Estado de seguridad:** puesta a disposición de la vista previa para revisar
 la composición. **El botón de impresión de Amplia está deshabilitado** hasta
 aceptación visual y verificación física CT230B. Las métricas del trabajo pueden
