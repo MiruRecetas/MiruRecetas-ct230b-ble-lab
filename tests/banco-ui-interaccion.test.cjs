@@ -123,3 +123,19 @@ test("los borradores sin modo comprobado no aparecen como opciones del banco",as
   assert.equal(el("bank-apply").disabled,true);
  }
 });
+
+test("cuatro cortes de vacuno: búsqueda por nombre/alias, notas y plazos de conservación",async()=>{
+ for(const term of ["Asado redondo","Lomillo entero","Filetes de ternera","Carne para guisar"]){
+  const {el,mode,aplicar}=entorno();
+  await aplicar(term);
+  assert.deepEqual(mode.options.map(x=>x.value),["fridge","freeze"]);
+  assert.equal(mode.value,"freeze");
+  assert.equal(el("note").value,"Descongelar en nevera");
+  assert.equal(el("expiry").value,"2027-03-08","4 meses = 120 días desde 08/11/26");
+  assert.equal(el("bank-time-hint").textContent,"Tiempo recomendado: 120 días");
+  mode.value="fridge";mode.fire("change");
+  assert.equal(el("note").value,"Conservar en nevera");
+  assert.equal(el("expiry").value,"2026-11-13","5 días desde 08/11/26");
+  assert.equal(el("bank-time-hint").textContent,"Tiempo recomendado: 5 días");
+ }
+});
