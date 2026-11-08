@@ -35,18 +35,18 @@ La tabla conserva los nombres de categorías de origen, incluidas las expresione
 
 ## Clasificación vigente: cuatro categorías (08/11/2026)
 
-La tabla que figura más arriba con 14 categorías es únicamente **FoodKeeper original**. MiruRecetas ha sustituido su clasificación previa de 11 categorías por **cuatro**:
+La tabla que figura más arriba con 14 categorías es únicamente **FoodKeeper original**. MiruRecetas ha sustituido su clasificación previa de 11 categorías por **cuatro categorías y 26 subcategorías aprobadas**:
 
 | Categoría | Subcategorías aprobadas |
 |---|---|
 | **Carnes y Aves** | Vacuno; Porcino; Ovino; Pollo; Pavo; Otras aves; Caza |
 | **Pescados y Mariscos** | Pescado blanco; Pescado azul; Crustáceos y moluscos; Cefalópodos |
 | **Frutas y Verduras** | Frutas; Hortalizas; Verduras de hoja; Tubérculos; Hongos; Algas |
-| **Despensa** | **Sin subcategorías aprobadas todavía**; presentar propuesta antes de fijarlas |
+| **Despensa** | Arroz; Pasta; Cereales; Legumbres; Harinas; Frutos secos; Semillas; Especias y hierbas; Conservas |
 
 **Panel de selección:** **los chips de categorías sin ningún ingrediente registrado seleccionable no aparecen**, aun cuando esas categorías existan en la taxonomía. No crear alimentos de relleno; presentar solo chips con contenido.
 
-Aves quedan dentro de Carnes y Aves; pulpo dentro de Cefalópodos; hongos y algas dentro de Frutas y Verduras. Se **elimina Lácteos y huevos** del banco, por no utilizarse con ingredientes a granel para etiquetar. La antigua clasificación de Cereales y Legumbres, Frutos secos y semillas, Condimentos y Conservas queda sustituida por **Despensa** con subcategorías pendientes de aprobación; conservas solo caseras en una fase futura. No incorporar productos comerciales envasados (incluidos sal, vinagre, grasas/aceites o proteínas vegetales comerciales); las masas/preparaciones de otros formatos tampoco pertenecen aquí. Aún no se ha creado el JSON derivado ni implementado la UI.
+Aves quedan dentro de Carnes y Aves; pulpo dentro de Cefalópodos; hongos y algas dentro de Frutas y Verduras. Se **elimina Lácteos y huevos** del banco, por no utilizarse con ingredientes a granel para etiquetar. La antigua clasificación de Cereales y Legumbres, Frutos secos y semillas, Condimentos y Conservas queda sustituida por **Despensa**, con **nueve subcategorías aprobadas**. La denominación visible será simplemente **«Conservas»**; su contenido se limitará exclusivamente a conservas caseras en una fase futura, no a conservas comerciales. No incorporar productos comerciales envasados (incluidos sal, vinagre, grasas/aceites o proteínas vegetales comerciales); las masas/preparaciones de otros formatos tampoco pertenecen aquí. Aún no se ha creado el JSON derivado ni implementado la UI.
 
 ## Contrato vigente para el catálogo derivado (08/11/2026)
 

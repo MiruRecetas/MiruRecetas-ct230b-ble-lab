@@ -48,9 +48,9 @@ AESAN queda como fuente de contraste. **`estado_recomendacion`, `fuente` e `id_f
 
 ## Taxonomía aprobada para el banco de ingredientes (08/11/2026)
 
-**4 categorías principales:** **Carnes y Aves** (Vacuno, Porcino, Ovino, Pollo, Pavo, Otras aves, Caza); **Pescados y Mariscos** (Pescado blanco, Pescado azul, Crustáceos y moluscos, Cefalópodos); **Frutas y Verduras** (Frutas, Hortalizas, Verduras de hoja, Tubérculos, Hongos, Algas); **Despensa** (**subcategorías pendientes**).
+**4 categorías principales:** **Carnes y Aves** (Vacuno, Porcino, Ovino, Pollo, Pavo, Otras aves, Caza); **Pescados y Mariscos** (Pescado blanco, Pescado azul, Crustáceos y moluscos, Cefalópodos); **Frutas y Verduras** (Frutas, Hortalizas, Verduras de hoja, Tubérculos, Hongos, Algas); **Despensa** (Arroz, Pasta, Cereales, Legumbres, Harinas, Frutos secos, Semillas, Especias y hierbas, Conservas).
 
-Esta clasificación sustituye las once categorías editoriales anteriores y excluye «Lácteos y huevos». Los **chips de categorías vacías no aparecerán en el panel**: para mostrarse, una categoría debe contener al menos un ingrediente seleccionable. Nunca crear registros ficticios ni incluir productos comerciales envasados. No hay JSON Schema, catálogo derivado ni implementación del panel todavía. [Contrato del banco](banco/README.md).
+Esta clasificación reúne **4 categorías y 26 subcategorías aprobadas** y sustituye las once categorías editoriales anteriores, excluyendo «Lácteos y huevos». La última subcategoría de Despensa se denomina simplemente **«Conservas»** en el panel, aunque se reservará a conservas caseras; nunca a productos comerciales. Los **chips de categorías vacías no aparecerán en el panel**: para mostrarse, una categoría debe contener al menos un ingrediente seleccionable. Nunca crear registros ficticios ni incluir productos comerciales envasados. No hay JSON Schema, catálogo derivado ni implementación del panel todavía. [Contrato del banco](banco/README.md).
 
 ## Banco JSON de Pequeña · patrón D aprobado, implementación pendiente (08/11/2026)
 
