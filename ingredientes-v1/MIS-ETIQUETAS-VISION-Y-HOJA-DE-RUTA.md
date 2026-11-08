@@ -1,5 +1,29 @@
 # MiruRecetas · «Mis etiquetas» · visión, decisiones y hoja de ruta
 
+## Incorporación aprobada · Elaborados y Charcutería (08/11/2026, vigente)
+
+La usuaria ha seleccionado **12 elaborados** y **10 productos de charcutería al corte**; quedan incorporadas como **22 fichas** al catálogo propio (total **45**), manteniendo **4 categorías / 28 subcategorías**.
+Este lote **sí admite productos de carnicería y charcutería elaborados vendidos a granel**; sigue excluyendo fichas genéricas de productos **preenvasados de marca**. La subcategoría **Elaborados** incluye carne fresca cruda preparada, productos rellenos sin cocinar **y las dos morcillas que son cocidas**: no afirmar que todos sean crudos. **Chorizo curado** pertenece a **Charcutería**, conforme a la nueva lista, prevaleciendo sobre la anterior mención provisional bajo Elaborados.
+
+| Subcategoría | Fichas registradas | Plazos (frigorífico / congelador) |
+|---|---|---|
+| **Elaborados** | Hamburguesas de ternera; Hamburguesas de pollo; Salchichas frescas; Chorizo fresco; Chorizo criollo; Morcilla de Burgos; Morcilla Matachana; Filetes rusos; Pincho moruno; Lomo de cerdo adobado; Cachopo; San Jacobo | Hamburguesas y filetes rusos **2/90 días**; embutidos frescos (salchichas y chorizos) **2/30**; morcillas a granel **6/30**; pincho moruno crudo **2/90**; lomo adobado **5/120**; cachopo y San Jacobo **2 / sin plazo de congelación contrastado** |
+| **Charcutería** | Jamón cocido; Jamón serrano; Jamón ibérico; Pechuga de pavo (fiambre); Salami; Lomo de cerdo embuchado; Salchichón; Chorizo curado; Bacon; Cecina | Jamón cocido y fiambre de pavo **5/30**; jamones curados al corte **3/30**; salami, lomo embuchado, salchichón, chorizo curado, cecina **6/30**; bacon **7/30** |
+
+**Referencias contrastadas y decisiones de origen:**
+- [FoodSafety.gov, Cold Food Storage Chart](https://www.foodsafety.gov/food-safety-charts/cold-food-storage-charts): hamburguesas y carnes molidas 1–2 días/3–4 meses; embutido crudo 1–2 días/1–2 meses; fiambre vendido loncheado en mostrador 3–5 días/1–2 meses; bacon 7 días/1 mes. El frigorífico requiere ≤4 °C y congelador ≤−18 °C. Se almacena el máximo del intervalo refrigerado y el mínimo congelado (mes = 30 días).
+- [FoodKeeper ES original](banco/fuentes/foodkeeper-es-original.json): ID **102** embutido crudo → Salchichas frescas (fuente `FoodKeeper`, ID 102); ID **79** Tocineta/Bacon → Bacon (fuente `FoodKeeper`, ID 79); ID **43** picada de vacuno y **115** picada de aves → hamburguesas; ID **630** chorizo fresco **sin duración**, contrastado mediante familia de embutido crudo 102. ID **184** fiambre cortado en supermercado indica 3–5 días refrigerado **sin congelación original**; se completa desde FoodSafety.gov para jamón cocido y fiambre de pavo. IDs **514/515/516** son fiambres preenvasados y **no son aplicables** a las fichas al corte. ID **675** identifica jamón curado, pero no incluye plazos.
+- [OCU, conservación de alimentos](https://www.ocu.org/alimentacion/seguridad-alimentaria/informe/conservacion-alimentos): fiambres y embutidos 3–6 días refrigerados, 1–2 meses congelados. Se aplica editorialmente a los elaborados cocidos vendidos sin envase cerrado y a los embutidos/cecina loncheados al corte cuando no hay ficha específica, **no como vida útil industrial del producto entero**. Para las dos morcillas se usa un valor conservador **6/30**, no el plazo de fábrica. El pliego oficial [Morcilla de Burgos](https://www2.new.itacyl.es/web/guest/-/marcas-igp-morcilla-de-burg-1) confirma que se cuece antes de venderse. El [fabricante de Morcilla Matachana](https://morcillamatachana.com/morcilla-matachana/) indica 20 días en frío para sus formatos en tripa, pero no deben extrapolarse a un producto **fraccionado al corte** o reenvasado domésticamente; si el vendedor declara condiciones específicas más restrictivas, prevalecen.
+- [Consorcio del Jamón Serrano](https://consorcioserrano.es/jamon-consorcio-serrano/sabor-aroma-y-conservacion/): lonchas cortadas recientemente para la venta, refrigeradas, consumir en no más de **2–3 días**. Se usa **3 días** para jamones curados al corte, incluido ibérico por analogía de presentación; [FoodSafety.gov](https://www.foodsafety.gov/food-safety-charts/cold-food-storage-charts) menciona un mes congelado para jamón tipo Serrano/Parma. La duración de una **pieza entera, deshuesada envasada o lonchas selladas de fábrica** no se extrapola.
+- **Cortes crudos y adobados**: filetes rusos y hamburguesas son preparados crudos de carne picada → 2/90, sujeto a composición normal sin otro ingrediente de vida útil más restrictiva; pincho moruno se considera dado de carne cruda adobada → 2/90, sin permitir que el adobo amplíe plazos; lomo de cerdo adobado como corte fresco crudo → 5/120, igual que lomo fresco, pero **el adobo no reinicia los días**.
+- **Cachopo y San Jacobo** se registran como `estado_recomendacion: "parcial"`: **2 días refrigerados** como criterio conservador de elaboraciones rellenas no cocinadas, pero congelación `true` con `congelacion_dias: null`, `tips_descongelacion: null` porque no hay una cifra propia respaldada para la combinación de carne/fiambre/queso/empanado. El banco ofrece la posibilidad de congelar, **sin calcular automáticamente una fecha no validada**. No confundir con cachopos industriales ultracongelados ni preparados cocinados.
+
+**Separación del lomo adobado:** `CAR-POR-001` **Lomo de cerdo** sigue en Porcino para carne fresca natural, pieza y filetes **sin adobar**. Se retiran de sus sinónimos las búsquedas de lomo adobado. Se crea **`CAR-ELA-010` «Lomo de cerdo adobado»** en Elaborados, sin borrar ni reclasificar la ficha natural. Su plazo de 5/120 no implica mayor durabilidad por el adobo. No se crean duplicados ni se modifican los tiempos originales del lomo natural.
+
+**Presentaciones y limitaciones:** las doce fichas de Elaborados llevan `presentacion: null`; las diez de Charcutería llevan `presentacion: "Al corte"`, excluyendo automáticamente la interpretación de piezas industriales enteras o productos cerrados de origen. Los ingredientes se consideran comprados a granel, de un establecimiento que mantiene la cadena de frío, y se toma como base compra/preparación; al vacío doméstico no añade días. Ciertos plazos son **extrapolaciones editoriales contrastadas a la familia del producto** (`fuente: "agregación"`, `id_fuente:null`), no tiempos literales de FoodKeeper. Las recomendaciones de congelación son principalmente de calidad, no certificados sanitarios. **El estado `verificado` solo indica método y tiempo editorialmente fijados**, no inocuidad absoluta. Las notas vacías en las fichas permiten usar los consejos editables del panel existentes.
+
+**Campos y exclusiones:** Todas estas fichas ofrecen refrigeración y congelación; las conservas caseras o despensa quedan `false` con plazo/consejos `null` porque se trata de compra a granel para mantener en frío. Esto no prohíbe otros usos validados de un producto distinto. Las fichas parciales no bloquean la introducción manual de fecha. **Otras aves** y **Caza** siguen vacías y ocultas; las subcategorías **Elaborados y Charcutería** aparecen de forma automática por tener registros seleccionables. El original FoodKeeper no se modifica. El procedimiento acordado es **commit directo en `main` sin PR**, documentación y comprobación ligera, sin tocar UI, etiquetas, motor, BLE ni repositorios de producción.
+
 ## Taxonomía ampliada · Elaborados y Charcutería (08/11/2026, vigente)
 
 **Decisión autorizada:** dentro de **Carnes y Aves** se añaden las
@@ -9,8 +33,9 @@ con **9 subcategorías en Carnes y Aves**. No se introducen ingredientes
 ficticios ni se modifica el catálogo de **23 fichas** existente.
 
 - **Elaborados:** productos de carnicería elaborados y vendidos a granel,
-  especialmente hamburguesas y salchichas frescas; también se incluye
-  expresamente **chorizo curado**, conforme a la decisión editorial.
+  especialmente hamburguesas y salchichas frescas. **Decisión posterior:**
+  el chorizo curado se registra en **Charcutería**; este pasaje
+  histórico no constituye la clasificación vigente.
   El chorizo curado no es carne fresca ni debe recibir por defecto
   los plazos de refrigeración/congelación de hamburguesas o carne
   cruda. Los métodos y plazos se estudiarán **por producto y

@@ -1,6 +1,20 @@
 # Conserva · «Mis etiquetas» (laboratorio · interfaz experimental)
 
-> **Taxonomía Carnes y Aves · 08/11/2026 (vigente):**
+> **Banco · Elaborados y Charcutería, 08/11/2026 (vigente):**
+> Registrados 12 elaborados de carnicería y 10 productos
+> de charcutería al corte. **45 fichas totales**,
+> 28 subcategorías taxonómicas. Chorizo curado se ubica
+> en Charcutería según la selección más reciente.
+> Lomo de cerdo natural permanece en Porcino; el
+> **lomo de cerdo adobado** tiene ficha nueva en Elaborados.
+> Los platos rellenos Cachopo y San Jacobo tienen
+> congelación disponible sin fecha automática, al faltar
+> un plazo específico fiable. Se documentan referencias
+> FoodKeeper, FoodSafety.gov, OCU y fuentes regionales.
+> Sin cambios del panel ni la impresión.
+> [Expediente](banco/README.md).
+>
+> **Taxonomía Carnes y Aves · 08/11/2026 (vigente, estructura):**
 > 9 subcategorías: Vacuno, Porcino, Ovino, Pollo, Pavo,
 > Otras aves, Caza, **Elaborados** y **Charcutería**.
 > Elaborados: hamburguesas y salchichas frescas de carnicería
@@ -151,9 +165,9 @@ AESAN queda como fuente de contraste. **`estado_recomendacion`, `fuente` e `id_f
 
 Esta clasificación reúne **4 categorías y 28 subcategorías aprobadas** y sustituye las once categorías editoriales anteriores, excluyendo «Lácteos y huevos». La última subcategoría de Despensa se denomina simplemente **«Conservas»** en el panel, aunque se reservará a conservas caseras; nunca a productos comerciales. Los **chips de categorías vacías no aparecerán en el panel**: para mostrarse, una categoría debe contener al menos un ingrediente seleccionable. Nunca crear registros ficticios ni incluir productos comerciales envasados. El [JSON Schema del banco](banco/catalogo.schema.json) **ya está creado** (4 categorías, 28 subcategorías y metadatos aprobados), y el **catálogo mínimo y el panel ya están implementados en laboratorio**, aún pendientes de validación visual; no es el catálogo definitivo. [Contrato del banco](banco/README.md).
 
-## Banco JSON de Pequeña · patrón D con veintitrés fichas (08/11/2026)
+## Banco JSON de Pequeña · patrón D con cuarenta y cinco fichas (08/11/2026)
 
-**Estado actual del banco:** ver [veintitrés fichas y fuentes](banco/README.md), su [JSON](banco/catalogo.json) y el controlador [banco-ui.js](banco-ui.js). Los chips, el sheet y la precarga editable están en laboratorio; la usuaria **aún no ha validado visualmente** esta nueva interacción. La opción libre, Compacta y Amplia mantienen su uso. El selector de Pequeña incorpora Despensa y Conserva como modos adicionales, sin cambiar el arte aprobado de los modos anteriores.
+**Estado actual del banco:** ver [cuarenta y cinco fichas y fuentes](banco/README.md), su [JSON](banco/catalogo.json) y el controlador [banco-ui.js](banco-ui.js). Los chips, el sheet y la precarga editable están en laboratorio; la usuaria **aún no ha validado visualmente** esta nueva interacción. La opción libre, Compacta y Amplia mantienen su uso. El selector de Pequeña incorpora Despensa y Conserva como modos adicionales, sin cambiar el arte aprobado de los modos anteriores.
 
 La usuaria ha aprobado **dos chips bajo la vista previa de Pequeña**:
 **«Ingrediente libre»** (por defecto) y **«Cargar del banco»**. Este último

@@ -18,8 +18,8 @@ const categories=props.categoria.enum;
 const subcategories=Object.fromEntries(allOf.slice(0,4).map(r=>[r.if.properties.categoria.const,r.then.properties.subcategoria.enum]));
 const byName=name=>records.find(x=>x.nombre===name);
 
-test("catálogo de veintitrés fichas, con ID y variante únicos",()=>{
- assert.equal(records.length,23);
+test("catálogo de cuarenta y cinco fichas, con ID y variante únicos",()=>{
+ assert.equal(records.length,45);
  assert.equal(new Set(records.map(x=>x.nombre+"|"+String(x.presentacion))).size,records.length);
  assert.equal(new Set(records.map(x=>x.id)).size,records.length);
  assert.deepEqual(new Set(records.map(x=>x.nombre)),new Set([
@@ -29,6 +29,7 @@ test("catálogo de veintitrés fichas, con ID y variante únicos",()=>{
   "Lomo de cerdo","Solomillo de cerdo","Costillas de cerdo",
   "Carne picada de cerdo","Cerdo para guisar",
   "Pollo","Pechuga de pollo","Muslo de pollo","Carne picada de pollo","Pechuga de pavo",
+  "Hamburguesas de ternera","Hamburguesas de pollo","Salchichas frescas","Chorizo fresco","Chorizo criollo","Morcilla de Burgos","Morcilla Matachana","Filetes rusos","Pincho moruno","Lomo de cerdo adobado","Cachopo","San Jacobo","Jamón cocido","Jamón serrano","Jamón ibérico","Pechuga de pavo (fiambre)","Salami","Lomo de cerdo embuchado","Salchichón","Chorizo curado","Bacon","Cecina",
   "Pulpo","Patata","Lechuga","Orejones","Salsa de tomate"
  ]));
  assert.equal(categories.length,4);
@@ -248,7 +249,8 @@ test("lote ovino/porcino: 8 ID FoodKeeper trazados en 7 fichas y 2 métodos",()=
  assert.equal(records.filter(x=>x.subcategoria==="Porcino").length,5);
  const loin=records.find(x=>x.id==="CAR-POR-001");
  assert.equal(loin.presentacion,null);
- assert.ok(loin.sinonimos.includes("Filetes de lomo adobados"));
+ assert.ok(!loin.sinonimos.includes("Filetes de lomo adobados"));
+ assert.ok(records.find(x=>x.id==="CAR-ELA-010").sinonimos.includes("Filetes de lomo adobados"));
  assert.ok(loin.sinonimos.includes("Filetes de lomo sin adobar"));
  const allIds=records.map(x=>x.id_fuente).filter(Boolean);
  assert.equal(new Set(allIds).size,allIds.length,"IDs de procedencia únicos (ID 69 queda en expediente)");
@@ -277,4 +279,34 @@ test("pollo y pavo: 6 variantes, ID de FoodKeeper y solo frío/congelación",()=
  assert.deepEqual(records.filter(x=>x.nombre==="Pechuga de pollo").map(x=>x.presentacion),["Pieza entera","Filetes"]);
  assert.equal(records.filter(x=>x.subcategoria==="Pollo").length,5);
  assert.equal(records.filter(x=>x.subcategoria==="Pavo").length,1);
+});
+
+test("Elaborados y Charcutería: veintidós fichas, fuentes y modalidades coherentes",()=>{
+ const additions=[{"id":"CAR-ELA-001","name":"Hamburguesas de ternera","cat":"Elaborados","presentation":null,"fridge":2,"freeze":90,"src":"agregación","sourceId":null,"state":"verificado"},{"id":"CAR-ELA-002","name":"Hamburguesas de pollo","cat":"Elaborados","presentation":null,"fridge":2,"freeze":90,"src":"agregación","sourceId":null,"state":"verificado"},{"id":"CAR-ELA-003","name":"Salchichas frescas","cat":"Elaborados","presentation":null,"fridge":2,"freeze":30,"src":"FoodKeeper","sourceId":"102","state":"verificado"},{"id":"CAR-ELA-004","name":"Chorizo fresco","cat":"Elaborados","presentation":null,"fridge":2,"freeze":30,"src":"agregación","sourceId":null,"state":"verificado"},{"id":"CAR-ELA-005","name":"Chorizo criollo","cat":"Elaborados","presentation":null,"fridge":2,"freeze":30,"src":"agregación","sourceId":null,"state":"verificado"},{"id":"CAR-ELA-006","name":"Morcilla de Burgos","cat":"Elaborados","presentation":null,"fridge":6,"freeze":30,"src":"agregación","sourceId":null,"state":"verificado"},{"id":"CAR-ELA-007","name":"Morcilla Matachana","cat":"Elaborados","presentation":null,"fridge":6,"freeze":30,"src":"agregación","sourceId":null,"state":"verificado"},{"id":"CAR-ELA-008","name":"Filetes rusos","cat":"Elaborados","presentation":null,"fridge":2,"freeze":90,"src":"agregación","sourceId":null,"state":"verificado"},{"id":"CAR-ELA-009","name":"Pincho moruno","cat":"Elaborados","presentation":null,"fridge":2,"freeze":90,"src":"agregación","sourceId":null,"state":"verificado"},{"id":"CAR-ELA-010","name":"Lomo de cerdo adobado","cat":"Elaborados","presentation":null,"fridge":5,"freeze":120,"src":"agregación","sourceId":null,"state":"verificado"},{"id":"CAR-ELA-011","name":"Cachopo","cat":"Elaborados","presentation":null,"fridge":2,"freeze":null,"src":"agregación","sourceId":null,"state":"parcial"},{"id":"CAR-ELA-012","name":"San Jacobo","cat":"Elaborados","presentation":null,"fridge":2,"freeze":null,"src":"agregación","sourceId":null,"state":"parcial"},{"id":"CAR-CHA-001","name":"Jamón cocido","cat":"Charcutería","presentation":"Al corte","fridge":5,"freeze":30,"src":"agregación","sourceId":null,"state":"verificado"},{"id":"CAR-CHA-002","name":"Jamón serrano","cat":"Charcutería","presentation":"Al corte","fridge":3,"freeze":30,"src":"agregación","sourceId":null,"state":"verificado"},{"id":"CAR-CHA-003","name":"Jamón ibérico","cat":"Charcutería","presentation":"Al corte","fridge":3,"freeze":30,"src":"agregación","sourceId":null,"state":"verificado"},{"id":"CAR-CHA-004","name":"Pechuga de pavo (fiambre)","cat":"Charcutería","presentation":"Al corte","fridge":5,"freeze":30,"src":"agregación","sourceId":null,"state":"verificado"},{"id":"CAR-CHA-005","name":"Salami","cat":"Charcutería","presentation":"Al corte","fridge":6,"freeze":30,"src":"agregación","sourceId":null,"state":"verificado"},{"id":"CAR-CHA-006","name":"Lomo de cerdo embuchado","cat":"Charcutería","presentation":"Al corte","fridge":6,"freeze":30,"src":"agregación","sourceId":null,"state":"verificado"},{"id":"CAR-CHA-007","name":"Salchichón","cat":"Charcutería","presentation":"Al corte","fridge":6,"freeze":30,"src":"agregación","sourceId":null,"state":"verificado"},{"id":"CAR-CHA-008","name":"Chorizo curado","cat":"Charcutería","presentation":"Al corte","fridge":6,"freeze":30,"src":"agregación","sourceId":null,"state":"verificado"},{"id":"CAR-CHA-009","name":"Bacon","cat":"Charcutería","presentation":"Al corte","fridge":7,"freeze":30,"src":"FoodKeeper","sourceId":"79","state":"verificado"},{"id":"CAR-CHA-010","name":"Cecina","cat":"Charcutería","presentation":"Al corte","fridge":6,"freeze":30,"src":"agregación","sourceId":null,"state":"verificado"}];
+ for(const e of additions){
+  const r=records.find(x=>x.id===e.id);
+  assert.ok(r,e.id);
+  assert.equal(r.categoria,"Carnes y Aves");
+  assert.equal(r.subcategoria,e.cat);
+  assert.equal(r.nombre,e.name);
+  assert.equal(r.presentacion,e.presentation);
+  assert.equal(r.estado_recomendacion,e.state);
+  assert.equal(r.fuente,e.src);
+  assert.equal(r.id_fuente,e.sourceId);
+  assert.equal(r.refrigeracion,true);
+  assert.equal(r.refrigeracion_dias,e.fridge);
+  assert.equal(r.congelacion,true);
+  assert.equal(r.congelacion_dias,e.freeze);
+  assert.equal(r.despensa,false);assert.equal(r.conserva,false);
+  assert.equal(r.despensa_dias,null);assert.equal(r.conserva_dias,null);
+  if(e.freeze===null)assert.equal(r.tips_descongelacion,null);
+ }
+ assert.equal(records.filter(x=>x.subcategoria==="Elaborados").length,12);
+ assert.equal(records.filter(x=>x.subcategoria==="Charcutería").length,10);
+ const natural=records.find(x=>x.id==="CAR-POR-001");
+ assert.equal(natural.subcategoria,"Porcino");
+ assert.ok(!natural.sinonimos.includes("Lomo de cerdo adobado"));
+ const dressed=records.find(x=>x.id==="CAR-ELA-010");
+ assert.equal(dressed.nombre,"Lomo de cerdo adobado");
+ assert.ok(dressed.sinonimos.includes("Filetes de lomo adobados"));
 });

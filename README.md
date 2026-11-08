@@ -1,3 +1,17 @@
+> **Banco · Elaborados y Charcutería, 08/11/2026 (vigente):**
+> Registrados 12 elaborados de carnicería y 10 productos
+> de charcutería al corte. **45 fichas totales**,
+> 28 subcategorías taxonómicas. Chorizo curado se ubica
+> en Charcutería según la selección más reciente.
+> Lomo de cerdo natural permanece en Porcino; el
+> **lomo de cerdo adobado** tiene ficha nueva en Elaborados.
+> Los platos rellenos Cachopo y San Jacobo tienen
+> congelación disponible sin fecha automática, al faltar
+> un plazo específico fiable. Se documentan referencias
+> FoodKeeper, FoodSafety.gov, OCU y fuentes regionales.
+> Sin cambios del panel ni la impresión.
+> [Expediente](ingredientes-v1/banco/README.md).
+>
 > **Taxonomía Carnes y Aves · 08/11/2026 (vigente):**
 > 9 subcategorías: Vacuno, Porcino, Ovino, Pollo, Pavo,
 > Otras aves, Caza, **Elaborados** y **Charcutería**.

@@ -172,7 +172,7 @@ test("cordero y cerdo: 7 fichas, notas, días y búsqueda por sinónimos",async(
   ["Medallones de solomillo de cerdo","Solomillo de cerdo",5,120],
   ["Costillar de cerdo","Costillas de cerdo",5,120],
   ["Cerdo picado","Carne picada de cerdo",2,90],
-  ["Filetes de lomo adobados","Lomo de cerdo",5,120],
+  ["Filetes de lomo adobados","Lomo de cerdo adobado",5,120],
   ["Filetes de lomo sin adobar","Lomo de cerdo",5,120],
   ["Lomo de cerdo en dados","Cerdo para guisar",2,90]
  ];
