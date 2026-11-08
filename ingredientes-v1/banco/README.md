@@ -33,12 +33,26 @@
 
 La tabla conserva los nombres de categorías de origen, incluidas las expresiones no habituales en español de España. La clasificación, denominaciones y número de registros que aparezcan en el **catálogo derivado** serán decisiones editoriales propias de MiruRecetas.
 
-## Contrato aprobado para el catálogo derivado
+## Contrato vigente para el catálogo derivado (08/11/2026)
 
-1. Crear **un JSON nuevo, distinto del original**, con nuestras categorías, subcategorías y elementos; conservar identificadores o trazas hacia los `Product.ID` de FoodKeeper. No reescribir el original para adaptar su traducción o estructura.
-2. Buscar **plazos de calidad** pertinentes para **refrigeración/congelación** de cada producto y condición, siguiendo el selector de conservación ya implementado en Pequeña 30×20. Los campos `Refrigerate_*`, `DOP_Refrigerate_*`, `Refrigerate_After_Opening_*`, `Refrigerate_After_Thawing_*`, `Freeze_*` y `DOP_Freeze_*` describen **contextos distintos**, no plazos intercambiables. Hay que decidir cuál es aplicable antes de calcular fechas desde el envasado.
-3. Cuando FoodKeeper aporte un **intervalo válido y aplicable**, usar **siempre su extremo mínimo**, preservando valor/unidad original y la referencia al registro fuente para la información mostrada y el cálculo. Si el dato es `No Recomendado`, `Fecha de Uso`, `Indefinido`, está ausente o no corresponde a la condición real, no convertirlo en meses ficticios.
-4. La fecha de consumo preferente es una **orientación para conservar la calidad** y seguirá siendo editable: en modo sugerido se recalcula al cambiar fecha de envasado; una edición manual se respeta hasta usar explícitamente `Restablecer recomendación`. Bajo las fechas, una nota breve `Tiempo recomendado: XX meses` (o unidad de origen). Estas recomendaciones no acreditan inocuidad.
-5. El banco derivado, panel de chips y selección solo afectarán a **Pequeña**; Compacta, Amplia, el motor, BLE y la web de producción no se tocan. AESAN puede emplearse para contraste, nunca para sustituir o inventar un plazo específico de FoodKeeper sin una decisión explícita.
+La clasificación de la tabla anterior es **solo original FoodKeeper**; no forma parte de la UI ni se importará completa. El futuro JSON **MiruRecetas** tendrá categorías/subcategorías/nombres es-ES y se limita a **ingredientes reales comprados a granel**, como carnes, pescados, mariscos, verduras, frutas o frutos secos; también contempla, más adelante, **conservas caseras**. **Nunca se etiquetarán productos comerciales envasados** en esta función. Compacta y Amplia conservan sus usos independientes.
 
-Este README documenta únicamente el **archivo de referencia y las decisiones**, no da por hecho que el catálogo derivado exista o esté aprobado. Véase el [protocolo canónico](../MIS-ETIQUETAS-VISION-Y-HOJA-DE-RUTA.md).
+**Sin duplicación de FoodKeeper:** este archivo original se mantiene intacto para referencia; el catálogo derivado guardará solo el ID estable MiruRecetas, categoría, subcategoría, nombre, una **presentación** opcional (no «preparación» duplicada) y datos mínimos de los modos de conservación. Sin intervalos originales, unidades de origen, campos de FoodKeeper, condiciones comerciales, fichas largas ni estado separado del alimento. Sinónimos y tip previo a la congelación son posibles **opcionales a confirmar** al cerrar el esquema.
+
+**Fecha base canónica:** envasado = compra o preparación, en el flujo doméstico de una sola etiqueta por ingrediente. El selector de tipo de conservación existente decide si se usa refrigeración o congelación; no se registra un historial de apertura, descongelación o estados sucesivos.
+
+**Selección del plazo FoodKeeper aplicable:**
+- Refrigeración: **valor máximo** del rango publicado (objetivo reducir desperdicio).
+- Congelación: **valor mínimo** del rango publicado (objetivo preservar calidad).
+- Convertir al incorporar: **semana = 7 días; mes = 30 días**. Todos los valores del JSON derivado se expresarán en **días enteros**; no almacenar ni el rango ni su unidad en el catálogo propio.
+- El **envasado al vacío** es habitual en MiruRecetas, pero **no añade automáticamente días** sobre FoodKeeper. Los periodos son orientativos para calidad y no garantías de seguridad; preservar correctamente la cadena de frío sigue siendo necesario.
+- Si el registro fuente no ofrece un dato aplicable, mantener el plazo `null`. No interpretar la ausencia de datos como «no recomendado» ni inventar valores. Fuente por recomendación, concisa: `FoodKeeper:59`, identificador de otra fuente, o indicación expresa del usuario. AESAN puede usarse para contrastar.
+- Para el futuro modo **conserva casera**, no aplicar plazos de conservas industriales a procesos domésticos sin instrucciones validadas.
+
+**Metadatos por conservación:** booleano `disponible`, `tiempo_dias` como entero positivo o `null`, `tip` de texto corto o `null`, `estado_recomendacion` y `fuente` breve. Para congelación, `tip_descongelacion` sí es utilizable para la nota de la etiqueta; `tip_precongelacion` opcional puede almacenarse, pero **no se mostrará ni imprimirá** por ahora. El estado permite distinguir recomendación verificada, plazo indicado por la usuaria, no recomendado y sin datos (etiquetas concretas del enum pendientes de fijar). `null` en tips si modo no disponible, cadena vacía `""` para modo disponible sin consejo.
+
+**Fecha y nota:** tras «Aplicar a etiqueta», la fecha de consumo preferente se propone sumando `tiempo_dias` a la fecha de envasado; cambia cuando se modifica el envasado **hasta que el usuario edite manualmente el consumo preferente**, y podrá restablecerse a la sugerencia. Nota breve: `Tiempo recomendado: N días`, no impresa. No añadir explicaciones extensas al panel de selección.
+
+**Ejemplo del original:** `FoodKeeper Product.ID=59` («Ternera — Carne molida») tiene `DOP_Refrigerate=1–2 días` y `DOP_Freeze=3–4 meses`. La futura ficha `CAR-VAC-001` usará **2 días** de refrigeración y **90 días** de congelación; la referencia fuente bastará para consultar de nuevo los campos originales.
+
+**Estado:** estas decisiones están registradas, pero el JSON derivado, el esquema y el panel **no se han creado todavía**. Véase el [protocolo canónico](../MIS-ETIQUETAS-VISION-Y-HOJA-DE-RUTA.md).
