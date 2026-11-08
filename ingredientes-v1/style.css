@@ -12,15 +12,16 @@ body{margin:0;min-width:320px}
 button,input,select{font:inherit}
 button{touch-action:manipulation}
 a{color:inherit}
-.page{max-width:1120px;margin:0 auto;padding:35px 24px 64px}
+.page{max-width:1360px;margin:0 auto;padding:30px 24px 64px}
 .eyebrow{margin:0 0 10px;color:var(--terracotta);font-size:12px;letter-spacing:.16em;font-weight:700;text-transform:uppercase}
 h1,h2,h3{font-family:"Bricolage Grotesque",system-ui,sans-serif;letter-spacing:-.035em}
 h1{font-size:clamp(31px,4.7vw,50px);line-height:1.06;margin:0 0 16px;font-weight:700}
 h2{font-size:21px;line-height:1.15;margin:0 0 6px}
 h3{font-size:15px}
 .intro{max-width:680px;font-size:16px;line-height:1.62;color:var(--muted);margin:0 0 30px}
-.content-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,.9fr);align-items:start;gap:24px}
-.left,.right{min-width:0;display:grid;gap:20px}
+.layout-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.06fr);align-items:start;gap:24px}
+.format-column{grid-column:2;grid-row:1;min-width:0}
+.steps-column{grid-column:1;grid-row:1;min-width:0;display:grid;align-content:start;gap:20px}
 .card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:27px;box-shadow:var(--shadow)}
 .card-head{display:flex;align-items:start;gap:13px;margin-bottom:21px}
 .step{display:grid;place-items:center;flex:0 0 27px;width:27px;height:27px;background:var(--sage-soft);color:var(--sage);border-radius:50%;font-size:12px;font-weight:800}
@@ -76,15 +77,12 @@ h3{font-size:15px}
 .advanced .btn{min-height:35px;padding:8px 12px;font-size:12px}
 .footer{font-size:12px;color:var(--muted);line-height:1.7;padding:28px 0}
 code{font-family:ui-monospace,monospace}
-@media(max-width:760px){
- .page{padding:25px 17px 44px}
- .content-grid{display:flex;flex-direction:column;gap:16px}
- .left,.right{display:contents}
- .left .card:first-child{order:1}
- .right .card{order:2}
- .left .card:last-child{order:3}
- .card{padding:21px}
- .intro{margin-bottom:25px}
+@media(max-width:900px){.page{padding:25px 17px 44px}.card{padding:21px}}
+/* La orientación vertical apila; horizontal conserva dos columnas desde 680px. */
+@media(max-width:679px),(max-width:900px) and (orientation:portrait){
+ .layout-grid{display:flex;flex-direction:column;gap:16px}
+ .format-column,.steps-column{width:100%;min-width:0}
+ .steps-column{gap:16px}
 }
 @media(max-width:410px){
  .fields{grid-template-columns:1fr}
@@ -94,7 +92,7 @@ code{font-family:ui-monospace,monospace}
 @media(prefers-reduced-motion:reduce){.btn{transition:none}}
 
 /* Mis etiquetas · selector de formatos horizontal; sin alterar arte térmico */
-.format-card{margin:0 0 23px}
+.format-card{margin:0}
 .format-card .card-head{margin-bottom:14px}
 .format-options{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;width:100%;min-width:0}
 .format-option{display:block;min-width:0;position:relative;cursor:pointer}
@@ -147,3 +145,31 @@ code{font-family:ui-monospace,monospace}
 #compact-fields .checkbox-row{margin:2px 0 0}
 #c-nutrition-fields{margin-bottom:0}
 #c-preview{width:100%;height:auto;display:block;image-rendering:auto}
+
+
+/* Mis etiquetas: estructura aprobada con selector y vista previa unidos.
+   Pantalla ancha: formularios a la izquierda, vista previa a la derecha;
+   móvil: selector/vista previa primero y después los dos pasos. */
+.format-preview{margin-top:20px;min-width:0}
+.format-preview .preview-stage{margin:0;min-height:175px}
+.format-preview .status-line{display:none}
+.format-preview .status-line[data-error="true"]{display:block;color:#a14434;font-weight:650;margin:12px 0 0}
+.step-card{min-width:0}
+.step-heading{display:flex;align-items:center;gap:13px;cursor:pointer;list-style:none}
+.step-heading::-webkit-details-marker{display:none}
+.step-heading::marker{content:""}
+.step-heading h2{margin:0;flex:1}
+.step-heading:focus-visible{outline:3px solid #adcdb2;outline-offset:5px;border-radius:7px}
+.accordion-chevron{width:10px;height:10px;flex:none;border-right:2px solid var(--sage);border-bottom:2px solid var(--sage);transform:rotate(45deg);transition:transform .15s ease;margin:0 5px 4px 0}
+.step-card[open] .accordion-chevron{transform:rotate(225deg);margin:6px 5px 0 0}
+.step-content{margin-top:22px}
+#compact-fields,#wide-fields{display:grid;gap:15px}
+#c-nutrition-fields[hidden],#a-nutrition-fields[hidden],
+#compact-fields[hidden],#wide-fields[hidden],#compact-preview[hidden],#wide-preview[hidden],
+#ingredient-fields[hidden],#ingredient-preview[hidden],#ingredient-print[hidden],
+.format-placeholder[hidden]{display:none!important}
+#compact-fields .checkbox-row,#wide-fields .checkbox-row,
+.note-settings .checkbox-row{margin:8px 0 12px}
+.note-settings{margin-top:17px}
+@media(max-width:900px){.format-preview{margin-top:16px}}
+@media(prefers-reduced-motion:reduce){.accordion-chevron{transition:none}}

@@ -47,7 +47,8 @@ test("vista previa es raster que entra al mismo generador TSPL; 1–20 copias",(
  const old=globalThis.document,painted=[];
  const ctx={
   fillRect(...coords){painted.push(["rect",...coords])},drawImage(){},fillText(txt){painted.push(["text",txt])},
-  measureText(txt){return {width:String(txt).length*9}},
+  beginPath(){},roundRect(){},fill(){},moveTo(){},lineTo(){},quadraticCurveTo(){},closePath(){},
+  measureText(txt){const size=Number((this.font.match(/(\d+)px/)||[])[1]||17);return {width:String(txt).length*size*.48}},
   getImageData(){const bytes=new Uint8ClampedArray(590*354*4);bytes.fill(255);return {data:bytes}},
   fillStyle:"#000",textBaseline:"",textAlign:"",font:""
  };

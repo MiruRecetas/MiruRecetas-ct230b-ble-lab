@@ -13,7 +13,7 @@ async function prepare(){
  let connected=false,oversize=false,accept=true;
  function get(id){
   if(!elements.has(id))elements.set(id,{
-   value:"",checked:false,disabled:false,hidden:false,textContent:"",
+   value:"",checked:false,disabled:false,hidden:false,open:id==="data-step",textContent:"",
    dataset:{},style:{},listeners:{},
    addEventListener(type,handler){this.listeners[type]=handler;},
    setAttribute(){},
@@ -87,7 +87,8 @@ test("Amplia no imprime sin conexión o sin confirmación de papel",async()=>{
  const s=await prepare();
  assert.equal(s.get("paper-dimensions").textContent,"50 × 80 mm");
  assert.equal(s.get("ingredient-print").hidden,false);
- assert.equal(s.get("alternate-print").hidden,true);
+ assert.equal(s.get("data-step").open,true);
+ assert.equal(s.get("print-step").open,false);
  assert.equal(s.get("print").disabled,true);
  s.get("confirm-paper").checked=true;
  s.get("confirm-paper").listeners.change();
@@ -148,4 +149,23 @@ test("Cancelación y trabajos fuera de límite nunca transmiten",async()=>{
  assert.equal(s.prompts.length,1);
  assert.equal(s.writes.length,0);
  assert.equal(s.get("confirm-paper").checked,true,"El usuario canceló, no hubo transmisión");
+});
+
+test("Paneles de Datos e Impresión mutuamente excluyentes y persistentes al cambiar formato",async()=>{
+ const s=await prepare();
+ const data=s.get("data-step"),print=s.get("print-step");
+ assert.equal(data.open,true);
+ assert.equal(print.open,false);
+ print.open=true;
+ print.listeners.toggle();
+ assert.equal(data.open,false,"Al desplegar Impresión, Datos se pliega");
+ assert.equal(print.open,true);
+ data.open=true;
+ data.listeners.toggle();
+ assert.equal(print.open,false,"Al desplegar Datos, Impresión se pliega");
+ s.radios[1].checked=true;
+ s.radios[1].listeners.change();
+ await s.flush();
+ assert.equal(data.open,true,"El cambio de formato no reinicia el panel abierto");
+ assert.equal(print.open,false);
 });

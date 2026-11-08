@@ -89,14 +89,16 @@
    const canvas=$("a-preview"),ctx=canvas.getContext("2d");
    ctx.clearRect(0,0,canvas.width,canvas.height);ctx.save();
    ctx.translate(canvas.width,0);ctx.rotate(Math.PI/2);ctx.drawImage(physical,0,0);ctx.restore();
-   $("a-status").textContent="Amplia B aprobada visualmente. Vista previa del raster real de impresión, rotado para lectura. Verifica físicamente el papel y la alineación al imprimir.";
+   $("a-status").dataset.error="false";
+   $("a-status").textContent="Vista previa disponible.";
    try{
     const strict=A.normalize(wideValues(),true),job=A.build(A.render(strict,logo),copies);
     $("a-metrics").textContent=job.bytes+" B · "+job.fragments+" fragmentos BLE · "+job.tiles+" bandas · "+copies+(copies===1?" copia":" copias")+" · sin QR. La transmisión no acredita impresión física.";
     aReady=true;
-   }catch(err){$("a-metrics").textContent="Vista previa disponible; impresión bloqueada: "+err.message;}
+   }catch(err){$("a-status").dataset.error="true";$("a-status").textContent="Impresión bloqueada: "+err.message;
+    $("a-metrics").textContent="Vista previa disponible; impresión bloqueada: "+err.message;}
   }catch(err){if(n===aRefreshSeq){
-   $("a-status").textContent="No se puede mostrar: "+err.message;
+   $("a-status").dataset.error="true";$("a-status").textContent="No se puede mostrar: "+err.message;
    $("a-metrics").textContent="Corrige los campos o la composición.";
   }}finally{if(n===aRefreshSeq)update();}
  }
@@ -109,12 +111,13 @@
    const d=C.normalize(compactValues(),false),cv=C.render(d,logo);
    const canvas=$("c-preview");canvas.getContext("2d").clearRect(0,0,C.width,C.height);
    canvas.getContext("2d").drawImage(cv,0,0);
-   $("c-status").textContent="Compacta libre: cabecera V0.9, fechas adaptadas al bloque nutricional y encabezados inferiores fijos. Pendiente de ensayo físico CT230B.";
+   $("c-status").dataset.error="false";$("c-status").textContent="Vista previa disponible.";
    try{const strict=C.normalize(compactValues(),true),job=C.build(C.render(strict,logo),copies);
     $("c-metrics").textContent=job.bytes+" B · "+job.fragments+" fragmentos BLE · "+job.tiles+" bandas · "+copies+" copias · sin QR.";
     cReady=true;
-   }catch(err){$("c-metrics").textContent="Impresión bloqueada: "+err.message;}
-  }catch(err){if(n===cRefreshSeq){$("c-status").textContent="No se puede mostrar: "+err.message;
+   }catch(err){$("c-status").dataset.error="true";$("c-status").textContent="Impresión bloqueada: "+err.message;
+    $("c-metrics").textContent="Impresión bloqueada: "+err.message;}
+  }catch(err){if(n===cRefreshSeq){$("c-status").dataset.error="true";$("c-status").textContent="No se puede mostrar: "+err.message;
    $("c-metrics").textContent="Corrige la composición antes de imprimir.";}}
   finally{if(n===cRefreshSeq)update();}
  }
@@ -137,10 +140,11 @@
     ready=true;
    }catch(err){message="Sin envío: "+err.message;}
    $("metrics").textContent=message;
-   $("design-status").textContent="Arte aprobado V0.8, tipografía e isotipo cargados.";
+   $("design-status").dataset.error=String(!ready);
+   $("design-status").textContent=ready?"Vista previa disponible.":message;
   }catch(err){
    if(n===refreshSeq){
-    $("design-status").textContent="Vista previa bloqueada: "+err.message;
+    $("design-status").dataset.error="true";$("design-status").textContent="Vista previa bloqueada: "+err.message;
     $("metrics").textContent="No se puede imprimir sin los activos oficiales.";
     log("Diseño: "+err.message);
    }
@@ -278,26 +282,20 @@
   void refresh();
  });
  $("notes-enabled").addEventListener("change",()=>{update();void refresh();});
- const formats={
-  ingredient:{title:"Datos del ingrediente",subtitle:"Personaliza la etiqueta sin modificar el diseño aprobado.",dimensions:"30 × 20 mm"},
-  component:{title:"Datos de la etiqueta Compacta",subtitle:"Personaliza los bloques de la etiqueta libre 50 × 30 mm, sin QR.",dimensions:"50 × 30 mm"},
-  horizontal:{title:"Datos de la etiqueta Amplia",subtitle:"Diseño libre B aprobado. La impresión CT230B está habilitada en laboratorio; las pruebas físicas globales quedan para la fase final.",dimensions:"50 × 80 mm"}
- };
+ // Únicamente los dos pasos 1 y 2 son desplegables. Un paso abierto cierra el otro.
+ const steps=[$("data-step"),$("print-step")];
+ for(const step of steps)step.addEventListener("toggle",()=>{
+  if(step.open)for(const other of steps)if(other!==step)other.open=false;
+ });
+ const formats={ingredient:true,component:true,horizontal:true};
  function changeFormat(format){
   if(busy||!Object.hasOwn(formats,format))return;
   selectedFormat=format;
-  const ingredient=format==="ingredient",compact=format==="component",wide=format==="horizontal",active=ingredient||compact||wide,data=formats[format];
-  $("data-heading").textContent=data.title;
-  $("data-subtitle").textContent=data.subtitle;
-  $("preview-dimensions").textContent=data.dimensions;
-  $("preview-subtitle").textContent=wide?"Raster monocromo de impresión girado a horizontal para su lectura, sin QR.": "Vista previa real del raster monocromo que se enviará, sin QR.";
-  $("print-subtitle").textContent="De 1 a 20 copias iguales en un único trabajo BLE. La transmisión no confirma la impresión física.";
+  const ingredient=format==="ingredient",compact=format==="component",wide=format==="horizontal",active=ingredient||compact||wide;
   $("paper-dimensions").textContent=wide?"50 × 80 mm":compact?"50 × 30 mm":"30 × 20 mm";
-  $("alternate-fields-title").textContent="Formato futuro";
   for(const [id,visible] of [
    ["ingredient-fields",ingredient],["ingredient-preview",ingredient],["compact-fields",compact],
-   ["compact-preview",compact],["wide-fields",wide],["wide-preview",wide],["ingredient-print",active],
-   ["alternate-fields",false],["alternate-preview",false],["alternate-print",false]
+   ["compact-preview",compact],["wide-fields",wide],["wide-preview",wide],["ingredient-print",active]
   ])$(id).hidden=!visible;
   for(const input of document.querySelectorAll("[data-label-format]"))
    input.checked=input.value===format;
@@ -318,7 +316,7 @@
   String(now.getMonth()+1).padStart(2,"0")+"-"+String(now.getDate()).padStart(2,"0");
  $("c-packed").value=$("packed").value;
  $("a-packed").value=$("packed").value;
- if(!E||!C||!A){$("design-status").textContent="Falta un motor libre del laboratorio.";return;}
+ if(!E||!C||!A){$("design-status").dataset.error="true";$("design-status").textContent="Falta un motor libre del laboratorio.";return;}
  log("Mis etiquetas: Pequeña, Compacta y Amplia B con BLE habilitado y confirmación manual; ensayo físico de Amplia pendiente. Sin inventarios.");
  update();void refresh();
 })();

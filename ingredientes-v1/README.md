@@ -29,7 +29,7 @@ expresamente por la usuaria, con iconos SVG actuales de **Amplia 50 × 80**,
 **Compacta 50 × 30**, **Pequeña 30 × 20** y **Más formatos · Próximamente**.
 No añadir textos de disponibilidad a las tres primeras ni alterar sus iconos
 sin nueva aprobación; registro final en [PR #40](https://github.com/MiruRecetas/MiruRecetas-ct230b-ble-lab/pull/40).
-Sus radios controlan los tres pasos. **Pequeña, Compacta y Amplia** generan y pueden enviar etiquetas libres a CT230B desde el laboratorio, usando un único flujo de impresión y confirmaciones. Compacta y Amplia están **aprobadas visualmente**; su aceptación física específica y multicopia permanece como comprobación posterior.
+Sus radios actualizan el formulario y la vista previa de la tarjeta fija; **solo hay dos pasos desplegables y mutuamente excluyentes** (Datos e Impresión). **Pequeña, Compacta y Amplia** generan y pueden enviar etiquetas libres a CT230B desde el laboratorio, usando un único flujo de impresión y confirmaciones. Compacta y Amplia están **aprobadas visualmente**; su aceptación física específica y multicopia permanece como comprobación posterior.
 
 El término «receta/componente/ingrediente» se reserva para documentación y
 formulario específico, no como subtítulo del selector de formatos.
@@ -170,11 +170,18 @@ con la V0.8; no dar por validada esta modificación sin pruebas específicas.
 - Antes de enviar varias copias, verificar alineación en papel real;
   una transmisión correcta no garantiza el número de copias impresas.
 
+## Página compacta y responsive · decisión de 08/11/2026
+
+El selector aprobado de cuatro tarjetas y la vista previa comparten **una única tarjeta no plegable**, titulada exactamente «Elige un formato», con subtítulo «Selecciona el diseño que quieres imprimir»; los raster monocromos son los mismos que se transmitirán. No se muestran anotaciones, cifras de transporte ni títulos adicionales bajo el selector; solo se permite mostrar un error cuando la vista previa falle. La página contiene **dos tarjetas** adicionales con títulos fijos: **1. Datos de la etiqueta** (abierta de inicio) y **2. Imprime tu etiqueta** (cerrada). Son desplegables de forma excluyente, sin duplicar ni alterar el formulario por formato.
+
+Se retiran textos auxiliares, paréntesis de los títulos de campo, notas de desarrollo y leyendas bajo multicopia/impresión. Las casillas de visibilidad de campos opcionales aparecen después de sus campos, sin cambiar el significado o valor de ninguna opción. El panel de impresión conserva conexión CT230B, confirmaciones, número de copias, progreso y diagnóstico colapsado.
+
+**Vertical:** selector+preview → Datos → Impresión. **Horizontal con anchura suficiente:** derecha selector+preview e izquierda Datos e Impresión, distribuidos en dos columnas. Diseño y gráficos térmicos de Pequeña, Compacta y Amplia no cambian. Las impresiones físicas siguen previstas para la fase final acordada.
+
 ## Límites de la pantalla
 
 La página es un **candidato de producto** y evita lenguaje o controles de
-experimentos históricos. Durante su estancia en el laboratorio conserva un
-aviso de alcance en el pie. El selector incluye los **tres formatos libres previstos** (no incorpora
+experimentos históricos. La nueva página presenta los **tres formatos libres previstos** (no incorpora
 50 × 80 vertical con anillo) y una tarjeta futura. Los tres formatos muestran su **raster real** y comparten formulario adaptado, confirmación de papel y transporte CT230B. Amplia utiliza el raster 590 × 945 y papel 50 × 80 mm; Compacta, raster 590 × 354. Ambos diseños libres están aprobados visualmente, sin que eso acredite una prueba física de su variante. El nombre y, cuando se indique, el peso en
 Pequeña son introducidos manualmente; todavía no hay un catálogo de ingredientes
 para esta sección. El peso no forma parte de Compacta ni Amplia.
@@ -189,9 +196,8 @@ innecesario ni crear transportistas de publicación alternativos.
 
 1. Ejecutar `node --test tests/ingredientes-v1.test.cjs` en una copia del
    laboratorio y revisar validaciones, límites, bitmap, TSPL y enlaces.
-2. Comprobar visualmente en Chromium Android o equivalente los anchos 360,
-   390, 768 y 1280 px, el orden móvil **datos → vista previa → impresión**,
-   el teclado, los calendarios, el texto largo y los estados de error.
+2. Comprobar visualmente en Chromium Android o equivalente anchos 360, 390,
+   768 y 1280 px tanto en vertical como horizontal: **selector + vista previa → datos → impresión** en vertical; en horizontal, **derecha formato/vista previa e izquierda Datos + Impresión**. Comprobar apertura inicial solo de Datos, exclusión de paneles, teclado, calendarios, texto largo y estados de error.
 3. Conectar voluntariamente CT230B en Chrome Android HTTPS y verificar
    que conectar no imprime nada; con campos inválidos o sin aceptar papel
    no debe poder imprimirse.

@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Geist:ital,wght@0,400;0,500;0,700;1,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./cabecera.css">
-<link rel="stylesheet" href="./style.css?v=20261108-amplia-multiline">
+<link rel="stylesheet" href="./style.css?v=20261108-layout-v1">
 </head>
 <body>
 <header class="miru-header miru-header--interior" data-miru-header="interior" aria-label="Cabecera de MiruRecetas">
@@ -60,14 +60,14 @@
 </header>
 
 <main class="page">
-  <p class="eyebrow">Conserva / Mis etiquetas</p>
-  <h1>Mis etiquetas</h1>
-  <p class="intro">Prepara tus propias etiquetas de conservación, elige un formato y envía una o varias copias a tu CLABEL CT230B.</p>
-  <section class="card format-card" aria-labelledby="format-heading">
+<h1>Mis etiquetas</h1>
+<div class="layout-grid">
+<div class="format-column">
+<section class="card format-card" aria-labelledby="format-heading">
     <div class="card-head">
       <div>
         <h2 id="format-heading">Elige un formato</h2>
-        <p class="small">Selecciona el diseño que quieres preparar. Los pasos 1, 2 y 3 se adaptan a tu elección.</p>
+        <p class="small">Selecciona el diseño que quieres imprimir</p>
       </div>
     </div>
     <div class="format-options" role="radiogroup" aria-label="Formato de etiqueta">
@@ -87,240 +87,8 @@
         <span class="format-option-body"><svg class="format-icon" viewBox="0 0 72 52" aria-hidden="true" focusable="false"><rect class="icon-light" x="10" y="8" width="39" height="36" rx="12" opacity=".75"/><rect x="25" y="17" width="37" height="31" rx="11" fill="#eef2e9" stroke="#fff" stroke-width="3"/><path d="M43.5 26v14m-7-7h14" stroke="#526c58" stroke-width="3.5" stroke-linecap="round"/></svg><strong>Más formatos</strong><span>Próximamente</span></span>
       </div>
     </div>
-  </section>
-  <div class="content-grid">
-    <div class="left">
-      <section class="card" aria-labelledby="data-heading">
-        <div class="card-head">
-          <span class="step" aria-hidden="true">1</span>
-          <div>
-            <h2 id="data-heading">Datos del ingrediente</h2>
-            <p id="data-subtitle" class="small">Personaliza la etiqueta sin modificar el diseño aprobado.</p>
-          </div>
-        </div>
-        <div id="ingredient-fields">
-        <div class="fields">
-          <label class="field full" for="name">Nombre del ingrediente
-            <input id="name" type="text" maxlength="55" value="Carne Picada" autocomplete="off" required>
-            <span class="field-note">Si no cabe en una línea, utiliza un nombre más corto.</span>
-          </label>
-          <label class="field" for="grams">Cantidad · gramos (opcional)
-            <input id="grams" type="number" inputmode="numeric" min="1" max="9999" step="1" value="" placeholder="Sin cantidad">
-          </label>
-          <label class="field" for="mode">Tipo de conservación
-            <select id="mode">
-              <option value="fridge" selected>Refrigeración</option>
-              <option value="freeze">Congelación</option>
-              <option value="other">Otro tipo</option>
-            </select>
-          </label>
-          <label class="field" for="packed">Fecha de envasado (obligatoria)
-            <input id="packed" type="date" required>
-          </label>
-          <label class="field" for="expiry">Consumo preferente (opcional)
-            <input id="expiry" type="date">
-            <span class="field-note">Sin fecha: --/--/-- en la etiqueta.</span>
-          </label>
-        </div>
-        <div class="note-settings">
-          <label class="checkbox-row" for="notes-enabled">
-            <input id="notes-enabled" type="checkbox" checked>
-            <span><strong>Mostrar nota de conservación</strong></span>
-          </label>
-          <label class="field full" for="note">Nota de conservación
-            <input id="note" type="text" maxlength="32" value="Conservar en nevera" autocomplete="off" aria-describedby="note-hint">
-            <span id="note-hint" class="field-note">Se rellena según el tipo de conservación. Puedes editarla (máximo 32 caracteres, siempre sujeta al espacio real de impresión).</span>
-          </label>
-        </div>
-        <p class="disclaimer">La fecha de consumo preferente debe introducirse desde el producto original o una referencia válida. El modo de conservación no calcula ni amplía su duración.</p>
-        </div>
-<div id="compact-fields" hidden>
-          <div class="fields">
-            <label class="field full" for="c-name">Nombre de la preparación
-              <input id="c-name" type="text" maxlength="70" value="Pisto casero" required autocomplete="off">
-              <span class="field-note">Se ajusta al espacio real de la cabecera; no se imprimen raciones ni gramos.</span>
-            </label>
-            <label class="field" for="c-mode">Tipo de conservación
-              <select id="c-mode">
-                <option value="freeze" selected>Congelación</option><option value="fridge">Refrigeración</option>
-                <option value="other">Otro tipo</option>
-              </select>
-            </label>
-            <label class="field" for="c-packed">Fecha de envasado (obligatoria)
-              <input id="c-packed" type="date" required>
-            </label>
-            <label class="field" for="c-expiry">Consumo preferente (opcional)
-              <input id="c-expiry" type="date">
-              <span class="field-note">En blanco: --/--/--. Siempre visible en la etiqueta.</span>
-            </label>
-          </div>
-          <label class="checkbox-row" for="c-nutrition-enabled">
-            <input type="checkbox" id="c-nutrition-enabled" checked>
-            <span><strong>Mostrar información nutricional</strong></span>
-          </label>
-          <div id="c-nutrition-fields" class="fields">
-            <label class="field" for="c-kcal">Energía · kcal (opcional)
-              <input id="c-kcal" type="text" inputmode="decimal" value="164,35" placeholder="Sin dato">
-            </label>
-            <label class="field" for="c-protein">Proteínas · g (opcional)
-              <input id="c-protein" type="text" inputmode="decimal" value="5,69" placeholder="Sin dato">
-            </label>
-            <label class="field" for="c-carbs">Hidratos · g (opcional)
-              <input id="c-carbs" type="text" inputmode="decimal" value="18,58" placeholder="Sin dato">
-            </label>
-            <label class="field" for="c-fat">Grasas · g (opcional)
-              <input id="c-fat" type="text" inputmode="decimal" value="7,84" placeholder="Sin dato">
-            </label>
-          </div>
-          <p class="disclaimer">Los valores son datos que introduces tú, no cálculos ni nutrientes oficiales de MiruRecetas. Cada campo vacío se omite; no se sustituye por cero.</p>
-          <label class="checkbox-row" for="c-instruction-enabled">
-            <input type="checkbox" id="c-instruction-enabled" checked>
-            <span><strong>Mostrar texto de conservación y consumo</strong> (encabezado siempre visible)</span>
-          </label>
-          <label class="field full" for="c-instruction">Instrucciones (máximo dos líneas impresas)
-            <textarea id="c-instruction" maxlength="90" rows="2">Descongelar en nevera. Recalentar a fuego suave.</textarea>
-            <span class="field-note">Al cambiar el tipo de conservación se propone la instrucción aprobada de Pequeña; puedes editarla.</span>
-          </label>
-          <label class="checkbox-row" for="c-note-enabled">
-            <input type="checkbox" id="c-note-enabled" checked>
-            <span><strong>Mostrar texto de la nota</strong> (encabezado siempre visible)</span>
-          </label>
-          <label class="field full" for="c-note">Nota personal (opcional)
-            <textarea id="c-note" maxlength="90" rows="2">La textura puede variar después de congelar.</textarea>
-            <span class="field-note">Al cambiar el tipo de conservación se limpia la nota anterior; puedes escribir otra. El encabezado sigue visible aunque esté vacía.</span>
-          </label>
-          <p class="disclaimer">Sin QR y sin gramaje. La vista previa usa el isotipo y las fuentes oficiales. Con la nutrición oculta, ambas fechas ocupan dos columnas; los encabezados de conservación y nota permanecen visibles incluso sin texto. Diseño pendiente de prueba física CT230B.</p>
-        </div>
-        <div id="wide-fields" hidden>
-          <div class="fields">
-            <label class="field full" for="a-name">Nombre de la preparación
-              <input id="a-name" type="text" maxlength="90" value="Pisto casero" required autocomplete="off">
-              <span class="field-note">Amplia horizontal 50 × 80. Nombre libre, sin QR, raciones ni gramos.</span>
-            </label>
-            <label class="field" for="a-mode">Tipo de conservación
-              <select id="a-mode">
-                <option value="freeze" selected>Congelación</option>
-                <option value="fridge">Refrigeración</option>
-                <option value="other">Otro tipo</option>
-              </select>
-            </label>
-            <label class="field" for="a-packed">Fecha de envasado (obligatoria)
-              <input id="a-packed" type="date" required>
-            </label>
-            <label class="field" for="a-expiry">Consumo preferente (opcional)
-              <input id="a-expiry" type="date">
-              <span class="field-note">En blanco: --/--/--. Nunca se calcula automáticamente.</span>
-            </label>
-          </div>
-          <label class="checkbox-row" for="a-nutrition-enabled">
-            <input id="a-nutrition-enabled" type="checkbox" checked>
-            <span><strong>Mostrar información nutricional</strong></span>
-          </label>
-          <div id="a-nutrition-fields" class="fields">
-            <label class="field" for="a-kcal">Energía · kcal (opcional)
-              <input id="a-kcal" type="text" inputmode="decimal" value="164,35" placeholder="Sin dato">
-            </label>
-            <label class="field" for="a-protein">Proteínas · g (opcional)
-              <input id="a-protein" type="text" inputmode="decimal" value="5,69" placeholder="Sin dato">
-            </label>
-            <label class="field" for="a-carbs">Hidratos · g (opcional)
-              <input id="a-carbs" type="text" inputmode="decimal" value="18,58" placeholder="Sin dato">
-            </label>
-            <label class="field" for="a-fat">Grasas · g (opcional)
-              <input id="a-fat" type="text" inputmode="decimal" value="7,84" placeholder="Sin dato">
-            </label>
-          </div>
-          <p class="disclaimer">Valores manuales ilustrativos: no se calculan ni se sustituyen datos ausentes por cero.</p>
-          <label class="checkbox-row" for="a-instruction-enabled">
-            <input id="a-instruction-enabled" type="checkbox" checked>
-            <span><strong>Mostrar texto de conservación y consumo</strong> (encabezado siempre visible)</span>
-          </label>
-          <label class="field full" for="a-instruction">Instrucciones de conservación y consumo
-            <textarea id="a-instruction" rows="3" maxlength="180">Descongelar en nevera. Recalentar tapado.</textarea>
-            <span class="field-note">Puedes escribir varias líneas: los saltos de línea se respetan en la etiqueta. Al cambiar la conservación se propone el texto de Pequeña.</span>
-          </label>
-          <label class="checkbox-row" for="a-note-enabled">
-            <input id="a-note-enabled" type="checkbox" checked>
-            <span><strong>Mostrar texto de la nota</strong> (encabezado siempre visible)</span>
-          </label>
-          <label class="field full" for="a-note">Nota personal (opcional)
-            <textarea id="a-note" rows="3" maxlength="140">La textura puede variar al descongelar.</textarea>
-            <span class="field-note">Puedes introducir dos o tres líneas con Intro: se imprimirán respetando los saltos. La nota se limpia al cambiar la conservación y su encabezado permanece.</span>
-          </label>
-          <p class="disclaimer">Amplia B aprobada visualmente. El botón de impresión está habilitado en el laboratorio: selecciona papel 50 × 80 mm, conecta la CT230B y confirma antes de enviar. Las comprobaciones de impresión física y multicopia se realizarán al final. Sin QR, sin anillo ni registro de existencias.</p>
-        </div>
-        <div id="alternate-fields" class="format-placeholder" hidden>
-          <strong id="alternate-fields-title"></strong>
-          <p>El formulario editable de este modelo se incorporará conservando su composición aprobada. No hay campos ni valores ficticios.</p>
-        </div>
-      </section>
-      <section class="card" aria-labelledby="device-heading">
-        <div class="card-head">
-          <span class="step" aria-hidden="true">3</span>
-          <div>
-            <h2 id="device-heading">Imprime tu etiqueta</h2>
-            <p id="print-subtitle" class="small">De 1 a 20 copias iguales, en un solo trabajo BLE.</p>
-          </div>
-        </div>
-        <div id="ingredient-print">
-        <p id="connection" class="device-status" data-connected="false" role="status" aria-live="polite">Sin conexión CT230B</p>
-        <div class="buttons">
-          <button class="btn" id="connect" type="button">Conectar impresora</button>
-          <button class="btn secondary" id="disconnect" type="button" disabled>Desconectar</button>
-        </div>
-        <div class="copies-field">
-          <span id="copies-label" class="field">Número de etiquetas iguales</span>
-          <div class="copy-stepper" role="group" aria-labelledby="copies-label">
-            <button id="copies-minus" type="button" aria-label="Reducir número de etiquetas" disabled>−</button>
-            <output id="copies" aria-live="polite" aria-atomic="true">1</output>
-            <button id="copies-plus" type="button" aria-label="Aumentar número de etiquetas">+</button>
-          </div>
-          <p class="small">La multicopia usa PRINT 1,n. Verifica físicamente la alineación antes de tiradas largas.</p>
-        </div>
-        <label class="checkbox-row" for="confirm-paper">
-          <input id="confirm-paper" type="checkbox">
-          <span>Confirmo que hay papel de <strong id="paper-dimensions">30 × 20 mm</strong> instalado y que he revisado los datos y el número de copias.</span>
-        </label>
-        <button class="btn print" id="print" type="button" disabled>Imprimir 1 etiqueta · 30 × 20 mm</button>
-        <div id="transport" class="transport" hidden aria-live="off">
-          <div class="transport-head">
-            <strong id="transport-title">Preparando impresión…</strong>
-            <span id="transport-percent">0 %</span>
-          </div>
-          <div id="progress" class="transport-track" role="progressbar" aria-label="Progreso de transmisión Bluetooth" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0 de 0 fragmentos transmitidos"><div id="progress-fill" class="transport-fill"></div></div>
-          <p id="transport-count" class="transport-count" role="status" aria-live="polite">0 enviados · 0 restantes</p>
-          <p class="small">Este indicador mide la transmisión Bluetooth, no confirma la impresión física.</p>
-        </div>
-        <p class="status-line">La impresión requiere Chrome Android, HTTPS, conexión BLE y confirmación. No se repiten envíos automáticamente.</p>
-        <details class="advanced">
-          <summary>Diagnóstico de impresión</summary>
-          <p class="small">Transporte TSPL multicopia con bandas raster. El envío Bluetooth completo no confirma por sí solo la salida física. Si falla, revisa la impresora antes de repetir.</p>
-          <div class="buttons">
-            <button class="btn secondary" id="copy" type="button">Copiar registro</button>
-            <button class="btn secondary" id="clear" type="button">Limpiar registro</button>
-          </div>
-          <pre id="log" aria-live="polite"></pre>
-        </details>
-        </div>
-        <div id="alternate-print" class="format-placeholder" hidden>
-          <strong>Impresión de formato no disponible</strong>
-          <p>Este aviso solo corresponde a formatos futuros que aún no dispongan de plantilla. Amplia, Compacta y Pequeña comparten los controles de impresión del laboratorio.</p>
-        </div>
-      </section>
-    </div>
-    <div class="right">
-      <section class="card preview-panel" aria-labelledby="preview-heading">
-        <div class="card-head">
-          <span class="step" aria-hidden="true">2</span>
-          <div style="width:100%">
-            <div class="preview-title">
-              <h2 id="preview-heading">Vista previa</h2>
-              <span id="preview-dimensions" class="dimensions">30 × 20 mm</span>
-            </div>
-            <p id="preview-subtitle" class="small">Reproducción monocroma del arte que se imprimirá, sin QR.</p>
-          </div>
-        </div>
-        <div id="ingredient-preview">
+  <div class="format-preview">
+<div id="ingredient-preview">
         <div class="preview-stage">
           <canvas id="preview" width="354" height="236" role="img" aria-label="Etiqueta con ingrediente, cantidad, fechas e isotipo MiruRecetas"></canvas>
         </div>
@@ -341,22 +109,200 @@
           <p id="a-status" class="status-line" role="status" aria-live="polite">Preparando Amplia horizontal con fuentes e isotipo oficiales…</p>
           <p id="a-metrics" class="status-line" aria-live="polite">Pendiente de generar raster.</p>
         </div>
-        <div id="alternate-preview" class="format-placeholder" hidden>
-          <strong>Vista previa pendiente</strong>
-          <p>La vista previa mostrará exclusivamente la composición validada para el formato seleccionado. No se presenta un diseño simulado como si estuviera listo para imprimir.</p>
+</div>
+</section>
+</div>
+<div class="steps-column">
+<details id="data-step" class="card step-card" open>
+<summary class="step-heading"><span class="step" aria-hidden="true">1</span><h2 id="data-heading">Datos de la etiqueta</h2><span class="accordion-chevron" aria-hidden="true"></span></summary>
+<div class="step-content">
+<div id="ingredient-fields">
+        <div class="fields">
+          <label class="field full" for="name">Nombre del ingrediente
+            <input id="name" type="text" maxlength="55" value="Carne Picada" autocomplete="off" required>
+          </label>
+          <label class="field" for="grams">Cantidad · gramos
+            <input id="grams" type="number" inputmode="numeric" min="1" max="9999" step="1" value="" placeholder="Sin cantidad">
+          </label>
+          <label class="field" for="mode">Tipo de conservación
+            <select id="mode">
+              <option value="fridge" selected>Refrigeración</option>
+              <option value="freeze">Congelación</option>
+              <option value="other">Otro tipo</option>
+            </select>
+          </label>
+          <label class="field" for="packed">Fecha de envasado
+            <input id="packed" type="date" required>
+          </label>
+          <label class="field" for="expiry">Consumo preferente
+            <input id="expiry" type="date">
+          </label>
         </div>
-      </section>
-    </div>
-  </div>
-  <footer class="footer">
-    Versión experimental en el laboratorio MiruRecetas. No guarda inventario, no establece caducidades y no se ha integrado en Conserva. La etiqueta V0.8 original y los formatos de recetas permanecen intactos.
-  </footer>
+        <div class="note-settings">
+          <label class="field full" for="note">Nota de conservación
+            <input id="note" type="text" maxlength="32" value="Conservar en nevera" autocomplete="off">
+          </label>
+<label class="checkbox-row" for="notes-enabled">
+            <input id="notes-enabled" type="checkbox" checked>
+            <span><strong>Mostrar nota de conservación</strong></span>
+          </label>
+        </div>
+        </div>
+<div id="compact-fields" hidden>
+          <div class="fields">
+            <label class="field full" for="c-name">Nombre de la preparación
+              <input id="c-name" type="text" maxlength="70" value="Pisto casero" required autocomplete="off">
+            </label>
+            <label class="field" for="c-mode">Tipo de conservación
+              <select id="c-mode">
+                <option value="freeze" selected>Congelación</option><option value="fridge">Refrigeración</option>
+                <option value="other">Otro tipo</option>
+              </select>
+            </label>
+            <label class="field" for="c-packed">Fecha de envasado
+              <input id="c-packed" type="date" required>
+            </label>
+            <label class="field" for="c-expiry">Consumo preferente
+              <input id="c-expiry" type="date">
+            </label>
+          </div>
+          <div id="c-nutrition-fields" class="fields">
+            <label class="field" for="c-kcal">Energía · kcal
+              <input id="c-kcal" type="text" inputmode="decimal" value="164,35" placeholder="Sin dato">
+            </label>
+            <label class="field" for="c-protein">Proteínas · g
+              <input id="c-protein" type="text" inputmode="decimal" value="5,69" placeholder="Sin dato">
+            </label>
+            <label class="field" for="c-carbs">Hidratos · g
+              <input id="c-carbs" type="text" inputmode="decimal" value="18,58" placeholder="Sin dato">
+            </label>
+            <label class="field" for="c-fat">Grasas · g
+              <input id="c-fat" type="text" inputmode="decimal" value="7,84" placeholder="Sin dato">
+            </label>
+          </div>
+<label class="checkbox-row" for="c-nutrition-enabled">
+            <input type="checkbox" id="c-nutrition-enabled" checked>
+            <span><strong>Mostrar información nutricional</strong></span>
+          </label>
+          <label class="field full" for="c-instruction">Instrucciones
+            <textarea id="c-instruction" maxlength="90" rows="2">Descongelar en nevera. Recalentar a fuego suave.</textarea>
+          </label>
+<label class="checkbox-row" for="c-instruction-enabled">
+            <input type="checkbox" id="c-instruction-enabled" checked>
+            <span><strong>Mostrar texto de conservación y consumo</strong></span>
+          </label>
+          <label class="field full" for="c-note">Nota personal
+            <textarea id="c-note" maxlength="90" rows="2">La textura puede variar después de congelar.</textarea>
+          </label>
+<label class="checkbox-row" for="c-note-enabled">
+            <input type="checkbox" id="c-note-enabled" checked>
+            <span><strong>Mostrar texto de la nota</strong></span>
+          </label>
+        </div>
+        <div id="wide-fields" hidden>
+          <div class="fields">
+            <label class="field full" for="a-name">Nombre de la preparación
+              <input id="a-name" type="text" maxlength="90" value="Pisto casero" required autocomplete="off">
+            </label>
+            <label class="field" for="a-mode">Tipo de conservación
+              <select id="a-mode">
+                <option value="freeze" selected>Congelación</option>
+                <option value="fridge">Refrigeración</option>
+                <option value="other">Otro tipo</option>
+              </select>
+            </label>
+            <label class="field" for="a-packed">Fecha de envasado
+              <input id="a-packed" type="date" required>
+            </label>
+            <label class="field" for="a-expiry">Consumo preferente
+              <input id="a-expiry" type="date">
+            </label>
+          </div>
+          <div id="a-nutrition-fields" class="fields">
+            <label class="field" for="a-kcal">Energía · kcal
+              <input id="a-kcal" type="text" inputmode="decimal" value="164,35" placeholder="Sin dato">
+            </label>
+            <label class="field" for="a-protein">Proteínas · g
+              <input id="a-protein" type="text" inputmode="decimal" value="5,69" placeholder="Sin dato">
+            </label>
+            <label class="field" for="a-carbs">Hidratos · g
+              <input id="a-carbs" type="text" inputmode="decimal" value="18,58" placeholder="Sin dato">
+            </label>
+            <label class="field" for="a-fat">Grasas · g
+              <input id="a-fat" type="text" inputmode="decimal" value="7,84" placeholder="Sin dato">
+            </label>
+          </div>
+<label class="checkbox-row" for="a-nutrition-enabled">
+            <input id="a-nutrition-enabled" type="checkbox" checked>
+            <span><strong>Mostrar información nutricional</strong></span>
+          </label>
+          <label class="field full" for="a-instruction">Instrucciones de conservación y consumo
+            <textarea id="a-instruction" rows="3" maxlength="180">Descongelar en nevera. Recalentar tapado.</textarea>
+          </label>
+<label class="checkbox-row" for="a-instruction-enabled">
+            <input id="a-instruction-enabled" type="checkbox" checked>
+            <span><strong>Mostrar texto de conservación y consumo</strong></span>
+          </label>
+          <label class="field full" for="a-note">Nota personal
+            <textarea id="a-note" rows="3" maxlength="140">La textura puede variar al descongelar.</textarea>
+          </label>
+<label class="checkbox-row" for="a-note-enabled">
+            <input id="a-note-enabled" type="checkbox" checked>
+            <span><strong>Mostrar texto de la nota</strong></span>
+          </label>
+        </div>
+</div>
+</details>
+<details id="print-step" class="card step-card">
+<summary class="step-heading"><span class="step" aria-hidden="true">2</span><h2 id="device-heading">Imprime tu etiqueta</h2><span class="accordion-chevron" aria-hidden="true"></span></summary>
+<div class="step-content">
+<div id="ingredient-print">
+        <p id="connection" class="device-status" data-connected="false" role="status" aria-live="polite">Sin conexión CT230B</p>
+        <div class="buttons">
+          <button class="btn" id="connect" type="button">Conectar impresora</button>
+          <button class="btn secondary" id="disconnect" type="button" disabled>Desconectar</button>
+        </div>
+        <div class="copies-field">
+          <span id="copies-label" class="field">Número de etiquetas iguales</span>
+          <div class="copy-stepper" role="group" aria-labelledby="copies-label">
+            <button id="copies-minus" type="button" aria-label="Reducir número de etiquetas" disabled>−</button>
+            <output id="copies" aria-live="polite" aria-atomic="true">1</output>
+            <button id="copies-plus" type="button" aria-label="Aumentar número de etiquetas">+</button>
+          </div>
+        </div>
+        <label class="checkbox-row" for="confirm-paper">
+          <input id="confirm-paper" type="checkbox">
+          <span>Confirmo que hay papel de <strong id="paper-dimensions">30 × 20 mm</strong> instalado y que he revisado los datos y el número de copias.</span>
+        </label>
+        <button class="btn print" id="print" type="button" disabled>Imprimir 1 etiqueta · 30 × 20 mm</button>
+        <div id="transport" class="transport" hidden aria-live="off">
+          <div class="transport-head">
+            <strong id="transport-title">Preparando impresión…</strong>
+            <span id="transport-percent">0 %</span>
+          </div>
+          <div id="progress" class="transport-track" role="progressbar" aria-label="Progreso de transmisión Bluetooth" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0 de 0 fragmentos transmitidos"><div id="progress-fill" class="transport-fill"></div></div>
+          <p id="transport-count" class="transport-count" role="status" aria-live="polite">0 enviados · 0 restantes</p>
+        </div>
+        <details class="advanced">
+          <summary>Diagnóstico de impresión</summary>
+          <div class="buttons">
+            <button class="btn secondary" id="copy" type="button">Copiar registro</button>
+            <button class="btn secondary" id="clear" type="button">Limpiar registro</button>
+          </div>
+          <pre id="log" aria-live="polite"></pre>
+        </details>
+        </div>
+        
+</div>
+</details>
+</div>
+</div>
 </main>
 <script src="./motor-libre.js?v=20261107-motor-unico"></script>
 <script src="./plantilla-pequena.js?v=20261107-motor-unico"></script>
 <script src="./plantilla-compacta.js?v=20261108-compacta-qa2"></script>
 <script src="./plantilla-amplia.js?v=20261108-amplia-b-v2"></script>
-<script src="./app.js?v=20261108-amplia-ble-v1"></script>
+<script src="./app.js?v=20261108-layout-v1"></script>
 <script src="./cabecera.js" defer></script>
 </body>
 </html>

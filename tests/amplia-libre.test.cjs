@@ -170,7 +170,8 @@ test("Formulario, preview e impresión BLE habilitada tras validación visual",(
  assert.ok(app.includes('selectedFormat==="horizontal"?aReady:selectedFormat==="component"?cReady:ready'));
  assert.ok(app.includes('const ingredient=format==="ingredient",compact=format==="component",wide=format==="horizontal",active=ingredient||compact||wide'));
  assert.ok(app.includes('["ingredient-print",active]'));
- assert.ok(app.includes('["alternate-fields",false],["alternate-preview",false],["alternate-print",false]'));
+ assert.ok(!app.includes('["alternate-fields",false],["alternate-preview",false],["alternate-print",false]'));
+ assert.ok(html.includes('<details id="print-step" class="card step-card">'));
  assert.ok(app.includes('const motor=wide?A:compact?C:E;'));
  assert.ok(app.includes('motor.normalize(wide?wideValues():compact?compactValues():values(),true)'));
  assert.ok(app.includes('work=motor.build(motor.render(d,logo),copies);'));
@@ -180,7 +181,7 @@ test("Formulario, preview e impresión BLE habilitada tras validación visual",(
  assert.ok(app.includes('if(busy||!(wide?aReady:compact?cReady:ready)||!connected()||!$("confirm-paper").checked)return;'));
  assert.ok(app.includes('window.confirm('));
  assert.ok(app.includes('no se reintentará automáticamente'));
- assert.ok(html.includes('src="./app.js?v=20261108-amplia-ble-v1"'));
+ assert.ok(html.includes('src="./app.js?v=20261108-layout-v1"'));
  assert.match(html,/<div id="ingredient-print">/);
  assert.ok(html.includes('id="paper-dimensions"'));
  assert.ok(html.includes('id="confirm-paper"'));
@@ -189,5 +190,5 @@ test("Formulario, preview e impresión BLE habilitada tras validación visual",(
  assert.ok(css.includes("#a-preview{width:100%"));
  assert.ok(css.includes("#compact-fields textarea,#wide-fields textarea"));
  assert.ok(css.includes("font:inherit;font-weight:500;line-height:1.5"));
- assert.ok(html.includes('href="./style.css?v=20261108-amplia-multiline"'));
+ assert.ok(html.includes('href="./style.css?v=20261108-layout-v1"'));
 });
