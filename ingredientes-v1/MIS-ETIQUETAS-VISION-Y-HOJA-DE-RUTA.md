@@ -1,5 +1,67 @@
 # MiruRecetas · «Mis etiquetas» · visión, decisiones y hoja de ruta
 
+## Ampliación del banco · Ovino y Porcino seleccionados (08/11/2026)
+
+La usuaria eligió ocho entradas del FoodKeeper ES original:
+**cordero 48 y 51; cerdo 61, 67, 69, 72, 73 y 75**.
+Son ingredientes **crudos, comprados a granel**. Se crean solo **7
+fichas** de MiruRecetas, al unificar `Product.ID 67`
+(solomillo de cerdo entero) y `69` (medallones de ese mismo
+solomillo) en la única ficha `CAR-POR-002` con
+`presentacion: null`, búsqueda por ambos nombres, una
+fuente global FoodKeeper y `id_fuente: "67"`. El ID **69**
+queda trazado explícitamente en
+[`banco/README.md`](banco/README.md), sin introducir
+nuevos campos en el esquema.
+
+**Nuevos ID y nombres:** `CAR-OVI-001`
+Paletilla o media pierna de cordero para asar;
+`CAR-OVI-002` Chuletas de cordero;
+`CAR-POR-001` Lomo de cerdo sin hueso;
+`CAR-POR-002` Solomillo de cerdo;
+`CAR-POR-003` Costillas de cerdo;
+`CAR-POR-004` Carne picada de cerdo;
+`CAR-POR-005` Lomo de cerdo en dados.
+
+**Métodos y plazos:** para todos, únicamente refrigeración
+y congelación (`true`); **despensa y conserva casera
+no se ofrecen** (`false`, días/tips `null`).
+Se usan **5 días / 120 días** para los cortes enteros,
+chuletas, costillas, solomillo y sus medallones: FoodKeeper
+`3–5 días` / `4–12 meses`, con conversión canónica
+de 30 días por mes. Carne picada de cerdo `73`:
+FoodKeeper `1–2 días` / `3–4 meses` → **2/90**.
+**Lomo de cerdo crudo en dados `75`:** FoodKeeper
+le atribuye `3–5 días` / `4–12 meses`,
+pero la tabla general específica de **carnes crudas troceadas
+para guisar** recomienda `1–2 días` / `3–4 meses`;
+se adoptan **2/90** para esta presentación, igual que
+para la ternera en dados. Se registra origen global
+`agregación`, `id_fuente: null`; la discrepancia y el
+ID 75 quedan documentados, sin reescribir el original.
+
+Los seis registros restantes usan `fuente: FoodKeeper` y
+su ID original; el solomillo unificado mantiene el ID 67
+y el 69 queda documentado. El estado de recomendación
+`verificado` no es una certificación de inocuidad.
+No hay notas FoodKeeper individuales; las cadenas vacías
+de tips permiten que la interfaz use sus presets editoriales
+editables «Conservar en nevera» y «Descongelar en nevera».
+La fecha base sigue siendo compra/preparación y el vacío
+doméstico no prolonga plazos; congelación a −18 °C
+sostiene calidad, y refrigeración requiere ≤4 °C.
+
+**Estado:** banco actualizado de **10 a 17 fichas**
+(5 Vacuno, 2 Ovino, 5 Porcino y 5 de otras familias).
+**Alcance:** exclusivamente
+`ingredientes-v1/banco/catalogo.json`, pruebas y
+documentación. Permanecen intactos el diseño,
+`banco-ui.js`, HTML, CSS, plantillas de impresión,
+motor compartido, raster, TSPL, BLE, web de producción,
+PWA, Airtable y demás repositorios.
+Referencia técnica y de fuentes:
+[`banco/README.md`](banco/README.md).
+
 ## Banco · normalización de nombres y presentaciones de ternera (08/11/2026)
 
 **Decisión expresa posterior a la PR #73:** en las cuatro fichas
