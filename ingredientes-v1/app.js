@@ -26,7 +26,8 @@
  }
  function connected(){return !!(device?.gatt?.connected&&channel);}
  function values(){return {name:$("name").value,grams:$("grams").value,
-  packed:$("packed").value,expiry:$("expiry").value,mode:$("mode").value,
+  packed:$("packed").value,expiry:$("expiry").value,
+  mode:["pantry","preserve"].includes($("mode").value)?"other":$("mode").value,
   notesEnabled:$("notes-enabled").checked,note:$("note").value};}
  function compactValues(){return {name:$("c-name").value,mode:$("c-mode").value,
   packed:$("c-packed").value,expiry:$("c-expiry").value,
