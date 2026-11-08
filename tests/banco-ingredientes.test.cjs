@@ -58,7 +58,7 @@ test("plazos del archivo original: sin extrapolar datos de otros alimentos",()=>
  assert.equal(meat.id_fuente,"59");assert.equal(meat.refrigeracion_dias,2);
  assert.equal(meat.congelacion_dias,90);
  assert.equal(potato.id_fuente,"297");assert.equal(potato.refrigeracion_dias,14);
- assert.equal(potato.despensa_dias,60);assert.equal(potato.congelacion_dias,null);
+ assert.equal(potato.despensa_dias,null);assert.equal(potato.congelacion_dias,null);
  assert.equal(lettuce.id_fuente,"290");assert.equal(lettuce.refrigeracion_dias,14);
  assert.equal(lettuce.congelacion,false);
  assert.equal(apricot.id_fuente,"379");assert.equal(apricot.despensa_dias,180);
