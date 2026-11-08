@@ -75,11 +75,11 @@ Aves quedan dentro de Carnes y Aves; pulpo dentro de Cefalópodos; hongos y alga
 - `fuente` e `id_fuente` son una pareja única por ficha, no por método. En `sin_datos`, ambos `null`; cuando `fuente` es `usuario` o `agregación`, `id_fuente` es `null`.
 - **No modifica ni gobierna el uso de las etiquetas libres**: el banco solo precarga campos editables y un plazo desconocido no genera fecha automática. Los criterios editoriales de selección del banco no son prohibiciones de etiquetado.
 
-Esta frase describía la fase histórica de diseño del esquema. **Estado vigente:** `catalogo.json` existe y contiene diez fichas, de las cuales cuatro son los nuevos cortes de vacuno. El original [FoodKeeper](fuentes/foodkeeper-es-original.json) permanece sin cambios.
+Esta frase describía la fase histórica de diseño del esquema. **Estado vigente:** `catalogo.json` existe y contiene **17 fichas** (5 Vacuno, 2 Ovino, 5 Porcino y 5 en otras subcategorías). El original [FoodKeeper](fuentes/foodkeeper-es-original.json) permanece sin cambios.
 
 ## Catálogo inicial de seis ingredientes (histórico, 08/11/2026)
 
-El archivo [**`catalogo.json`**](catalogo.json) se creó inicialmente con **seis fichas**. Esta tabla documenta la primera fase experimental; el catálogo vigente contiene **diez fichas** tras la ampliación de vacuno, documentada debajo.
+El archivo [**`catalogo.json`**](catalogo.json) se creó inicialmente con **seis fichas**. Esta tabla documenta la primera fase experimental; el catálogo alcanzó **diez fichas** con la primera ampliación de vacuno y ahora contiene **17**, tras incorporar también cordero y cerdo.
 
 | Ingrediente | Clasificación | Estado y fuente | Plazos actualmente disponibles |
 |---|---|---|---|
@@ -89,6 +89,92 @@ El archivo [**`catalogo.json`**](catalogo.json) se creó inicialmente con **seis
 | Lechuga | Frutas y Verduras / Verduras de hoja | `verificado`, `agregación` (plazo FoodKeeper `290` y exclusiones editoriales) | Refrigeración **14 días** (iceberg o romana) |
 | Orejones | Frutas y Verduras / Frutas | `parcial`, FoodKeeper `379` | Despensa **180 días**; sinónimo «Albaricoques deshidratados» |
 | Salsa de tomate | Despensa / Conservas | `sin_datos` | Ninguno, `null` |
+
+## Ampliación autorizada · cordero y cerdo (08/11/2026)
+
+La usuaria confirmó **8 Product.ID originales de FoodKeeper ES** en
+`Category.ID=10` (Carnes → Frescos). Se incorporan como **7 fichas
+de carne cruda a granel** en las subcategorías ya aprobadas **Ovino**
+y **Porcino**. No se importan elaboraciones cocinadas ni productos
+comerciales. **Fuente canónica original:** el archivo
+[`foodkeeper-es-original.json`](fuentes/foodkeeper-es-original.json)
+(v128), que permanece sin alteraciones.
+
+| ID MiruRecetas | Subcategoría | Nombre visible | Presentación | Product.ID originales | Nevera | Congelación |
+|---|---|---|---|---|---:|---:|
+| `CAR-OVI-001` | Ovino | Paletilla o media pierna de cordero para asar | Pieza entera | 48 | 5 días | 120 días |
+| `CAR-OVI-002` | Ovino | Chuletas de cordero | Costilla o lomo | 51 | 5 días | 120 días |
+| `CAR-POR-001` | Porcino | Lomo de cerdo sin hueso | Pieza entera | 61 | 5 días | 120 días |
+| `CAR-POR-002` | Porcino | Solomillo de cerdo | `null` | **67 y 69, unificados** | 5 días | 120 días |
+| `CAR-POR-003` | Porcino | Costillas de cerdo | `null` | 72 | 5 días | 120 días |
+| `CAR-POR-004` | Porcino | Carne picada de cerdo | Picada | 73 | **2 días** | **90 días** |
+| `CAR-POR-005` | Porcino | Lomo de cerdo en dados | Dados | 75 | **2 días** | **90 días** |
+
+**Contraste del FoodKeeper original:**
+
+- ID **48, 51, 61, 67, 69 y 72**: `DOP_Refrigerate`
+  **3–5 días**; `DOP_Freeze` **4–12 meses**. Conforme al motor
+  económico/editorial del banco (máximo de frío y mínimo de congelación,
+  1 mes = 30 días), se registran **5 y 120 días**.
+- ID **73** (cerdo molido/picado): refrigeración **1–2 días**,
+  congelación **3–4 meses**: se registran **2 y 90 días**. La
+  [tabla oficial de FoodSafety.gov](https://www.foodsafety.gov/food-safety-charts/cold-food-storage-charts)
+  confirma que la carne picada de cerdo comparte estos intervalos
+  con otras carnes molidas.
+- ID **75**, `Cerdo — Lomo, cubos`: el original afirma **3–5 días**
+  y **4–12 meses**, pero las guías específicas para **carne cruda
+  troceada para guisar** de
+  [University of Nebraska Extension](https://food.unl.edu/free-resource/food-storage/)
+  y de la [USDA, Refrigeration and Food Safety](https://irp.cdn-website.com/946d72ef/files/uploaded/USDA-Meat-Poultry-Guidelines.pdf)
+  establecen **1–2 días** de refrigeración y **3–4 meses** de
+  congelación. Se adopta el extremo operativo **2 y 90 días** para
+  los **dados de carne cruda**, como ya se hizo para la ternera en
+  dados. No se reescriben ni atribuyen estos números al ID 75.
+
+**Solomillo de cerdo, IDs 67 y 69:** son el mismo músculo
+(`Pork, tenderloin`), el segundo cortado en medallones.
+Los dos registros tienen **exactamente los mismos rangos** de
+refrigeración y congelación. Se crea **una única ficha**
+`CAR-POR-002` con `presentacion: null` y sinónimos para
+«solomillo entero» y «medallones de solomillo de cerdo»;
+no se duplica por el formato de corte. Dado que el esquema propio
+admite **una sola fuente y un solo ID por ficha**, la fuente global
+es `"FoodKeeper"` y el ID principal del registro es `"67"`;
+el **ID 69 queda conservado explícitamente aquí** como
+correspondencia del segundo original. Los rangos no se extrapolan
+a carne picada ni a pequeños dados para guisar.
+
+**Fuente y estado globales:** `verificado` en las siete fichas,
+que significa únicamente que sus modalidades editoriales se han
+revisado, no una certificación alimentaria. Para las seis fichas
+con intervalo directamente derivado de FoodKeeper se usa
+`fuente: "FoodKeeper"` e ID como texto (48, 51, 61, 67, 72, 73).
+Para **dados de lomo** (`CAR-POR-005`) se guarda
+`fuente: "agregación"` e `id_fuente: null`,
+con ID **75** y las otras guías registrados en este expediente;
+ningún origen múltiple se improvisa en el esquema.
+
+**Modalidades:** todas habilitan exclusivamente refrigeración y
+congelación; despensa y conserva casera llevan `false` y
+sus días y consejos `null`. Los originales no aportan notas
+específicas para estos cortes, por lo que los `tips` activos
+se almacenan como `""` y la UI existente aplica las notas
+editoriales editables «Conservar en nevera» y «Descongelar en nevera».
+`tips_preparacion_conservacion` es `null`. Estas exclusiones son
+para la **presentación de carne fresca y cruda** de estas fichas,
+no para conservas con tratamiento y método validados.
+
+**Condiciones:** conservar en nevera a **4 °C o menos** y congelar a
+**−18 °C o menos**. Los límites de congelación son orientativos de
+**calidad**, no garantías de inocuidad; no se añaden días por
+envasado doméstico al vacío ni se reinicia el plazo al reenvasar.
+La fecha base sigue siendo compra o preparación, según el contrato
+doméstico. Solo se añadieron datos, pruebas y documentación:
+**ninguna plantilla, modal, motor, raster, TSPL ni BLE cambia**.
+
+**Estado actual del catálogo:** **17 fichas**, con 5 Vacuno, 2 Ovino,
+5 Porcino y 5 de otras subcategorías (algunas aún en borrador).
+Siguiente fase: nuevas selecciones explícitas por subcategoría.
 
 ## Ampliación autorizada · cuatro cortes de vacuno (08/11/2026)
 
@@ -178,4 +264,4 @@ Para congelación, `tip_descongelacion` puede aplicarse a la nota de etiqueta; e
 
 **Ejemplo del original:** `FoodKeeper Product.ID=59` («Ternera — Carne molida») tiene `DOP_Refrigerate=1–2 días` y `DOP_Freeze=3–4 meses`. La futura ficha `CAR-VAC-001` usará **2 días** de refrigeración y **90 días** de congelación; la referencia fuente bastará para consultar de nuevo los campos originales.
 
-**Estado vigente:** el [JSON Schema](catalogo.schema.json) y el [catálogo de diez fichas](catalogo.json) existen; cinco registros corresponden a Vacuno. Los chips y el panel están implementados en laboratorio, sin alteraciones durante el lote de vacuno. La población de las restantes subcategorías sigue pendiente. Véase el [protocolo canónico](../MIS-ETIQUETAS-VISION-Y-HOJA-DE-RUTA.md).
+**Estado vigente:** el [JSON Schema](catalogo.schema.json) y el [catálogo de diecisiete fichas](catalogo.json) existen; hay cinco registros de Vacuno, dos de Ovino y cinco de Porcino. Los chips y el panel están implementados en laboratorio, sin alteraciones durante los lotes de carne. La población de las restantes subcategorías sigue pendiente. Véase el [protocolo canónico](../MIS-ETIQUETAS-VISION-Y-HOJA-DE-RUTA.md).
