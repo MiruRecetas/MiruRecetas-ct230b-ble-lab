@@ -1,0 +1,458 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mirurecetas.github.io/MiruRecetas-ct230b-ble-lab/ingredientes-v1/banco/catalogo.schema.json",
+  "title": "MiruRecetas · Banco de ingredientes para etiquetas",
+  "description": "Esquema del banco doméstico de precarga; no limita etiquetas libres ni la edición de datos precargados. Un catálogo vacío es válido.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ingredientes"
+  ],
+  "properties": {
+    "ingredientes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ingrediente"
+      }
+    }
+  },
+  "$defs": {
+    "ingrediente": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "categoria",
+        "subcategoria",
+        "presentacion",
+        "nombre",
+        "sinonimos",
+        "estado_recomendacion",
+        "fuente",
+        "id_fuente",
+        "tips_preparacion_conservacion"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Z]{2,}-[A-Z]{2,}-[0-9]{3,}$",
+          "description": "Siglas categoría-subcategoría-número; por ejemplo CAR-VAC-001."
+        },
+        "categoria": {
+          "type": "string",
+          "enum": [
+            "Carnes y Aves",
+            "Pescados y Mariscos",
+            "Frutas y Verduras",
+            "Despensa"
+          ]
+        },
+        "subcategoria": {
+          "type": "string"
+        },
+        "presentacion": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Variante opcional, p. ej. Picada."
+        },
+        "nombre": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sinonimos": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": "Alias de búsqueda; [] si no hay."
+        },
+        "estado_recomendacion": {
+          "enum": [
+            "verificado",
+            "parcial",
+            "sin_datos"
+          ],
+          "description": "Estado global de la ficha; no bloquea la etiqueta libre ni la impresión."
+        },
+        "fuente": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Fuente global: FoodKeeper, otra fuente, usuario o agregación. Null en sin_datos."
+        },
+        "id_fuente": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "ID original de una fuente externa, null para usuario/agregación/sin_datos o texto sin_datos si esa fuente no tiene IDs."
+        },
+        "refrigeracion": {
+          "type": "boolean"
+        },
+        "refrigeracion_dias": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "description": "Días enteros; null si no hay plazo conocido para este método."
+        },
+        "tips_refrigeracion": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "congelacion": {
+          "type": "boolean"
+        },
+        "congelacion_dias": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "description": "Días enteros; null si no hay plazo conocido para este método."
+        },
+        "tips_descongelacion": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "despensa": {
+          "type": "boolean"
+        },
+        "despensa_dias": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "description": "Días enteros; null si no hay plazo conocido para este método."
+        },
+        "tips_despensa": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "conserva": {
+          "type": "boolean"
+        },
+        "conserva_dias": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "description": "Días enteros; null si no hay plazo conocido para este método."
+        },
+        "tips_conserva": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "tips_preparacion_conservacion": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Consejo antes de conservar o envasar; no mostrado ni impreso en el panel actual."
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "categoria": {
+                "const": "Carnes y Aves"
+              }
+            },
+            "required": [
+              "categoria"
+            ]
+          },
+          "then": {
+            "properties": {
+              "subcategoria": {
+                "enum": [
+                  "Vacuno",
+                  "Porcino",
+                  "Ovino",
+                  "Pollo",
+                  "Pavo",
+                  "Otras aves",
+                  "Caza"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "categoria": {
+                "const": "Pescados y Mariscos"
+              }
+            },
+            "required": [
+              "categoria"
+            ]
+          },
+          "then": {
+            "properties": {
+              "subcategoria": {
+                "enum": [
+                  "Pescado blanco",
+                  "Pescado azul",
+                  "Crustáceos y moluscos",
+                  "Cefalópodos"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "categoria": {
+                "const": "Frutas y Verduras"
+              }
+            },
+            "required": [
+              "categoria"
+            ]
+          },
+          "then": {
+            "properties": {
+              "subcategoria": {
+                "enum": [
+                  "Frutas",
+                  "Hortalizas",
+                  "Verduras de hoja",
+                  "Tubérculos",
+                  "Hongos",
+                  "Algas"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "categoria": {
+                "const": "Despensa"
+              }
+            },
+            "required": [
+              "categoria"
+            ]
+          },
+          "then": {
+            "properties": {
+              "subcategoria": {
+                "enum": [
+                  "Arroz",
+                  "Pasta",
+                  "Cereales",
+                  "Legumbres",
+                  "Harinas",
+                  "Frutos secos",
+                  "Semillas",
+                  "Especias y hierbas",
+                  "Conservas"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "estado_recomendacion": {
+                "const": "sin_datos"
+              }
+            },
+            "required": [
+              "estado_recomendacion"
+            ]
+          },
+          "then": {
+            "properties": {
+              "fuente": {
+                "type": "null"
+              },
+              "id_fuente": {
+                "type": "null"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "fuente": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "refrigeracion",
+              "refrigeracion_dias",
+              "tips_refrigeracion",
+              "congelacion",
+              "congelacion_dias",
+              "tips_descongelacion",
+              "despensa",
+              "despensa_dias",
+              "tips_despensa",
+              "conserva",
+              "conserva_dias",
+              "tips_conserva"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "fuente": {
+                "enum": [
+                  "usuario",
+                  "agregación"
+                ]
+              }
+            },
+            "required": [
+              "fuente"
+            ]
+          },
+          "then": {
+            "properties": {
+              "id_fuente": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "estado_recomendacion": {
+                "const": "parcial"
+              }
+            },
+            "required": [
+              "estado_recomendacion"
+            ]
+          },
+          "then": {
+            "properties": {
+              "fuente": {
+                "not": {
+                  "enum": [
+                    "usuario",
+                    "agregación"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "refrigeracion": {
+                "const": false
+              }
+            },
+            "required": [
+              "refrigeracion"
+            ]
+          },
+          "then": {
+            "properties": {
+              "refrigeracion_dias": {
+                "type": "null"
+              },
+              "tips_refrigeracion": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "congelacion": {
+                "const": false
+              }
+            },
+            "required": [
+              "congelacion"
+            ]
+          },
+          "then": {
+            "properties": {
+              "congelacion_dias": {
+                "type": "null"
+              },
+              "tips_descongelacion": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "despensa": {
+                "const": false
+              }
+            },
+            "required": [
+              "despensa"
+            ]
+          },
+          "then": {
+            "properties": {
+              "despensa_dias": {
+                "type": "null"
+              },
+              "tips_despensa": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "conserva": {
+                "const": false
+              }
+            },
+            "required": [
+              "conserva"
+            ]
+          },
+          "then": {
+            "properties": {
+              "conserva_dias": {
+                "type": "null"
+              },
+              "tips_conserva": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

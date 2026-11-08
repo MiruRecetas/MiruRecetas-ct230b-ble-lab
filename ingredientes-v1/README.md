@@ -52,7 +52,7 @@ AESAN queda como fuente de contraste. **`estado_recomendacion`, `fuente` e `id_f
 
 **4 categorías principales:** **Carnes y Aves** (Vacuno, Porcino, Ovino, Pollo, Pavo, Otras aves, Caza); **Pescados y Mariscos** (Pescado blanco, Pescado azul, Crustáceos y moluscos, Cefalópodos); **Frutas y Verduras** (Frutas, Hortalizas, Verduras de hoja, Tubérculos, Hongos, Algas); **Despensa** (Arroz, Pasta, Cereales, Legumbres, Harinas, Frutos secos, Semillas, Especias y hierbas, Conservas).
 
-Esta clasificación reúne **4 categorías y 26 subcategorías aprobadas** y sustituye las once categorías editoriales anteriores, excluyendo «Lácteos y huevos». La última subcategoría de Despensa se denomina simplemente **«Conservas»** en el panel, aunque se reservará a conservas caseras; nunca a productos comerciales. Los **chips de categorías vacías no aparecerán en el panel**: para mostrarse, una categoría debe contener al menos un ingrediente seleccionable. Nunca crear registros ficticios ni incluir productos comerciales envasados. No hay JSON Schema, catálogo derivado ni implementación del panel todavía. [Contrato del banco](banco/README.md).
+Esta clasificación reúne **4 categorías y 26 subcategorías aprobadas** y sustituye las once categorías editoriales anteriores, excluyendo «Lácteos y huevos». La última subcategoría de Despensa se denomina simplemente **«Conservas»** en el panel, aunque se reservará a conservas caseras; nunca a productos comerciales. Los **chips de categorías vacías no aparecerán en el panel**: para mostrarse, una categoría debe contener al menos un ingrediente seleccionable. Nunca crear registros ficticios ni incluir productos comerciales envasados. El [JSON Schema del banco](banco/catalogo.schema.json) **ya está creado** (4 categorías, 26 subcategorías y metadatos aprobados), pero **el catálogo derivado y el panel aún no se han creado**. [Contrato del banco](banco/README.md).
 
 ## Banco JSON de Pequeña · patrón D aprobado, implementación pendiente (08/11/2026)
 
@@ -83,7 +83,7 @@ sigue siendo imprescindible; la recomendación de calidad no es garantía
 de seguridad.
 
 **Estado: aprobado el diseño y el comportamiento, no implementados.**
-Pendiente definir y validar fuentes, esquema y catálogo inicial.
+Fuentes y estructura de almacenamiento documentadas en el [esquema aprobado para desarrollo](banco/catalogo.schema.json). Pendiente crear el catálogo inicial y conectar el panel; las etiquetas libres siguen plenamente editables.
 No hay modificaciones en plantillas, motor, BLE, impresión, producción
 ni Airtable. Consultar la [hoja de ruta](MIS-ETIQUETAS-VISION-Y-HOJA-DE-RUTA.md)
 para las decisiones y casos de validación.
