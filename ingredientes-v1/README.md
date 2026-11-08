@@ -11,8 +11,10 @@ para esta variante libre. **Amplia 50 × 80 horizontal** es la siguiente fase. E
 aprobó **explorar diseños** basados en V0.7.3, sin QR y con espacio
 redistribuido para instrucciones y nota; se presentaron dos maquetas
 conceptuales A (bloques apilados) y B (secciones paralelas), cada una
-con y sin macros. **Ninguna es aún un diseño definitivo aprobado ni una
-plantilla implementada**. No se ha integrado ni migrado
+con y sin macros. La **propuesta B fue elegida** y sus ajustes concretos
+aprobados el 08/11/2026. Se ha incorporado `plantilla-amplia.js`, tercera
+plantilla independiente en el mismo motor, con vista previa raster real,
+**pendiente de validación visual y sin impresión BLE habilitada para Amplia**. No se ha integrado ni migrado
 ningún archivo a `MiruRecetas/mirurecetas-web-source`; no está publicado como
 página productiva ni registra existencias.
 
@@ -77,6 +79,26 @@ construcción TSPL y validación de multicopia. `plantilla-pequena.js` y
 coordenadas gráficas. `app.js` gestiona una única conexión/transporte BLE.
 No importar ni modificar los motores históricos o productivos. La unificación
 no constituye aprobación física de las nuevas variantes.
+
+## Amplia libre 50 × 80 horizontal · propuesta B (08/11/2026)
+
+Arte 945×590 girado −90° para el raster físico 590×945 del rollo 50×80;
+la vista previa lo rota para facilitar su lectura sin dibujar una etiqueta
+alternativa. `plantilla-amplia.js` es autónoma del motor V0.7.3 histórico:
+conserva su cabecera, isotipo oficial y banda, pero **no QR, anillo, gramos,
+raciones ni URL de receta**. Títulos negros redondeados «CONSERVACIÓN Y CONSUMO»
+y «NOTA» en columnas paralelas, con líneas conectadas hasta los bordes;
+kcal invertida en caja redondeada y PR/HC/GR debajo. Con macros, fechas en
+**cuatro filas**; sin macros, **dos columnas centradas**. Títulos inferiores
+fijos aunque los textos estén ocultos o vacíos. Formulario con campos
+manuales y rótulos adaptados al tipo de conservación; primera fecha obligatoria
+y segunda opcional. Mismo motor `motor-libre.js` y raster TSPL común.
+
+**Estado de seguridad:** puesta a disposición de la vista previa para revisar
+la composición. **El botón de impresión de Amplia está deshabilitado** hasta
+aceptación visual y verificación física CT230B. Las métricas del trabajo pueden
+ser estimadas, pero no significan que se haya enviado o impreso. Compacta,
+Pequeña y los ensayos históricos no cambian.
 
 ## Cabecera aprobada · variante interior
 
