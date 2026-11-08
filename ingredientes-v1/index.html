@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Geist:ital,wght@0,400;0,500;0,700;1,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./cabecera.css">
-<link rel="stylesheet" href="./style.css?v=20261108-conserva-heading-v1">
+<link rel="stylesheet" href="./style.css?v=20261108-banco-panel-v1">
 </head>
 <body>
 <header class="miru-header miru-header--interior" data-miru-header="interior" aria-label="Cabecera de MiruRecetas">
@@ -112,6 +112,10 @@
           <p id="a-metrics" class="status-line" aria-live="polite">Pendiente de generar raster.</p>
         </div>
 </div>
+  <div id="ingredient-bank-controls" class="bank-mode" role="group" aria-label="Origen de los datos de Pequeña">
+    <button type="button" id="bank-free" class="bank-choice is-active" aria-pressed="true">Ingrediente libre</button>
+    <button type="button" id="bank-open" class="bank-choice" aria-pressed="false" aria-haspopup="dialog" aria-controls="bank-sheet">Cargar del banco</button>
+  </div>
 </section>
 </div>
 <div class="steps-column">
@@ -130,6 +134,8 @@
             <select id="mode">
               <option value="fridge" selected>Refrigeración</option>
               <option value="freeze">Congelación</option>
+              <option value="pantry">Despensa</option>
+              <option value="preserve">Conserva</option>
               <option value="other">Otro tipo</option>
             </select>
           </label>
@@ -139,6 +145,10 @@
           <label class="field" for="expiry">Consumo preferente
             <input id="expiry" type="date">
           </label>
+        </div>
+        <div id="bank-time-tools" class="bank-time-tools" hidden>
+          <span id="bank-time-hint" aria-live="polite"></span>
+          <button id="bank-reset-date" type="button" hidden>Restablecer recomendación</button>
         </div>
         <div class="note-settings">
           <label class="field full" for="note">Nota de conservación
@@ -300,11 +310,32 @@
 </div>
 </div>
 </main>
+<div id="bank-overlay" class="bank-overlay" hidden>
+  <section id="bank-sheet" class="bank-sheet" role="dialog" aria-modal="true" aria-labelledby="bank-heading" tabindex="-1">
+    <div class="bank-sheet-head">
+      <div><p class="eyebrow">Banco de ingredientes</p><h2 id="bank-heading">Elige un ingrediente</h2></div>
+      <button id="bank-close" type="button" class="bank-close" aria-label="Cerrar banco de ingredientes">Cerrar ×</button>
+    </div>
+    <label class="bank-search-field" for="bank-search">Buscar ingrediente
+      <input id="bank-search" type="search" autocomplete="off" placeholder="Nombre o sinónimo…">
+    </label>
+    <div id="bank-categories" class="bank-categories" role="group" aria-label="Filtrar por categoría"></div>
+    <label class="bank-subfield" for="bank-subcategory">Subcategoría
+      <select id="bank-subcategory"><option value="">Todas</option></select>
+    </label>
+    <p id="bank-results-count" class="bank-results-count" role="status" aria-live="polite"></p>
+    <div id="bank-results" class="bank-results" role="listbox" aria-label="Ingredientes encontrados"></div>
+    <div class="bank-sheet-actions">
+      <button type="button" id="bank-apply" class="btn" disabled>Aplicar a etiqueta</button>
+    </div>
+  </section>
+</div>
 <script src="./motor-libre.js?v=20261108-raster-regiones-v1"></script>
 <script src="./plantilla-pequena.js?v=20261107-motor-unico"></script>
 <script src="./plantilla-compacta.js?v=20261108-compacta-qa2"></script>
 <script src="./plantilla-amplia.js?v=20261108-amplia-b-v2"></script>
 <script src="./app.js?v=20261108-raster-regiones-v1"></script>
+<script src="./banco-ui.js?v=20261108-banco-panel-v1"></script>
 <script src="./cabecera.js" defer></script>
 </body>
 </html>
