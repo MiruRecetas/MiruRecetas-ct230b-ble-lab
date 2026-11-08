@@ -18,6 +18,28 @@ plantilla independiente en el mismo motor, con vista previa raster real,
 ningún archivo a `MiruRecetas/mirurecetas-web-source`; no está publicado como
 página productiva ni registra existencias.
 
+## Fuente original FoodKeeper archivada (08/11/2026)
+
+Se conserva **sin modificación de bytes** el JSON español original aportado por la
+usuaria: [`banco/fuentes/foodkeeper-es-original.json`](banco/fuentes/foodkeeper-es-original.json)
+(716.677 bytes; SHA-256 `2a25209edc1d578f1f0002a0a896c54c26611a4d986c46ebcdc156554190687b`).
+Contiene **662 productos**, **25 grupos con ID** y **14 categorías
+principales**, no confundibles con las futuras categorías editoriales
+de MiruRecetas. Su [inventario y contrato de derivación](banco/README.md)
+explican la estructura y las reglas de tratamiento. La propia fuente
+indica `FMA-Data-v128.xlsx` (versión 128 fechada en 2018), sin asumir
+vigencia actual respecto a posibles revisiones externas.
+
+**Decisión expresa:** nuestro banco será un **segundo JSON propio**,
+con categorías/subcategorías/elementos elegidos por MiruRecetas y
+nombres es-ES; el original se conserva para consulta y trazabilidad.
+En Pequeña, el selector de conservación existente elegirá el plazo
+aplicable de **refrigeración o congelación**, con el **valor mínimo del
+intervalo** de FoodKeeper para orientar la **calidad**. No trasladar
+plazos entre contextos de fecha de compra, apertura, descongelación y
+envasado sin validación. AESAN queda como fuente de contraste general.
+El JSON derivado y su panel **todavía no están implementados**.
+
 ## Banco JSON de Pequeña · patrón D aprobado, implementación pendiente (08/11/2026)
 
 La usuaria ha aprobado **dos chips bajo la vista previa de Pequeña**:
