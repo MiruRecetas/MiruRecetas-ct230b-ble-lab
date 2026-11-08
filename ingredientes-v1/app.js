@@ -51,7 +51,6 @@
     document.fonts.load('700 29px "Bricolage Grotesque"',"Carne Picada"),
     document.fonts.load('700 55px "Bricolage Grotesque"',"500 g"),
     document.fonts.load('400 17px "Geist"',"Envasado y congelación"),
-    document.fonts.load('600 24px "Geist"',"Envasado y congelación"),
     document.fonts.load('700 17px "Geist"',"30/10/26"),
     document.fonts.load('italic 500 16px "Geist"',"Descongelar en nevera Conservar en nevera")
    ]);
