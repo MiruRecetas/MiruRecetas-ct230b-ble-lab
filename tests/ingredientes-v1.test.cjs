@@ -130,7 +130,7 @@ test("página autónoma, campos y archivos enlazados",()=>{
   assert.match(html,new RegExp('id="'+id+'"'));
  assert.match(html,/src="\.\/motor-libre\.js\?v=20261107-motor-unico"/);
  assert.match(html,/src="\.\/plantilla-pequena\.js\?v=20261107-motor-unico"/);
- assert.match(html,/src="\.\/app\.js\?v=20261108-amplia-b-v1"/);
+ assert.match(html,/src="\.\/app\.js\?v=20261108-amplia-ble-v1"/);
  assert.match(html,/src="\.\/plantilla-compacta\.js\?v=20261108-compacta-qa2"/);
  assert.match(html,/src="\.\/plantilla-amplia\.js\?v=20261108-amplia-b-v2"/);
  assert.match(html,/href="\.\/style\.css\?v=20261108-amplia-multiline"/);
@@ -160,7 +160,9 @@ test("Mis etiquetas: selector único de formato vinculado a los tres pasos",()=>
   "data-subtitle","preview-subtitle","preview-dimensions","print-subtitle"]){
   assert.match(html,new RegExp('id="'+id+'"'));
  }
- assert.match(app,/selectedFormat==="horizontal"\|\|busy/);
+ assert.doesNotMatch(app,/selectedFormat==="horizontal"\|\|busy/);
+ assert.match(app,/active=ingredient\|\|compact\|\|wide/);
+ assert.match(app,/selectedFormat==="horizontal"\?aReady/);
  assert.match(app,/function changeFormat\(format\)/);
  assert.match(app,/\+\+refreshSeq/);
  assert.match(css,/\.format-option input:checked/);
