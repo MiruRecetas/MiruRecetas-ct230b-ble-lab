@@ -131,11 +131,12 @@ test("cuatro cortes de vacuno: búsqueda por nombre/alias, notas y plazos de con
   assert.deepEqual(mode.options.map(x=>x.value),["fridge","freeze"]);
   assert.equal(mode.value,"freeze");
   assert.equal(el("note").value,"Descongelar en nevera");
-  assert.equal(el("expiry").value,"2027-03-08","4 meses = 120 días desde 08/11/26");
-  assert.equal(el("bank-time-hint").textContent,"Tiempo recomendado: 120 días");
+  const stew=term==="Carne para guisar";
+  assert.equal(el("expiry").value,stew?"2027-02-06":"2027-03-08");
+  assert.equal(el("bank-time-hint").textContent,"Tiempo recomendado: "+(stew?90:120)+" días");
   mode.value="fridge";mode.fire("change");
   assert.equal(el("note").value,"Conservar en nevera");
-  assert.equal(el("expiry").value,"2026-11-13","5 días desde 08/11/26");
-  assert.equal(el("bank-time-hint").textContent,"Tiempo recomendado: 5 días");
+  assert.equal(el("expiry").value,stew?"2026-11-10":"2026-11-13");
+  assert.equal(el("bank-time-hint").textContent,"Tiempo recomendado: "+(stew?2:5)+" días");
  }
 });
