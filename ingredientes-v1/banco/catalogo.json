@@ -18,7 +18,7 @@
       "tips_refrigeracion": "",
       "congelacion": true,
       "congelacion_dias": 90,
-      "tips_descongelacion": "Descongelar en nevera",
+      "tips_descongelacion": "",
       "despensa": true,
       "despensa_dias": null,
       "tips_despensa": null,
