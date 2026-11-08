@@ -11,7 +11,7 @@
  };
  const accentFree=s=>String(s??"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLocaleLowerCase("es").trim();
  let catalog=[],loaded=false,loading=null,selectedId=null,category="",subcategory="",active="free";
- let freeDraft=null,bankDraft=null,manuallyEditedExpiry=false,lastAuto="",suppressExpiryInput=false,lastFocus=null;
+ let freeDraft=null,bankDraft=null,bankDraftItemId=null,manuallyEditedExpiry=false,lastAuto="",suppressExpiryInput=false,lastFocus=null;
  const currentFormat=()=>document.querySelector("[data-label-format]:checked")?.value==="ingredient";
  const currentItem=()=>catalog.find(x=>x.id===selectedId)||null;
  function readForm(){
@@ -85,7 +85,7 @@
   updateHint();
  }
  function useFree(){
-  if(active==="bank")bankDraft=readForm();
+  if(active==="bank"){bankDraft=readForm();bankDraftItemId=selectedId;}
   active="free";
   if(freeDraft)writeForm(freeDraft);
   manuallyEditedExpiry=!!(freeDraft&&freeDraft.manuallyEditedExpiry);
@@ -181,14 +181,20 @@
  }
  function applySelected(){
   const item=currentItem();if(!item||!catalog.filter(matches).some(x=>x.id===item.id))return;
-  if(active==="free")freeDraft=readForm();
+  if(active==="free"){
+   freeDraft=readForm();
+   if(bankDraft&&bankDraftItemId===item.id){
+    active="bank";writeForm(bankDraft);chips();updateHint();closeSheet();
+    $("print-step").open=false;$("data-step").open=true;return;
+   }
+  }
   active="bank";chips();
   // Cantidad y envasado nunca vienen del catálogo: conservar los que introdujo la usuaria.
   $("name").value=item.nombre;
   $("note").value=tipFor(item,$("mode").value);
   manuallyEditedExpiry=false;lastAuto="";
   suggestDate();
-  bankDraft=readForm();
+  bankDraft=readForm();bankDraftItemId=item.id;
   closeSheet();
   $("print-step").open=false;$("data-step").open=true;
   repaint();
