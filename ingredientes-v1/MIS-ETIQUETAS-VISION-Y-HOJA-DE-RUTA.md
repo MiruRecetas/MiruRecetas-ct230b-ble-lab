@@ -1,5 +1,45 @@
 # MiruRecetas · «Mis etiquetas» · visión, decisiones y hoja de ruta
 
+## Regla doméstica vigente · Charcutería sin congelación (08/11/2026)
+
+**Uso del banco:** es un **atajo de escritura para etiquetas caseras**, no
+un proceso de fábrica, auditoría ni certificación de envasado. Los datos
+editoriales aprobados por la usuaria definen los métodos que se ofrecen.
+No volver a imponer controles, PR, procesos de laboratorio, comprobaciones
+integrales de impresión o largas discusiones de seguridad para simples
+cambios de fichas. Procedimiento: editar el JSON en `main`, coherencia
+básica de campos y fuentes, documentación breve; Pages automático.
+Conservar siempre la opción de etiqueta libre y campos editables.
+
+**Decisión definitiva de la usuaria, apoyada en sus capturas:**
+**no ofrecer «Congelación»** para los productos de charcutería curada
+**jamón serrano, jamón ibérico, salami, lomo embuchado, salchichón,
+chorizo curado y cecina**, en sus siete fichas **«Al corte»**.
+Las cinco fichas «Pieza entera» ya ofrecían solo Despensa y no cambian.
+Las capturas desaconsejan además congelar **fiambres cocidos al corte**
+por la textura; siguiendo ese criterio doméstico también se elimina
+Congelación de **Jamón cocido** y **Pechuga de pavo (fiambre)**.
+Para las nueve fichas modificadas: `congelacion: false`,
+`congelacion_dias: null`, `tips_descongelacion: null`.
+**Bacon no cambia**, y conserva su recomendación de congelación.
+El resto de ingredientes y recetas tampoco cambian.
+
+Los cinco curados «Al corte» que ya tienen Despensa conservan
+**60 días** y nota **«Envasado al vacío»**; se preservan asimismo
+sus plazos de refrigeración. Sus correspondientes **«Pieza entera»**
+mantienen **solo Despensa 180 días**, sin cambiar su nota.
+La recomendación de despensa conserva las condiciones editoriales
+documentadas anteriormente. El mensaje «no congelar» es una
+**preferencia de calidad/conservación del banco doméstico**, no una
+afirmación de que sea técnicamente imposible congelar estos alimentos.
+
+Sin modificar nombre, presentación, identificadores, condiciones
+restantes, `banco-ui.js`, plantillas, raster, BLE ni producción.
+**50 fichas** y **28 subcategorías** sin cambios. El archivo
+FoodKeeper original permanece intacto. Esta decisión **prevalece
+sobre menciones históricas a congelación de los curados** en el
+expediente anterior.
+
 ## Curados · «Al corte» con vacío y «Pieza entera» (08/11/2026, decisión vigente)
 
 La usuaria ha aprobado cinco pares de presentaciones: **Jamón serrano, Jamón ibérico, Lomo de cerdo embuchado, Salchichón y Chorizo curado**.

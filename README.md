@@ -1,3 +1,18 @@
+> **Charcutería · decisión doméstica vigente (08/11/2026):**
+> Las fichas «Al corte» de jamón serrano/ibérico, salami,
+> lomo embuchado, salchichón, chorizo curado y cecina
+> **NO ofrecen congelación**, según las capturas y
+> preferencias de la usuaria. Tampoco Jamón cocido y
+> Pechuga de pavo (fiambre), por calidad/textura.
+> Sus campos de congelación son `false/null`.
+> Los curados al corte con despensa mantienen 60 días
+> con nota «Envasado al vacío»; las cinco piezas enteras
+> ofrecen solo despensa 180 días. Bacon no cambia.
+> Banco = precarga de etiquetas caseras, **no fábrica**:
+> cambios de datos directos en main, sin PR ni ensayos
+> de impresión ni controles añadidos. 50 fichas.
+> [Protocolo](ingredientes-v1/banco/README.md).
+>
 > **Charcutería curada · dos presentaciones (08/11/2026, vigente):**
 > Para Jamón serrano, Jamón ibérico, Lomo embuchado, Salchichón
 > y Chorizo curado, las fichas «Al corte» conservan frío
