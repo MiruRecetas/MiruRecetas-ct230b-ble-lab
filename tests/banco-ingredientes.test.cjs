@@ -18,8 +18,8 @@ const categories=props.categoria.enum;
 const subcategories=Object.fromEntries(allOf.slice(0,4).map(r=>[r.if.properties.categoria.const,r.then.properties.subcategoria.enum]));
 const byName=name=>records.find(x=>x.nombre===name);
 
-test("catálogo de cuarenta y cinco fichas, con ID y variante únicos",()=>{
- assert.equal(records.length,45);
+test("catálogo de cincuenta fichas, con ID y variante únicos",()=>{
+ assert.equal(records.length,50);
  assert.equal(new Set(records.map(x=>x.nombre+"|"+String(x.presentacion))).size,records.length);
  assert.equal(new Set(records.map(x=>x.id)).size,records.length);
  assert.deepEqual(new Set(records.map(x=>x.nombre)),new Set([
@@ -36,7 +36,7 @@ test("catálogo de cuarenta y cinco fichas, con ID y variante únicos",()=>{
  assert.equal(Object.values(subcategories).flat().length,28);
  assert.deepEqual(subcategories["Carnes y Aves"],
   ["Vacuno","Porcino","Ovino","Pollo","Pavo","Otras aves","Caza","Elaborados","Charcutería"]);
- for(const empty of ["Otras aves","Caza","Elaborados","Charcutería"])
+ for(const empty of ["Otras aves","Caza"])
   assert.equal(records.filter(x=>x.subcategoria===empty).length,0,"sin fichas: "+empty);
  for(const r of records){
   assert.match(r.id,/^[A-Z]{2,}-[A-Z]{2,}-\d{3,}$/);
@@ -297,12 +297,12 @@ test("Elaborados y Charcutería: veintidós fichas, fuentes y modalidades cohere
   assert.equal(r.refrigeracion_dias,e.fridge);
   assert.equal(r.congelacion,true);
   assert.equal(r.congelacion_dias,e.freeze);
-  assert.equal(r.despensa,false);assert.equal(r.conserva,false);
-  assert.equal(r.despensa_dias,null);assert.equal(r.conserva_dias,null);
+  assert.equal(r.despensa,["CAR-CHA-002","CAR-CHA-003","CAR-CHA-006","CAR-CHA-007","CAR-CHA-008"].includes(r.id));assert.equal(r.conserva,false);
+  assert.equal(r.despensa_dias,r.despensa?60:null);assert.equal(r.conserva_dias,null);
   if(e.freeze===null)assert.equal(r.tips_descongelacion,null);
  }
  assert.equal(records.filter(x=>x.subcategoria==="Elaborados").length,12);
- assert.equal(records.filter(x=>x.subcategoria==="Charcutería").length,10);
+ assert.equal(records.filter(x=>x.subcategoria==="Charcutería").length,15);
  for(const id of ["CAR-ELA-006","CAR-ELA-007"]){
   const x=records.find(r=>r.id===id);
   assert.equal(x.refrigeracion_dias,5);
@@ -310,10 +310,14 @@ test("Elaborados y Charcutería: veintidós fichas, fuentes y modalidades cohere
   assert.equal(x.despensa,false);
   assert.equal(x.congelacion_dias,30);
  }
- for(const id of ["CAR-CHA-002","CAR-CHA-003","CAR-CHA-006","CAR-CHA-007","CAR-CHA-008","CAR-CHA-010"]){
+ for(const id of ["CAR-CHA-002","CAR-CHA-003","CAR-CHA-006","CAR-CHA-007","CAR-CHA-008"]){
   const x=records.find(r=>r.id===id);
-  assert.equal(x.despensa,false);
-  assert.equal(x.despensa_dias,null);
+  assert.equal(x.despensa,true);assert.equal(x.despensa_dias,60);
+  assert.equal(x.tips_despensa,"Envasado al vacío");
+ }
+ for(const id of ["CAR-CHA-001","CAR-CHA-004","CAR-CHA-005","CAR-CHA-009","CAR-CHA-010"]){
+  const x=records.find(r=>r.id===id);
+  assert.equal(x.despensa,false);assert.equal(x.despensa_dias,null);
  }
  const natural=records.find(x=>x.id==="CAR-POR-001");
  assert.equal(natural.subcategoria,"Porcino");
@@ -321,4 +325,24 @@ test("Elaborados y Charcutería: veintidós fichas, fuentes y modalidades cohere
  const dressed=records.find(x=>x.id==="CAR-ELA-010");
  assert.equal(dressed.nombre,"Lomo de cerdo adobado");
  assert.ok(dressed.sinonimos.includes("Filetes de lomo adobados"));
+});
+
+test("cinco piezas enteras solo despensa y cinco loncheados condicionados al vacío",()=>{
+ const originalIds=["CAR-CHA-002","CAR-CHA-003","CAR-CHA-006","CAR-CHA-007","CAR-CHA-008"];
+ const wholeIds=["CAR-CHA-011","CAR-CHA-012","CAR-CHA-013","CAR-CHA-014","CAR-CHA-015"];
+ for(let i=0;i<5;i++){
+  const cut=records.find(x=>x.id===originalIds[i]);
+  const whole=records.find(x=>x.id===wholeIds[i]);
+  assert.ok(cut&&whole);assert.equal(cut.nombre,whole.nombre);
+  assert.equal(cut.presentacion,"Al corte");assert.equal(whole.presentacion,"Pieza entera");
+  assert.equal(cut.refrigeracion,true);assert.equal(cut.congelacion,true);
+  assert.equal(cut.despensa,true);assert.equal(cut.despensa_dias,60);
+  assert.equal(cut.tips_despensa,"Envasado al vacío");
+  assert.equal(whole.refrigeracion,false);assert.equal(whole.congelacion,false);
+  assert.equal(whole.despensa,true);assert.equal(whole.despensa_dias,180);
+  assert.equal(whole.conserva,false);assert.equal(whole.fuente,"usuario");
+  assert.equal(whole.id_fuente,null);
+ }
+ assert.equal(records.length,50);
+ assert.equal(records.filter(x=>x.subcategoria==="Charcutería").length,15);
 });

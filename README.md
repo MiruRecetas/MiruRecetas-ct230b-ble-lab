@@ -1,3 +1,15 @@
+> **Charcutería curada · dos presentaciones (08/11/2026, vigente):**
+> Para Jamón serrano, Jamón ibérico, Lomo embuchado, Salchichón
+> y Chorizo curado, las fichas «Al corte» conservan frío
+> y congelación y añaden **Despensa 60 días** con nota
+> «Envasado al vacío». Otras cinco fichas «Pieza entera»
+> usan únicamente **Despensa 180 días** sin empezar.
+> Plazos editoriales condicionados a que el curado sea
+> realmente estable a temperatura ambiente según vendedor
+> o fabricante. El vacío por sí solo no lo garantiza.
+> Total **50 fichas** (15 de Charcutería), sin cambiar la UI.
+> [Expediente](ingredientes-v1/banco/README.md).
+>
 > **Morcillas y curados · revisión 08/11/2026 (vigente):**
 > Morcilla de Burgos y Matachana: **frío obligatorio 2–4 °C**,
 > **5 días nevera / 30 días congelación** en compra doméstica

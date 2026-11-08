@@ -1,6 +1,18 @@
 # Conserva · «Mis etiquetas» (laboratorio · interfaz experimental)
 
-> **Morcillas y curados · revisión 08/11/2026 (vigente):**
+> **Charcutería curada · dos presentaciones (08/11/2026, vigente):**
+> Para Jamón serrano, Jamón ibérico, Lomo embuchado, Salchichón
+> y Chorizo curado, las fichas «Al corte» conservan frío
+> y congelación y añaden **Despensa 60 días** con nota
+> «Envasado al vacío». Otras cinco fichas «Pieza entera»
+> usan únicamente **Despensa 180 días** sin empezar.
+> Plazos editoriales condicionados a que el curado sea
+> realmente estable a temperatura ambiente según vendedor
+> o fabricante. El vacío por sí solo no lo garantiza.
+> Total **50 fichas** (15 de Charcutería), sin cambiar la UI.
+> [Expediente](banco/README.md).
+>
+> **Morcillas y curados · revisión 08/11/2026 (histórico):**
 > Morcilla de Burgos y Matachana: **frío obligatorio 2–4 °C**,
 > **5 días nevera / 30 días congelación** en compra doméstica
 > a granel, sin despensa. Su nota editable indica la temperatura.
@@ -177,9 +189,9 @@ AESAN queda como fuente de contraste. **`estado_recomendacion`, `fuente` e `id_f
 
 Esta clasificación reúne **4 categorías y 28 subcategorías aprobadas** y sustituye las once categorías editoriales anteriores, excluyendo «Lácteos y huevos». La última subcategoría de Despensa se denomina simplemente **«Conservas»** en el panel, aunque se reservará a conservas caseras; nunca a productos comerciales. Los **chips de categorías vacías no aparecerán en el panel**: para mostrarse, una categoría debe contener al menos un ingrediente seleccionable. Nunca crear registros ficticios ni incluir productos comerciales envasados. El [JSON Schema del banco](banco/catalogo.schema.json) **ya está creado** (4 categorías, 28 subcategorías y metadatos aprobados), y el **catálogo mínimo y el panel ya están implementados en laboratorio**, aún pendientes de validación visual; no es el catálogo definitivo. [Contrato del banco](banco/README.md).
 
-## Banco JSON de Pequeña · patrón D con cuarenta y cinco fichas (08/11/2026)
+## Banco JSON de Pequeña · patrón D con cincuenta fichas (08/11/2026)
 
-**Estado actual del banco:** ver [cuarenta y cinco fichas y fuentes](banco/README.md), su [JSON](banco/catalogo.json) y el controlador [banco-ui.js](banco-ui.js). Los chips, el sheet y la precarga editable están en laboratorio; la usuaria **aún no ha validado visualmente** esta nueva interacción. La opción libre, Compacta y Amplia mantienen su uso. El selector de Pequeña incorpora Despensa y Conserva como modos adicionales, sin cambiar el arte aprobado de los modos anteriores.
+**Estado actual del banco:** ver [cincuenta fichas y fuentes](banco/README.md), su [JSON](banco/catalogo.json) y el controlador [banco-ui.js](banco-ui.js). Los chips, el sheet y la precarga editable están en laboratorio; la usuaria **aún no ha validado visualmente** esta nueva interacción. La opción libre, Compacta y Amplia mantienen su uso. El selector de Pequeña incorpora Despensa y Conserva como modos adicionales, sin cambiar el arte aprobado de los modos anteriores.
 
 La usuaria ha aprobado **dos chips bajo la vista previa de Pequeña**:
 **«Ingrediente libre»** (por defecto) y **«Cargar del banco»**. Este último

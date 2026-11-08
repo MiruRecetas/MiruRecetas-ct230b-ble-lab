@@ -1,6 +1,26 @@
 # MiruRecetas · «Mis etiquetas» · visión, decisiones y hoja de ruta
 
-## Matización de conservación · morcillas y curados (08/11/2026, vigente)
+## Curados · «Al corte» con vacío y «Pieza entera» (08/11/2026, decisión vigente)
+
+La usuaria ha aprobado cinco pares de presentaciones: **Jamón serrano, Jamón ibérico, Lomo de cerdo embuchado, Salchichón y Chorizo curado**.
+
+| Curado | Original «Al corte» | Nuevo «Pieza entera» |
+|---|---|---|
+| Jamón serrano | `CAR-CHA-002` | `CAR-CHA-011` |
+| Jamón ibérico | `CAR-CHA-003` | `CAR-CHA-012` |
+| Lomo de cerdo embuchado | `CAR-CHA-006` | `CAR-CHA-013` |
+| Salchichón | `CAR-CHA-007` | `CAR-CHA-014` |
+| Chorizo curado | `CAR-CHA-008` | `CAR-CHA-015` |
+
+**Al corte:** las cinco fichas anteriores conservan refrigeración y congelación, y añaden `despensa: true`, `despensa_dias: 60`, nota editable `tips_despensa: "Envasado al vacío"`. El plazo de despensa únicamente corresponde a **loncheado al vacío sin abrir** y estable sin refrigeración; sin vacío deben seguirse las condiciones y plazos de nevera.
+
+**Pieza entera:** cinco nuevas fichas diferenciadas con el mismo nombre y `presentacion: "Pieza entera"`, `despensa: true`, `despensa_dias: 180`, nota `"Lugar fresco, seco y oscuro"`. Refrigeración, congelación y conserva se deshabilitan (`false`, días y consejos `null`). Condición: **pieza curada entera sin empezar**. Una vez abierta no se aplica automáticamente este plazo.
+
+**Límites de seguridad y procedencia:** 60 y 180 días son los **criterios editoriales aportados por la usuaria** y no duraciones universalmente validadas por FoodKeeper o AESAN. El vacío doméstico **no acredita** la estabilidad de un alimento a temperatura ambiente. La opción despensa solo debe usarse con un producto curado cuya **estabilidad sin refrigeración esté respaldada por las condiciones de su vendedor o fabricante**; en caso contrario, incluso si está al vacío, debe conservarse refrigerado. El etiquetado y cualquier condición más restrictiva tienen prioridad. Nuevas fichas `fuente: "usuario"`, `id_fuente: null`; las «Al corte» conservan `fuente: "agregación"`. El motor del banco muestra la nota exacta para el método seleccionado, sin cambiar código ni permitir asumir estabilidad por el mero hecho de sellar una bolsa.
+
+**Alcance:** pasan de 45 a **50 fichas**, 15 en Charcutería; no se altera Cecina, Salami, Bacon, Jamón cocido, fiambre de pavo ni otras familias. Se mantienen 4 categorías / 28 subcategorías. Cambios exclusivamente en catálogo, comprobación ligera y documentación. Sin tocar UI, HTML/CSS, plantillas de etiqueta, TSPL/BLE, FoodKeeper original, producción o Airtable. Commit directo en `main`, sin PR y con Pages automático.
+
+## Matización de conservación · morcillas y curados (08/11/2026, histórico)
 
 La usuaria aportó capturas de una respuesta generada en búsquedas de Google
 con tablas orientativas y precisó dos condiciones editoriales. Se ha
