@@ -130,7 +130,7 @@ test("nombres nuevos y medallones de solomillo comparten plazos de corte entero"
   assert.equal(el("expiry").value,fridge===5?"2026-11-13":"2026-11-10");
  }
  const {el,aplicar}=entorno();
- await aplicar("Medallones de solomillo");
+ await aplicar("Medallones de solomillo de ternera");
  assert.equal(el("name").value,"Solomillo de ternera");
  assert.equal(el("expiry").value,"2027-03-08");
 });
@@ -160,5 +160,32 @@ test("cuatro cortes de vacuno: búsqueda por nombre/alias, notas y plazos de con
   assert.equal(el("note").value,"Conservar en nevera");
   assert.equal(el("expiry").value,stew?"2026-11-10":"2026-11-13");
   assert.equal(el("bank-time-hint").textContent,"Tiempo recomendado: "+(stew?2:5)+" días");
+ }
+});
+
+test("cordero y cerdo: 7 fichas, notas, días y búsqueda por sinónimos",async()=>{
+ const cases=[
+  ["Paletilla de cordero","Paletilla o media pierna de cordero para asar",5,120],
+  ["Chuletas de cordero","Chuletas de cordero",5,120],
+  ["Lomo de cerdo sin hueso","Lomo de cerdo sin hueso",5,120],
+  ["Solomillo de cerdo","Solomillo de cerdo",5,120],
+  ["Medallones de solomillo de cerdo","Solomillo de cerdo",5,120],
+  ["Costillar de cerdo","Costillas de cerdo",5,120],
+  ["Cerdo picado","Carne picada de cerdo",2,90],
+  ["Lomo de cerdo en dados","Lomo de cerdo en dados",2,90]
+ ];
+ for(const [term,name,fridge,freeze] of cases){
+  const {el,mode,aplicar}=entorno();
+  await aplicar(term);
+  assert.equal(el("name").value,name);
+  assert.deepEqual(mode.options.map(x=>x.value),["fridge","freeze"]);
+  assert.equal(mode.value,"freeze");
+  assert.equal(el("note").value,"Descongelar en nevera");
+  assert.equal(el("expiry").value,freeze===90?"2027-02-06":"2027-03-08");
+  assert.equal(el("bank-time-hint").textContent,"Tiempo recomendado: "+freeze+" días");
+  mode.value="fridge";mode.fire("change");
+  assert.equal(el("note").value,"Conservar en nevera");
+  assert.equal(el("expiry").value,fridge===2?"2026-11-10":"2026-11-13");
+  assert.equal(el("bank-time-hint").textContent,"Tiempo recomendado: "+fridge+" días");
  }
 });
