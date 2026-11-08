@@ -1,5 +1,49 @@
 # MiruRecetas · «Mis etiquetas» · visión, decisiones y hoja de ruta
 
+## Banco de ingredientes · ampliación inicial de vacuno (08/11/2026)
+
+La usuaria confirmó cuatro entradas del archivo FoodKeeper ES original:
+`Product.ID 36` (Asado redondo), `37` (Lomillo entero), `40`
+(Filetes) y `41` (Carne para guisar), todas de **carne de res cruda
+y fresca**, no elaboraciones cocinadas. Se incorporan exclusivamente a
+`ingredientes-v1/banco/catalogo.json`, en **Carnes y Aves → Vacuno**,
+con IDs `CAR-VAC-002` a `CAR-VAC-005`. Nombres visibles españoles:
+Redondo de vacuno, Solomillo de vacuno entero, Filetes de vacuno y
+Carne de vacuno para guisar; las denominaciones elegidas de FoodKeeper
+se conservan como sinónimos para la búsqueda.
+
+**Revisión de conservación:** los cuatro originales dan refrigeración
+`3–5 días` y congelación `4–12 meses` (campos `DOP_*`).
+Por el protocolo de `banco/README.md` se fija **refrigeración 5 días**
+(máximo del intervalo) y **congelación 120 días** (mínimo, 4 meses ×
+30 días). **Despensa y Conserva doméstica no se ofrecen** en esas
+fichas de carne cruda: `false`, días/tips `null`; esto no describe
+todo posible procesado industrial o transformación alimentaria.
+Fuente global única **FoodKeeper** e ID original respectivo; estado
+global `verificado` por modalidades editoriales cerradas, no
+certificación sanitaria. La fuente no aporta notas particulares;
+`tips_refrigeracion` y `tips_descongelacion` son cadenas vacías
+para que el panel existente utilice sus notas editoriales editables
+«Conservar en nevera» y «Descongelar en nevera».
+`tips_preparacion_conservacion` permanece `null`.
+
+Las fechas se cuentan desde la compra o preparación, coincidente con
+la fecha de envasado del flujo doméstico aprobado, **sin prolongarlas
+por el uso de bolsas al vacío ni por un reenvasado posterior**.
+Los tiempos de congelación son referencias de calidad bajo frío
+continuado, no garantías de inocuidad. Original FoodKeeper intacto.
+
+**Alcance estricto:** añadir cuatro registros y pruebas de
+búsqueda/filtrado, notas y fechas; no tocar las tres plantillas,
+la vista previa, CSS, HTML, interfaz del panel del banco,
+`banco-ui.js`, `motor-libre.js`, raster, BLE, PWA, web
+productiva, Airtable ni inventario. El conjunto pasa de **6 a
+10 fichas**, cinco de ellas en la subcategoría Vacuno.
+Las futuras incorporaciones seguirán por subcategoría con
+selección explícita de la usuaria. Ver
+[banco/README.md](banco/README.md) para la trazabilidad de
+los datos originales.
+
 ## Cierre visual del panel del banco · 08/11/2026
 
 Tras la aprobación funcional del banco de ingredientes, la usuaria solicita
