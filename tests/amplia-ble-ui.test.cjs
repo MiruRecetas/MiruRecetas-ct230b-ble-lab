@@ -61,7 +61,8 @@ async function prepare(){
    build(canvas,copies){
     if(id==="horizontal"&&oversize)throw Error("Trabajo demasiado grande");
     builds.push({id,copies});
-    return {job:new Uint8Array(47).fill(65),bytes:47,fragments:3,tiles:4,copies};
+    return {job:new Uint8Array(47).fill(65),bytes:47,fragments:3,tiles:4,copies,
+     baselineBytes:64,baselineTiles:6,savedBytes:17};
    },
    logo:async()=>({width:314,height:267})
   };
@@ -86,6 +87,9 @@ async function prepare(){
 test("Amplia no imprime sin conexión o sin confirmación de papel",async()=>{
  const s=await prepare();
  assert.equal(s.get("paper-dimensions").textContent,"50 × 80 mm");
+ assert.equal(s.get("a-preview").dataset.baselineBytes,"64");
+ assert.equal(s.get("a-preview").dataset.optimizedBytes,"47");
+ assert.match(s.get("log").textContent,/Raster Amplia: Antes 64 B · ahora 47 B · ahorro 17 B/);
  assert.equal(s.get("ingredient-print").hidden,false);
  assert.equal(s.get("data-step").open,true);
  assert.equal(s.get("print-step").open,false);

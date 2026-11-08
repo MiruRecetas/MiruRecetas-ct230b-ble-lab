@@ -11,6 +11,19 @@
  function log(s){
   $("log").textContent+="["+new Date().toLocaleTimeString("es-ES")+"] "+s+"\n";
  }
+ const previousRasterMetrics=new Map();
+ function rasterSavings(id,work){
+  const saved=work.savedBytes,percent=work.baselineBytes>0
+   ?(100*saved/work.baselineBytes).toFixed(1):"0.0";
+  const info="Antes "+work.baselineBytes+" B · ahora "+work.bytes+" B · ahorro "+
+   saved+" B ("+percent+" %) · "+work.baselineTiles+"→"+work.tiles+" sub-bandas";
+  // Registro técnico ya existente (plegado), no añadir anotaciones al preview.
+  if(previousRasterMetrics.get(id)!==info){
+   previousRasterMetrics.set(id,info);
+   log("Raster "+id+": "+info);
+  }
+  return info;
+ }
  function connected(){return !!(device?.gatt?.connected&&channel);}
  function values(){return {name:$("name").value,grams:$("grams").value,
   packed:$("packed").value,expiry:$("expiry").value,mode:$("mode").value,
@@ -93,7 +106,10 @@
    $("a-status").textContent="Vista previa disponible.";
    try{
     const strict=A.normalize(wideValues(),true),job=A.build(A.render(strict,logo),copies);
-    $("a-metrics").textContent=job.bytes+" B · "+job.fragments+" fragmentos BLE · "+job.tiles+" bandas · "+copies+(copies===1?" copia":" copias")+" · sin QR. La transmisión no acredita impresión física.";
+    $("a-metrics").textContent=rasterSavings("Amplia",job)+" · "+job.fragments+
+     " fragmentos BLE · "+copies+(copies===1?" copia":" copias")+".";
+    $("a-preview").dataset.baselineBytes=String(job.baselineBytes);
+    $("a-preview").dataset.optimizedBytes=String(job.bytes);
     aReady=true;
    }catch(err){$("a-status").dataset.error="true";$("a-status").textContent="Impresión bloqueada: "+err.message;
     $("a-metrics").textContent="Vista previa disponible; impresión bloqueada: "+err.message;}
@@ -113,7 +129,10 @@
    canvas.getContext("2d").drawImage(cv,0,0);
    $("c-status").dataset.error="false";$("c-status").textContent="Vista previa disponible.";
    try{const strict=C.normalize(compactValues(),true),job=C.build(C.render(strict,logo),copies);
-    $("c-metrics").textContent=job.bytes+" B · "+job.fragments+" fragmentos BLE · "+job.tiles+" bandas · "+copies+" copias · sin QR.";
+    $("c-metrics").textContent=rasterSavings("Compacta",job)+" · "+job.fragments+
+     " fragmentos BLE · "+copies+" copias.";
+    $("c-preview").dataset.baselineBytes=String(job.baselineBytes);
+    $("c-preview").dataset.optimizedBytes=String(job.bytes);
     cReady=true;
    }catch(err){$("c-status").dataset.error="true";$("c-status").textContent="Impresión bloqueada: "+err.message;
     $("c-metrics").textContent="Impresión bloqueada: "+err.message;}
@@ -135,8 +154,10 @@
    let message="Vista previa con fecha de envasado pendiente; el consumo preferente es opcional.";
    try{
     const strict=E.normalize(values(),true),full=E.build(E.render(strict,logo),copies);
-    message=full.bytes+" B · "+full.fragments+" fragmentos BLE · "+full.tiles+
-     " bandas raster · "+copies+(copies===1?" copia":" copias")+" · sin QR.";
+    message=rasterSavings("Pequeña",full)+" · "+full.fragments+
+     " fragmentos BLE · "+copies+(copies===1?" copia":" copias")+".";
+    $("preview").dataset.baselineBytes=String(full.baselineBytes);
+    $("preview").dataset.optimizedBytes=String(full.bytes);
     ready=true;
    }catch(err){message="Sin envío: "+err.message;}
    $("metrics").textContent=message;
