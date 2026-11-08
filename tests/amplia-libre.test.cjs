@@ -156,7 +156,7 @@ test("Texto que no cabe se bloquea, sin recorte silencioso ni impresión",()=>{
  assert.throws(()=>inspect({...base,note:"supercalifragilisticoespialidoso".repeat(3)}),/no cabe|excede/);
  assert.equal(A.normalize({...base,showNote:false,note:"<inválido>"}).note,"");
 });
-test("Formulario, preview y bloqueo de impresión de Amplia en fase visual",()=>{
+test("Formulario, preview e impresión BLE habilitada tras validación visual",()=>{
  const html=fs.readFileSync(path.join(root,"index.html"),"utf8");
  const app=fs.readFileSync(path.join(root,"app.js"),"utf8");
  const css=fs.readFileSync(path.join(root,"style.css"),"utf8");
@@ -166,7 +166,24 @@ test("Formulario, preview y bloqueo de impresión de Amplia en fase visual",()=>
   assert.ok(html.includes('id="'+id+'"'),id);
  assert.ok(html.includes('src="./plantilla-amplia.js?v=20261108-amplia-b-v2"'));
  assert.ok(app.includes('A=Motor.forFormat("horizontal")'));
- assert.ok(app.includes('selectedFormat==="horizontal"||busy'));
+ assert.ok(!app.includes('selectedFormat==="horizontal"||busy'));
+ assert.ok(app.includes('selectedFormat==="horizontal"?aReady:selectedFormat==="component"?cReady:ready'));
+ assert.ok(app.includes('const ingredient=format==="ingredient",compact=format==="component",wide=format==="horizontal",active=ingredient||compact||wide'));
+ assert.ok(app.includes('["ingredient-print",active]'));
+ assert.ok(app.includes('["alternate-fields",false],["alternate-preview",false],["alternate-print",false]'));
+ assert.ok(app.includes('const motor=wide?A:compact?C:E;'));
+ assert.ok(app.includes('motor.normalize(wide?wideValues():compact?compactValues():values(),true)'));
+ assert.ok(app.includes('work=motor.build(motor.render(d,logo),copies);'));
+ assert.ok(app.includes('const paper=wide?"50 × 80":compact?"50 × 30":"30 × 20";'));
+ assert.ok(app.includes('selectedFormat==="horizontal"?wideRefresh():selectedFormat==="component"?compactRefresh():refresh()'));
+ assert.ok(app.includes('const wide=selectedFormat==="horizontal",compact=selectedFormat==="component";'));
+ assert.ok(app.includes('if(busy||!(wide?aReady:compact?cReady:ready)||!connected()||!$("confirm-paper").checked)return;'));
+ assert.ok(app.includes('window.confirm('));
+ assert.ok(app.includes('no se reintentará automáticamente'));
+ assert.ok(html.includes('src="./app.js?v=20261108-amplia-ble-v1"'));
+ assert.match(html,/<div id="ingredient-print">/);
+ assert.ok(html.includes('id="paper-dimensions"'));
+ assert.ok(html.includes('id="confirm-paper"'));
  assert.ok(app.includes('$("a-instruction").value=noteDefaults[mode]'));
  assert.ok(app.includes('$("a-note").value=""'));
  assert.ok(css.includes("#a-preview{width:100%"));

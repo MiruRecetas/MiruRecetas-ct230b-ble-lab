@@ -7,14 +7,14 @@ selector de formatos aprobado y con **Pequeña 30 × 20** operativa en laborator
 de la [PR #46](https://github.com/MiruRecetas/MiruRecetas-ct230b-ble-lab/pull/46),
 a raíz de la revisión de la PR #45. **Aprobada y validada visualmente por la usuaria
 el 08/11/2026 en la página publicada**; no consta todavía ensayo físico CT230B
-para esta variante libre. **Amplia 50 × 80 horizontal** es la siguiente fase. El 08/11/2026 se
+para esta variante libre. **Amplia 50 × 80 horizontal** se desarrolló después de Compacta. El 08/11/2026 se
 aprobó **explorar diseños** basados en V0.7.3, sin QR y con espacio
 redistribuido para instrucciones y nota; se presentaron dos maquetas
 conceptuales A (bloques apilados) y B (secciones paralelas), cada una
 con y sin macros. La **propuesta B fue elegida** y sus ajustes concretos
 aprobados el 08/11/2026. Se ha incorporado `plantilla-amplia.js`, tercera
 plantilla independiente en el mismo motor, con vista previa raster real,
-**aprobada y validada visualmente tras PR #50 el 08/11/2026**, con impresión BLE todavía deshabilitada para Amplia hasta verificación física y autorización independiente. No se ha integrado ni migrado
+**aprobada y validada visualmente tras PR #50 el 08/11/2026**. La usuaria autorizó expresamente **habilitar el envío BLE de Amplia ahora** y aplazar las pruebas físicas hasta la fase final. Se utiliza el mismo flujo de impresión compartido con confirmación y papel 50 × 80 mm. Ningún ensayo físico nuevo se afirma realizado. No se ha integrado ni migrado
 ningún archivo a `MiruRecetas/mirurecetas-web-source`; no está publicado como
 página productiva ni registra existencias.
 
@@ -29,9 +29,7 @@ expresamente por la usuaria, con iconos SVG actuales de **Amplia 50 × 80**,
 **Compacta 50 × 30**, **Pequeña 30 × 20** y **Más formatos · Próximamente**.
 No añadir textos de disponibilidad a las tres primeras ni alterar sus iconos
 sin nueva aprobación; registro final en [PR #40](https://github.com/MiruRecetas/MiruRecetas-ct230b-ble-lab/pull/40).
-Sus radios controlan los tres pasos. Pequeña y Compacta generan e imprimen
-etiquetas libres; Compacta tiene diseño **aceptado y validado visualmente**, y
-su eventual prueba física sigue siendo una comprobación separada.
+Sus radios controlan los tres pasos. **Pequeña, Compacta y Amplia** generan y pueden enviar etiquetas libres a CT230B desde el laboratorio, usando un único flujo de impresión y confirmaciones. Compacta y Amplia están **aprobadas visualmente**; su aceptación física específica y multicopia permanece como comprobación posterior.
 
 El término «receta/componente/ingrediente» se reserva para documentación y
 formulario específico, no como subtítulo del selector de formatos.
@@ -96,11 +94,7 @@ y segunda opcional. Mismo motor `motor-libre.js` y raster TSPL común.
 
 **Revisión de formulario y textos (08/11/2026):** la usuaria ha aprobado visualmente la composición Amplia B y ha solicitado corregir dos comportamientos: los textarea de conservación y nota usan ahora **el mismo Geist, peso y estilo de Compacta**, y la plantilla libre de Amplia preserva los Enter (LF/CRLF y líneas internas vacías) a la hora de imprimir texto. Se conserva el ajuste automático de cada línea a la anchura de su caja, hasta 5 líneas de conservación o 6 de nota; si no cabe, se bloquea sin truncar. El **motor común y las plantillas Pequeña y Compacta no se modifican**. La usuaria ha **confirmado la aprobación y validación visual de la versión corregida** el 08/11/2026; el diseño queda cerrado. No consta prueba física CT230B de la nueva etiqueta.
 
-**Estado de seguridad:** puesta a disposición de la vista previa para revisar
-la composición. **El botón de impresión de Amplia está deshabilitado** hasta
-verificación física CT230B y autorización expresa para habilitarlo. La aprobación visual ya consta. Las métricas del trabajo pueden
-ser estimadas, pero no significan que se haya enviado o impreso. Compacta,
-Pequeña y los ensayos históricos no cambian.
+**Estado vigente (08/11/2026):** **botón de impresión de Amplia habilitado** por autorización expresa de la usuaria, sin alterar el diseño visual aprobado. El formulario y la vista previa utilizan el mismo raster físico 590 × 945 que se entrega a `motor-libre.js`. Los pasos obligatorios son datos válidos, raster construible, CT230B conectada, confirmación de papel **50 × 80 mm**, aprobación explícita del trabajo y envío BLE UART de 20 bytes con pausa; 1–20 copias en `PRINT 1,n`. No hay reintentos automáticos, registros de inventario ni cambios a otros motores. **La revisión física se hará al final:** el envío de bytes no demuestra alimentación, orientación, alineación o legibilidad. Compacta, Pequeña y los ensayos históricos no cambian.
 
 ## Cabecera aprobada · variante interior
 
@@ -181,10 +175,7 @@ con la V0.8; no dar por validada esta modificación sin pruebas específicas.
 La página es un **candidato de producto** y evita lenguaje o controles de
 experimentos históricos. Durante su estancia en el laboratorio conserva un
 aviso de alcance en el pie. El selector incluye los **tres formatos libres previstos** (no incorpora
-50 × 80 vertical con anillo) y una tarjeta futura. La selección de Amplia muestra el estado pendiente dentro de los pasos, sin motor
-imprimible ni previsualización inventada; Compacta sí presenta el raster
-compartido del formato seleccionado y puede enviar a CT230B bajo confirmación,
-pero aún no dispone de aceptación física de su nuevo diseño. El nombre y, cuando se indique, el peso en
+50 × 80 vertical con anillo) y una tarjeta futura. Los tres formatos muestran su **raster real** y comparten formulario adaptado, confirmación de papel y transporte CT230B. Amplia utiliza el raster 590 × 945 y papel 50 × 80 mm; Compacta, raster 590 × 354. Ambos diseños libres están aprobados visualmente, sin que eso acredite una prueba física de su variante. El nombre y, cuando se indique, el peso en
 Pequeña son introducidos manualmente; todavía no hay un catálogo de ingredientes
 para esta sección. El peso no forma parte de Compacta ni Amplia.
 Las fechas no se deducen de pautas generales de conservación.
