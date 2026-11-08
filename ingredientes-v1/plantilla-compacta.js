@@ -30,7 +30,7 @@
    error:"Texto demasiado largo para Compacta 50 × 30: "+String(text).slice(0,35)});
  }
  function labelLine(c,label,x,y,max){
-  fit(c,label,x,y,17,14,max,"600",'"Geist"');
+  fit(c,label,x,y,17,14,max,"700",'"Geist"');
  }
  function section(c,label,x,y,width){
   c.fillStyle="#000";
@@ -80,8 +80,8 @@
   }else{
    // Sin nutrición: las dos fechas ocupan el ancho completo en dos columnas.
    c.fillRect(294,89,2,85);
-   fit(c,first,14,117,24,17,260,"600");
-   fit(c,"Consumo preferente",310,117,24,17,263,"600");
+   fit(c,first,14,117,24,17,260,"700");
+   fit(c,"Consumo preferente",310,117,24,17,263,"700");
    fit(c,data.packed,14,163,29,22,261,"700");
    fit(c,data.expiry,310,163,29,22,261,"700");
   }
