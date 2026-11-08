@@ -99,6 +99,16 @@
   t.draw(c,data,officialLogo);
   return canvas;
  }
+ // Parcela raster disperso V0.6.2: bandas de 12 filas, sin blancos exteriores.
+ // A diferencia de las siete regiones fijas históricas, localiza regiones
+ // separadas en bytes de 8 px y decide separarlas solo si ahorran bytes TSPL.
+ // A lo sumo 6 rectángulos por banda; sin superposiciones y sin pérdida.
+ const MAX_REGIONS_PER_STRIPE=6,EXTRA_COMMAND_COST=12;
+ function tileWireBytes(x,y,widthBytes,height){
+  // BITMAP + payload 1 bpp + CRLF, igual que build().
+  return ("BITMAP "+x+","+y+","+widthBytes+","+height+",0,").length
+   +widthBytes*height+2;
+ }
  function sparse(id,canvas){
   const t=get(id),W=t.width,H=t.height;
   if(canvas.width!==W||canvas.height!==H)throw Error("Dimensiones de raster incorrectas.");
@@ -111,37 +121,97 @@
     bytes[y*stride+(x>>3)]&=~(0x80>>(x&7));
   }
   const blocks=[];
+  let baselineRasterBytes=0,baselineTiles=0;
   for(let y=0;y<H;y+=STRIPE){
-   let minCol=stride,maxCol=-1,minRow=H,maxRow=-1;
-   for(let iy=y;iy<Math.min(H,y+STRIPE);iy++)for(let ix=0;ix<stride;ix++){
-    if(bytes[iy*stride+ix]===255)continue;
-    minCol=Math.min(minCol,ix);maxCol=Math.max(maxCol,ix);
-    minRow=Math.min(minRow,iy);maxRow=Math.max(maxRow,iy);
+   const end=Math.min(H,y+STRIPE),active=[];
+   // Un byte se considera ocupado si tiene >=1 píxel negro en la banda.
+   // Mantener fila superior/inferior por columna permite recortar cada región.
+   for(let x=0;x<stride;x++){
+    let top=end,bottom=y-1;
+    for(let row=y;row<end;row++)if(bytes[row*stride+x]!==255){
+     top=Math.min(top,row);bottom=Math.max(bottom,row);
+    }
+    if(bottom>=y)active.push({col:x,top,bottom});
    }
-   if(maxCol<0)continue;
-   const w=maxCol-minCol+1,h=maxRow-minRow+1,crop=new Uint8Array(w*h);
-   for(let iy=minRow;iy<=maxRow;iy++)
-    crop.set(bytes.subarray(iy*stride+minCol,iy*stride+maxCol+1),(iy-minRow)*w);
-   blocks.push({x:minCol*8,y:minRow,widthBytes:w,height:h,bytes:crop});
+   if(!active.length)continue;
+   const n=active.length;
+   const first=active[0],last=active[n-1];
+   let baseTop=end,baseBottom=y-1;
+   for(const a of active){
+    baseTop=Math.min(baseTop,a.top);baseBottom=Math.max(baseBottom,a.bottom);
+   }
+   baselineRasterBytes+=tileWireBytes(first.col*8,baseTop,last.col-first.col+1,baseBottom-baseTop+1);
+   baselineTiles++;
+
+   // Costes exactos de cada región posible (incluyendo cabecera BITMAP).
+   // Penalización pequeña de comandos: preferir pocas regiones y proteger
+   // el firmware, sin renunciar al ahorro de blancos interiores.
+   const costs=Array.from({length:n},()=>new Array(n));
+   const tops=Array.from({length:n},()=>new Array(n));
+   const bottoms=Array.from({length:n},()=>new Array(n));
+   for(let i=0;i<n;i++){
+    let top=end,bottom=y-1;
+    for(let j=i;j<n;j++){
+     top=Math.min(top,active[j].top);bottom=Math.max(bottom,active[j].bottom);
+     const widthBytes=active[j].col-active[i].col+1;
+     costs[i][j]=tileWireBytes(active[i].col*8,top,widthBytes,bottom-top+1)
+      +EXTRA_COMMAND_COST;
+     tops[i][j]=top;bottoms[i][j]=bottom;
+    }
+   }
+   const cap=Math.min(MAX_REGIONS_PER_STRIPE,n),inf=Number.POSITIVE_INFINITY;
+   const dp=Array.from({length:cap+1},()=>Array(n+1).fill(inf));
+   const next=Array.from({length:cap+1},()=>Array(n+1).fill(-1));
+   for(let k=0;k<=cap;k++)dp[k][n]=0;
+   for(let k=1;k<=cap;k++)for(let i=n-1;i>=0;i--){
+    for(let j=i;j<n;j++){
+     const candidate=costs[i][j]+dp[k-1][j+1];
+     if(candidate<dp[k][i]){
+      dp[k][i]=candidate;
+      next[k][i]=j;
+     }
+    }
+   }
+   let i=0,k=cap;
+   while(i<n){
+    const j=next[k][i];
+    if(j<i||j>=n)throw Error("No se pudo parcelar el raster sin pérdida.");
+    const x=active[i].col*8,top=tops[i][j],bottom=bottoms[i][j],
+     w=active[j].col-active[i].col+1,h=bottom-top+1;
+    const crop=new Uint8Array(w*h);
+    for(let row=top;row<=bottom;row++){
+     crop.set(bytes.subarray(row*stride+active[i].col,row*stride+active[j].col+1),
+      (row-top)*w);
+    }
+    blocks.push({x,y:top,widthBytes:w,height:h,bytes:crop});
+    i=j+1;k--;
+   }
   }
+  // Metadatos de tamaño anterior a la mejora, sobre el MISMO raster.
+  // No se transmiten; permiten comparar pesos en los tres formatos.
+  blocks.baselineRasterBytes=baselineRasterBytes;
+  blocks.baselineTiles=baselineTiles;
   return blocks;
  }
  function build(id,canvas,copies=1){
   const t=get(id),W=t.width,H=t.height;
   if(!Number.isInteger(copies)||copies<1||copies>20)throw Error("Número de copias fuera del intervalo 1–20.");
-  const tiles=sparse(id,canvas),parts=[enc.encode("SIZE "+t.paper+"\r\nGAP 2 mm,0 mm\r\nDIRECTION 0\r\nCLS\r\n")];
+  const tiles=sparse(id,canvas),header=enc.encode("SIZE "+t.paper+"\r\nGAP 2 mm,0 mm\r\nDIRECTION 0\r\nCLS\r\n"),
+   footer=enc.encode("PRINT 1,"+copies+"\r\n"),parts=[header];
   for(const b of tiles){
    if(b.height>12||b.x<0||b.y<0||b.x+b.widthBytes*8>W+7||b.y+b.height>H)
     throw Error("Banda fuera de los límites del papel.");
    parts.push(enc.encode("BITMAP "+b.x+","+b.y+","+b.widthBytes+","+b.height+",0,"));
    parts.push(b.bytes,enc.encode("\r\n"));
   }
-  parts.push(enc.encode("PRINT 1,"+copies+"\r\n"));
-  const bytes=parts.reduce((sum,part)=>sum+part.length,0);
+  parts.push(footer);
+  const bytes=parts.reduce((sum,part)=>sum+part.length,0),
+   baselineBytes=header.length+tiles.baselineRasterBytes+footer.length;
   if(bytes>MAX_BYTES)throw Error("Trabajo demasiado grande ("+bytes+" bytes).");
   const job=new Uint8Array(bytes);let offset=0;
   for(const part of parts){job.set(part,offset);offset+=part.length;}
-  return {job,tiles:tiles.length,bytes,fragments:Math.ceil(bytes/20),copies};
+  return {job,tiles:tiles.length,bytes,fragments:Math.ceil(bytes/20),copies,
+   baselineBytes,baselineTiles:tiles.baselineTiles,savedBytes:baselineBytes-bytes};
  }
  function forFormat(id){
   if(views.has(id))return views.get(id);
