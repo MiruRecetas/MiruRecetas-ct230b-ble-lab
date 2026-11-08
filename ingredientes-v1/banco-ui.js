@@ -85,6 +85,7 @@
   updateHint();
  }
  function useFree(){
+  if($("name").disabled)return;
   if(active==="bank"){bankDraft=readForm();bankDraftItemId=selectedId;}
   active="free";
   if(freeDraft)writeForm(freeDraft);
@@ -138,7 +139,7 @@
   for(const item of items){
    const button=document.createElement("button");
    button.type="button";button.className="bank-item";
-   button.setAttribute("role","option");button.setAttribute("aria-selected",String(selectedId===item.id));
+   button.setAttribute("aria-pressed",String(selectedId===item.id));
    const main=document.createElement("span");main.className="bank-item-body";
    const name=document.createElement("strong");name.className="bank-item-name";name.textContent=item.nombre;
    const meta=document.createElement("span");meta.className="bank-item-meta";
@@ -173,7 +174,7 @@
   if(lastFocus?.isConnected)lastFocus.focus();
  }
  async function openSheet(){
-  if(!currentFormat())return;
+  if(!currentFormat()||$("name").disabled)return;
   lastFocus=document.activeElement;
   $("bank-overlay").hidden=false;document.body.style.overflow="hidden";
   $("bank-apply").disabled=true;
@@ -192,6 +193,7 @@
   }
  }
  function applySelected(){
+  if($("name").disabled)return;
   const item=currentItem();if(!item||!catalog.filter(matches).some(x=>x.id===item.id))return;
   if(active==="free"){
    freeDraft=readForm();
