@@ -1,8 +1,12 @@
 > **Banco de ingredientes · vacuno, incorporación 08/11/2026:**
 > cuatro fichas solicitadas por la usuaria, correspondientes a
 > FoodKeeper IDs **36, 37, 40 y 41**, añadidas a Vacuno.
-> Refrigeración **5 días** y congelación **120 días**;
-> despensa y conserva deshabilitadas en estos cortes crudos.
+> Redondo, solomillo y filetes: frío **5 días**, congelación
+> **120 días**. Carne troceada para guisar: frío **2 días**,
+> congelación **90 días**, por discrepancia contrastada con
+> recomendaciones específicas (fuente global `agregación`, con
+> FoodKeeper ID 41 preservado en el expediente).
+> Despensa y conserva excluidas en estos cortes crudos.
 > Catálogo **10 fichas** (cinco de vacuno). Sin modificar
 > interfaz aprobada, plantillas, motor ni producción. Detalle y
 > trazabilidad en [banco/README.md](ingredientes-v1/banco/README.md).
