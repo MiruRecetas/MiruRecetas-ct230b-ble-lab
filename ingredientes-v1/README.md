@@ -44,8 +44,7 @@ para congelación el **mínimo**. Al importar se convierte a **días enteros**:
 semana = 7 días; mes = 30 días. El vacío no añade días. No duplicar
 los campos originales: solo referencia breve a la fuente, estado,
 tiempo operativo y tip corto por modo, además de identidad editorial.
-AESAN queda como fuente de contraste. No hay fichas explicativas
-extensas en el panel. El JSON derivado y su panel **siguen pendientes**.
+AESAN queda como fuente de contraste. **Estado de recomendación por modo:** solo `verificado` o `sin_datos`; el campo `fuente` distingue FoodKeeper, otras fuentes y la indicación expresa de la usuaria (`usuario`). Un método expresamente no recomendado se registra como `disponible=false`, `verificado`, plazo `null` y fuente identificada; la ausencia de información como `disponible=false`, `sin_datos`, plazo y fuente `null`. Desde el principio se incluyen `sinonimos` como array (vacío `[]`) y `tips_preparacion_conservacion` (texto opcional o `null`) para una futura sección de la web, **sin mostrarse ni imprimirse ahora**. No hay fichas explicativas extensas en el panel. El JSON derivado y su panel **siguen pendientes**.
 
 ## Banco JSON de Pequeña · patrón D aprobado, implementación pendiente (08/11/2026)
 
