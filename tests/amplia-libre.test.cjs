@@ -181,7 +181,7 @@ test("Formulario, preview e impresión BLE habilitada tras validación visual",(
  assert.ok(app.includes('if(busy||!(wide?aReady:compact?cReady:ready)||!connected()||!$("confirm-paper").checked)return;'));
  assert.ok(app.includes('window.confirm('));
  assert.ok(app.includes('no se reintentará automáticamente'));
- assert.ok(html.includes('src="./app.js?v=20261108-amplia-ble-v1"'));
+ assert.ok(html.includes('src="./app.js?v=20261108-layout-v1"'));
  assert.match(html,/<div id="ingredient-print">/);
  assert.ok(html.includes('id="paper-dimensions"'));
  assert.ok(html.includes('id="confirm-paper"'));
