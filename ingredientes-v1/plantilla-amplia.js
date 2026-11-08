@@ -7,6 +7,16 @@
 (function(root){
  const M=typeof module!=="undefined"&&module.exports?require("./motor-libre.js"):root.MiruLabelEngine;
  const W=590,H=945,LW=945,LH=590;
+ // Conserva los Enter del textarea. El limpiador común aplana espacios por
+ // diseño y sigue intacto para Pequeña y Compacta.
+ function multiline(raw,max,label){
+  const value=String(raw??"").replace(/\r\n?/g,"\n").split("\n")
+   .map(line=>line.trim().replace(/\s+/g," ")).join("\n").trim();
+  if(value.length>max||/[<>]/.test(value)||
+   [...value].some(ch=>ch.charCodeAt(0)<32&&ch!=="\n"))
+   throw Error(label+" no válido (máximo "+max+" caracteres).");
+  return value;
+ }
  function normalize(raw,strict=true){
   const name=M.clean(raw.name,90,"Nombre",true);
   const mode=String(raw.mode||"freeze"),p=String(raw.packed||""),e=String(raw.expiry||"");
@@ -21,8 +31,8 @@
    protein:showNutrition?M.numeric(raw.protein,"Proteínas"):null,
    carbs:showNutrition?M.numeric(raw.carbs,"Hidratos"):null,
    fat:showNutrition?M.numeric(raw.fat,"Grasas"):null,
-   showInstruction,instruction:showInstruction?M.clean(raw.instruction,180,"Instrucciones"):"",
-   showNote,note:showNote?M.clean(raw.note,140,"Nota"):""
+   showInstruction,instruction:showInstruction?multiline(raw.instruction,180,"Instrucciones"):"",
+   showNote,note:showNote?multiline(raw.note,140,"Nota"):""
   };
  }
  function fit(c,str,x,y,size,min,max,style="400",family='"Geist"',align="left"){
@@ -43,24 +53,31 @@
  }
  function body(c,str,x,y,max,size,min,maxLines,style="400"){
   if(!str)return;
-  const words=str.split(/\s+/);
+  // Cada Enter termina una línea obligatoriamente; dentro de ella, palabras
+  // largas se envuelven por anchura. Nunca reordenar párrafos del formulario.
+  const paragraphs=str.split("\n");
   for(let px=size;px>=min;px--){
    c.font=style+" "+px+'px "Geist"';
-   const lines=[];let line="",overflow=false;
-   for(const word of words){
-    if(c.measureText(word).width>max){overflow=true;break;}
-    const together=line?line+" "+word:word;
-    if(c.measureText(together).width<=max){line=together;continue;}
+   const lines=[];let overflow=false;
+   for(const paragraph of paragraphs){
+    if(!paragraph){lines.push("");continue;}
+    let line="";
+    for(const word of paragraph.split(" ")){
+     if(c.measureText(word).width>max){overflow=true;break;}
+     const candidate=line?line+" "+word:word;
+     if(c.measureText(candidate).width<=max)line=candidate;
+     else{if(line)lines.push(line);line=word;}
+    }
+    if(overflow)break;
     if(line)lines.push(line);
-    line=word;
    }
-   if(line)lines.push(line);
    if(overflow||lines.length>maxLines)continue;
    const leading=px+7;
-   for(let i=0;i<lines.length;i++)fit(c,lines[i],x,y+i*leading,px,px,max,style);
+   for(let i=0;i<lines.length;i++)
+    if(lines[i])fit(c,lines[i],x,y+i*leading,px,px,max,style);
    return;
   }
-  throw Error("El texto no cabe en su bloque de Amplia; abrévialo.");
+  throw Error("El texto excede el espacio disponible de Amplia; acórtalo.");
  }
  function label(c,title,x,y,w){
   c.fillStyle="#000";round(c,x,y,w,38,9);
