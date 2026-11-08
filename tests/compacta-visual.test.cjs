@@ -23,7 +23,7 @@ function preview(raw){
    return {width:String(value).length*size*.52};
   }
  })})};
- try{compact.render(compact.normalize(raw),{});}finally{globalThis.document=original;}
+ try{compact.render(compact.normalize(raw),{width:314,height:267});}finally{globalThis.document=original;}
  return {texts,rects,logos};
 }
 function where(p,value){return p.texts.find(t=>t.value===value);}
@@ -32,6 +32,7 @@ test("Compacta conserva geometría y no integra gramos de ingrediente",()=>{
  assert.equal("grams" in compact.normalize({...sample,grams:500}),false);
  const p=preview(sample);
  assert.equal(p.logos.length,1);
+ assert.ok(Math.abs(p.logos[0][3]/p.logos[0][4]-314/267)<0.001);
  assert.ok(where(p,"MiruRecetas"),"La firma oficial debe ser visible");
  assert.match(where(p,"Pisto casero").font,/Bricolage Grotesque/);
  assert.match(where(p,"Envasado y").font,/Geist/);
