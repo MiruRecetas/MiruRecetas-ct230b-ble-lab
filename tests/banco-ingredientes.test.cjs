@@ -18,12 +18,16 @@ const categories=props.categoria.enum;
 const subcategories=Object.fromEntries(allOf.slice(0,4).map(r=>[r.if.properties.categoria.const,r.then.properties.subcategoria.enum]));
 const byName=name=>records.find(x=>x.nombre===name);
 
-test("catálogo de diez ingredientes, con ID único y taxonomía aprobada",()=>{
- assert.equal(records.length,10);
- assert.equal(new Set(records.map(x=>x.id)).size,6);
+test("catálogo de diecisiete ingredientes, con ID único y taxonomía aprobada",()=>{
+ assert.equal(records.length,17);
+ assert.equal(new Set(records.map(x=>x.id)).size,records.length);
  assert.deepEqual(new Set(records.map(x=>x.nombre)),new Set([
   "Carne picada de ternera","Redondo de ternera","Solomillo de ternera",
-  "Filetes de ternera","Ternera para guisar","Pulpo","Patata","Lechuga","Orejones","Salsa de tomate"
+  "Filetes de ternera","Ternera para guisar",
+  "Paletilla o media pierna de cordero para asar","Chuletas de cordero",
+  "Lomo de cerdo sin hueso","Solomillo de cerdo","Costillas de cerdo",
+  "Carne picada de cerdo","Lomo de cerdo en dados",
+  "Pulpo","Patata","Lechuga","Orejones","Salsa de tomate"
  ]));
  assert.equal(categories.length,4);
  assert.equal(Object.values(subcategories).flat().length,26);
@@ -183,4 +187,59 @@ test("vacuno aprobado 36/37/40/41: procedencia exacta, plazos y métodos aplicab
  assert.equal(tenderloin.congelacion_dias,120);
  assert.equal(new Set(records.map(x=>x.id_fuente).filter(Boolean)).size,
   records.filter(x=>x.id_fuente).length,"ningún origen FoodKeeper duplicado");
+});
+
+test("lote ovino/porcino: 8 ID FoodKeeper trazados en 7 fichas y 2 métodos",()=>{
+ const original=JSON.parse(read("banco/fuentes/foodkeeper-es-original.json"));
+ const products=original.sheets.find(x=>x.name==="Product").data.map(row=>Object.assign({},...row));
+ const specs=[
+  {id:"CAR-OVI-001",name:"Paletilla o media pierna de cordero para asar",presentation:"Pieza entera",category:"Ovino",source:[48],days:[5,120]},
+  {id:"CAR-OVI-002",name:"Chuletas de cordero",presentation:"Costilla o lomo",category:"Ovino",source:[51],days:[5,120]},
+  {id:"CAR-POR-001",name:"Lomo de cerdo sin hueso",presentation:"Pieza entera",category:"Porcino",source:[61],days:[5,120]},
+  {id:"CAR-POR-002",name:"Solomillo de cerdo",presentation:null,category:"Porcino",source:[67,69],days:[5,120]},
+  {id:"CAR-POR-003",name:"Costillas de cerdo",presentation:null,category:"Porcino",source:[72],days:[5,120]},
+  {id:"CAR-POR-004",name:"Carne picada de cerdo",presentation:"Picada",category:"Porcino",source:[73],days:[2,90]},
+  {id:"CAR-POR-005",name:"Lomo de cerdo en dados",presentation:"Dados",category:"Porcino",source:[75],days:[2,90]}
+ ];
+ for(const spec of specs){
+  const entry=records.find(x=>x.id===spec.id);
+  assert.ok(entry,"ficha "+spec.id);
+  assert.equal(entry.nombre,spec.name);
+  assert.equal(entry.presentacion,spec.presentation);
+  assert.equal(entry.categoria,"Carnes y Aves");
+  assert.equal(entry.subcategoria,spec.category);
+  assert.equal(entry.estado_recomendacion,"verificado");
+  const aggregated=spec.id==="CAR-POR-005";
+  assert.equal(entry.fuente,aggregated?"agregación":"FoodKeeper");
+  assert.equal(entry.id_fuente,aggregated?null:String(spec.source[0]));
+  assert.equal(entry.refrigeracion,true);
+  assert.equal(entry.refrigeracion_dias,spec.days[0]);
+  assert.equal(entry.congelacion,true);
+  assert.equal(entry.congelacion_dias,spec.days[1]);
+  assert.equal(entry.tips_refrigeracion,"");
+  assert.equal(entry.tips_descongelacion,"");
+  assert.equal(entry.despensa,false);
+  assert.equal(entry.conserva,false);
+  assert.equal(entry.despensa_dias,null);
+  assert.equal(entry.conserva_dias,null);
+  assert.equal(entry.tips_despensa,null);
+  assert.equal(entry.tips_conserva,null);
+  assert.equal(entry.tips_preparacion_conservacion,null);
+  for(const id of spec.source){
+   const p=products.find(x=>x.ID===id);
+   assert.ok(p);
+   assert.equal(p.Category_ID,10);
+   assert.equal(p.DOP_Refrigerate_Metric,"Días");
+   assert.equal(p.DOP_Freeze_Metric,"Meses");
+   assert.equal(p.DOP_Refrigerate_Max,id===73?2:5);
+   assert.equal(p.DOP_Freeze_Min,id===73?3:4);
+  }
+ }
+ const tenderloin=records.find(x=>x.id==="CAR-POR-002");
+ assert.ok(tenderloin.sinonimos.includes("Medallones de solomillo de cerdo"));
+ assert.equal(records.filter(x=>x.nombre==="Solomillo de cerdo").length,1);
+ assert.equal(records.filter(x=>x.subcategoria==="Ovino").length,2);
+ assert.equal(records.filter(x=>x.subcategoria==="Porcino").length,5);
+ const allIds=records.map(x=>x.id_fuente).filter(Boolean);
+ assert.equal(new Set(allIds).size,allIds.length,"IDs de procedencia únicos (ID 69 queda en expediente)");
 });
