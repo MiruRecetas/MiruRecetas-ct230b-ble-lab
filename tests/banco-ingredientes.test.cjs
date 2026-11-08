@@ -158,11 +158,17 @@ test("vacuno aprobado 36/37/40/41: procedencia exacta, plazos y métodos aplicab
   assert.equal(r.nombre,name);assert.ok(r.sinonimos.includes(alias));
   assert.equal(r.categoria,"Carnes y Aves");assert.equal(r.subcategoria,"Vacuno");
   assert.equal(r.estado_recomendacion,"verificado");
-  assert.equal(r.fuente,"FoodKeeper");assert.equal(r.id_fuente,String(sourceId));
-  assert.equal(r.refrigeracion,true);assert.equal(r.refrigeracion_dias,5);
-  assert.equal(r.tips_refrigeracion,"");
-  assert.equal(r.congelacion,true);assert.equal(r.congelacion_dias,120);
-  assert.equal(r.tips_descongelacion,"");
+  // FoodKeeper ES 41 discrepa del criterio especializado para carne de guiso
+  // troceada: se aplican 2 días / 3 meses de USDA y la fuente es agregada.
+  if(sourceId===41){
+   assert.equal(r.fuente,"agregación");assert.equal(r.id_fuente,null);
+   assert.equal(r.refrigeracion_dias,2);assert.equal(r.congelacion_dias,90);
+  }else{
+   assert.equal(r.fuente,"FoodKeeper");assert.equal(r.id_fuente,String(sourceId));
+   assert.equal(r.refrigeracion_dias,5);assert.equal(r.congelacion_dias,120);
+  }
+  assert.equal(r.refrigeracion,true);assert.equal(r.tips_refrigeracion,"");
+  assert.equal(r.congelacion,true);assert.equal(r.tips_descongelacion,"");
   for(const m of ["despensa","conserva"]){
    assert.equal(r[m],false);assert.equal(r[m+"_dias"],null);
    assert.equal(r["tips_"+m],null);
