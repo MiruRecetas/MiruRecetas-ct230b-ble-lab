@@ -18,6 +18,39 @@ plantilla independiente en el mismo motor, con vista previa raster real,
 ningún archivo a `MiruRecetas/mirurecetas-web-source`; no está publicado como
 página productiva ni registra existencias.
 
+## Banco JSON de Pequeña · patrón D aprobado, implementación pendiente (08/11/2026)
+
+La usuaria ha aprobado **dos chips bajo la vista previa de Pequeña**:
+**«Ingrediente libre»** (por defecto) y **«Cargar del banco»**. Este último
+abre un selector modal **inferior en vertical** y **lateral en horizontal**,
+basado en el patrón de paneles de vista diaria y de impresión de la web
+MiruRecetas, sin depender directamente de su código. El panel ofrecerá
+búsqueda por nombre/alias, categorías, presentaciones, chips de filtrado,
+fuentes consultables y **«Aplicar a etiqueta»**, deshabilitado hasta
+selección concreta. Abrir/filtrar/seleccionar no modificará el formulario;
+solo «Aplicar» precarga y abre el paso 1. El acordeón de pasos permanece
+independiente. Deben conservarse el borrador **libre** y el del **banco**,
+con selección recuperable, y todos los campos precargados seguirán
+**editables**. En Compacta y Amplia no existirán chips ni banco.
+
+En Pequeña con ingrediente del banco y **plazo de calidad verificado**,
+al aplicar se propondrá el consumo preferente calculado desde el envasado
+introducido por el usuario. Cambiar el envasado recalcula esa fecha
+mientras siga en modo sugerencia; al editar el consumo preferente de
+forma manual se respeta el valor y se detiene el recálculo, con
+posibilidad de **«Restablecer recomendación»**. Se mostrará una sola nota
+pequeña bajo las fechas: **«Tiempo recomendado: XX meses»** si los
+datos verificados se expresan en meses (u otra unidad real de la fuente).
+No se imprimirá la nota. Si no hay plazo respaldado por fuente, no habrá
+cálculo automático. El JSON debe conservar unidad, duración, condiciones y
+fuente. Ninguna recomendación representa una garantía de seguridad.
+
+**Estado: aprobado el diseño y el comportamiento, no implementados.**
+Pendiente definir y validar fuentes, esquema y catálogo inicial.
+No hay modificaciones en plantillas, motor, BLE, impresión, producción
+ni Airtable. Consultar la [hoja de ruta](MIS-ETIQUETAS-VISION-Y-HOJA-DE-RUTA.md)
+para las decisiones y casos de validación.
+
 ## Contrato de producto y diseño aprobado (06/11/2026)
 
 **Documento rector:** [MIS-ETIQUETAS-VISION-Y-HOJA-DE-RUTA.md](MIS-ETIQUETAS-VISION-Y-HOJA-DE-RUTA.md).
