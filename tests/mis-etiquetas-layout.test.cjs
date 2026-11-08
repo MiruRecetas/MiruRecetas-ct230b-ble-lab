@@ -100,6 +100,6 @@ test("La vista previa mantiene accesibilidad y sólo revela errores de construcc
  assert.match(css,/\.format-preview \.status-line\[data-error="true"\]\{display:block/);
  for(const id of ["design-status","c-status","a-status"])
   assert.ok(app.includes('$("'+id+'").dataset.error="true"'));
- assert.match(html,/src="\.\/app\.js\?v=20261108-raster-regiones-v1"/);
+ assert.match(html,/src="\.\/app\.js\?v=20261108-banco-integration-v1"/);
  assert.match(html,/href="\.\/style\.css\?v=20261108-banco-panel-v1"/);
 });
