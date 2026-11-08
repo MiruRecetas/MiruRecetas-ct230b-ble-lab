@@ -103,7 +103,7 @@ test("Consumo preferente vacío se representa con guiones en los dos modos",()=>
 });
 test("App cambia instrucciones y limpia nota por modo, como Pequeña, sin plazo inferido",()=>{
  const app=fs.readFileSync(path.join(base,"app.js"),"utf8");
- assert.match(app,/noteDefaults=\{fridge:"Conservar en nevera",freeze:"Descongelar en nevera",other:""\}/);
+ assert.match(app,/noteDefaults=\{fridge:"Conservar en nevera",freeze:"Descongelar en nevera",pantry:"",preserve:"",other:""\}/);
  assert.match(app,/\$\("c-mode"\)\.addEventListener\("change"/);
  assert.match(app,/\$\("c-instruction"\)\.value=noteDefaults\[mode\]/);
  assert.match(app,/\$\("c-note"\)\.value=""/);
