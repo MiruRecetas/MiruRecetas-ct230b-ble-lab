@@ -75,7 +75,7 @@
             "parcial",
             "sin_datos"
           ],
-          "description": "Estado global de la ficha; no bloquea la etiqueta libre ni la impresión."
+          "description": "Estado global editorial. Verificado: modalidades de la ficha fijadas/aprobadas; no acredita inocuidad. Parcial: fuentes/contextos pendientes. Sin datos: no seleccionable todavía en banco."
         },
         "fuente": {
           "type": [
@@ -92,7 +92,8 @@
           "description": "ID original de una fuente externa, null para usuario/agregación/sin_datos o texto sin_datos si esa fuente no tiene IDs."
         },
         "refrigeracion": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "true: modalidad ofrecida para esta presentación en el banco; false: no se ofrece aquí (no una prohibición universal)."
         },
         "refrigeracion_dias": {
           "type": [
@@ -109,7 +110,8 @@
           ]
         },
         "congelacion": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "true: modalidad ofrecida para esta presentación en el banco; false: no se ofrece aquí (no una prohibición universal)."
         },
         "congelacion_dias": {
           "type": [
@@ -126,7 +128,8 @@
           ]
         },
         "despensa": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "true: modalidad ofrecida para esta presentación en el banco; false: no se ofrece aquí (no una prohibición universal)."
         },
         "despensa_dias": {
           "type": [
@@ -143,7 +146,8 @@
           ]
         },
         "conserva": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "true: modalidad ofrecida para esta presentación en el banco; false: no se ofrece aquí (no una prohibición universal)."
         },
         "conserva_dias": {
           "type": [
