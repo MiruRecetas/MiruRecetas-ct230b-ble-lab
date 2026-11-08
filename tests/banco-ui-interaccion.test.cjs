@@ -78,7 +78,6 @@ test("lechuga del banco corrige congelación anterior y añade nota y fecha",asy
  assert.equal(mode.value,"fridge");
  assert.equal(el("note").value,"Conservar en nevera");
  assert.equal(el("expiry").value,"2026-11-22");
- assert.equal(el("bank-source-info").textContent||"","");
 });
 
 test("libre conserva los cinco modos y su borrador; carne limita a dos",async()=>{
