@@ -78,6 +78,35 @@ coordenadas gráficas. `app.js` gestiona una única conexión/transporte BLE.
 No importar ni modificar los motores históricos o productivos. La unificación
 no constituye aprobación física de las nuevas variantes.
 
+## Optimización común de impresión · parcelación V0.6.2 (08/11/2026)
+
+Los tres formatos libres utilizan desde esta actualización un único algoritmo de
+raster disperso derivado **conceptualmente** de `label-v062.js` sin importar
+ese archivo. Cada banda de 12 filas se divide **solo cuando compensa** en
+hasta seis regiones horizontales no solapadas, recortadas a filas y columnas
+con tinta en unidades de 8 px. El coste incluye cabecera y terminación
+de cada `BITMAP` y una penalización por comandos adicionales. El raster de
+1 bpp, el posicionamiento absoluto y los diseños aprobados **son idénticos**
+antes y después. Se mantienen **35.000 B** de límite, 20 B/fragmento BLE,
+confirmaciones, `PRINT 1,n` y el mismo UART; no se modifican plantillas.
+
+El diagnóstico técnico existente muestra, por formato y para el **mismo
+raster**, los bytes anteriores, los actuales, el ahorro en bytes/porcentaje
+y las sub-bandas antes/después. `build()` expone `baselineBytes`,
+`baselineTiles`, `bytes`, `tiles` y `savedBytes`; esos datos también están
+en el dataset del canvas para comprobación. La incidencia previa de Amplia
+predeterminada fue **44.334 B** (captura Android aportada); la nueva medida
+efectiva debe leerse de la página publicada y del registro, **no extrapolar
+las cifras de los tests sintéticos**. Si un trabajo sigue superando 35 KB,
+se bloquea y se muestran ambas medidas.
+
+La equivalencia 1 bpp se prueba reconstruyendo cada TSPL enviado sobre el
+lienzo físico de los tres tamaños, junto con casos de bandas llenas, blancas,
+límites de 8 píxeles, cortes de banda, dos columnas y datos aleatorios. Una
+prueba sintética comprueba que un trabajo anteriormente bloqueado puede
+quedar por debajo del umbral. **No constituye prueba física CT230B**;
+se mantiene para el cierre final autorizado.
+
 ## Amplia libre 50 × 80 horizontal · propuesta B (08/11/2026)
 
 Arte 945×590 girado −90° para el raster físico 590×945 del rollo 50×80;
