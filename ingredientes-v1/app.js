@@ -51,6 +51,7 @@
     document.fonts.load('700 29px "Bricolage Grotesque"',"Carne Picada"),
     document.fonts.load('700 55px "Bricolage Grotesque"',"500 g"),
     document.fonts.load('400 17px "Geist"',"Envasado y congelación"),
+    document.fonts.load('600 24px "Geist"',"Envasado y congelación"),
     document.fonts.load('700 17px "Geist"',"30/10/26"),
     document.fonts.load('italic 500 16px "Geist"',"Descongelar en nevera Conservar en nevera")
    ]);
@@ -69,7 +70,7 @@
    const d=C.normalize(compactValues(),false),cv=C.render(d,logo);
    const canvas=$("c-preview");canvas.getContext("2d").clearRect(0,0,C.width,C.height);
    canvas.getContext("2d").drawImage(cv,0,0);
-   $("c-status").textContent="Borrador libre sin QR basado en la geometría histórica; distribución inferior revisable.";
+   $("c-status").textContent="Diseño libre elegido: encabezados fijos y fechas en dos columnas sin nutrición. Pendiente de ensayo físico CT230B.";
    try{const strict=C.normalize(compactValues(),true),job=C.build(C.render(strict,logo),copies);
     $("c-metrics").textContent=job.bytes+" B · "+job.fragments+" fragmentos BLE · "+job.tiles+" bandas · "+copies+" copias · sin QR.";
     cReady=true;
