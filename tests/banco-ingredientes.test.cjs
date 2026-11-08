@@ -120,3 +120,19 @@ test("los métodos del banco solo aparecen cuando están habilitados",()=>{
  assert.deepEqual(permitted(byName("Pulpo")),[]);
  assert.deepEqual(permitted(byName("Salsa de tomate")),[]);
 });
+
+test("panel banco replica el cierre, asa móvil y papel de impresión oficiales sin cambiar la lógica",()=>{
+ const html=read("index.html"),css=read("style.css"),js=read("banco-ui.js");
+ const scope=html.slice(html.indexOf('id="bank-overlay"'),html.indexOf('src="./motor-libre.js'));
+ assert.match(scope,/<div class="bank-mobile-handle" aria-hidden="true"><\/div>/);
+ assert.match(scope,/<button id="bank-close"[^>]*aria-label="Cerrar banco de ingredientes">×<\/button>/);
+ assert.doesNotMatch(scope,/>Cerrar ×<\/button>/);
+ assert.match(css,/\.bank-sheet\{position:relative;background:#fffcf7/);
+ assert.match(css,/\.bank-close\{display:grid;place-items:center;width:44px;height:44px;min-width:44px/);
+ assert.match(css,/border:1px solid #e4dfd5;border-radius:50%;background:#fff;color:#29352e/);
+ assert.match(css,/\.bank-mobile-handle\{display:block;position:absolute;top:14px;left:50%/);
+ assert.match(css,/width:46px;height:5px;border-radius:4px;/);
+ assert.match(css,/background:#c1c9bf;pointer-events:none/);
+ assert.match(html,/href="\.\/style\.css\?v=20261108-banco-panel-canonico-v3"/);
+ assert.match(js,/\$\("bank-close"\)\.addEventListener\("click",closeSheet\)/);
+});

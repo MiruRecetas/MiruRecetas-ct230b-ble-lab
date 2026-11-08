@@ -191,14 +191,23 @@ code{font-family:ui-monospace,monospace}
  font-size:12px;cursor:pointer;padding:5px 0}
 .bank-overlay{position:fixed;inset:0;z-index:10020;background:rgb(26 43 32 / 40%);
  display:flex;align-items:flex-end;justify-content:stretch}
-.bank-sheet{background:var(--paper);color:var(--ink);border-radius:20px 20px 0 0;width:100%;
+.bank-sheet{position:relative;background:#fffcf7;color:var(--ink);border-radius:20px 20px 0 0;width:100%;
  max-height:min(90dvh,760px);padding:22px max(18px,env(safe-area-inset-right)) calc(18px + env(safe-area-inset-bottom)) max(18px,env(safe-area-inset-left));
  display:flex;flex-direction:column;gap:13px;overflow:hidden;box-shadow:0 0 40px rgb(0 0 0 / 20%)}
 .bank-sheet-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
 .bank-sheet-head .eyebrow{font-size:10px;margin:0 0 4px}
 .bank-sheet-head h2{font:700 23px/1.2 "Bricolage Grotesque",sans-serif;margin:0}
-.bank-close{background:var(--sage-soft);border:1px solid var(--line);border-radius:9px;cursor:pointer;
- padding:8px 10px;white-space:nowrap;color:var(--sage-dark);font-weight:600}
+/* Geometría, color y tipografía del cierre oficial .p1-close (web productiva). */
+.bank-close{display:grid;place-items:center;width:44px;height:44px;min-width:44px;
+ border:1px solid #e4dfd5;border-radius:50%;background:#fff;color:#29352e;
+ font-size:1.6rem;line-height:1;padding:0;cursor:pointer}
+.bank-mobile-handle{display:none}
+@media(max-width:700px){
+ .bank-mobile-handle{display:block;position:absolute;top:14px;left:50%;
+  transform:translateX(-50%);width:46px;height:5px;border-radius:4px;
+  background:#c1c9bf;pointer-events:none}
+ .bank-sheet{padding-top:34px}
+}
 .bank-search-field,.bank-subfield{display:flex;flex-direction:column;gap:6px;color:var(--sage-dark);
  font-size:12px;font-weight:650}
 .bank-search-field input,.bank-subfield select{border:1px solid #b6c4b6;border-radius:10px;background:#fff;

@@ -215,7 +215,7 @@ test("página autónoma, campos y archivos enlazados",()=>{
  assert.match(html,/src="\.\/app\.js\?v=20261108-banco-correcciones-v2"/);
  assert.match(html,/src="\.\/plantilla-compacta\.js\?v=20261108-compacta-qa2"/);
  assert.match(html,/src="\.\/plantilla-amplia\.js\?v=20261108-amplia-b-v2"/);
- assert.match(html,/href="\.\/style\.css\?v=20261108-banco-correcciones-v2"/);
+ assert.match(html,/href="\.\/style\.css\?v=20261108-banco-panel-canonico-v3"/);
  assert.ok(html.includes('class="miru-isotipo"'));
  assert.match(app,/E\.logo\("\.\.\/assets\/isotipo-bn\.svg"\)/);
  assert.match(css,/--sage:/);
