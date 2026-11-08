@@ -33,12 +33,19 @@ vigencia actual respecto a posibles revisiones externas.
 **Decisión expresa:** nuestro banco será un **segundo JSON propio**,
 con categorías/subcategorías/elementos elegidos por MiruRecetas y
 nombres es-ES; el original se conserva para consulta y trazabilidad.
-En Pequeña, el selector de conservación existente elegirá el plazo
-aplicable de **refrigeración o congelación**, con el **valor mínimo del
-intervalo** de FoodKeeper para orientar la **calidad**. No trasladar
-plazos entre contextos de fecha de compra, apertura, descongelación y
-envasado sin validación. AESAN queda como fuente de contraste general.
-El JSON derivado y su panel **todavía no están implementados**.
+El catálogo propio **solo tendrá ingredientes adquiridos a granel y,
+más adelante, conservas caseras; nunca productos comerciales envasados**.
+Mantendrá categorías, subcategorías, nombres en español de España y
+una sola **presentación** opcional (sin duplicar «preparación»).
+El flujo canónico usa **fecha de envasado = fecha de compra o preparación**.
+El selector existente elegirá el plazo aplicable de refrigeración o
+congelación. Para refrigeración se usa el **máximo** del rango FoodKeeper;
+para congelación el **mínimo**. Al importar se convierte a **días enteros**:
+semana = 7 días; mes = 30 días. El vacío no añade días. No duplicar
+los campos originales: solo referencia breve a la fuente, estado,
+tiempo operativo y tip corto por modo, además de identidad editorial.
+AESAN queda como fuente de contraste. No hay fichas explicativas
+extensas en el panel. El JSON derivado y su panel **siguen pendientes**.
 
 ## Banco JSON de Pequeña · patrón D aprobado, implementación pendiente (08/11/2026)
 
@@ -60,12 +67,13 @@ al aplicar se propondrá el consumo preferente calculado desde el envasado
 introducido por el usuario. Cambiar el envasado recalcula esa fecha
 mientras siga en modo sugerencia; al editar el consumo preferente de
 forma manual se respeta el valor y se detiene el recálculo, con
-posibilidad de **«Restablecer recomendación»**. Se mostrará una sola nota
-pequeña bajo las fechas: **«Tiempo recomendado: XX meses»** si los
-datos verificados se expresan en meses (u otra unidad real de la fuente).
-No se imprimirá la nota. Si no hay plazo respaldado por fuente, no habrá
-cálculo automático. El JSON debe conservar unidad, duración, condiciones y
-fuente. Ninguna recomendación representa una garantía de seguridad.
+posibilidad de **«Restablecer recomendación»**. Se mostrará una sola nota pequeña bajo las fechas:
+**«Tiempo recomendado: N días»**; no se imprimirá. Sin plazo aplicable
+ni fuente/indicación expresa no habrá cálculo automático. El derivado
+guardará solo **días**, recomendación y fuente breve; todo el detalle
+de FoodKeeper está en el original inalterado. La refrigeración correcta
+sigue siendo imprescindible; la recomendación de calidad no es garantía
+de seguridad.
 
 **Estado: aprobado el diseño y el comportamiento, no implementados.**
 Pendiente definir y validar fuentes, esquema y catálogo inicial.
