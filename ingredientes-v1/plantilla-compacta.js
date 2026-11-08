@@ -45,7 +45,7 @@
  function draw(c,data,logo){
   // Firma oficial: isotipo BN aprobado + MiruRecetas en Bricolage Grotesque.
   fit(c,data.name,12,50,49,23,463,"700",'"Bricolage Grotesque"');
-  c.drawImage(logo,523,5,52,38);
+  c.drawImage(logo,523,3,52,52*logo.height/logo.width);
   fit(c,"MiruRecetas",490,60,19,13,89,"700",'"Bricolage Grotesque"');
   c.fillRect(0,69,W,10);
 
