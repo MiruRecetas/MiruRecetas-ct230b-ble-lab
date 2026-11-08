@@ -1,0 +1,137 @@
+{
+  "ingredientes": [
+    {
+      "id": "CAR-VAC-001",
+      "categoria": "Carnes y Aves",
+      "subcategoria": "Vacuno",
+      "presentacion": "Picada",
+      "nombre": "Carne picada de ternera",
+      "sinonimos": [
+        "Ternera picada",
+        "Carne molida de ternera"
+      ],
+      "estado_recomendacion": "parcial",
+      "fuente": "FoodKeeper",
+      "id_fuente": "59",
+      "refrigeracion": true,
+      "refrigeracion_dias": 2,
+      "tips_refrigeracion": "",
+      "congelacion": true,
+      "congelacion_dias": 90,
+      "tips_descongelacion": "",
+      "despensa": true,
+      "despensa_dias": null,
+      "tips_despensa": null,
+      "conserva": true,
+      "conserva_dias": null,
+      "tips_conserva": null,
+      "tips_preparacion_conservacion": null
+    },
+    {
+      "id": "PES-CEF-001",
+      "categoria": "Pescados y Mariscos",
+      "subcategoria": "Cefalópodos",
+      "presentacion": null,
+      "nombre": "Pulpo",
+      "sinonimos": [],
+      "estado_recomendacion": "sin_datos",
+      "fuente": null,
+      "id_fuente": null,
+      "tips_preparacion_conservacion": null
+    },
+    {
+      "id": "FRV-TUB-001",
+      "categoria": "Frutas y Verduras",
+      "subcategoria": "Tubérculos",
+      "presentacion": "Entera",
+      "nombre": "Patata",
+      "sinonimos": [
+        "Papa"
+      ],
+      "estado_recomendacion": "parcial",
+      "fuente": "FoodKeeper",
+      "id_fuente": "297",
+      "refrigeracion": true,
+      "refrigeracion_dias": 14,
+      "tips_refrigeracion": "",
+      "congelacion": true,
+      "congelacion_dias": null,
+      "tips_descongelacion": null,
+      "despensa": true,
+      "despensa_dias": null,
+      "tips_despensa": null,
+      "conserva": true,
+      "conserva_dias": null,
+      "tips_conserva": null,
+      "tips_preparacion_conservacion": null
+    },
+    {
+      "id": "FRV-HOJ-001",
+      "categoria": "Frutas y Verduras",
+      "subcategoria": "Verduras de hoja",
+      "presentacion": "Iceberg o romana",
+      "nombre": "Lechuga",
+      "sinonimos": [
+        "Lechuga romana",
+        "Lechuga iceberg"
+      ],
+      "estado_recomendacion": "parcial",
+      "fuente": "FoodKeeper",
+      "id_fuente": "290",
+      "refrigeracion": true,
+      "refrigeracion_dias": 14,
+      "tips_refrigeracion": "",
+      "congelacion": false,
+      "congelacion_dias": null,
+      "tips_descongelacion": null,
+      "despensa": true,
+      "despensa_dias": null,
+      "tips_despensa": null,
+      "conserva": true,
+      "conserva_dias": null,
+      "tips_conserva": null,
+      "tips_preparacion_conservacion": null
+    },
+    {
+      "id": "FRV-FRU-001",
+      "categoria": "Frutas y Verduras",
+      "subcategoria": "Frutas",
+      "presentacion": null,
+      "nombre": "Orejones",
+      "sinonimos": [
+        "Albaricoques deshidratados",
+        "Albaricoques secos"
+      ],
+      "estado_recomendacion": "parcial",
+      "fuente": "FoodKeeper",
+      "id_fuente": "379",
+      "refrigeracion": true,
+      "refrigeracion_dias": null,
+      "tips_refrigeracion": null,
+      "congelacion": true,
+      "congelacion_dias": null,
+      "tips_descongelacion": null,
+      "despensa": true,
+      "despensa_dias": 180,
+      "tips_despensa": "",
+      "conserva": true,
+      "conserva_dias": null,
+      "tips_conserva": null,
+      "tips_preparacion_conservacion": null
+    },
+    {
+      "id": "DES-CON-001",
+      "categoria": "Despensa",
+      "subcategoria": "Conservas",
+      "presentacion": null,
+      "nombre": "Salsa de tomate",
+      "sinonimos": [
+        "Tomate en conserva"
+      ],
+      "estado_recomendacion": "sin_datos",
+      "fuente": null,
+      "id_fuente": null,
+      "tips_preparacion_conservacion": null
+    }
+  ]
+}

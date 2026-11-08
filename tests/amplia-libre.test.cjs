@@ -181,7 +181,7 @@ test("Formulario, preview e impresión BLE habilitada tras validación visual",(
  assert.ok(app.includes('if(busy||!(wide?aReady:compact?cReady:ready)||!connected()||!$("confirm-paper").checked)return;'));
  assert.ok(app.includes('window.confirm('));
  assert.ok(app.includes('no se reintentará automáticamente'));
- assert.ok(html.includes('src="./app.js?v=20261108-raster-regiones-v1"'));
+ assert.ok(html.includes('src="./app.js?v=20261108-banco-integration-v1"'));
  assert.match(html,/<div id="ingredient-print">/);
  assert.ok(html.includes('id="paper-dimensions"'));
  assert.ok(html.includes('id="confirm-paper"'));
@@ -190,5 +190,5 @@ test("Formulario, preview e impresión BLE habilitada tras validación visual",(
  assert.ok(css.includes("#a-preview{width:100%"));
  assert.ok(css.includes("#compact-fields textarea,#wide-fields textarea"));
  assert.ok(css.includes("font:inherit;font-weight:500;line-height:1.5"));
- assert.ok(html.includes('href="./style.css?v=20261108-conserva-heading-v1"'));
+ assert.ok(html.includes('href="./style.css?v=20261108-banco-panel-v1"'));
 });

@@ -19,7 +19,7 @@ test("Encabezado de Conserva como el recetario, con subtítulo breve",()=>{
  assert.ok(eyebrow>=0&&eyebrow<heading&&heading<subtitle&&subtitle<layout);
  assert.match(css,/\.eyebrow\{[^}]*color:#b96c4a;[^}]*font-size:\.7rem;[^}]*letter-spacing:\.16em;[^}]*font-weight:700;[^}]*text-transform:uppercase/);
  assert.match(css,/\.intro\{[^}]*font-size:16px;[^}]*line-height:1\.5;[^}]*color:#67756b/);
- assert.match(html,/href="\.\/style\.css\?v=20261108-conserva-heading-v1"/);
+ assert.match(html,/href="\.\/style\.css\?v=20261108-banco-panel-v1"/);
  // No se modifican los elementos visuales aprobados de las etiquetas ni la cabecera interior.
  assert.equal((main.match(/class="card format-card"/g)||[]).length,1);
  assert.equal((main.match(/class="card step-card"/g)||[]).length,2);
@@ -100,6 +100,6 @@ test("La vista previa mantiene accesibilidad y sólo revela errores de construcc
  assert.match(css,/\.format-preview \.status-line\[data-error="true"\]\{display:block/);
  for(const id of ["design-status","c-status","a-status"])
   assert.ok(app.includes('$("'+id+'").dataset.error="true"'));
- assert.match(html,/src="\.\/app\.js\?v=20261108-raster-regiones-v1"/);
- assert.match(html,/href="\.\/style\.css\?v=20261108-conserva-heading-v1"/);
+ assert.match(html,/src="\.\/app\.js\?v=20261108-banco-integration-v1"/);
+ assert.match(html,/href="\.\/style\.css\?v=20261108-banco-panel-v1"/);
 });

@@ -13,7 +13,7 @@
   if(rawGrams!==""&&(!/^\d{1,4}$/.test(rawGrams)||Number(rawGrams)<1||Number(rawGrams)>9999))
    throw Error("Si indicas cantidad, utiliza entre 1 y 9999 gramos enteros.");
   const mode=String(raw.mode||"freeze");
-  if(!["freeze","fridge","other"].includes(mode))throw Error("Tipo de conservación no reconocido.");
+  if(!["freeze","fridge","pantry","preserve","other"].includes(mode))throw Error("Tipo de conservación no reconocido.");
   const notesEnabled=raw.notesEnabled===undefined?String(raw.footer??"none")!=="none":raw.notesEnabled===true;
   let note=raw.note===undefined?({none:"",defrost:"Descongelar en nevera",fridge:"Conservar en nevera"}[String(raw.footer??"none")]):String(raw.note);
   if(typeof note!=="string")throw Error("Instrucción de conservación no reconocida.");
@@ -35,7 +35,7 @@
  function draw(c,data,officialLogo){
   fit(c,data.name,8,32,"700",29,'"Bricolage Grotesque"',337,17);
   c.fillRect(0,48,354,9);
-  c.font='400 17px "Geist"';c.fillText(data.mode==="freeze"?"Envasado y congelación":data.mode==="other"?"Conservación":"Envasado",8,91);
+  c.font='400 17px "Geist"';c.fillText(data.mode==="freeze"?"Envasado y congelación":data.mode==="fridge"?"Envasado":"Conservación",8,91);
   c.fillText("Consumo preferente",8,124);
   c.font='700 17px "Geist"';c.textAlign="right";
   c.fillText(data.packed,337,91);c.fillText(data.expiry,337,124);

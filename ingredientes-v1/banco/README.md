@@ -64,6 +64,23 @@ Aves quedan dentro de Carnes y Aves; pulpo dentro de Cefalópodos; hongos y alga
 
 No hay todavía **`catalogo.json`** ni registros creados por esta operación. Tampoco se cambia el original [FoodKeeper](fuentes/foodkeeper-es-original.json).
 
+## Catálogo mínimo experimental: seis ingredientes (08/11/2026)
+
+El archivo [**`catalogo.json`**](catalogo.json) ya está creado y contiene **seis fichas**. Es un conjunto inicial para probar la interfaz, no el banco definitivo ni una obligación de registrar nuevos alimentos.
+
+| Ingrediente | Clasificación | Estado y fuente | Plazos actualmente disponibles |
+|---|---|---|---|
+| Carne picada de ternera | Carnes y Aves / Vacuno | `parcial`, FoodKeeper `59` | Refrigeración **2 días**; congelación **90 días** |
+| Pulpo | Pescados y Mariscos / Cefalópodos | `sin_datos` | Ninguno, `null` |
+| Patata | Frutas y Verduras / Tubérculos | `parcial`, FoodKeeper `297` | Refrigeración **14 días**; despensa **sin plazo fijado** (rango 1–2 meses en la fuente) |
+| Lechuga | Frutas y Verduras / Verduras de hoja | `parcial`, FoodKeeper `290` | Refrigeración **14 días** (iceberg o romana) |
+| Orejones | Frutas y Verduras / Frutas | `parcial`, FoodKeeper `379` | Despensa **180 días**; sinónimo «Albaricoques deshidratados» |
+| Salsa de tomate | Despensa / Conservas | `sin_datos` | Ninguno, `null` |
+
+**Sin extrapolaciones:** la fuente FoodKeeper 297 solo aporta congelación para patatas cocidas y machacadas (no patatas enteras). Para lechuga se concreta la presentación iceberg/romana. Pulpo no tiene ficha propia en el archivo y «Salsa de tomate» no implica automáticamente una conserva procesada concreta: no asignar plazos que no corresponden. Se conserva el [original de FoodKeeper](fuentes/foodkeeper-es-original.json) sin alteraciones. El campo fuente es **global de la ficha**.
+
+**Interfaz ya implementada en laboratorio:** [`../banco-ui.js`](../banco-ui.js) + chips bajo el selector de Pequeña, buscador por nombre/sinónimos, chips solo de categorías con datos, filtro de subcategoría y panel inferior vertical/lateral horizontal. Solo «Aplicar a etiqueta» modifica los campos, todos editables. Hay dos borradores recuperables: libre/banco. El selector existente de Pequeña admite Despensa y Conserva. Recalcula días desde envasado mientras la fecha sugerida no haya sido modificada manualmente; se puede restablecer. Sin plazo, no inventar fecha ni impedir introducirla a mano. **Pendiente de revisión visual de la usuaria y ensayos físicos; no afecta a Compacta/Amplia ni producción.**
+
 ## Contrato vigente para el catálogo derivado (08/11/2026)
 
 La clasificación de la tabla anterior es **solo original FoodKeeper**; no forma parte de la UI ni se importará completa. El futuro JSON **MiruRecetas** tendrá categorías/subcategorías/nombres es-ES y se limita a **ingredientes reales comprados a granel**, como carnes, pescados, mariscos, verduras, frutas o frutos secos; también contempla, más adelante, **conservas caseras**. **Según la selección editorial aprobada, el banco no incluirá fichas de productos comerciales envasados**; esto no restringe lo que puede escribirse en modo libre. Compacta y Amplia conservan sus usos independientes.
@@ -93,4 +110,4 @@ Para congelación, `tip_descongelacion` puede aplicarse a la nota de etiqueta; e
 
 **Ejemplo del original:** `FoodKeeper Product.ID=59` («Ternera — Carne molida») tiene `DOP_Refrigerate=1–2 días` y `DOP_Freeze=3–4 meses`. La futura ficha `CAR-VAC-001` usará **2 días** de refrigeración y **90 días** de congelación; la referencia fuente bastará para consultar de nuevo los campos originales.
 
-**Estado:** las decisiones están registradas y el [JSON Schema](catalogo.schema.json) **ya se ha creado y revisado con ejemplos**, pero el catálogo JSON derivado con ingredientes y el panel **todavía no están implementados**. Véase el [protocolo canónico](../MIS-ETIQUETAS-VISION-Y-HOJA-DE-RUTA.md).
+**Estado:** el [JSON Schema](catalogo.schema.json) y el [catálogo mínimo de seis fichas](catalogo.json) existen; chips y panel están **implementados en laboratorio, pendientes de revisión visual**, y el catálogo definitivo aún no está poblado. Véase el [protocolo canónico](../MIS-ETIQUETAS-VISION-Y-HOJA-DE-RUTA.md).
