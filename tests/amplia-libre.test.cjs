@@ -190,5 +190,5 @@ test("Formulario, preview e impresión BLE habilitada tras validación visual",(
  assert.ok(css.includes("#a-preview{width:100%"));
  assert.ok(css.includes("#compact-fields textarea,#wide-fields textarea"));
  assert.ok(css.includes("font:inherit;font-weight:500;line-height:1.5"));
- assert.ok(html.includes('href="./style.css?v=20261108-conserva-heading-v1"'));
+ assert.ok(html.includes('href="./style.css?v=20261108-banco-panel-v1"'));
 });
