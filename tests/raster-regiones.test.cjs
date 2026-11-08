@@ -164,6 +164,21 @@ test("Patrones de regiones aleatorias reproducibles para los tres formatos",()=>
   check(id,cv,paper);
  }
 });
+test("Un raster originalmente bloqueado puede imprimirse tras la reducción sin subir límite",()=>{
+ const cv=canvas(590,945,({rect})=>{
+  for(let stripe=0;stripe<62;stripe++){
+   const y=stripe*12;
+   rect(13,y+1,100,10);
+   rect(465,y+1,100,10);
+  }
+ });
+ const old=oldSize(cv,"50 mm,80 mm");
+ assert.ok(old.bytes>35000,"El algoritmo anterior debe haber bloqueado este ejemplo");
+ const now=check("horizontal",cv,"50 mm,80 mm");
+ assert.ok(now.bytes<35000,"La variante optimizada debe ser imprimible");
+ assert.ok(now.savedBytes>10000);
+ assert.equal(now.baselineBytes,old.bytes);
+});
 test("Sigue bloqueando trabajos grandes sin subir el límite de 35 KB",()=>{
  const cv=canvas(590,945,({rect})=>rect(0,0,590,945));
  assert.throws(()=>M.forFormat("horizontal").build(cv,1),
