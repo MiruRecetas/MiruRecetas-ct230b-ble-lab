@@ -46,6 +46,82 @@
 
 La tabla conserva los nombres de categorías de origen, incluidas las expresiones no habituales en español de España. La clasificación, denominaciones y número de registros que aparezcan en el **catálogo derivado** serán decisiones editoriales propias de MiruRecetas.
 
+## Matización de conservación · morcillas y curados (08/11/2026, vigente)
+
+La usuaria aportó capturas de una respuesta generada en búsquedas de Google
+con tablas orientativas y precisó dos condiciones editoriales. Se ha
+contrastado con fuentes primarias. **No atribuir a FoodKeeper ni a las
+autoridades los números de las capturas sin fuente verificable.**
+
+**Morcilla de Burgos y Morcilla Matachana**
+(`CAR-ELA-006`, `CAR-ELA-007`): ambas **requieren refrigeración
+obligatoria de 2 a 4 °C**, incluso cuando se elaboran mediante cocción,
+por su humedad y composición. Envasarlas al vacío en casa **no
+autoriza almacenarlas en despensa**. Se establece **5 días
+en refrigeración** como plazo doméstico conservador desde compra o
+fraccionamiento fresco, sin reiniciar una fecha ya transcurrida;
+se conservan **30 días de congelación** como plazo prudente de
+calidad, no se elevan a 90 días solo por la captura. Los
+`tips_refrigeracion` pasan a `"Frío obligatorio: 2–4 °C"`,
+texto corto que la UI muestra como nota editable sin modificación
+de código, y `tips_preparacion_conservacion` documenta la misma
+condición. `despensa: false`, `conserva: false`. Apoyo:
+[ficha comercial de Morcilla de Burgos La Ribera](https://www.morcillaslaribera.com/morcilla-de-burgos/)
+(refrigeración 0–5 °C incluso envasada al vacío),
+[productor de Morcilla Matachana](https://morcillamatachana.com/morcilla-matachana/)
+(vida en **frío**; varía por formato),
+[Embutidos Entrepeñas, morcilla fresca](https://tienda.embutidosentrepenas.es/embutidos/morcilla/morcilla.html)
+(1–4 °C) y
+[AESAN, vida útil de cárnicos cocidos loncheados](https://www.aesan.gob.es/AECOSAN/docs/documentos/publicaciones/revistas_comite_cientifico/LONCHEADOS.pdf)
+(criterio de referencia 5 días a 4 °C para ciertos cocidos
+fraccionados; no es estudio específico de morcillas).
+Se aplica el criterio más conservador para compra a granel;
+prevalece cualquier indicación más restrictiva del vendedor.
+
+**Curados (jamón serrano, jamón ibérico, lomo embuchado,
+salchichón, chorizo curado y cecina):** la usuaria plantea
+**60 días en despensa para loncheados envasados al vacío** y
+**180 días para piezas enteras sin vacío**. Esta distinción
+entre **curados secos** y **fiambres cocidos que requieren frío**
+es pertinente, pero **los plazos no se pueden aplicar
+automáticamente a toda la familia**.
+[AESAN, informe sobre productos cárnicos curados cortados/loncheados
+y envasados para venta minorista](https://www.aesan.gob.es/AECOSAN/docs/documentos/publicaciones/revistas_comite_cientifico/LONCHEADOS.pdf)
+reconoce estabilidad a temperatura ambiente **cuando la actividad
+de agua y el pH específicos del producto impiden la proliferación
+de peligros microbiológicos**; el tiempo de vida útil no queda
+fijado de forma universal por el mero hecho de estar al vacío.
+[AESAN, guía de despensa](https://www.aesan.gob.es/AECOSAN/docs/documentos/tema_interes/guia_baja.pdf)
+admite piezas enteras curadas como jamón y cecina en despensa
+fresca, ventilada, seca y sin luz directa.
+En cambio, el
+[Consorcio del Jamón Serrano](https://consorcioserrano.es/jamon-consorcio-serrano/sabor-aroma-y-conservacion/)
+recomienda **refrigerar loncheados/deshuesados** y respetar
+las indicaciones del productor, con **2–3 días** para lonchas
+recién compradas al corte.
+
+Por tanto, las seis fichas **`presentacion: "Al corte"`**
+registradas hoy **mantienen refrigeración/congelación y
+`despensa: false`**, sin generar automáticamente una
+fecha de 60 o 180 días que sería inadecuada para
+muchos productos cortados y reenvasados en casa.
+**No se rechaza despensa como método futuro**: para
+incorporar presentaciones específicas de piezas enteras
+curadas o loncheados cuya estabilidad esté acreditada,
+registrar variantes y plazos contrastados de la presentación,
+fabricante/vendedor o evidencia técnica aplicable,
+sin confundir envase doméstico con proceso validado.
+Ningún fiambre cocido (jamón York, pavo) ni morcilla fresca
+se considera estable en despensa por recibir vacío.
+El modo libre puede seguir escribiéndose/editándose.
+
+**Alcance del ajuste:** dos fichas de morcilla, aserciones
+básicas de datos y actualización de los manuales pertinentes;
+se mantienen **45 fichas, 28 subcategorías y los ID**,
+FoodKeeper intacto, sin PR, sin cambiar HTML/CSS,
+`banco-ui.js`, plantillas, motor, BLE, producción ni PWA.
+
+
 ## Incorporación aprobada · Elaborados y Charcutería (08/11/2026, vigente)
 
 La usuaria ha seleccionado **12 elaborados** y **10 productos de charcutería al corte**; quedan incorporadas como **22 fichas** al catálogo propio (total **45**), manteniendo **4 categorías / 28 subcategorías**.
@@ -53,7 +129,7 @@ Este lote **sí admite productos de carnicería y charcutería elaborados vendid
 
 | Subcategoría | Fichas registradas | Plazos (frigorífico / congelador) |
 |---|---|---|
-| **Elaborados** | Hamburguesas de ternera; Hamburguesas de pollo; Salchichas frescas; Chorizo fresco; Chorizo criollo; Morcilla de Burgos; Morcilla Matachana; Filetes rusos; Pincho moruno; Lomo de cerdo adobado; Cachopo; San Jacobo | Hamburguesas y filetes rusos **2/90 días**; embutidos frescos (salchichas y chorizos) **2/30**; morcillas a granel **6/30**; pincho moruno crudo **2/90**; lomo adobado **5/120**; cachopo y San Jacobo **2 / sin plazo de congelación contrastado** |
+| **Elaborados** | Hamburguesas de ternera; Hamburguesas de pollo; Salchichas frescas; Chorizo fresco; Chorizo criollo; Morcilla de Burgos; Morcilla Matachana; Filetes rusos; Pincho moruno; Lomo de cerdo adobado; Cachopo; San Jacobo | Hamburguesas y filetes rusos **2/90 días**; embutidos frescos (salchichas y chorizos) **2/30**; morcillas a granel **5/30** (ajuste posterior); pincho moruno crudo **2/90**; lomo adobado **5/120**; cachopo y San Jacobo **2 / sin plazo de congelación contrastado** |
 | **Charcutería** | Jamón cocido; Jamón serrano; Jamón ibérico; Pechuga de pavo (fiambre); Salami; Lomo de cerdo embuchado; Salchichón; Chorizo curado; Bacon; Cecina | Jamón cocido y fiambre de pavo **5/30**; jamones curados al corte **3/30**; salami, lomo embuchado, salchichón, chorizo curado, cecina **6/30**; bacon **7/30** |
 
 **Referencias contrastadas y decisiones de origen:**

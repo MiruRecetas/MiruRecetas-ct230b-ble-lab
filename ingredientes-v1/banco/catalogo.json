@@ -657,8 +657,8 @@
       "fuente": "agregación",
       "id_fuente": null,
       "refrigeracion": true,
-      "refrigeracion_dias": 6,
-      "tips_refrigeracion": "",
+      "refrigeracion_dias": 5,
+      "tips_refrigeracion": "Frío obligatorio: 2–4 °C",
       "congelacion": true,
       "congelacion_dias": 30,
       "tips_descongelacion": "",
@@ -668,7 +668,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": null
+      "tips_preparacion_conservacion": "Requiere refrigeración entre 2 y 4 °C."
     },
     {
       "id": "CAR-ELA-007",
@@ -684,8 +684,8 @@
       "fuente": "agregación",
       "id_fuente": null,
       "refrigeracion": true,
-      "refrigeracion_dias": 6,
-      "tips_refrigeracion": "",
+      "refrigeracion_dias": 5,
+      "tips_refrigeracion": "Frío obligatorio: 2–4 °C",
       "congelacion": true,
       "congelacion_dias": 30,
       "tips_descongelacion": "",
@@ -695,7 +695,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": null
+      "tips_preparacion_conservacion": "Requiere refrigeración entre 2 y 4 °C."
     },
     {
       "id": "CAR-ELA-008",

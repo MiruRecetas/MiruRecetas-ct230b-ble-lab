@@ -1,5 +1,17 @@
 # Conserva · «Mis etiquetas» (laboratorio · interfaz experimental)
 
+> **Morcillas y curados · revisión 08/11/2026 (vigente):**
+> Morcilla de Burgos y Matachana: **frío obligatorio 2–4 °C**,
+> **5 días nevera / 30 días congelación** en compra doméstica
+> a granel, sin despensa. Su nota editable indica la temperatura.
+> Los curados secos pueden ser estables a temperatura ambiente
+> según sus características; **no asignar 60 días en vacío ni
+> 180 días a piezas enteras universalmente**.
+> Las fichas actuales «Al corte» siguen sin despensa hasta
+> comprobar presentación y vida útil; el vacío casero
+> no convierte un producto perecedero en estable.
+> [Expediente y fuentes](banco/README.md).
+>
 > **Banco · Elaborados y Charcutería, 08/11/2026 (vigente):**
 > Registrados 12 elaborados de carnicería y 10 productos
 > de charcutería al corte. **45 fichas totales**,
