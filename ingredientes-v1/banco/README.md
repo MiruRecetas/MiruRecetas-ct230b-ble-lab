@@ -46,13 +46,56 @@
 
 La tabla conserva los nombres de categorías de origen, incluidas las expresiones no habituales en español de España. La clasificación, denominaciones y número de registros que aparezcan en el **catálogo derivado** serán decisiones editoriales propias de MiruRecetas.
 
+## Taxonomía ampliada · Elaborados y Charcutería (08/11/2026, vigente)
+
+**Decisión autorizada:** dentro de **Carnes y Aves** se añaden las
+subcategorías **Elaborados** y **Charcutería**, junto a las siete
+anteriores. Quedan **4 categorías principales y 28 subcategorías**,
+con **9 subcategorías en Carnes y Aves**. No se introducen ingredientes
+ficticios ni se modifica el catálogo de **23 fichas** existente.
+
+- **Elaborados:** productos de carnicería elaborados y vendidos a granel,
+  especialmente hamburguesas y salchichas frescas; también se incluye
+  expresamente **chorizo curado**, conforme a la decisión editorial.
+  El chorizo curado no es carne fresca ni debe recibir por defecto
+  los plazos de refrigeración/congelación de hamburguesas o carne
+  cruda. Los métodos y plazos se estudiarán **por producto y
+  presentación** antes de incorporar cada ficha.
+- **Charcutería:** alimentos de charcutería vendidos **al corte o a
+  granel**, como jamón, fiambre de pavo, jamón York, salami, lomo
+  embuchado y bacon. Los tiempos dependerán del estado del producto,
+  salazón/curación/cocción, manipulación y condiciones del mostrador;
+  no extrapolar sin contrastar la fuente. Se mantiene el criterio
+  de excluir las **fichas de productos comerciales preenvasados**
+  por marca, pero sí se contempla la charcutería a granel
+  autorizada expresamente.
+- **Otras aves** y **Caza** permanecen vacías, sin registros ni
+  fechas previstas. **Elaborados** y **Charcutería** también nacen
+  vacías hasta la selección expresa de fichas por la usuaria.
+
+**Visibilidad:** el filtro existente de subcategorías se construye
+únicamente a partir de fichas seleccionables en el catálogo.
+Por tanto, ninguna de estas **cuatro subcategorías vacías** se muestra
+en el selector hasta que tenga ingredientes aprobados. La categoría
+principal **Carnes y Aves** permanece visible por sus otras fichas;
+no se crean chips para subcategorías sin registros. **No se cambia
+`banco-ui.js`, ni HTML, CSS, diseños o impresión.**
+
+**Procedimiento de laboratorio:** modificación de esquema,
+documentación y aserción básica de taxonomía por **commit directo
+en `main`**; sin PR ni gestión manual de Actions. El
+[archivo FoodKeeper original](fuentes/foodkeeper-es-original.json)
+continúa intacto. Las decisiones históricas anteriores de
+«26 subcategorías» quedan **sustituidas por 28**, sin borrar
+el historial de adopción de la taxonomía inicial.
+
 ## Clasificación vigente: cuatro categorías (08/11/2026)
 
-La tabla que figura más arriba con 14 categorías es únicamente **FoodKeeper original**. MiruRecetas ha sustituido su clasificación previa de 11 categorías por **cuatro categorías y 26 subcategorías aprobadas**:
+La tabla que figura más arriba con 14 categorías es únicamente **FoodKeeper original**. MiruRecetas ha sustituido su clasificación previa de 11 categorías por **cuatro categorías y 28 subcategorías aprobadas**:
 
 | Categoría | Subcategorías aprobadas |
 |---|---|
-| **Carnes y Aves** | Vacuno; Porcino; Ovino; Pollo; Pavo; Otras aves; Caza |
+| **Carnes y Aves** | Vacuno; Porcino; Ovino; Pollo; Pavo; Otras aves; Caza; Elaborados; Charcutería |
 | **Pescados y Mariscos** | Pescado blanco; Pescado azul; Crustáceos y moluscos; Cefalópodos |
 | **Frutas y Verduras** | Frutas; Hortalizas; Verduras de hoja; Tubérculos; Hongos; Algas |
 | **Despensa** | Arroz; Pasta; Cereales; Legumbres; Harinas; Frutos secos; Semillas; Especias y hierbas; Conservas |
@@ -69,7 +112,7 @@ Aves quedan dentro de Carnes y Aves; pulpo dentro de Cefalópodos; hongos y alga
 
 [**`catalogo.schema.json`**](catalogo.schema.json) define el almacenamiento mínimo en **JSON Schema Draft 2020-12**. El catálogo que se creará después tiene raíz `{"ingredientes":[]}` y puede empezar vacío. **Crear el esquema no significa que exista ya un catálogo poblado ni que el panel esté implementado.**
 
-- Contiene las **4 categorías y 26 subcategorías aprobadas** y el ID tipo `CAR-VAC-001` (siglas de categoría, siglas de subcategoría y número).
+- Contiene las **4 categorías y 28 subcategorías aprobadas** y el ID tipo `CAR-VAC-001` (siglas de categoría, siglas de subcategoría y número).
 - Incluye identidad, `presentacion` opcional como `null`, `sinonimos` como lista, estado/fuente/ID de fuente **globales**, cuatro modos de conservación y tips, y `tips_preparacion_conservacion` para posible uso futuro.
 - Para fichas `verificado`/`parcial` pide los cuatro métodos con sus tiempos en **días** y consejos. Método no disponible (`false`) → tiempo y tip `null`; método pendiente en ficha `parcial` → `true`, días y tips `null`. En `sin_datos` **no obliga a inventar valores de conservación**: los modos todavía pueden omitirse.
 - `fuente` e `id_fuente` son una pareja única por ficha, no por método. En `sin_datos`, ambos `null`; cuando `fuente` es `usuario` o `agregación`, `id_fuente` es `null`.

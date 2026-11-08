@@ -1,5 +1,17 @@
 # Conserva · «Mis etiquetas» (laboratorio · interfaz experimental)
 
+> **Taxonomía Carnes y Aves · 08/11/2026 (vigente):**
+> 9 subcategorías: Vacuno, Porcino, Ovino, Pollo, Pavo,
+> Otras aves, Caza, **Elaborados** y **Charcutería**.
+> Elaborados: hamburguesas y salchichas frescas de carnicería
+> y chorizo curado; este último sin extrapolar plazos de
+> carne cruda. Charcutería: jamón, fiambres, salami, lomo
+> embuchado y bacon vendidos al corte/a granel.
+> Otras aves, Caza, Elaborados y Charcutería siguen vacías y
+> ocultas hasta contar con fichas seleccionables.
+> **28 subcategorías totales, 23 fichas sin cambios**.
+> [Decisión canónica](banco/README.md).
+>
 > **Banco de aves · incorporación 08/11/2026:** seis fichas autorizadas:
 > Pollo entero, Pechuga de pollo (Pieza entera / Filetes),
 > Muslo de pollo, Carne picada de pollo y Pechuga de pavo.
@@ -135,9 +147,9 @@ AESAN queda como fuente de contraste. **`estado_recomendacion`, `fuente` e `id_f
 
 ## Taxonomía aprobada para el banco de ingredientes (08/11/2026)
 
-**4 categorías principales:** **Carnes y Aves** (Vacuno, Porcino, Ovino, Pollo, Pavo, Otras aves, Caza); **Pescados y Mariscos** (Pescado blanco, Pescado azul, Crustáceos y moluscos, Cefalópodos); **Frutas y Verduras** (Frutas, Hortalizas, Verduras de hoja, Tubérculos, Hongos, Algas); **Despensa** (Arroz, Pasta, Cereales, Legumbres, Harinas, Frutos secos, Semillas, Especias y hierbas, Conservas).
+**4 categorías principales:** **Carnes y Aves** (Vacuno, Porcino, Ovino, Pollo, Pavo, Otras aves, Caza, Elaborados, Charcutería); **Pescados y Mariscos** (Pescado blanco, Pescado azul, Crustáceos y moluscos, Cefalópodos); **Frutas y Verduras** (Frutas, Hortalizas, Verduras de hoja, Tubérculos, Hongos, Algas); **Despensa** (Arroz, Pasta, Cereales, Legumbres, Harinas, Frutos secos, Semillas, Especias y hierbas, Conservas).
 
-Esta clasificación reúne **4 categorías y 26 subcategorías aprobadas** y sustituye las once categorías editoriales anteriores, excluyendo «Lácteos y huevos». La última subcategoría de Despensa se denomina simplemente **«Conservas»** en el panel, aunque se reservará a conservas caseras; nunca a productos comerciales. Los **chips de categorías vacías no aparecerán en el panel**: para mostrarse, una categoría debe contener al menos un ingrediente seleccionable. Nunca crear registros ficticios ni incluir productos comerciales envasados. El [JSON Schema del banco](banco/catalogo.schema.json) **ya está creado** (4 categorías, 26 subcategorías y metadatos aprobados), y el **catálogo mínimo y el panel ya están implementados en laboratorio**, aún pendientes de validación visual; no es el catálogo definitivo. [Contrato del banco](banco/README.md).
+Esta clasificación reúne **4 categorías y 28 subcategorías aprobadas** y sustituye las once categorías editoriales anteriores, excluyendo «Lácteos y huevos». La última subcategoría de Despensa se denomina simplemente **«Conservas»** en el panel, aunque se reservará a conservas caseras; nunca a productos comerciales. Los **chips de categorías vacías no aparecerán en el panel**: para mostrarse, una categoría debe contener al menos un ingrediente seleccionable. Nunca crear registros ficticios ni incluir productos comerciales envasados. El [JSON Schema del banco](banco/catalogo.schema.json) **ya está creado** (4 categorías, 28 subcategorías y metadatos aprobados), y el **catálogo mínimo y el panel ya están implementados en laboratorio**, aún pendientes de validación visual; no es el catálogo definitivo. [Contrato del banco](banco/README.md).
 
 ## Banco JSON de Pequeña · patrón D con veintitrés fichas (08/11/2026)
 

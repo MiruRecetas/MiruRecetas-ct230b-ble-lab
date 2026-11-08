@@ -32,7 +32,11 @@ test("catálogo de veintitrés fichas, con ID y variante únicos",()=>{
   "Pulpo","Patata","Lechuga","Orejones","Salsa de tomate"
  ]));
  assert.equal(categories.length,4);
- assert.equal(Object.values(subcategories).flat().length,26);
+ assert.equal(Object.values(subcategories).flat().length,28);
+ assert.deepEqual(subcategories["Carnes y Aves"],
+  ["Vacuno","Porcino","Ovino","Pollo","Pavo","Otras aves","Caza","Elaborados","Charcutería"]);
+ for(const empty of ["Otras aves","Caza","Elaborados","Charcutería"])
+  assert.equal(records.filter(x=>x.subcategoria===empty).length,0,"sin fichas: "+empty);
  for(const r of records){
   assert.match(r.id,/^[A-Z]{2,}-[A-Z]{2,}-\d{3,}$/);
   assert.ok(categories.includes(r.categoria));
