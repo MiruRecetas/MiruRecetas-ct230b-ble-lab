@@ -11,12 +11,15 @@
 > **Ampliación de banco · Vacuno (08/11/2026):**
 > incorporadas cuatro fichas FoodKeeper 36, 37, 40 y 41, con IDs
 > CAR-VAC-002…005. Redondo, solomillo entero, filetes y carne
-> para guisar. Se ofrece **solo refrigeración (5 días) y congelación
-> (120 días)**; despensa/conserva quedan excluidas en estas fichas
-> crudas. Notas editoriales de nevera/descongelación preexistentes,
-> fuente original FoodKeeper conservada y sin modificar diseños ni
-> componentes de impresión. Catálogo vigente: **10 fichas**, cinco
-> de Vacuno. [Expediente de datos](banco/README.md).
+> para guisar. **Redondo, solomillo y filetes:** refrigeración
+> **5 días** y congelación **120 días**. **Carne para guisar en dados:**
+> refrigeración **2 días** y congelación **90 días**, por el contraste
+> específico con otras fuentes de conservación doméstica frente al
+> FoodKeeper ES original ID 41 (registrado como `agregación`).
+> Solo se ofrecen frío y congelación; despensa/conserva no se ofrecen.
+> Notas editoriales de nevera/descongelación existentes y sin cambios
+> de diseño ni impresión. Catálogo: **10 fichas**, cinco de Vacuno.
+> [Expediente y discrepancia documentados](banco/README.md).
 >
 > **Actualización correctiva 08/11/2026 (prevalece sobre pasajes históricos):**
 > restaurada la plantilla Pequeña previa a #68; el banco ofrece solo métodos
