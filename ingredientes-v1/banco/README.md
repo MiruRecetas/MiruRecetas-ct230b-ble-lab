@@ -46,7 +46,7 @@ La clasificación de la tabla anterior es **solo original FoodKeeper**; no forma
 - Congelación: **valor mínimo** del rango publicado (objetivo preservar calidad).
 - Convertir al incorporar: **semana = 7 días; mes = 30 días**. Todos los valores del JSON derivado se expresarán en **días enteros**; no almacenar ni el rango ni su unidad en el catálogo propio.
 - El **envasado al vacío** es habitual en MiruRecetas, pero **no añade automáticamente días** sobre FoodKeeper. Los periodos son orientativos para calidad y no garantías de seguridad; preservar correctamente la cadena de frío sigue siendo necesario.
-- Si el registro fuente no ofrece un dato aplicable, mantener el plazo `null`. No interpretar la ausencia de datos como «no recomendado» ni inventar valores. Fuente por recomendación, concisa: `FoodKeeper:59`, identificador de otra fuente, o indicación expresa del usuario. AESAN puede usarse para contrastar.
+- Si el registro fuente no ofrece un dato aplicable, mantener el plazo `null`. No interpretar la ausencia de datos como «no recomendado» ni inventar valores. Una sola fuente **global por ficha** y, cuando exista, un único `id_fuente`: p. ej. `fuente: "FoodKeeper"`, `id_fuente: "59"`; no registrar procedencia por método. AESAN puede usarse para contrastar.
 - Para el futuro modo **conserva casera**, no aplicar plazos de conservas industriales a procesos domésticos sin instrucciones validadas.
 
 **Metadatos de la ficha global, NO por conservación:**
