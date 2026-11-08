@@ -113,6 +113,28 @@ test("fecha manual prevalece y explorar sin aplicar no cambia el formulario",asy
  assert.equal(el("expiry").value,"2027-04-08");
 });
 
+test("nombres nuevos y medallones de solomillo comparten plazos de corte entero",async()=>{
+ for(const item of [
+  ["Redondo de ternera","Pieza entera",5,120],
+  ["Solomillo de ternera",null,5,120],
+  ["Filetes de ternera","Filetes",5,120],
+  ["Ternera para guisar","Dados",2,90]
+ ]){
+  const [name,presentation,fridge,freeze]=item;
+  const {el,mode,aplicar}=entorno();
+  await aplicar(name);
+  assert.equal(el("name").value,name);
+  assert.deepEqual(mode.options.map(x=>x.value),["fridge","freeze"]);
+  assert.equal(el("expiry").value,freeze===120?"2027-03-08":"2027-02-06");
+  mode.value="fridge";mode.fire("change");
+  assert.equal(el("expiry").value,fridge===5?"2026-11-13":"2026-11-10");
+ }
+ const {el,aplicar}=entorno();
+ await aplicar("Medallones de solomillo");
+ assert.equal(el("name").value,"Solomillo de ternera");
+ assert.equal(el("expiry").value,"2027-03-08");
+});
+
 test("los borradores sin modo comprobado no aparecen como opciones del banco",async()=>{
  const {el}=entorno();
  el("bank-open").fire("click");

@@ -10,8 +10,12 @@
 >
 > **Ampliación de banco · Vacuno (08/11/2026):**
 > incorporadas cuatro fichas FoodKeeper 36, 37, 40 y 41, con IDs
-> CAR-VAC-002…005. Redondo, solomillo entero, filetes y carne
-> para guisar. **Redondo, solomillo y filetes:** refrigeración
+> CAR-VAC-002…005. **Redondo de ternera**, **Solomillo de ternera**,
+> **Filetes de ternera** y **Ternera para guisar** (presentaciones:
+> Pieza entera, null, Filetes y Dados respectivamente). Solomillo
+> cubre pieza entera y medallones crudos de 3–4 cm con los mismos
+> plazos; el original FoodKeeper distingue beef/veal y mantiene sus IDs.
+> **Redondo, solomillo y filetes:** refrigeración
 > **5 días** y congelación **120 días**. **Carne para guisar en dados:**
 > refrigeración **2 días** y congelación **90 días**, por el contraste
 > específico con otras fuentes de conservación doméstica frente al
