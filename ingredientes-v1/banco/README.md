@@ -52,6 +52,18 @@ Aves quedan dentro de Carnes y Aves; pulpo dentro de Cefalópodos; hongos y alga
 
 **No añadir restricciones funcionales que la usuaria no haya pedido.** El etiquetado libre de Pequeña sigue disponible siempre; seleccionar un ingrediente del banco **solo precarga campos editables**. El banco es una colección sencilla de datos para evitar escribir a mano, **no un sistema de aprobación de lo que se puede etiquetar**. Los estados globales `verificado`, `parcial` y `sin_datos` son **metadatos del catálogo, no permisos de impresión**. Si falta plazo (`null`), no hay sugerencia automática de fecha, pero la usuaria puede completar los datos manualmente y utilizar la etiqueta. Las reglas sobre qué fichas se añaden al banco (como no poblarlo con productos comerciales) son solo **selección editorial del banco** y no restringen las etiquetas libres. Conservar las validaciones técnicas existentes de impresión, sin crear controles adicionales de contenido, procedencia o seguridad alimentaria.
 
+## JSON Schema del catálogo (creado 08/11/2026)
+
+[**`catalogo.schema.json`**](catalogo.schema.json) define el almacenamiento mínimo en **JSON Schema Draft 2020-12**. El catálogo que se creará después tiene raíz `{"ingredientes":[]}` y puede empezar vacío. **Crear el esquema no significa que exista ya un catálogo poblado ni que el panel esté implementado.**
+
+- Contiene las **4 categorías y 26 subcategorías aprobadas** y el ID tipo `CAR-VAC-001` (siglas de categoría, siglas de subcategoría y número).
+- Incluye identidad, `presentacion` opcional como `null`, `sinonimos` como lista, estado/fuente/ID de fuente **globales**, cuatro modos de conservación y tips, y `tips_preparacion_conservacion` para posible uso futuro.
+- Para fichas `verificado`/`parcial` pide los cuatro métodos con sus tiempos en **días** y consejos. Método no disponible (`false`) → tiempo y tip `null`; método pendiente en ficha `parcial` → `true`, días y tips `null`. En `sin_datos` **no obliga a inventar valores de conservación**: los modos todavía pueden omitirse.
+- `fuente` e `id_fuente` son una pareja única por ficha, no por método. En `sin_datos`, ambos `null`; cuando `fuente` es `usuario` o `agregación`, `id_fuente` es `null`.
+- **No modifica ni gobierna el uso de las etiquetas libres**: el banco solo precarga campos editables y un plazo desconocido no genera fecha automática. Los criterios editoriales de selección del banco no son prohibiciones de etiquetado.
+
+No hay todavía **`catalogo.json`** ni registros creados por esta operación. Tampoco se cambia el original [FoodKeeper](fuentes/foodkeeper-es-original.json).
+
 ## Contrato vigente para el catálogo derivado (08/11/2026)
 
 La clasificación de la tabla anterior es **solo original FoodKeeper**; no forma parte de la UI ni se importará completa. El futuro JSON **MiruRecetas** tendrá categorías/subcategorías/nombres es-ES y se limita a **ingredientes reales comprados a granel**, como carnes, pescados, mariscos, verduras, frutas o frutos secos; también contempla, más adelante, **conservas caseras**. **Según la selección editorial aprobada, el banco no incluirá fichas de productos comerciales envasados**; esto no restringe lo que puede escribirse en modo libre. Compacta y Amplia conservan sus usos independientes.
@@ -81,4 +93,4 @@ Para congelación, `tip_descongelacion` puede aplicarse a la nota de etiqueta; e
 
 **Ejemplo del original:** `FoodKeeper Product.ID=59` («Ternera — Carne molida») tiene `DOP_Refrigerate=1–2 días` y `DOP_Freeze=3–4 meses`. La futura ficha `CAR-VAC-001` usará **2 días** de refrigeración y **90 días** de congelación; la referencia fuente bastará para consultar de nuevo los campos originales.
 
-**Estado:** estas decisiones están registradas, pero el JSON derivado, el esquema y el panel **no se han creado todavía**. Véase el [protocolo canónico](../MIS-ETIQUETAS-VISION-Y-HOJA-DE-RUTA.md).
+**Estado:** las decisiones están registradas y el [JSON Schema](catalogo.schema.json) **ya se ha creado y revisado con ejemplos**, pero el catálogo JSON derivado con ingredientes y el panel **todavía no están implementados**. Véase el [protocolo canónico](../MIS-ETIQUETAS-VISION-Y-HOJA-DE-RUTA.md).
