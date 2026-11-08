@@ -94,11 +94,16 @@ El diagnóstico técnico existente muestra, por formato y para el **mismo
 raster**, los bytes anteriores, los actuales, el ahorro en bytes/porcentaje
 y las sub-bandas antes/después. `build()` expone `baselineBytes`,
 `baselineTiles`, `bytes`, `tiles` y `savedBytes`; esos datos también están
-en el dataset del canvas para comprobación. La incidencia previa de Amplia
-predeterminada fue **44.334 B** (captura Android aportada); la nueva medida
-efectiva debe leerse de la página publicada y del registro, **no extrapolar
-las cifras de los tests sintéticos**. Si un trabajo sigue superando 35 KB,
-se bloquea y se muestran ambas medidas.
+en el dataset del canvas para comprobación. **Resultados reales del navegador Android (08/11/2026, PR #55 publicada):**
+- **Pequeña:** 4.048 → 3.226 B; ahorro 822 B (20,3 %); 16 → 23 sub-bandas.
+- **Compacta:** 14.176 → 9.476 B; ahorro 4.700 B (33,2 %); 27 → 56 sub-bandas.
+- **Amplia (Pisto casero):** 44.334 → 27.505 B; ahorro 16.829 B (38,0 %); 79 → 280 sub-bandas.
+
+El resultado de Amplia queda **por debajo de 35.000 B sin modificar el límite**.
+Son mediciones comunicadas por la usuaria desde el diagnóstico del navegador,
+**no** resultados de patrones sintéticos ni verificación de impresión física;
+la reducción de bytes no demuestra un tiempo de impresión real. Si un trabajo
+posterior sigue superando 35 KB se bloquea y se muestran ambas medidas.
 
 La equivalencia 1 bpp se prueba reconstruyendo cada TSPL enviado sobre el
 lienzo físico de los tres tamaños, junto con casos de bandas llenas, blancas,
