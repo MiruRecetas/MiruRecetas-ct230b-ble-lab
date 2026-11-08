@@ -192,7 +192,9 @@
   // Cantidad y envasado nunca vienen del catálogo: conservar los que introdujo la usuaria.
   $("name").value=item.nombre;
   $("note").value=tipFor(item,$("mode").value);
-  manuallyEditedExpiry=false;lastAuto="";
+  // Un dato sin plazo no borra una fecha manual que la usuaria ya escribió.
+  manuallyEditedExpiry=daysFor(item,$("mode").value)===null&&!!$("expiry").value;
+  lastAuto="";
   suggestDate();
   bankDraft=readForm();bankDraftItemId=item.id;
   closeSheet();
