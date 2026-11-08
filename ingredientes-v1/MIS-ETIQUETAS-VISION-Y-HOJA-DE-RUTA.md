@@ -74,19 +74,28 @@ versiones. Una modificación posterior del diseño libre **no podrá alterar**
 la etiqueta existente de recetas. La V0.9 original con QR permanece aprobada
 e inmutable. La nueva versión **sin QR** ha recibido una decisión de diseño explícita el 08/11/2026 (PR [#45](https://github.com/MiruRecetas/MiruRecetas-ct230b-ble-lab/pull/45)); **la impresión física sigue sin validar**.
 
-- Lienzo 590 × 354; título grande y firma superior compuesta por **isotipo BN oficial**
-  y «MiruRecetas» en Bricolage Grotesque. Barra superior a y=69; panel de
-  fechas/nutrición a y≈90–174 y separador a y=180. Con macros activos, fechas
-  en dos filas a la izquierda y nutrición a la derecha; con macros ocultos,
-  fechas en dos columnas de ancho equilibrado. Los encabezados negros de
-  conservación y nota a y≈191 y y≈274, con textos opcionales extendidos a todo
-  el ancho y espacio reservado que no se contrae al vaciar los campos.
+- Lienzo 590 × 354. **Corrección 08/11/2026 tras comparar capturas Android**:
+  cabecera idéntica a V0.9, título Bricolage Grotesque (x=11, y=46, 46 px),
+  isotipo BN grande (x=525, y=5, 53 × 48) y banda negra completa y=60, alto 12.
+  **No añadir** «MiruRecetas» bajo el isotipo ni reducirlo. Con macros activos,
+  dos filas de rótulos/fechas alineados verticalmente sin divisores internos;
+  nutrición más espaciada a derecha, kcal en caja redondeada negra. Con macros
+  ocultos, dos columnas de fechas y rótulos **centrados**, sin divisor vertical.
+  Se elimina la línea horizontal adicional antes de «CONSERVACIÓN Y CONSUMO».
+  Encabezados negros de conservación y nota conservan posiciones (y≈191 y
+  y≈274), líneas laterales, textos opcionales y huecos fijos aunque estén vacíos.
 - El espacio inferior derecho antes ocupado por el QR se aprovecha en el
   diseño aprobado: las secciones inferiores ocupan el ancho disponible. No
   copiar QR, URL de receta, raciones ni gramaje.
 - Formulario propio editable: título, tipo de conservación, fecha primaria
   obligatoria, consumo preferente opcional, kcal y tres macros independientes
-  (todos opcionales), instrucciones y nota manuales.
+  (todos opcionales), instrucciones y nota manuales. Las reglas aprobadas de
+  Pequeña se heredan **sin importar su motor**: congelación → «Envasado y
+  congelación»/«Descongelar en nevera»; refrigeración → «Envasado»/«Conservar
+  en nevera»; otro → «Conservación»/texto vacío. El segundo rótulo
+  «Consumo preferente» es constante y su fecha opcional. Al cambiar de modo
+  se precarga la instrucción correspondiente y se limpia la nota antigua;
+  ambas se pueden editar y ninguno de los tres modos infiere una duración.
 - Control de visibilidad del **bloque nutricional** y del **texto** de
   instrucciones y nota. Con nutrición activa, las fechas van en filas a la
   izquierda y los macros a la derecha. Al desactivarla, las dos fechas
@@ -169,7 +178,8 @@ Para todo cambio:
 | 06/11/2026 | **Selector de cuatro tarjetas en una fila, SVG definitivos de PR #40, títulos y tamaños sin disponibilidad** | **Diseño aprobado expresamente** |
 | 06/11/2026 | Banco JSON con filtros guiados; después de los dos modelos de etiquetas libres | Dirección aceptada, pendiente de desarrollo |
 | 06/11/2026 | «Mis reservas» como futuro inventario remoto autenticado; no usar caché local como BD | Requisito arquitectónico futuro |
-| 08/11/2026 | Compacta libre: diseño de la imagen aportada; isotipo oficial BN y Bricolage Grotesque/Geist; macros activos = fechas izquierda/nutrición derecha; macros ocultos = fechas a dos columnas; títulos inferiores siempre, contenidos opcionales y huecos preservados | Diseño autorizado; implementación PR #45, pendiente de prueba física y aceptación del raster publicado |
+| 08/11/2026 | Compacta libre: diseño de la imagen aportada; isotipo oficial BN y Bricolage Grotesque/Geist; macros activos = fechas izquierda/nutrición derecha; macros ocultos = fechas a dos columnas; títulos inferiores siempre, contenidos opcionales y huecos preservados | Diseño autorizado; primera implementación PR #45, sustituida por las correcciones visuales de PR #46; pendiente validación física |
+| 08/11/2026 | Comparativa con etiqueta V0.9 y capturas Android: restaurar exactamente título/isotipo/banda; suprimir separadores extra; centrar dos columnas sin macros; alinear rótulos/fechas con macros; redondear kcal y airear nutrientes; aplicar títulos y presets aprobados de Pequeña al cambiar conservación | Autorizado, implementado en PR [#46](https://github.com/MiruRecetas/MiruRecetas-ct230b-ble-lab/pull/46), pendiente de revisión visual publicada y ensayo físico CT230B |
 | Futuro | Etiquetas de tarros, sesiones, favoritos, reimpresión, datos de cuenta | Propuestas por concretar |
 
 **Este documento debe actualizarse en la misma PR que cambie el alcance o acepte nuevas decisiones; no esperar a recordar el contexto conversacional.**
