@@ -45,7 +45,7 @@ Navegación futura aprobada conceptualmente: menú **Conserva → Listas de la c
   - **Más formatos, Próximamente:** icono de formatos superpuestos y signo +, tarjeta de borde discontinuo no seleccionable.
 - **No mostrar** «receta horizontal», «componente», «ingrediente», «Disponible», «En desarrollo», chips de estado ni una banda «formato seleccionado». La disponibilidad se comunica visualmente, y solo «Más formatos» muestra «Próximamente».
 - Mantener la selección con **borde verde y fondo salvia**, sin necesidad de check circular; no introducir fondos diferentes detrás de SVG individuales.
-- El selector gobierna **los tres pasos**: 1) datos/formulario, 2) vista previa real, 3) impresión. Solo la **Pequeña** está conectada hoy al motor libre: las otras muestran su estado pendiente *dentro de los pasos*, nunca una vista previa ficticia ni impresión habilitada.
+- El selector gobierna **los tres pasos**: 1) datos/formulario, 2) vista previa real, 3) impresión. **Pequeña (30 × 20) y Compacta libre (50 × 30)** están conectadas al **motor único** mediante plantillas independientes (PR #43); **Amplia (50 × 80)** sigue pendiente y muestra su estado dentro de los pasos, sin vista previa ficticia ni impresión habilitada. La composición libre de Compacta sin QR aún requiere revisión visual y prueba física: su implementación no equivale a aprobación del diseño.
 - **Detalle técnico pendiente:** durante un trabajo BLE bloquear también los radios a nivel DOM para evitar una selección visual incongruente; la lógica actual ya impide cambiar el formato efectivo mientras está ocupado.
 - Esta aprobación del **selector** no equivale a aprobación de las composiciones *libres* de 50 × 30 / 50 × 80 ni de sus futuros ensayos físicos.
 
@@ -150,7 +150,7 @@ Para todo cambio:
 | 05–06/11/2026 | Etiquetas libres sin QR ni anillo; excluir vertical 50 × 80; gramos solo en 30 × 20 | Aprobado como alcance |
 | 05–06/11/2026 | Fechas siempre visibles; primera obligatoria; consumo preferente opcional con guiones | Aprobado e implementado en Pequeña |
 | 05–06/11/2026 | Notas de Pequeña editables/ocultables; «Otro tipo» → «Conservación» y nota vacía | Implementado en laboratorio |
-| 06/11/2026 | Interfaz general con selector que gobierna los tres pasos; Compacta y Amplia por implementar | Implementado en laboratorio |
+| 06/11/2026 | Interfaz general con selector que gobierna los tres pasos; en aquel momento Compacta y Amplia estaban pendientes | Hito histórico superado: Compacta implementada en PR #42 y unificada con Pequeña en el motor común mediante PR #43; Amplia sigue pendiente. La Compacta libre sin QR continúa pendiente de revisión visual y física. |
 | 06/11/2026 | **Selector de cuatro tarjetas en una fila, SVG definitivos de PR #40, títulos y tamaños sin disponibilidad** | **Diseño aprobado expresamente** |
 | 06/11/2026 | Banco JSON con filtros guiados; después de los dos modelos de etiquetas libres | Dirección aceptada, pendiente de desarrollo |
 | 06/11/2026 | «Mis reservas» como futuro inventario remoto autenticado; no usar caché local como BD | Requisito arquitectónico futuro |
