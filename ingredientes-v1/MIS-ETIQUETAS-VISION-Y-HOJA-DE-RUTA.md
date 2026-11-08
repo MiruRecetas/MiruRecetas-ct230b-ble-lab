@@ -202,26 +202,34 @@ Para 50 × 30 y 50 × 80 horizontal:
 
 ### Metadatos mínimos para discutir antes de definir JSON Schema
 
-La siguiente relación recoge los **campos pedidos por la usuaria** más algunos **campos auxiliares propuestos**, claramente identificados. No es todavía el esquema JSON implementado:
+La relación siguiente recoge los **campos aprobados por la usuaria**, manteniendo el catálogo mínimo. No es todavía el esquema JSON implementado:
 
 | Grupo | Campo | `null` | Regla |
 |---|---|---|---|
 | Identidad | ID, categoría, subcategoría, nombre | No | ID estable `CAR-VAC-001`, clasificación editorial propia |
 | Identidad | Presentación | Sí | **Único** descriptor opcional: «Picada»; eliminar «Preparación» duplicado |
-| Búsqueda (propuesta) | Sinónimos | Lista vacía o ausente | Solo cuando aporte búsqueda; no duplicar traducciones completas |
+| Búsqueda (aprobado) | `sinonimos` | No: `[]` si no hay | Array de términos de búsqueda, incluidos alias o equivalencias es-ES; no requiere datos extra de FoodKeeper |
 | Por modo | Refrigeración, congelación, despensa, conserva | No | Booleanos true/false del catálogo, no inferir seguridad |
 | Por modo | Tiempo en días | Sí | Entero positivo, `null` si falta plazo aplicable |
 | Por modo | Tip breve | Sí | `null` si modo no disponible; `""` cuando está habilitado pero no hay tip; texto si existe |
 | Congelación | Tip descongelación | Sí | Nota breve que sí puede precargarse en Pequeña |
-| Congelación (opcional, reservado) | Tip previo a congelación | Sí | Puede conservarse para otro uso; **no aparece ni se imprime** en esta etiqueta |
-| Por modo (aprobado como concepto) | Estado de recomendación | No | Distinguir verificado, indicado por usuaria, no recomendado y sin datos; valores exactos del enum pendientes de aprobar en el esquema |
+| Preparación para conservar (aprobado; reservado) | `tips_preparacion_conservacion` | Sí | Un único texto corto opcional previo al almacenamiento (escaldar antes de congelar, secar antes de embolsar, consejos de envasado al vacío). **No se muestra en el panel actual ni se imprime** |
+| Por modo (aprobado) | `estado_recomendacion` | No | Únicamente `verificado` o `sin_datos`. El campo fuente identifica si procede de FoodKeeper, otra publicación o una indicación expresa de la usuaria |
 | Por modo | Fuente breve | Sí | Identificador mínimo, p. ej. `FoodKeeper:59` o fuente indicada; no duplicar filas originales |
 
-`true` puede coexistir con `tiempo=null` cuando no hay recomendación numérica para calcular. `false` significa no disponible en el catálogo **para ese modo** y no equivale, por sí solo, a «peligroso». El estado de recomendación distingue falta de datos de «no recomendado». No añadir notas ampliadas ni paneles de lectura largos.
+`true` puede coexistir con `tiempo=null` si ese modo está habilitado pero todavía falta un plazo numérico: **sin tiempo no se autocalcula ninguna fecha**. `false` significa no disponible en el catálogo para ese modo, no necesariamente «peligroso». El estado de recomendación tiene **solo dos valores**. La distinción entre una recomendación explícita de no conservar y la ausencia de información la proporciona la combinación de `disponible`, `estado_recomendacion` y `fuente`, sin añadir un tercer estado:
+
+| Situación | `disponible` | `estado_recomendacion` | `tiempo_dias` | `fuente` |
+|---|---|---|---|---|
+| Método aplicable con plazo identificado | `true` | `verificado` | Entero positivo | Identificador conciso (p. ej. `FoodKeeper:59`) |
+| Fuente indica expresamente que el método no está recomendado | `false` | `verificado` | `null` | Identificador de esa fuente |
+| No existe información aplicable | `false` | `sin_datos` | `null` | `null` |
+
+`verificado` quiere decir **recomendación identificada/documentada en el catálogo**, no garantía de seguridad alimentaria ni necesariamente validación científica externa: cuando la usuaria establezca expresamente un plazo se guardará también `verificado`, pero con `fuente: "usuario"` (para no atribuirlo a USDA o AESAN). No generar plazos ni marcar como verificadas fuentes que no existan. Los consejos breves y los alias no añaden fichas de lectura extensas al panel. Sinónimos se guarda siempre como lista (aunque esté vacía); `tips_preparacion_conservacion` es `null` si no hay recomendación previa al almacenamiento y **se reserva para una futura sección de la web**.
 
 **Ejemplo de tiempo derivado, pendiente de cerrar el resto de la ficha:** `CAR-VAC-001` «Carne picada de ternera», presentación «Picada», referencia [FoodKeeper `Product.ID=59`](banco/fuentes/foodkeeper-es-original.json): refrigeración original **1–2 días** → `refrigeracion_dias=2`; congelación original **3–4 meses** → `congelacion_dias=90`. Esos son los únicos números que aparecerían en nuestro catálogo; el JSON de procedencia conserva los intervalos originales. No atribuir un tip redactado por MiruRecetas a FoodKeeper si su registro no lo incluye.
 
-**Estado:** están aprobados el **patrón de visualización, las reglas de cálculo/editabilidad, FoodKeeper como fuente y las nuevas reglas de selección/conversión de plazos**; el original está preservado, pero **no se ha creado el catálogo JSON derivado ni cambiado la interfaz o los formularios existentes**. Antes de implementarlo, cerrar campos opcionales, enum de estado, esquema, selección editorial y catálogo inicial; después desarrollar la UI y QA mediante PR privadas, sin tocar producción. Las pruebas físicas de impresión continúan aplazadas al cierre.
+**Estado:** están aprobados el **patrón de visualización, las reglas de cálculo/editabilidad, FoodKeeper como fuente, la selección/conversión de plazos y los dos estados de recomendación**, con `sinonimos` y `tips_preparacion_conservacion` incluidos desde el inicio. El original está preservado, pero **no se ha creado el catálogo JSON derivado ni cambiado la interfaz o los formularios existentes**. Antes de implementarlo, concretar el esquema, la selección editorial y el catálogo inicial; después desarrollar la UI y QA mediante PR privadas, sin tocar producción. Las pruebas físicas de impresión continúan aplazadas al cierre.
 
 ## 7. Otras capacidades consideradas — FUTURAS, SIN IMPLEMENTACIÓN
 - **Etiquetado por lotes/sesiones**: cola de etiquetas distintas de una sesión de compras o batch cooking, compartir primera fecha de la sesión sin forzar consumos preferentes iguales, envío secuencial controlado y confirmación; distinto de multicopia `PRINT 1,n` de *una misma* etiqueta. Sin reenvío automático al fallar BLE.
@@ -285,6 +293,7 @@ Para todo cambio:
 | 08/11/2026 | Fecha de consumo preferente dependiente de fecha de envasado y nota informativa (texto original «Tiempo recomendado: XX meses») | **Decisión histórica, actualizada el mismo 08/11:** el catálogo y la nota emplearán únicamente **días**; recálculo hasta edición manual, restablecimiento explícito y nota sin imprimir. |
 | 08/11/2026 | Establecer FoodKeeper como origen del banco, conservar JSON ES íntegro y definir categorías propias, subcategorías, datos y plazos de calidad | **Fuente recibida y preservada sin alterar** (662 productos, 25 grupos, 14 categorías principales). **Catálogo derivado pendiente**. Regla inicial de mínimo en ambos modos **sustituida el mismo 08/11**: refrigeración **máximo** y congelación **mínimo** del rango; fuente archivada en `ingredientes-v1/banco/fuentes/`. |
 | 08/11/2026 | Refinar el catálogo de Pequeña a ingredientes a granel y conservas caseras futuras; metadatos mínimos sin duplicar FoodKeeper | **Aprobado:** presentación única; envasado = compra/preparación; refrigeración máximo del rango, congelación mínimo; 1 semana=7 días y 1 mes=30 días; almacenar únicamente días; vacío no añade días; fuente breve/estado por modo; sin comerciales ni panel largo. **El esquema y el catálogo derivado siguen pendientes.** |
+| 08/11/2026 | Cerrar enum de recomendaciones y metadatos futuros de búsqueda/preparación | **Aprobado:** solo `verificado` y `sin_datos`; `fuente` identifica USDA/AESAN/usuario, y junto a `disponible` distingue rechazo explícito de ausencia de información. Incluir `sinonimos` (array, vacío `[]`) y un consejo previo `tips_preparacion_conservacion` (texto opcional, `null` si no procede) reservado para futura web; sin panel largo. **JSON Schema y catálogo aún pendientes.** |
 | Futuro | Etiquetas de tarros, sesiones, favoritos, reimpresión, datos de cuenta | Propuestas por concretar |
 
 **Este documento debe actualizarse en la misma PR que cambie el alcance o acepte nuevas decisiones; no esperar a recordar el contexto conversacional.**
