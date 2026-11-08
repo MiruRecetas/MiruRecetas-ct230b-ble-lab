@@ -207,7 +207,7 @@
   parts.push(footer);
   const bytes=parts.reduce((sum,part)=>sum+part.length,0),
    baselineBytes=header.length+tiles.baselineRasterBytes+footer.length;
-  if(bytes>MAX_BYTES)throw Error("Trabajo demasiado grande ("+bytes+" bytes).");
+  if(bytes>MAX_BYTES)throw Error("Trabajo demasiado grande ("+bytes+" bytes; antes de optimizar: "+baselineBytes+" bytes).");
   const job=new Uint8Array(bytes);let offset=0;
   for(const part of parts){job.set(part,offset);offset+=part.length;}
   return {job,tiles:tiles.length,bytes,fragments:Math.ceil(bytes/20),copies,
