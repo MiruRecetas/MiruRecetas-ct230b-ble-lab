@@ -13,7 +13,7 @@ async function prepare(){
  let connected=false,oversize=false,accept=true;
  function get(id){
   if(!elements.has(id))elements.set(id,{
-   value:"",checked:false,disabled:false,hidden:false,textContent:"",
+   value:"",checked:false,disabled:false,hidden:false,open:id==="data-step",textContent:"",
    dataset:{},style:{},listeners:{},
    addEventListener(type,handler){this.listeners[type]=handler;},
    setAttribute(){},
@@ -87,7 +87,8 @@ test("Amplia no imprime sin conexión o sin confirmación de papel",async()=>{
  const s=await prepare();
  assert.equal(s.get("paper-dimensions").textContent,"50 × 80 mm");
  assert.equal(s.get("ingredient-print").hidden,false);
- assert.equal(s.get("alternate-print").hidden,true);
+ assert.equal(s.get("data-step").open,true);
+ assert.equal(s.get("print-step").open,false);
  assert.equal(s.get("print").disabled,true);
  s.get("confirm-paper").checked=true;
  s.get("confirm-paper").listeners.change();
