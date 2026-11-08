@@ -69,7 +69,7 @@
    const d=C.normalize(compactValues(),false),cv=C.render(d,logo);
    const canvas=$("c-preview");canvas.getContext("2d").clearRect(0,0,C.width,C.height);
    canvas.getContext("2d").drawImage(cv,0,0);
-   $("c-status").textContent="Borrador libre sin QR basado en la geometría histórica; distribución inferior revisable.";
+   $("c-status").textContent="Diseño libre elegido: encabezados fijos y fechas en dos columnas sin nutrición. Pendiente de ensayo físico CT230B.";
    try{const strict=C.normalize(compactValues(),true),job=C.build(C.render(strict,logo),copies);
     $("c-metrics").textContent=job.bytes+" B · "+job.fragments+" fragmentos BLE · "+job.tiles+" bandas · "+copies+" copias · sin QR.";
     cReady=true;

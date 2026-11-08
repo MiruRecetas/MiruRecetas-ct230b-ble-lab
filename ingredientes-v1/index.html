@@ -175,19 +175,19 @@
           <p class="disclaimer">Los valores son datos que introduces tú, no cálculos ni nutrientes oficiales de MiruRecetas. Cada campo vacío se omite; no se sustituye por cero.</p>
           <label class="checkbox-row" for="c-instruction-enabled">
             <input type="checkbox" id="c-instruction-enabled" checked>
-            <span><strong>Mostrar instrucciones de conservación</strong></span>
+            <span><strong>Mostrar texto de conservación y consumo</strong> (encabezado siempre visible)</span>
           </label>
           <label class="field full" for="c-instruction">Instrucciones (máximo dos líneas impresas)
             <textarea id="c-instruction" maxlength="90" rows="2">Descongelar en nevera. Recalentar a fuego suave.</textarea>
           </label>
           <label class="checkbox-row" for="c-note-enabled">
             <input type="checkbox" id="c-note-enabled" checked>
-            <span><strong>Mostrar nota</strong></span>
+            <span><strong>Mostrar texto de la nota</strong> (encabezado siempre visible)</span>
           </label>
           <label class="field full" for="c-note">Nota personal (opcional)
             <textarea id="c-note" maxlength="90" rows="2">La textura puede variar después de congelar.</textarea>
           </label>
-          <p class="disclaimer">Sin QR. La composición usa una copia aislada de la geometría histórica 50 × 30: revisar en pantalla y en impresión física antes de aprobar esta variante.</p>
+          <p class="disclaimer">Sin QR y sin gramaje. La vista previa usa el isotipo y las fuentes oficiales. Con la nutrición oculta, ambas fechas ocupan dos columnas; los encabezados de conservación y nota permanecen visibles incluso sin texto. Diseño pendiente de prueba física CT230B.</p>
         </div>
         <div id="alternate-fields" class="format-placeholder" hidden>
           <strong id="alternate-fields-title"></strong>
@@ -287,8 +287,8 @@
 </main>
 <script src="./motor-libre.js?v=20261107-motor-unico"></script>
 <script src="./plantilla-pequena.js?v=20261107-motor-unico"></script>
-<script src="./plantilla-compacta.js?v=20261107-motor-unico"></script>
-<script src="./app.js?v=20261107-motor-unico"></script>
+<script src="./plantilla-compacta.js?v=20261108-compacta-aprobada"></script>
+<script src="./app.js?v=20261108-compacta-aprobada"></script>
 <script src="./cabecera.js" defer></script>
 </body>
 </html>

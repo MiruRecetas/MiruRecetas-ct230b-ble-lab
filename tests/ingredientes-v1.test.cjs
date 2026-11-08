@@ -130,8 +130,8 @@ test("página autónoma, campos y archivos enlazados",()=>{
   assert.match(html,new RegExp('id="'+id+'"'));
  assert.match(html,/src="\.\/motor-libre\.js\?v=20261107-motor-unico"/);
  assert.match(html,/src="\.\/plantilla-pequena\.js\?v=20261107-motor-unico"/);
- assert.match(html,/src="\.\/app\.js\?v=20261107-motor-unico"/);
- assert.match(html,/src="\.\/plantilla-compacta\.js\?v=20261107-motor-unico"/);
+ assert.match(html,/src="\.\/app\.js\?v=20261108-compacta-aprobada"/);
+ assert.match(html,/src="\.\/plantilla-compacta\.js\?v=20261108-compacta-aprobada"/);
  assert.match(html,/href="\.\/style\.css"/);
  assert.ok(html.includes('class="miru-isotipo"'));
  assert.match(app,/E\.logo\("\.\.\/assets\/isotipo-bn\.svg"\)/);

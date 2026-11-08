@@ -3,8 +3,9 @@
 **Estado: desarrollo experimental exclusivamente en la rama de laboratorio.**
 Este directorio contiene la página autónoma **«Mis etiquetas»**, con
 selector de formatos aprobado y con **Pequeña 30 × 20** operativa en laboratorio.
-**Compacta libre 50 × 30** está implementada en laboratorio pendiente de
-revisión y pruebas físicas. **Amplia 50 × 80 horizontal** sigue pendiente. No se ha integrado ni migrado
+**Compacta libre 50 × 30** está implementada con la composición libre aprobada
+el 08/11/2026 (PR #45), pendiente de revisión de la vista previa publicada y
+validación física CT230B. **Amplia 50 × 80 horizontal** sigue pendiente. No se ha integrado ni migrado
 ningún archivo a `MiruRecetas/mirurecetas-web-source`; no está publicado como
 página productiva ni registra existencias.
 
@@ -34,12 +35,17 @@ del motor web privado y de las etiquetas productivas. **No modificar la V0.9
 original**: la plantilla libre tiene ciclo de vida y futuras revisiones propias.
 
 El formulario compacto admite nutrición manual opcional, instrucciones y
-nota libre con casillas de visibilidad, nombre y ambas fechas (primera obligatoria;
-segunda opcional con `--/--/--`). El preview usa el raster de 590 × 354
+nota libre con casillas que controlan **solo el texto** inferior, nombre y ambas
+fechas (primera obligatoria; segunda opcional con `--/--/--`). La composición
+aprobada el 08/11/2026 conserva ambos encabezados inferiores y su espacio,
+aunque el texto esté vacío u oculto. Con nutrientes presentes, fechas en dos
+filas a la izquierda y bloque nutricional a la derecha; con nutrición apagada,
+ambas fechas se redistribuyen en **dos columnas de igual anchura**, ocupando
+el ancho completo sin dejar un hueco de macros. El preview usa el raster de 590 × 354
 que genera el mismo motor de TSPL; la impresión CT230B usa los controles BLE
-ya existentes y multicopia `PRINT 1,n`. El área que antes ocupaba QR se
-mantiene libre para **revisión visual posterior**. La geometría sin QR,
-los bloques ocultos y las series multicopia **no tienen aprobación física
+ya existentes y multicopia `PRINT 1,n`. El espacio del antiguo QR se ha aprovechado para extender las secciones de
+texto a todo el ancho según el diseño elegido. La geometría sin QR,
+las variantes sin texto y las series multicopia **no tienen aprobación física
 por herencia** de la V0.9 original. Ver
 [MIS-ETIQUETAS-VISION-Y-HOJA-DE-RUTA.md](MIS-ETIQUETAS-VISION-Y-HOJA-DE-RUTA.md).
 
@@ -131,9 +137,10 @@ con la V0.8; no dar por validada esta modificación sin pruebas específicas.
 La página es un **candidato de producto** y evita lenguaje o controles de
 experimentos históricos. Durante su estancia en el laboratorio conserva un
 aviso de alcance en el pie. El selector incluye los **tres formatos libres previstos** (no incorpora
-50 × 80 vertical con anillo) y una tarjeta futura. La selección de Compacta
-o Amplia muestra el estado pendiente dentro de los pasos, sin motor imprimible
-ni previsualización inventada. El nombre y, cuando se indique, el peso en
+50 × 80 vertical con anillo) y una tarjeta futura. La selección de Amplia muestra el estado pendiente dentro de los pasos, sin motor
+imprimible ni previsualización inventada; Compacta sí presenta el raster
+compartido del formato seleccionado y puede enviar a CT230B bajo confirmación,
+pero aún no dispone de aceptación física de su nuevo diseño. El nombre y, cuando se indique, el peso en
 Pequeña son introducidos manualmente; todavía no hay un catálogo de ingredientes
 para esta sección. El peso no forma parte de Compacta ni Amplia.
 Las fechas no se deducen de pautas generales de conservación.
