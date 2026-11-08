@@ -1,5 +1,30 @@
 # MiruRecetas · «Mis etiquetas» · visión, decisiones y hoja de ruta
 
+## Corrección del centrado horizontal de la nota · Pequeña 30 × 20 (08/11/2026)
+
+Tras validar la cantidad en la PR #70, la usuaria detecta el mismo
+problema de alineación en las notas: `M.fit` forzaba la alineación
+izquierda y las dibujaba desde `x=60` hacia el isotipo.
+
+**Decisión expresa:** la nota **mantiene exactamente su altura y línea
+base anteriores, `y=227`**; no desplazarla arriba ni abajo.
+Se centra únicamente en el eje horizontal, **en el mismo espacio que
+los gramos**: centro `x=128`, ancho máximo `240` puntos
+(zona `x=8…248`), `align="center"` explícito y separación mínima
+de `20` puntos antes del isotipo (comienza en `x=268`).
+Se conserva el tamaño inicial de fuente Geist itálica `16 px` y
+el mínimo `12 px`, el texto editable de hasta 32 caracteres y
+la posibilidad de ocultar la nota. El isotipo no se mueve.
+
+No modificar otras coordenadas, márgenes, la cantidad ya corregida,
+las fechas, las etiquetas Compacta/Amplia, el motor común,
+el raster TSPL ni Bluetooth. Invalidar caché del script de la
+plantilla para Chrome Android. Añadir pruebas para nota corta, texto
+largo (hasta 32 caracteres) y nota oculta, comprobando además que
+**la posición vertical sigue siendo exactamente `227`**.
+La verificación real en Android y la prueba física son
+independientes de las simulaciones.
+
 ## Corrección de cantidad frente al isotipo · 08/11/2026
 
 La usuaria confirma después del despliegue de la PR #69 que «500 g» sigue
