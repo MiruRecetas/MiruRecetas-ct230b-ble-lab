@@ -3,8 +3,9 @@
 **Estado: desarrollo experimental exclusivamente en la rama de laboratorio.**
 Este directorio contiene la página autónoma **«Mis etiquetas»**, con
 selector de formatos aprobado y con **Pequeña 30 × 20** operativa en laboratorio.
-**Compacta libre 50 × 30** está implementada con la composición libre aprobada
-el 08/11/2026 (PR #45), pendiente de revisión de la vista previa publicada y
+**Compacta libre 50 × 30** está implementada con las correcciones visuales
+de la [PR #46](https://github.com/MiruRecetas/MiruRecetas-ct230b-ble-lab/pull/46),
+a raíz de la revisión de la PR #45. Pendiente de aceptación de la nueva vista previa y
 validación física CT230B. **Amplia 50 × 80 horizontal** sigue pendiente. No se ha integrado ni migrado
 ningún archivo a `MiruRecetas/mirurecetas-web-source`; no está publicado como
 página productiva ni registra existencias.
@@ -38,16 +39,28 @@ El formulario compacto admite nutrición manual opcional, instrucciones y
 nota libre con casillas que controlan **solo el texto** inferior, nombre y ambas
 fechas (primera obligatoria; segunda opcional con `--/--/--`). La composición
 aprobada el 08/11/2026 conserva ambos encabezados inferiores y su espacio,
-aunque el texto esté vacío u oculto. Con nutrientes presentes, fechas en dos
-filas a la izquierda y bloque nutricional a la derecha; con nutrición apagada,
-ambas fechas se redistribuyen en **dos columnas de igual anchura**, ocupando
-el ancho completo sin dejar un hueco de macros. El preview usa el raster de 590 × 354
+aunque el texto esté vacío u oculto. Con nutrientes presentes, fechas y
+rótulos comparten línea a la izquierda sin separadores verticales;
+la nutrición ocupa la derecha con kcal en caja negra redondeada y macros
+separados. Con nutrición apagada, fechas y rótulos se centran en
+**dos columnas de igual anchura**, sin separador y sin hueco de macros.
+Se retira la raya horizontal adicional antes del encabezado de conservación.
+El título, el isotipo BN y la banda negra superiores conservan exactamente
+las coordenadas y tamaños V0.9, sin texto añadido bajo el isotipo. El preview usa el raster de 590 × 354
 que genera el mismo motor de TSPL; la impresión CT230B usa los controles BLE
 ya existentes y multicopia `PRINT 1,n`. El espacio del antiguo QR se ha aprovechado para extender las secciones de
 texto a todo el ancho según el diseño elegido. La geometría sin QR,
 las variantes sin texto y las series multicopia **no tienen aprobación física
 por herencia** de la V0.9 original. Ver
 [MIS-ETIQUETAS-VISION-Y-HOJA-DE-RUTA.md](MIS-ETIQUETAS-VISION-Y-HOJA-DE-RUTA.md).
+
+Al cambiar el tipo de conservación de Compacta se reutiliza la regla de
+Pequeña: congelación → rótulo «Envasado y congelación» e instrucción editable
+«Descongelar en nevera»; refrigeración → «Envasado» y «Conservar en nevera»;
+otro → «Conservación» e instrucción vacía. La nota personal anterior se
+limpia para evitar mensajes contradictorios; puede volver a editarse.
+«Consumo preferente» permanece siempre visible con ese nombre. Ningún modo
+calcula automáticamente la fecha ni un plazo.
 
 **Arquitectura unificada (07/11/2026):** `motor-libre.js` contiene una única
 implementación de fechas y utilidades de validación, carga del isotipo, ajuste
