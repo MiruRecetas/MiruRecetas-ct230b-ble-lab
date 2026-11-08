@@ -170,7 +170,8 @@ test("Formulario, preview e impresión BLE habilitada tras validación visual",(
  assert.ok(app.includes('selectedFormat==="horizontal"?aReady:selectedFormat==="component"?cReady:ready'));
  assert.ok(app.includes('const ingredient=format==="ingredient",compact=format==="component",wide=format==="horizontal",active=ingredient||compact||wide'));
  assert.ok(app.includes('["ingredient-print",active]'));
- assert.ok(app.includes('["alternate-fields",false],["alternate-preview",false],["alternate-print",false]'));
+ assert.ok(!app.includes('["alternate-fields",false],["alternate-preview",false],["alternate-print",false]'));
+ assert.ok(html.includes('<details id="print-step" class="card step-card">'));
  assert.ok(app.includes('const motor=wide?A:compact?C:E;'));
  assert.ok(app.includes('motor.normalize(wide?wideValues():compact?compactValues():values(),true)'));
  assert.ok(app.includes('work=motor.build(motor.render(d,logo),copies);'));
