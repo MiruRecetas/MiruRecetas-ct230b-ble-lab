@@ -1,3 +1,11 @@
+> **Nota de etiqueta Pequeña · corrección posterior a PR #70:**
+> se corrige únicamente el centrado horizontal de la nota: **x=128,
+> ancho máximo 240 puntos, alineación central**. La línea base
+> **y=227 se mantiene exactamente**, así como el isotipo y la zona de gramos.
+> Se actualiza la versión del JS y se añaden pruebas de nota corta/larga/oculta.
+> No se modifica el motor ni la impresión, ni Compacta ni Amplia.
+> [Decisión canónica](ingredientes-v1/MIS-ETIQUETAS-VISION-Y-HOJA-DE-RUTA.md).
+>
 > **Corrección de superposición de gramos (posterior a PR #69):**
 > Pages desplegó PR #69, pero «500 g» seguía invadiendo el isotipo porque
 > `motor-libre.js::fit` restablecía la alineación izquierda. La plantilla
