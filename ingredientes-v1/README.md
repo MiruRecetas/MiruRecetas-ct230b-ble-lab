@@ -7,7 +7,7 @@ selector de formatos aprobado y con **Pequeña 30 × 20** operativa en laborator
 de la [PR #46](https://github.com/MiruRecetas/MiruRecetas-ct230b-ble-lab/pull/46),
 a raíz de la revisión de la PR #45. **Aprobada y validada visualmente por la usuaria
 el 08/11/2026 en la página publicada**; no consta todavía ensayo físico CT230B
-para esta variante libre. **Amplia 50 × 80 horizontal** es la siguiente fase. El 08/11/2026 se
+para esta variante libre. **Amplia 50 × 80 horizontal** se desarrolló después de Compacta. El 08/11/2026 se
 aprobó **explorar diseños** basados en V0.7.3, sin QR y con espacio
 redistribuido para instrucciones y nota; se presentaron dos maquetas
 conceptuales A (bloques apilados) y B (secciones paralelas), cada una
