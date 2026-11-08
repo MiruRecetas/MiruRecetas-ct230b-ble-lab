@@ -110,6 +110,52 @@ test("Tres tipos de conservación y fecha preferente opcional",()=>{
  }
  assert.throws(()=>A.normalize({...base,expiry:"2026-11-07"}),/anterior/);
 });
+test("Los Enter del formulario se conservan en instrucciones y nota, con tres líneas",()=>{
+ const p=inspect({...base,
+  instruction:"En nevera.\nRecalentar tapado.\nNo volver a congelar.",
+  note:"Textura variable.\nConsumir pronto.\nMantener en frío."
+ });
+ assert.equal(p.data.instruction,"En nevera.\nRecalentar tapado.\nNo volver a congelar.");
+ assert.equal(p.data.note,"Textura variable.\nConsumir pronto.\nMantener en frío.");
+ for(const [value,x,y] of [
+  ["En nevera.",26,431],["Recalentar tapado.",26,465],
+  ["No volver a congelar.",26,499],
+  ["Textura variable.",622,431],["Consumir pronto.",622,462],
+  ["Mantener en frío.",622,493]
+ ]){
+  const item=at(p,value);
+  assert.ok(item,"No aparece la línea literal: "+value);
+  assert.deepEqual([item.x,item.y],[x,y],"Posición de "+value);
+ }
+});
+test("CRLF y doble Enter se normalizan sin perder los saltos internos",()=>{
+ const data=A.normalize({...base,
+  instruction:"Primera instrucción\r\n\r\nTercera instrucción",
+  note:"Primera nota\rSegunda nota"
+ });
+ assert.equal(data.instruction,"Primera instrucción\n\nTercera instrucción");
+ assert.equal(data.note,"Primera nota\nSegunda nota");
+ const p=inspect({...base,instruction:data.instruction,note:data.note});
+ assert.equal(at(p,"Primera instrucción").y,431);
+ assert.equal(at(p,"Tercera instrucción").y,499);
+ assert.equal(at(p,"Segunda nota").y,462);
+});
+test("Envoltorio automático conserva palabras y puede ocupar varias líneas",()=>{
+ const p=inspect({...base,
+  note:"La textura puede variar bastante al descongelar y al volver a calentar el alimento."
+ });
+ const lines=p.text.filter(x=>x.x===622&&x.y>=431);
+ assert.ok(lines.length>=2&&lines.length<=6);
+ assert.equal(lines.map(x=>x.value).join(" "),
+  "La textura puede variar bastante al descongelar y al volver a calentar el alimento.");
+ assert.ok(lines.every(x=>x.y<=590));
+});
+test("Texto que no cabe se bloquea, sin recorte silencioso ni impresión",()=>{
+ assert.throws(()=>A.normalize({...base,instruction:"x".repeat(181)}),/Instrucciones/);
+ assert.throws(()=>A.normalize({...base,note:"x".repeat(141)}),/Nota/);
+ assert.throws(()=>inspect({...base,note:"supercalifragilisticoespialidoso".repeat(3)}),/no cabe|excede/);
+ assert.equal(A.normalize({...base,showNote:false,note:"<inválido>"}).note,"");
+});
 test("Formulario, preview y bloqueo de impresión de Amplia en fase visual",()=>{
  const html=fs.readFileSync(path.join(root,"index.html"),"utf8");
  const app=fs.readFileSync(path.join(root,"app.js"),"utf8");
