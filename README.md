@@ -1,3 +1,11 @@
+> **Banco de ingredientes · última revisión visual 08/11/2026:**
+> adoptados del panel oficial «Preparar etiqueta» el fondo exacto
+> `#fffcf7`, la barra gris superior en móvil y el cierre circular
+> blanco con una única «×». Se ha respetado íntegramente el banco,
+> las fichas y las plantillas. Tras la revisión visual en Android,
+> la siguiente fase será poblar el catálogo. Detalle en
+> [hoja de ruta](ingredientes-v1/MIS-ETIQUETAS-VISION-Y-HOJA-DE-RUTA.md).
+>
 > **Nota de etiqueta Pequeña · corrección posterior a PR #70:**
 > se corrige únicamente el centrado horizontal de la nota: **x=128,
 > ancho máximo 240 puntos, alineación central**. La línea base
