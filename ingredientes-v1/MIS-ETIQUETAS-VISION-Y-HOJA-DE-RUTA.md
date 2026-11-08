@@ -170,7 +170,7 @@ Para 50 × 30 y 50 × 80 horizontal:
 
 - Inmediatamente **debajo de la vista previa** de Pequeña, antes del paso **1. Datos de la etiqueta**, presentar dos chips: **«Ingrediente libre»** (estado inicial) y **«Cargar del banco»**. No añadir una tarjeta ni un «paso 0» numerado; no mostrar chips en Compacta/Amplia.
 - «Ingrediente libre» mantiene el formulario manual actual, sin buscar ni aplicar datos del banco. «Cargar del banco» abre un **panel modal temporal**: **inferior tipo bottom sheet en vertical** y **lateral en horizontal**; seguir el patrón visual/accesible existente de vista diaria compacta y del panel de impresión en las fichas de recetas de la web oficial, **adaptado dentro del laboratorio** (sin importar código productivo como dependencia).
-- El panel contiene buscador de nombre/alias, exploración por categorías, variantes/presentaciones y **chips de filtrado** cuando aporten valor, además de información de conservación y **fuentes consultables**. El botón final **«Aplicar a etiqueta»** permanece deshabilitado hasta seleccionar un ingrediente concreto y, cuando corresponda, su presentación. Admitir alternativa de escribir libremente sin contaminar los resultados del banco.
+- El panel contiene buscador de nombre/alias, exploración por categorías, variantes/presentaciones y **chips de filtrado** cuando aporten valor, además de información de conservación y **fuentes consultables**. **Ocultar los chips de categorías que no tengan ingredientes en el banco; nunca mostrar categorías vacías.** El botón final **«Aplicar a etiqueta»** permanece deshabilitado hasta seleccionar un ingrediente concreto y, cuando corresponda, su presentación. Admitir alternativa de escribir libremente sin contaminar los resultados del banco.
 - **Separar explorar de aplicar**: abrir, filtrar, comparar y seleccionar dentro del panel **no cambia** los campos del paso 1. Solo «Aplicar a etiqueta» confirma la elección, precarga sus datos, cierra el panel y abre el paso **1. Datos de la etiqueta** para revisión. Al volver a pulsar «Cargar del banco», se reabre el panel con selección/filtros previos para revisar o cambiar y aplicar de nuevo.
 - **Conservar dos estados diferenciados**: formulario libre y formulario con datos aplicados del banco. Al pulsar «Ingrediente libre», recuperar sus valores escritos, sin sobrescribirlos ni borrar la última selección del banco. Cambiar de formato a Compacta/Amplia no debe cargar datos del banco en esos formatos.
 - **Permitir editar lo precargado**: el paso 1 sigue siendo editable (nombre, cantidad, fechas, conservación y nota, según el contrato vigente de Pequeña). La cantidad y la fecha real de envasado son datos del usuario, no se inventan ni se reemplazan al elegir ingrediente. La selección del banco no crea ni modifica inventario, receta, Airtable ni datos comerciales.
@@ -200,25 +200,20 @@ Para 50 × 30 y 50 × 80 horizontal:
 - **Envasado al vacío:** situación habitual del usuario, **no incremento automático** de plazos FoodKeeper por utilizar vacío. La selección del máximo para refrigeración **no equivale a garantía de seguridad**: correcta refrigeración e higiene siguen siendo imprescindibles. Una recomendación de calidad no sustituye condiciones seguras de manipulación.
 - **Despensa y conserva casera:** se mantienen como familias de metadatos pensadas para futuras etiquetas; no extrapolar a conservas domésticas los tiempos de conservas comerciales. Un consejo como «Una vez abierto, consumir en 5 días» puede ser solo un **texto corto**, sin añadir por ahora campos de seguimiento de apertura.
 
-### Clasificación editorial aprobada · 11 categorías (08/11/2026)
+### Clasificación editorial vigente · 4 categorías y subcategorías (08/11/2026)
 
-Las siguientes son las **11 categorías principales de MiruRecetas**, independientes de las 14 categorías originales de FoodKeeper; su orden se mantiene para preparar la futura clasificación del banco:
+**Solo cuatro categorías principales** para los chips del banco MiruRecetas, independientes del catálogo original de FoodKeeper. El listado sustituye la clasificación anterior de 11 categorías:
 
-1. **Carne**
-2. **Pescado**
-3. **Marisco**
-4. **Frutas**
-5. **Verduras**
-6. **Cereales y Legumbres**
-7. **Frutos secos y semillas**
-8. **Conservas**
-9. **Condimentos**
-10. **Lácteos y huevos**
-11. **Hongos y algas**
+| Categoría | Subcategorías aprobadas |
+|---|---|
+| **Carnes y Aves** | Vacuno; Porcino; Ovino; Pollo; Pavo; Otras aves; Caza |
+| **Pescados y Mariscos** | Pescado blanco; Pescado azul; Crustáceos y moluscos; Cefalópodos |
+| **Frutas y Verduras** | Frutas; Hortalizas; Verduras de hoja; Tubérculos; Hongos; Algas |
+| **Despensa** | **Pendiente de aprobación**: se propondrán por separado las subcategorías apropiadas |
 
-**Decisiones de clasificación:** «Cereales y Legumbres» unifica las anteriores opciones de arroz, pasta, cereales, harinas y legumbres, cuyas **subcategorías aún están pendientes de diseñar**; no crear fichas por el mero hecho de existir una subcategoría. «Condimentos» reemplaza «Especias y hierbas» y tendrá las subcategorías pertinentes; no incluir productos comerciales como sal ni vinagre. **Carne incluye aves**; **Verduras incluye tubérculos**; **Marisco incluye cefalópodos**, como el pulpo. «Lácteos y huevos» permanece definida aunque **inicialmente pueda estar vacía**. «Conservas» se reserva para **conservas caseras futuras**, no comerciales.
+**Regla de los chips de categorías:** mostrar **solo las categorías con al menos un ingrediente registrado en el banco disponible para buscar/seleccionar**. Si una categoría aún no contiene ingredientes, **no se muestra su chip en el panel**. No crear ingredientes ficticios para hacer visible una categoría. La interfaz no debe mostrar obligatoriamente los cuatro chips ni chips vacíos.
 
-**Criterio de inclusión por encima de la categoría:** solo ingredientes reales adquiridos a granel que se vayan a etiquetar. No crear registros de productos envasados comerciales, grasas/aceites, proteínas vegetales comerciales ni masas/preparaciones que pertenecen a Compacta. Las categorías vacías son válidas. El esquema y catálogo derivados permanecen pendientes, y el original FoodKeeper no se modifica.
+**Ámbito estricto:** ingredientes reales comprados a granel, y conservas caseras en una fase futura. No productos comerciales envasados ni ingredientes comerciales que no se vayan a etiquetar. Se **descarta «Lácteos y huevos»**; las antiguas categorías «Condimentos», «Conservas», «Cereales y Legumbres» y «Frutos secos y semillas» se absorben editorialmente en **Despensa** cuando corresponda, pero **sus subcategorías todavía no están aprobadas**. «Hongos y algas» pasa a las subcategorías de **Frutas y Verduras**; no se crea categoría independiente. El pulpo pertenece a **Cefalópodos** dentro de Pescados y Mariscos. No se altera el original FoodKeeper, ni el esquema aún pendiente, ni la UI existente.
 
 ### Metadatos mínimos para discutir antes de definir JSON Schema
 
@@ -319,6 +314,6 @@ Para todo cambio:
 | 08/11/2026 | Aclaración expresa: `estado_recomendacion` y `fuente` pertenecen a **toda la ficha**, no a cada conservación | **Decisión vigente en su ámbito global**: no existen estados/fuentes por método. La enumeración histórica de dos estados queda **ampliada posteriormente** a tres mediante `parcial`; `fuente: null` sigue obligatoria para `sin_datos`. |
 | 08/11/2026 | Añadir `parcial` y el ID global de fuente sin duplicar FoodKeeper | **Aprobado**: `estado_recomendacion` global `verificado`/`parcial`/`sin_datos`; en `parcial` (fuente externa incompleta), modos sin datos con booleano `true` pero tiempo/tips `null` y sin fecha sugerida; al completar, fuente `usuario` o `agregación`; `id_fuente` único opcional (ID como texto / `null` usuario-agregación-sin datos / `"sin_datos"` si fuente externa sin ID único). JSON Schema, catálogo y app pendientes. |
 | 08/11/2026 | Aprobar clasificación editorial inicial del banco | **11 categorías**, unificando Cereales y Legumbres; Condimentos como nombre definitivo; aves→Carne, tubérculos→Verduras y pulpo/cefalópodos→Marisco. «Lácteos y huevos» se conserva aunque vacía; conservas solo caseras futuras. No crear registros comerciales; **subcategorías y esquema aún por definir**. |
-| Futuro | Etiquetas de tarros, sesiones, favoritos, reimpresión, datos de cuenta | Propuestas por concretar |
+| 08/11/2026 | Sustituir la clasificación editorial de 11 categorías por 4 y definir tres grupos de subcategorías | **Aprobado:** Carnes y Aves (7 subcategorías), Pescados y Mariscos (4), Frutas y Verduras (6), Despensa (**subcategorías pendientes**); «Lácteos y huevos» eliminada; hongos/algas dentro de Frutas y Verduras. En el panel **no mostrar chips de categorías sin ingredientes**. La clasificación anterior queda sustituida; no crear catálogo/esquema ni cambiar app en esta PR. |\n| Futuro | Etiquetas de tarros, sesiones, favoritos, reimpresión, datos de cuenta | Propuestas por concretar |
 
 **Este documento debe actualizarse en la misma PR que cambie el alcance o acepte nuevas decisiones; no esperar a recordar el contexto conversacional.**
