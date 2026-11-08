@@ -130,10 +130,10 @@ test("página autónoma, campos y archivos enlazados",()=>{
   assert.match(html,new RegExp('id="'+id+'"'));
  assert.match(html,/src="\.\/motor-libre\.js\?v=20261107-motor-unico"/);
  assert.match(html,/src="\.\/plantilla-pequena\.js\?v=20261107-motor-unico"/);
- assert.match(html,/src="\.\/app\.js\?v=20261108-amplia-ble-v1"/);
+ assert.match(html,/src="\.\/app\.js\?v=20261108-layout-v1"/);
  assert.match(html,/src="\.\/plantilla-compacta\.js\?v=20261108-compacta-qa2"/);
  assert.match(html,/src="\.\/plantilla-amplia\.js\?v=20261108-amplia-b-v2"/);
- assert.match(html,/href="\.\/style\.css\?v=20261108-amplia-multiline"/);
+ assert.match(html,/href="\.\/style\.css\?v=20261108-layout-v1"/);
  assert.ok(html.includes('class="miru-isotipo"'));
  assert.match(app,/E\.logo\("\.\.\/assets\/isotipo-bn\.svg"\)/);
  assert.match(css,/--sage:/);
@@ -149,15 +149,15 @@ test("página autónoma, campos y archivos enlazados",()=>{
 
 test("Mis etiquetas: selector único de formato vinculado a los tres pasos",()=>{
  const html=source("index.html"),app=source("app.js"),css=source("style.css");
- assert.ok(html.indexOf('class="card format-card"')>html.indexOf('class="intro"'));
- assert.ok(html.indexOf('class="card format-card"')<html.indexOf('class="content-grid"'));
+ assert.ok(html.indexOf('class="card format-card"')>html.indexOf('<main class="page">'));
+ assert.ok(html.indexOf('class="card format-card"')<html.indexOf('id="data-step"'));
  assert.equal(html.split('data-label-format').length-1,3);
  for(const format of ["horizontal","component","ingredient"])
   assert.match(html,new RegExp('value="'+format+'" data-label-format'));
  assert.match(html,/value="ingredient" data-label-format checked/);
- for(const id of ["ingredient-fields","ingredient-preview","ingredient-print",
-  "alternate-fields","alternate-preview","alternate-print",
-  "data-subtitle","preview-subtitle","preview-dimensions","print-subtitle"]){
+ for(const id of ["ingredient-fields","compact-fields","wide-fields",
+  "ingredient-preview","compact-preview","wide-preview","ingredient-print",
+  "data-step","print-step","format-heading","data-heading","device-heading"]){
   assert.match(html,new RegExp('id="'+id+'"'));
  }
  assert.doesNotMatch(app,/selectedFormat==="horizontal"\|\|busy/);
