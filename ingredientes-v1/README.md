@@ -1,5 +1,13 @@
 # Conserva · «Mis etiquetas» (laboratorio · interfaz experimental)
 
+> **Banco · cierre visual 08/11/2026:** el selector conserva todas sus
+> funciones y adopta el patrón oficial «Preparar etiqueta»: fondo
+> `#fffcf7`, barra móvil gris `46 × 5 px` (`#c1c9bf`) y cierre
+> circular blanco `44 × 44 px` con solo «×», sin texto «Cerrar».
+> Referencia: `mirurecetas-web-source/main/assets/etiquetas.css` y
+> `assets/estilo.css`. Pendiente comprobación visual final en Android;
+> fase siguiente: poblar las fichas del banco sin cambiar la interfaz.
+>
 > **Actualización correctiva 08/11/2026 (prevalece sobre pasajes históricos):**
 > restaurada la plantilla Pequeña previa a #68; el banco ofrece solo métodos
 > aplicables y notas editoriales, conserva el modo libre independiente, oculta
