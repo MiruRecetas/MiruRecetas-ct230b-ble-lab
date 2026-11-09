@@ -1,5 +1,21 @@
 # FoodKeeper ES · archivo fuente original (solo consulta)
 
+## Uso doméstico del banco · conservas y calidad al congelar (10/11/2026)
+
+Este banco existe **para precargar etiquetas de cocina casera**, no para auditar procesos industriales. La ficha ofrece solo métodos útiles con plazo directo; los consejos cortos aclaran la situación aplicable.
+
+| Preparación | Ruta | Nevera | Conserva casera sin abrir | Congelación |
+|---|---|---:|---:|---|
+| Compota de manzana casera | Despensa > Conservas · DES-CON-002 | 7 días | 365 días | No |
+| Mermeladas caseras | Despensa > Conservas · DES-CON-003 | 30 días (tradicional con azúcar) | 365 días | No |
+| Carne de membrillo casero | Despensa > Conservas · DES-CON-004 | 30 días (tradicional con azúcar) | 180 días | No |
+
+En **Nevera**, plazo desde elaboración o apertura, conservar cerrado a ≤4 °C. En **Conserva**, el plazo solo sirve para tarros **sin abrir**, que se han hecho con receta adecuada, procesado térmico apropiado para el alimento/tamaño/altitud y cierre correcto; después de abrir usar nevera. No basta llenar el tarro caliente o darle la vuelta: [compota, NCHFP](https://nchfp.uga.edu/how/can/canning-fruit/applesauce/); [mermeladas, NCHFP](https://nchfp.uga.edu/how/make-jam-jelly/storing-home-canned-jams-and-jellies/); [Penn State en español](https://extension.psu.edu/vamos-a-conservar-alimentos-mermeladas-jaleas-y-compotas). Para la carne de membrillo, de textura mucho más espesa que una jalea, **no atribuir automáticamente al dulce tradicional los tiempos de procesado de las jaleas**: si no se dispone de receta/proceso adecuado para esa presentación, usar la opción Nevera, no Conserva. Los 180 días son un objetivo de calidad condicionado, no una sustitución de un método válido.
+
+**Congelación basada en calidad real y presentación:** se desactiva para **20 fichas de fruta fresca/ingredientes secos** destinadas a consumirse con su textura habitual, ya que al descongelar pierden firmeza o cambian de uso; no implica que sea físicamente imposible congelar fruta para batidos o cocina, pero esas son **preparaciones diferentes** y deben tener su propia ficha cuando se soliciten. También se retira de **14 fichas** con pérdida evidente de calidad o que exigirían cocinar antes el alimento (patata y boniato cocidos/asados; remolacha cruda; berenjena y calabacín frescos; tomate fresco; hongos frescos). Se mantienen métodos adecuados en verduras escaldadas, guisantes/judías y otros alimentos cuyo uso cocinado responde bien. [NCHFP alimentos que no congelan bien](https://nchfp.uga.edu/how/freeze/freeze-general-information/foods-that-do-not-freeze-well/); [NCHFP fruta fresca](https://nchfp.uga.edu/blog/fresh-not-frozen); [University of Minnesota](https://extension.umn.edu/food/preparing/cooking-at-home/food-preservation/freezing).
+
+**Alcance:** modificación directa en main de JSON, README y tests de datos. Se mantienen las fichas y códigos existentes; solo dos fichas nuevas. FoodKeeper original, UI e impresión intactos.
+
 ## Frutas · selección doméstica aprobada (10/11/2026)
 
 **40 fichas nuevas, de las cuales 39 están en Frutas y 1 en Despensa > Conservas** (compota de manzana casera). Respetadas **37 frutas distintas**, Granada (entera y desgranada), Piña (entera y cortada) y la ficha previa **Orejones FRV-FRU-001 sin duplicar**. Total del banco: **177 fichas**; 40 bajo Frutas contando los Orejones. Las 137 fichas preexistentes se preservan sin cambios.
