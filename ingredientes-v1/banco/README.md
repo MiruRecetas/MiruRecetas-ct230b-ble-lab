@@ -1,5 +1,30 @@
 # FoodKeeper ES · archivo fuente original (solo consulta)
 
+## Pescado azul · selección autorizada (09/11/2026, vigente)
+
+Incorporadas **10 fichas** de la subcategoría **Pescado azul**, respetando exactamente las presentaciones elegidas por la usuaria:
+
+| Ficha | Nombre | Presentación | Nevera | Congelación |
+|---|---|---|---:|---:|
+| `PES-AZU-001` | Boquerón | Pieza entera | 2 días | 60 días |
+| `PES-AZU-002` | Atún | Lomos | 2 días | 60 días |
+| `PES-AZU-003` | Bonito | Lomos | 2 días | 60 días |
+| `PES-AZU-004` | Bonito | Rodajas | 2 días | 60 días |
+| `PES-AZU-005` | Caballa | Pieza entera | 2 días | 60 días |
+| `PES-AZU-006` | Jurel | Lomos | 2 días | 60 días |
+| `PES-AZU-007` | Jurel | Pieza entera | 2 días | 60 días |
+| `PES-AZU-008` | Pez espada | Rodajas | 2 días | 60 días |
+| `PES-AZU-009` | Salmón | Lomos | 2 días | 60 días |
+| `PES-AZU-010` | Sardina | Pieza entera | 2 días | 60 días |
+
+**Referencia de origen:** [FoodKeeper ES original](fuentes/foodkeeper-es-original.json), `Product.ID 146`, grupo *Pescado graso*, incluye expresamente **mackerel (caballa/verdel), salmon (salmón) y tuna (atún)**, junto con otros peces no seleccionados. Intervalos: refrigeración **1–2 días**; congelación **2–3 meses**. Se aplica la normalización doméstica del banco: **2 días en nevera y 60 días en congelador** (mes=30 días). [FoodSafety.gov, Cold Food Storage Chart](https://www.foodsafety.gov/food-safety-charts/cold-food-storage-charts) corrobora aproximadamente la misma categoría y duración de congelación; su rango refrigerado actual 1–3 días no sustituye la regla acordada de FoodKeeper original. Se conservan los tres nombres con la presentación indicada; no se crean fichas adicionales sin selección.
+
+**Extrapolación editorial:** el FoodKeeper original no enumera individualmente boquerón, bonito, jurel, pez espada ni sardina bajo el ID 146. Estos se añaden por petición expresa utilizando la pauta general del grupo, sin atribuirles un ID individual. El [Ministerio de Agricultura](https://www.alimentosdespana.es/es/turismo-agroalimentario-y-gastronomia/gastronomia/bloc/pescados/clasificacion) incluye boquerón, jurel, caballa, sardina y atún entre los azules, pero clasifica el *emperador/pez espada* como semigraso; [material divulgativo de AESAN](https://www.aesan.gob.es/AECOSAN/docs/documentos/nutricion/educanaos/fichas_aula.pdf) lo incluye entre los azules. Se mantiene **Pez espada → Pescado azul** según el criterio editorial de la usuaria, sin crear otra subcategoría.
+
+**Trazabilidad:** `fuente: "agregación"`, `id_fuente: null` en las 10 fichas, porque los intervalos del registro agrupado 146 se aplican a presentaciones y especies seleccionadas editorialmente, sin duplicar el mismo identificador original; se conserva el ID 146 en este documento. Para **Caballa**, se registra el nombre breve y «Verdel» como sinónimo; para **Jurel**, «Chicharro» como alias, sin nuevas fichas. **Bonito** y **Jurel** tienen dos fichas cada uno por sus presentaciones diferenciadas. Para boquerón fresco que vaya a comerse en vinagre, recordar que [AESAN indica congelación preventiva frente al anisakis](https://www.aesan.gob.es/ca/actualidad/campanyas-seguridad-alimentaria/anisakis); el banco no agrega controles ni validaciones adicionales por ello.
+
+**Modos:** refrigeración y congelación habilitadas; despensa y conserva no ofrecidas (`false` y días/tips `null`). Notas activas cortas vacías para conservar los ajustes editables de las etiquetas domésticas. El periodo de congelación es orientativo de calidad. **Total 67 fichas** (7 blanco, 10 azul), 4 categorías y 28 subcategorías. Registro directo en `main` con comprobación de coherencia simple, sin PR ni pruebas integrales. No se modifica UI, plantillas, BLE, FoodKeeper original, Airtable ni producción.
+
 ## Pescado blanco · lote seleccionado (09/11/2026)
 
 Se incorporan **7 fichas**: Bacalao (**Lomos desalados**, **En salazón**), Abadejo (**Lomos**), Dorada (**Pieza entera**), Lubina (**Pieza entera**), Merluza (**Lomos**) y Corvina (**Lomos**).

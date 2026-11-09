@@ -18,8 +18,8 @@ const categories=props.categoria.enum;
 const subcategories=Object.fromEntries(allOf.slice(0,4).map(r=>[r.if.properties.categoria.const,r.then.properties.subcategoria.enum]));
 const byName=name=>records.find(x=>x.nombre===name);
 
-test("catálogo de cincuenta y siete fichas, con ID y variante únicos",()=>{
- assert.equal(records.length,57);
+test("catálogo de sesenta y siete fichas, con ID y variante únicos",()=>{
+ assert.equal(records.length,67);
  assert.equal(new Set(records.map(x=>x.nombre+"|"+String(x.presentacion))).size,records.length);
  assert.equal(new Set(records.map(x=>x.id)).size,records.length);
  assert.deepEqual(new Set(records.map(x=>x.nombre)),new Set([
@@ -30,7 +30,7 @@ test("catálogo de cincuenta y siete fichas, con ID y variante únicos",()=>{
   "Carne picada de cerdo","Cerdo para guisar",
   "Pollo","Pechuga de pollo","Muslo de pollo","Carne picada de pollo","Pechuga de pavo",
   "Hamburguesas de ternera","Hamburguesas de pollo","Salchichas frescas","Chorizo fresco","Chorizo criollo","Morcilla de Burgos","Morcilla Matachana","Filetes rusos","Pincho moruno","Lomo de cerdo adobado","Cachopo","San Jacobo","Jamón cocido","Jamón serrano","Jamón ibérico","Pechuga de pavo (fiambre)","Salami","Lomo de cerdo embuchado","Salchichón","Chorizo curado","Bacon","Cecina",
-  "Bacalao","Abadejo","Dorada","Lubina","Merluza","Corvina","Pulpo","Patata","Lechuga","Orejones","Salsa de tomate"
+  "Bacalao","Abadejo","Dorada","Lubina","Merluza","Corvina","Boquerón","Atún","Bonito","Caballa","Jurel","Pez espada","Salmón","Sardina","Pulpo","Patata","Lechuga","Orejones","Salsa de tomate"
  ]));
  assert.equal(categories.length,4);
  assert.equal(Object.values(subcategories).flat().length,28);
@@ -345,6 +345,23 @@ test("cinco piezas enteras solo despensa y cinco loncheados condicionados al vac
   assert.equal(whole.conserva,false);assert.equal(whole.fuente,"usuario");
   assert.equal(whole.id_fuente,null);
  }
- assert.equal(records.length,57);
+ assert.equal(records.length,67);
  assert.equal(records.filter(x=>x.subcategoria==="Charcutería").length,15);
+});
+
+test("Pescado azul doméstico · 10 presentaciones, plazos FoodKeeper 146",()=>{
+ const expected=[{"id":"PES-AZU-001","name":"Boquerón","presentation":"Pieza entera"},{"id":"PES-AZU-002","name":"Atún","presentation":"Lomos"},{"id":"PES-AZU-003","name":"Bonito","presentation":"Lomos"},{"id":"PES-AZU-004","name":"Bonito","presentation":"Rodajas"},{"id":"PES-AZU-005","name":"Caballa","presentation":"Pieza entera"},{"id":"PES-AZU-006","name":"Jurel","presentation":"Lomos"},{"id":"PES-AZU-007","name":"Jurel","presentation":"Pieza entera"},{"id":"PES-AZU-008","name":"Pez espada","presentation":"Rodajas"},{"id":"PES-AZU-009","name":"Salmón","presentation":"Lomos"},{"id":"PES-AZU-010","name":"Sardina","presentation":"Pieza entera"}];
+ const actual=records.filter(x=>x.subcategoria==="Pescado azul");
+ assert.equal(actual.length,10);
+ for(const e of expected){
+  const x=actual.find(x=>x.id===e.id);
+  assert.ok(x,e.id);
+  assert.equal(x.nombre,e.name);
+  assert.equal(x.presentacion,e.presentation);
+  assert.equal(x.refrigeracion_dias,2);
+  assert.equal(x.congelacion_dias,60);
+  assert.equal(x.despensa,false);
+  assert.equal(x.fuente,"agregación");
+  assert.equal(x.id_fuente,null);
+ }
 });

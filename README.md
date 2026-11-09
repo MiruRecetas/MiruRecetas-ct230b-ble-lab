@@ -1,3 +1,14 @@
+> **Banco · Pescado azul (09/11/2026, vigente):**
+> 10 fichas: Boquerón (Pieza entera); Atún (Lomos);
+> Bonito (Lomos y Rodajas); Caballa (Pieza entera);
+> Jurel (Lomos y Pieza entera); Pez espada (Rodajas);
+> Salmón (Lomos); Sardina (Pieza entera).
+> **2 días refrigeración / 60 días congelación**,
+> desde el grupo FoodKeeper 146. Bonito y Jurel
+> se desdoblan por presentación. **67 fichas totales**.
+> Sin cambios de interfaz ni impresión.
+> [Expediente](ingredientes-v1/banco/README.md).
+>
 > **Pescado blanco · 09/11/2026 (vigente):**
 > 7 fichas: Bacalao (Lomos desalados / En salazón),
 > Abadejo (Lomos), Dorada/Lubina (Pieza entera),
