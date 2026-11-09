@@ -1,5 +1,27 @@
 # FoodKeeper ES · archivo fuente original (solo consulta)
 
+## Pescado blanco · lote seleccionado (09/11/2026)
+
+Se incorporan **7 fichas**: Bacalao (**Lomos desalados**, **En salazón**), Abadejo (**Lomos**), Dorada (**Pieza entera**), Lubina (**Pieza entera**), Merluza (**Lomos**) y Corvina (**Lomos**).
+
+| ID | Nombre | Presentación | Nevera | Congelador | Despensa |
+|---|---|---|---:|---:|---:|
+| `PES-BLA-001` | Bacalao | Lomos desalados | 2 | 180 | — |
+| `PES-BLA-002` | Bacalao | En salazón | — | — | 180 |
+| `PES-BLA-003` | Abadejo | Lomos | 2 | 120 | — |
+| `PES-BLA-004` | Dorada | Pieza entera | 2 | 180 | — |
+| `PES-BLA-005` | Lubina | Pieza entera | 2 | 180 | — |
+| `PES-BLA-006` | Merluza | Lomos | 2 | 180 | — |
+| `PES-BLA-007` | Corvina | Lomos | 2 | 180 | — |
+
+Días en cada método. Solo se ofrecen los modos indicados; los demás son `false` con datos `null`. Los plazos frescos siguen FoodKeeper `Product.ID 144` (pescado magro, *cod*: 1–2 días frío, 6–8 meses congelado) y `145` (*pollock*: 1–2 días, 4–8 meses), completados con la [referencia general de pescado blanco de OCU](https://www.ocu.org/alimentacion/seguridad-alimentaria/informe/conservacion-alimentos). Se toma **2 días** refrigerados, **180** congelados en blanco genérico y **120** en abadejo.
+
+El original FoodKeeper no tiene fichas por separado para estos peces. **Lubina europea** (*Dicentrarchus labrax*) **no equivale** a *rockfish*, aunque el texto español del ID 145 lo traduzca como «lubina»; se usa el [nombre oficial español del BOE](https://www.boe.es/buscar/act.php?id=BOE-A-2026-12598). El abadejo original es *pollock* y las denominaciones españolas identifican especies concretas según la comercialización. Dorada, merluza y corvina reciben plazos editoriales del grupo blanco, no ID FoodKeeper individual.
+
+La presentación **Bacalao · Lomos desalados** solo permite nevera **2 días** y congelación **180 días**. **Bacalao · En salazón** únicamente ofrece **despensa 180 días** con nota editable «Solo seco-salado; ver envase», **exclusivamente** si se vende como producto seco-salado estable sin frío. La [OCU](https://www.ocu.org/alimentacion/alimentos/noticias/bacalao-guia-de-compra) describe su conservación durante varios meses en lugar seco; productos húmedos, en salmuera, al punto de sal o con exigencia de frío siguen las instrucciones del vendedor y no esa ficha. No son cifras del original FoodKeeper para bacalao salado.
+
+Las siete entradas tienen `fuente:"agregación"`, `id_fuente:null` por la combinación de presentaciones elegidas, FoodKeeper agrupado y fuentes externas; aquí queda la trazabilidad explícita de **144/145**. Son etiquetas caseras editables, **sin nuevos controles**. No cambia `banco-ui.js`, HTML, CSS, impresión, motor, BLE, FoodKeeper original, Airtable ni web de producción. Banco: **50 → 57** fichas, cuatro categorías y 28 subcategorías. Commit directo en `main`, sin PR ni pruebas integrales.
+
 > **Decisión posterior 08/11/2026:** la UI del banco muestra únicamente
 > conservaciones aplicables a cada ficha. Ya no se ofrecen métodos desconocidos
 > por el mero hecho de tener un booleano, y `false` expresa «no ofrecido

@@ -18,8 +18,8 @@ const categories=props.categoria.enum;
 const subcategories=Object.fromEntries(allOf.slice(0,4).map(r=>[r.if.properties.categoria.const,r.then.properties.subcategoria.enum]));
 const byName=name=>records.find(x=>x.nombre===name);
 
-test("catálogo de cincuenta fichas, con ID y variante únicos",()=>{
- assert.equal(records.length,50);
+test("catálogo de cincuenta y siete fichas, con ID y variante únicos",()=>{
+ assert.equal(records.length,57);
  assert.equal(new Set(records.map(x=>x.nombre+"|"+String(x.presentacion))).size,records.length);
  assert.equal(new Set(records.map(x=>x.id)).size,records.length);
  assert.deepEqual(new Set(records.map(x=>x.nombre)),new Set([
@@ -30,7 +30,7 @@ test("catálogo de cincuenta fichas, con ID y variante únicos",()=>{
   "Carne picada de cerdo","Cerdo para guisar",
   "Pollo","Pechuga de pollo","Muslo de pollo","Carne picada de pollo","Pechuga de pavo",
   "Hamburguesas de ternera","Hamburguesas de pollo","Salchichas frescas","Chorizo fresco","Chorizo criollo","Morcilla de Burgos","Morcilla Matachana","Filetes rusos","Pincho moruno","Lomo de cerdo adobado","Cachopo","San Jacobo","Jamón cocido","Jamón serrano","Jamón ibérico","Pechuga de pavo (fiambre)","Salami","Lomo de cerdo embuchado","Salchichón","Chorizo curado","Bacon","Cecina",
-  "Pulpo","Patata","Lechuga","Orejones","Salsa de tomate"
+  "Bacalao","Abadejo","Dorada","Lubina","Merluza","Corvina","Pulpo","Patata","Lechuga","Orejones","Salsa de tomate"
  ]));
  assert.equal(categories.length,4);
  assert.equal(Object.values(subcategories).flat().length,28);
@@ -345,6 +345,6 @@ test("cinco piezas enteras solo despensa y cinco loncheados condicionados al vac
   assert.equal(whole.conserva,false);assert.equal(whole.fuente,"usuario");
   assert.equal(whole.id_fuente,null);
  }
- assert.equal(records.length,50);
+ assert.equal(records.length,57);
  assert.equal(records.filter(x=>x.subcategoria==="Charcutería").length,15);
 });

@@ -1,5 +1,16 @@
 # Conserva · «Mis etiquetas» (laboratorio · interfaz experimental)
 
+> **Pescado blanco · 09/11/2026 (vigente):**
+> 7 fichas: Bacalao (Lomos desalados / En salazón),
+> Abadejo (Lomos), Dorada/Lubina (Pieza entera),
+> Merluza/Corvina (Lomos). Nevera 2 días en pescado
+> fresco; congelador 180 días (abadejo 120);
+> Bacalao seco-salado apto para despensa solo
+> Despensa 180 días. Fuente agrupada FoodKeeper
+> 144/145 y OCU, con lubina española no confundida
+> con «rockfish». Total **57 fichas**.
+> [Detalle](banco/README.md).
+>
 > **Charcutería · decisión doméstica vigente (08/11/2026):**
 > Las fichas «Al corte» de jamón serrano/ibérico, salami,
 > lomo embuchado, salchichón, chorizo curado y cecina
@@ -204,9 +215,9 @@ AESAN queda como fuente de contraste. **`estado_recomendacion`, `fuente` e `id_f
 
 Esta clasificación reúne **4 categorías y 28 subcategorías aprobadas** y sustituye las once categorías editoriales anteriores, excluyendo «Lácteos y huevos». La última subcategoría de Despensa se denomina simplemente **«Conservas»** en el panel, aunque se reservará a conservas caseras; nunca a productos comerciales. Los **chips de categorías vacías no aparecerán en el panel**: para mostrarse, una categoría debe contener al menos un ingrediente seleccionable. Nunca crear registros ficticios ni incluir productos comerciales envasados. El [JSON Schema del banco](banco/catalogo.schema.json) **ya está creado** (4 categorías, 28 subcategorías y metadatos aprobados), y el **catálogo mínimo y el panel ya están implementados en laboratorio**, aún pendientes de validación visual; no es el catálogo definitivo. [Contrato del banco](banco/README.md).
 
-## Banco JSON de Pequeña · patrón D con cincuenta fichas (08/11/2026)
+## Banco JSON de Pequeña · patrón D con cincuenta y siete fichas (09/11/2026)
 
-**Estado actual del banco:** ver [cincuenta fichas y fuentes](banco/README.md), su [JSON](banco/catalogo.json) y el controlador [banco-ui.js](banco-ui.js). Los chips, el sheet y la precarga editable están en laboratorio; la usuaria **aún no ha validado visualmente** esta nueva interacción. La opción libre, Compacta y Amplia mantienen su uso. El selector de Pequeña incorpora Despensa y Conserva como modos adicionales, sin cambiar el arte aprobado de los modos anteriores.
+**Estado actual del banco:** ver [cincuenta y siete fichas y fuentes](banco/README.md), su [JSON](banco/catalogo.json) y el controlador [banco-ui.js](banco-ui.js). Los chips, el sheet y la precarga editable están en laboratorio; la usuaria **aún no ha validado visualmente** esta nueva interacción. La opción libre, Compacta y Amplia mantienen su uso. El selector de Pequeña incorpora Despensa y Conserva como modos adicionales, sin cambiar el arte aprobado de los modos anteriores.
 
 La usuaria ha aprobado **dos chips bajo la vista previa de Pequeña**:
 **«Ingrediente libre»** (por defecto) y **«Cargar del banco»**. Este último

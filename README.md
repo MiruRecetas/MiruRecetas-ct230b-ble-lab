@@ -1,3 +1,14 @@
+> **Pescado blanco · 09/11/2026 (vigente):**
+> 7 fichas: Bacalao (Lomos desalados / En salazón),
+> Abadejo (Lomos), Dorada/Lubina (Pieza entera),
+> Merluza/Corvina (Lomos). Nevera 2 días en pescado
+> fresco; congelador 180 días (abadejo 120);
+> Bacalao seco-salado apto para despensa solo
+> Despensa 180 días. Fuente agrupada FoodKeeper
+> 144/145 y OCU, con lubina española no confundida
+> con «rockfish». Total **57 fichas**.
+> [Detalle](ingredientes-v1/banco/README.md).
+>
 > **Charcutería · decisión doméstica vigente (08/11/2026):**
 > Las fichas «Al corte» de jamón serrano/ibérico, salami,
 > lomo embuchado, salchichón, chorizo curado y cecina
