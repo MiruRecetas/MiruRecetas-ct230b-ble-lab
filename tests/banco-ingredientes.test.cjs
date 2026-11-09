@@ -18,8 +18,8 @@ const categories=props.categoria.enum;
 const subcategories=Object.fromEntries(allOf.slice(0,4).map(r=>[r.if.properties.categoria.const,r.then.properties.subcategoria.enum]));
 const byName=name=>records.find(x=>x.nombre===name);
 
-test("catálogo de ochenta y cuatro fichas, con ID y variante únicos",()=>{
- assert.equal(records.length,84);
+test("catálogo de ciento una fichas, con ID y variante únicos",()=>{
+ assert.equal(records.length,101);
  assert.equal(new Set(records.map(x=>x.nombre+"|"+String(x.presentacion))).size,records.length);
  assert.equal(new Set(records.map(x=>x.id)).size,records.length);
  assert.deepEqual(new Set(records.map(x=>x.nombre)),new Set([
@@ -30,7 +30,7 @@ test("catálogo de ochenta y cuatro fichas, con ID y variante únicos",()=>{
   "Carne picada de cerdo","Cerdo para guisar",
   "Pollo","Pechuga de pollo","Muslo de pollo","Carne picada de pollo","Pechuga de pavo",
   "Hamburguesas de ternera","Hamburguesas de pollo","Salchichas frescas","Chorizo fresco","Chorizo criollo","Morcilla de Burgos","Morcilla Matachana","Filetes rusos","Pincho moruno","Lomo de cerdo adobado","Cachopo","San Jacobo","Jamón cocido","Jamón serrano","Jamón ibérico","Pechuga de pavo (fiambre)","Salami","Lomo de cerdo embuchado","Salchichón","Chorizo curado","Bacon","Cecina",
-  "Bacalao","Abadejo","Dorada","Lubina","Merluza","Corvina","Boquerón","Atún","Bonito","Caballa","Jurel","Pez espada","Salmón","Sardina","Almejas","Mejillones","Langostinos","Gambas","Gambón","Zamburiñas","Bogavante","Pulpo","Calamar","Chipirón","Sepia","Patata","Lechuga","Orejones","Salsa de tomate"
+  "Bacalao","Abadejo","Dorada","Lubina","Merluza","Corvina","Boquerón","Atún","Bonito","Caballa","Jurel","Pez espada","Salmón","Sardina","Almejas","Mejillones","Langostinos","Gambas","Gambón","Zamburiñas","Bogavante","Pulpo","Calamar","Chipirón","Sepia","Patata","Boniato","Yuca","Apionabo","Zanahoria","Remolacha","Champiñón","Portobello","Shiitake","Seta de ostra","Boletus","Níscalos","Lechuga","Orejones","Salsa de tomate"
  ]));
  assert.equal(categories.length,4);
  assert.equal(Object.values(subcategories).flat().length,28);
@@ -72,7 +72,7 @@ test("plazos del archivo original: sin extrapolar datos de otros alimentos",()=>
  assert.equal(meat.despensa,false);assert.equal(meat.conserva,false);
  assert.equal(meat.congelacion_dias,90);
  assert.equal(potato.id_fuente,"297");assert.equal(potato.refrigeracion_dias,14);
- assert.equal(potato.despensa_dias,null);assert.equal(potato.congelacion,false);assert.equal(potato.congelacion_dias,null);
+ assert.equal(potato.despensa_dias,60);assert.equal(potato.presentacion,"Pieza entera cruda");assert.equal(potato.congelacion,false);assert.equal(potato.congelacion_dias,null);
  assert.equal(lettuce.estado_recomendacion,"verificado");assert.equal(lettuce.fuente,"agregación");
  assert.equal(lettuce.id_fuente,null);assert.equal(lettuce.refrigeracion_dias,14);
  assert.equal(lettuce.despensa,false);assert.equal(lettuce.conserva,false);
@@ -347,7 +347,7 @@ test("cinco piezas enteras solo despensa y cinco loncheados condicionados al vac
   assert.equal(whole.conserva,false);assert.equal(whole.fuente,"usuario");
   assert.equal(whole.id_fuente,null);
  }
- assert.equal(records.length,84);
+ assert.equal(records.length,101);
  assert.equal(records.filter(x=>x.subcategoria==="Charcutería").length,15);
 });
 
@@ -381,5 +381,5 @@ test("mariscos: vivos/frescos unidos, variantes seleccionadas y Pulpo completado
  assert.equal(records.filter(x=>x.subcategoria==="Cefalópodos").length,4);
  assert.equal(records.filter(x=>x.id==="PES-CEF-001").length,1);
  assert.equal(records.find(x=>x.id==="PES-CEF-001").estado_recomendacion,"verificado");
- assert.equal(records.length,84);
+ assert.equal(records.length,101);
 });

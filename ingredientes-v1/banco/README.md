@@ -1,5 +1,44 @@
 # FoodKeeper ES · archivo fuente original (solo consulta)
 
+## Tubérculos y Hongos · incorporación doméstica (09/11/2026, vigente)
+
+La usuaria aprueba **17 fichas nuevas**: **11 en Tubérculos**, **6 en Hongos**. Se **actualiza Patata `FRV-TUB-001` sin duplicarla**. La subcategoría **Algas permanece vacía y oculta**, sin registros.
+
+| ID | Nombre | Presentación | Frigorífico (d) | Congelación (d) | Despensa (d) |
+|---|---|---|---:|---:|---:|
+| `FRV-TUB-001` | Patata | Pieza entera cruda | 14 | — | 60 |
+| `FRV-TUB-002` | Patata | Asada | 4 | 30 | — |
+| `FRV-TUB-003` | Patata | Cocida | 4 | 30 | — |
+| `FRV-TUB-004` | Boniato | Pieza entera cruda | — | — | 21 |
+| `FRV-TUB-005` | Boniato | Asado | 4 | 30 | — |
+| `FRV-TUB-006` | Boniato | Cocido | 4 | 30 | — |
+| `FRV-TUB-007` | Yuca | — | 3 | 30 | 7 |
+| `FRV-TUB-008` | Apionabo | — | 7 | — | — |
+| `FRV-TUB-009` | Zanahoria | Pieza entera cruda | 21 | 300 | — |
+| `FRV-TUB-010` | Zanahoria | Dados | 3 | 300 | — |
+| `FRV-TUB-011` | Remolacha | Cruda | 14 | 180 | — |
+| `FRV-TUB-012` | Remolacha | Cocida | 4 | 30 | — |
+| `FRV-HON-001` | Champiñón | Fresco | 7 | 300 | — |
+| `FRV-HON-002` | Portobello | Fresco | 7 | 300 | — |
+| `FRV-HON-003` | Shiitake | Fresco | 7 | 300 | — |
+| `FRV-HON-004` | Seta de ostra | Fresca | 7 | 300 | — |
+| `FRV-HON-005` | Boletus | Fresco | 7 | 300 | — |
+| `FRV-HON-006` | Níscalos | Frescos | 7 | 300 | — |
+
+**FoodKeeper ES original** archivado (sin alterar):
+- `Product.ID 297` patata («Papas»): frigorífico 1–2 semanas y despensa 1–2 meses. Se mantiene frigorífico 14 días del registro anterior, se completa despensa con **60 días**, se renombra «Entera» a «Pieza entera cruda», se preserva `id_fuente: "297"` y la ficha pasa de parcial a verificada.
+- `Product.ID 422` «Batata dulce»: **2–3 semanas en despensa**; se registra Boniato «Pieza entera cruda» con **21 días**, sin frío ni congelación en esa variante.
+- `Product.ID 308` «Yuca/Casabe»: **3 días frigorífico / 1–2 meses congelación / 7 días despensa**; ficha Yuca, Mandioca como sinónimo, 3/30/7 días.
+- `Product.ID 661` «Raíz de apio»: una semana de frigorífico → Apionabo, 7 días, sin agregar plazos desconocidos.
+- `Product.ID 279` «Zanahorias, chirivía»: 2–3 semanas de frigorífico y 10–12 meses de congelación → Zanahoria «Pieza entera cruda» **21/300 días**. Para la presentación «Dados» (dados crudos), frigorífico **3 días** como adaptación conservadora al corte, congelación **300 días** previo escaldado. Las dos variantes llevan `fuente:"agregación"` e `id_fuente:null` para no duplicar el ID 279.
+- `Product.ID 274` «Remolacha»: frigorífico 7–14 días y congelación 6–8 meses → Remolacha «Cruda» **14/180 días**. La presentación «Cocida» es independiente.
+- `Product.ID 174` «Comidas para llevar sin carne, pescado ni huevos (vegetales cocinados, arroz o papas)»: refrigeración 3–4 días, congelación 1–2 meses. Se aplica **4/30 días** a Patata (Asada, Cocida), Boniato (Asado, Cocido) y Remolacha Cocida. [USDA: cooked potatoes](https://ask.fsis.usda.gov/article/How-long-can-you-store-cooked-potatoes) también indica 3–4 días frigorífico.
+- `Product.ID 292` «Setas» agrupa hongos frescos, refrigeración 3–7 días y congelación 10–12 meses → Champiñón, Portobello, Shiitake, Seta de ostra, Boletus y Níscalos frescos **7/300 días**. El banco aconseja **saltear antes de congelar** como nota editable; las especies no son IDs individuales de FoodKeeper y llevan `fuente:"agregación"`, `id_fuente:null`.
+
+**Clasificación editorial:** se mantienen Zanahoria y Remolacha en «Tubérculos» junto a las raíces de reserva por la decisión de agrupar estas incorporaciones, aunque botánicamente son raíces/hortalizas y no tubérculos estrictos. Las presentaciones no solicitadas de Yuca y Apionabo permanecen `null`. Los modos no ofrecidos son `false`, con plazo y tips `null`; no hay ingredientes ficticios. Son sugerencias editables para el banco **doméstico** y no controles industriales.
+
+**Estado:** 84 → **101 fichas** en total (17 nuevas, Patata modificada), cuatro categorías principales y 28 subcategorías. `main` directo, sin PR ni pruebas integrales; solo actualización de catálogo, aserciones existentes y documentación. No se cambia UI, diseño, impresión, BLE, FoodKeeper original ni ningún repositorio productivo.
+
 ## Crustáceos y moluscos y Cefalópodos · lote doméstico (09/11/2026, vigente)
 
 La usuaria aprueba **14 fichas nuevas** para «Crustáceos y moluscos» y **3 nuevas** para «Cefalópodos», además de **completar la ficha de Pulpo existente `PES-CEF-001` sin duplicarla**. Total **84 fichas** (67 anteriores + 17 nuevas), dentro de las cuatro categorías y 28 subcategorías existentes.

@@ -1,3 +1,16 @@
+> **Tubérculos y Hongos · lote 09/11/2026:**
+> Se actualiza Patata existente como «Pieza entera cruda»
+> (nevera 14 d, despensa 60 d) y se añaden Patata
+> (Asada, Cocida), Boniato (crudo entero, Asado, Cocido),
+> Yuca, Apionabo, Zanahoria (entera cruda, Dados),
+> Remolacha (Cruda, Cocida), más Champiñón,
+> Portobello, Shiitake, Seta de ostra, Boletus y
+> Níscalos frescos. **17 nuevas, 101 fichas totales**.
+> Algas queda vacía y oculta. Cambios de datos
+> por commit directo en main, sin PR ni pruebas
+> integrales ni retoques de interfaz o impresión.
+> [Detalle](ingredientes-v1/banco/README.md).
+>
 > **Pescados y mariscos · lote 09/11/2026:**
 > 14 nuevas fichas en **Crustáceos y moluscos**:
 > almejas y mejillones (sin duplicar vivo/fresco);
