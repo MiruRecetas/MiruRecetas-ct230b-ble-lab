@@ -18,8 +18,8 @@ const categories=props.categoria.enum;
 const subcategories=Object.fromEntries(allOf.slice(0,4).map(r=>[r.if.properties.categoria.const,r.then.properties.subcategoria.enum]));
 const byName=name=>records.find(x=>x.nombre===name);
 
-test("catálogo de ciento una fichas, con ID y variante únicos",()=>{
- assert.equal(records.length,101);
+test("catálogo de ciento catorce fichas, con ID y variante únicos",()=>{
+ assert.equal(records.length,114);
  assert.equal(new Set(records.map(x=>x.nombre+"|"+String(x.presentacion))).size,records.length);
  assert.equal(new Set(records.map(x=>x.id)).size,records.length);
  assert.deepEqual(new Set(records.map(x=>x.nombre)),new Set([
@@ -30,7 +30,7 @@ test("catálogo de ciento una fichas, con ID y variante únicos",()=>{
   "Carne picada de cerdo","Cerdo para guisar",
   "Pollo","Pechuga de pollo","Muslo de pollo","Carne picada de pollo","Pechuga de pavo",
   "Hamburguesas de ternera","Hamburguesas de pollo","Salchichas frescas","Chorizo fresco","Chorizo criollo","Morcilla de Burgos","Morcilla Matachana","Filetes rusos","Pincho moruno","Lomo de cerdo adobado","Cachopo","San Jacobo","Jamón cocido","Jamón serrano","Jamón ibérico","Pechuga de pavo (fiambre)","Salami","Lomo de cerdo embuchado","Salchichón","Chorizo curado","Bacon","Cecina",
-  "Bacalao","Abadejo","Dorada","Lubina","Merluza","Corvina","Boquerón","Atún","Bonito","Caballa","Jurel","Pez espada","Salmón","Sardina","Almejas","Mejillones","Langostinos","Gambas","Gambón","Zamburiñas","Bogavante","Pulpo","Calamar","Chipirón","Sepia","Patata","Boniato","Yuca","Apionabo","Zanahoria","Remolacha","Champiñón","Portobello","Shiitake","Seta de ostra","Boletus","Níscalos","Lechuga","Orejones","Salsa de tomate"
+  "Bacalao","Abadejo","Dorada","Lubina","Merluza","Corvina","Boquerón","Atún","Bonito","Caballa","Jurel","Pez espada","Salmón","Sardina","Almejas","Mejillones","Langostinos","Gambas","Gambón","Zamburiñas","Bogavante","Pulpo","Calamar","Chipirón","Sepia","Patata","Boniato","Yuca","Apionabo","Zanahoria","Remolacha","Champiñón","Portobello","Shiitake","Seta de ostra","Boletus","Níscalos","Lechuga","Repollo","Espinacas","Mezcla de hojas para ensalada","Acelga","Rúcula","Berzas","Escarola","Endivias","Canónigos","Orejones","Salsa de tomate"
  ]));
  assert.equal(categories.length,4);
  assert.equal(Object.values(subcategories).flat().length,28);
@@ -347,7 +347,7 @@ test("cinco piezas enteras solo despensa y cinco loncheados condicionados al vac
   assert.equal(whole.conserva,false);assert.equal(whole.fuente,"usuario");
   assert.equal(whole.id_fuente,null);
  }
- assert.equal(records.length,101);
+ assert.equal(records.length,114);
  assert.equal(records.filter(x=>x.subcategoria==="Charcutería").length,15);
 });
 
@@ -381,5 +381,35 @@ test("mariscos: vivos/frescos unidos, variantes seleccionadas y Pulpo completado
  assert.equal(records.filter(x=>x.subcategoria==="Cefalópodos").length,4);
  assert.equal(records.filter(x=>x.id==="PES-CEF-001").length,1);
  assert.equal(records.find(x=>x.id==="PES-CEF-001").estado_recomendacion,"verificado");
- assert.equal(records.length,101);
+ assert.equal(records.length,114);
+});
+
+test("verduras de hoja aprobadas: 14 fichas, sin duplicar lechuga ni atribuir IDs de grupos",()=>{
+ const hoja=records.filter(x=>x.subcategoria==="Verduras de hoja");
+ assert.equal(hoja.length,14);
+ const lettuce=hoja.find(x=>x.id==="FRV-HOJ-001");
+ assert.equal(lettuce.nombre,"Lechuga");assert.equal(lettuce.presentacion,"Iceberg o romana");
+ assert.equal(lettuce.refrigeracion_dias,14);assert.equal(lettuce.id_fuente,null);
+ const fresh=[["Repollo","Crudo",14,"278"],["Espinacas","Crudas",7,null],
+  ["Acelga","Cruda",14,"550"],["Berzas","Crudas",7,null]];
+ const blanched=[["Repollo","Escaldado",300],["Espinacas","Escaldadas",240],
+  ["Acelga","Escaldada",240],["Berzas","Escaldadas",240]];
+ for(const [nombre,presentacion,days,source] of fresh){
+  const x=hoja.find(z=>z.nombre===nombre&&z.presentacion===presentacion);
+  assert.ok(x,nombre+" crudo");assert.equal(x.refrigeracion_dias,days);
+  assert.equal(x.congelacion,false);assert.equal(x.id_fuente,source);
+ }
+ for(const [nombre,presentacion,days] of blanched){
+  const x=hoja.find(z=>z.nombre===nombre&&z.presentacion===presentacion);
+  assert.ok(x,nombre+" escaldado");assert.equal(x.refrigeracion_dias,4);
+  assert.equal(x.congelacion_dias,days);assert.equal(x.fuente,"agregación");assert.equal(x.id_fuente,null);
+ }
+ for(const [nombre,days,source] of [["Mezcla de hojas para ensalada",2,"415"],
+  ["Rúcula",7,"678"],["Escarola",7,null],["Endivias",7,null],["Canónigos",5,null]]){
+  const x=hoja.find(z=>z.nombre===nombre);assert.ok(x,nombre);
+  assert.equal(x.refrigeracion_dias,days);assert.equal(x.congelacion,false);
+  assert.equal(x.id_fuente,source);
+ }
+ const ids=records.map(x=>x.id_fuente).filter(Boolean);
+ assert.equal(new Set(ids).size,ids.length);
 });

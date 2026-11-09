@@ -1,5 +1,32 @@
 # FoodKeeper ES · archivo fuente original (solo consulta)
 
+## Verduras de hoja · selección doméstica autorizada (09/11/2026)
+
+Se incorporan **13 fichas nuevas** y se conserva íntegra la **Lechuga** existente `FRV-HOJ-001` («Iceberg o romana»), sin duplicarla. Total del banco: **114 fichas**, subcategoría «Verduras de hoja»: **14 fichas para 10 ingredientes**.
+
+| Ficha | Nombre | Presentación | Frigorífico (d) | Congelación (d) | Procedencia |
+|---|---|---|---:|---:|---|
+| FRV-HOJ-001 | Lechuga | Iceberg o romana | 14 | — | Existente; FoodKeeper 290, sin duplicar |
+| FRV-HOJ-002 | Repollo | Crudo | 14 | — | FoodKeeper 278 |
+| FRV-HOJ-003 | Repollo | Escaldado | 4 | 300 | FoodKeeper 278 + escaldado NCHFP + vegetales cocinados 174 |
+| FRV-HOJ-004 | Espinacas | Crudas | 7 | — | Grupo FoodKeeper 291 (lechuga de hoja, espinacas) |
+| FRV-HOJ-005 | Espinacas | Escaldadas | 4 | 240 | Grupo 291 + NCHFP/Extension + 174 |
+| FRV-HOJ-006 | Mezcla de hojas para ensalada | Bolsa | 2 (abierta) | — | FoodKeeper 415 (bolsa de vegetales) |
+| FRV-HOJ-007 | Acelga | Cruda | 14 | — | FoodKeeper 550 |
+| FRV-HOJ-008 | Acelga | Escaldada | 4 | 240 | FoodKeeper 550 + NCHFP/Extension + 174 |
+| FRV-HOJ-009 | Rúcula | — | 7 | — | FoodKeeper 678 («Arúgula») |
+| FRV-HOJ-010 | Berzas | Crudas | 7 | — | Adaptación doméstica, sin ID individual |
+| FRV-HOJ-011 | Berzas | Escaldadas | 4 | 240 | NCHFP/Extension + 174, sin ID individual |
+| FRV-HOJ-012 | Escarola | — | 7 | — | Adaptación doméstica, sin ID individual |
+| FRV-HOJ-013 | Endivias | — | 7 | — | Adaptación doméstica, sin ID individual |
+| FRV-HOJ-014 | Canónigos | — | 5 | — | Adaptación doméstica, sin ID individual |
+
+**Trazabilidad del original:** FoodKeeper ES (archivo suministrado, sin modificaciones) `Product.ID 278` da **1–2 semanas en frío** y **10–12 meses congelado** para repollo; `290` refiere a lechuga iceberg/romana; `291` **agrupa lechuga de hoja y espinacas** (3–7 días y congelación de hoja cruda no recomendada); `415` corresponde a **bolsa de vegetales mixtos** (una vez abierta, **2 días** según su campo de plazo, aunque la nota textual mencione 3; cerrada, seguir fecha de envase); `550` indica **1–2 semanas** para acelga; `678` indica **3–7 días** para arúgula. No asignar 291 a espinacas como producto individual ni los IDs anteriores a especies diferentes. La lechuga existente conserva su origen agregado y sus 14 días. Para los nombres adicionales sin ID, fuente global `agregación` e `id_fuente:null`; las variantes escaldadas también son agregaciones.
+
+**Métodos:** en crudo, se ofrece frigorífico; para congelación de Repollo, Espinacas, Acelga y Berzas se ofrece la **variante escaldada**, destinada a usos cocinados. Escaldado en agua: **Repollo 1½ min; Espinacas 2 min; hojas de Acelga 2 min; Berzas 3 min**; enfriar inmediatamente, escurrir, envasar y congelar. Referencias: [NCHFP, coles](https://nchfp.uga.edu/how/freeze/vegetables/freezing-cabbage-or-chinese-cabbage/), [NCHFP, verduras de hoja](https://nchfp.uga.edu/how/freeze/vegetable/freezing-greens-including-spinach/), [Universidad de New Hampshire, pautas y congelación 8–12 meses](https://extension.unh.edu/resource/freezing-vegetables). El plazo **300 días** del repollo escaldado procede del mínimo de FoodKeeper 278; **240 días** para las otras escaldadas es el mínimo del rango genérico de calidad 8–12 meses. Frigorífico **4 días** para las variantes escaldadas es adaptación del grupo de vegetales cocinados FoodKeeper `174` (3–4 días), condicionada a enfriado inmediato; se prefiere congelarlas pronto. No es una instrucción para conservarlas a temperatura ambiente. Las sugerencias son **orientativas domésticas**, con frigorífico ≤4 °C y congelador ≤−18 °C; no se añaden modos de despensa/conserva ni cambios a impresión, interfaz o FoodKeeper original.
+
+**Alcance de esta operación:** commit único directo en `main` con catálogo, aserciones ligeras del banco y este resumen; sin PR, pruebas integrales, interfaces, BLE, etiquetas ni repositorios de producción.
+
 ## Tubérculos y Hongos · incorporación doméstica (09/11/2026, vigente)
 
 La usuaria aprueba **17 fichas nuevas**: **11 en Tubérculos**, **6 en Hongos**. Se **actualiza Patata `FRV-TUB-001` sin duplicarla**. La subcategoría **Algas permanece vacía y oculta**, sin registros.
