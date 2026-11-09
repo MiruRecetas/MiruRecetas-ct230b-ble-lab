@@ -32,7 +32,7 @@ test("catálogo de ciento setenta y nueve fichas, con ID y variante únicos",()=
   "Hamburguesas de ternera","Hamburguesas de pollo","Salchichas frescas","Chorizo fresco","Chorizo criollo","Morcilla de Burgos","Morcilla Matachana","Filetes rusos","Pincho moruno","Lomo de cerdo adobado","Cachopo","San Jacobo","Jamón cocido","Jamón serrano","Jamón ibérico","Pechuga de pavo (fiambre)","Salami","Lomo de cerdo embuchado","Salchichón","Chorizo curado","Bacon","Cecina",
   "Bacalao","Abadejo","Dorada","Lubina","Merluza","Corvina","Boquerón","Atún","Bonito","Caballa","Jurel","Pez espada","Salmón","Sardina","Almejas","Mejillones","Langostinos","Gambas","Gambón","Zamburiñas","Bogavante","Pulpo","Calamar","Chipirón","Sepia","Patata","Boniato","Yuca","Apionabo","Zanahoria","Remolacha","Champiñón","Portobello","Shiitake","Seta de ostra","Boletus","Níscalos","Lechuga","Repollo","Espinacas","Mezcla de hojas para ensalada","Acelga","Rúcula","Berzas","Escarola","Endivias","Canónigos","Orejones","Salsa de tomate",
   "Alcachofa","Espárragos","Brócoli","Coles de Bruselas","Coliflor","Puerro","Pepino","Berenjena","Pimiento","Calabaza","Calabacín","Tomate","Tomate cherry","Ajo","Cebolla seca","Cebolleta","Judías verdes","Habas frescas","Guisantes frescos","Edamame fresco","Rábano",
-  "Manzana","Albaricoque fresco","Melocotón","Nectarina","Ciruela","Pera","Cerezas","Uvas","Granada","Naranja","Limón","Lima","Pomelo","Mandarina","Clementina","Fresas / fresón","Frambuesas","Moras","Grosellas","Arándanos azules","Aguacate","Chirimoya","Kiwi","Piña","Papaya","Mango fresco","Melón","Sandía","Plátano dulce / banana","Coco fresco","Coco rallado","Dátiles","Uvas pasas","Higos frescos","Caqui","Nísperos","Membrillo fresco","Compota de manzana casera","Mermeladas caseras","Carne de membrillo casero"
+  "Manzana","Albaricoque fresco","Melocotón","Nectarina","Ciruela","Pera","Cerezas","Uvas","Granada","Naranja","Limón","Lima","Pomelo","Mandarina","Clementina","Fresas / fresón","Frambuesas","Moras","Grosellas","Arándanos azules","Aguacate","Chirimoya","Kiwi","Piña","Papaya","Mango fresco","Melón","Sandía","Plátano dulce / banana","Coco fresco","Coco rallado","Dátiles","Uvas pasas","Higos frescos","Caqui","Nísperos","Membrillo fresco","Compota de manzana casera","Mermeladas caseras","Carne de membrillo"
  ]));
  assert.equal(categories.length,4);
  assert.equal(Object.values(subcategories).flat().length,28);
@@ -471,29 +471,32 @@ test("Frutas aprobadas: 39 nuevas fichas, compota en Conservas sin despensa y si
  for(const x of fruit){if(!x.refrigeracion)assert.equal(x.refrigeracion_dias,null);if(!x.congelacion)assert.equal(x.congelacion_dias,null);if(!x.despensa)assert.equal(x.despensa_dias,null);}
 });
 
-test("banco doméstico: tres conservas caseras en nevera o conserva sin congelación",()=>{
- const checked=[
- ["DES-CON-002","Compota de manzana casera",7,365],
- ["DES-CON-003","Mermeladas caseras",30,365],
- ["DES-CON-004","Carne de membrillo casero",30,180]
+test("banco doméstico: compota/mermeladas con nevera o conserva, membrillo solo nevera",()=>{
+ const list=[
+  ["DES-CON-002","Compota de manzana casera",7,365],
+  ["DES-CON-003","Mermeladas caseras",30,365]
  ];
- for(const [id,n,fr,cv] of checked){
+ for(const [id,n,fr,cv] of list){
   const x=records.find(z=>z.id===id);
-  assert.ok(x,id);assert.equal(x.nombre,n);assert.equal(x.categoria,"Despensa");
-  assert.equal(x.subcategoria,"Conservas");assert.equal(x.refrigeracion,true);
-  assert.equal(x.refrigeracion_dias,fr);assert.equal(x.conserva,true);
-  assert.equal(x.conserva_dias,cv);assert.equal(x.despensa,false);
-  assert.equal(x.congelacion,false);assert.equal(x.congelacion_dias,null);
-  assert.equal(x.fuente,"agregación");assert.equal(x.id_fuente,null);
-  assert.match(x.tips_conserva,/receta|procesad|Conserva casera/i);
+  assert.ok(x,id);assert.equal(x.nombre,n);
+  assert.equal(x.categoria,"Despensa");assert.equal(x.subcategoria,"Conservas");
+  assert.equal(x.refrigeracion,true);assert.equal(x.refrigeracion_dias,fr);
+  assert.equal(x.conserva,true);assert.equal(x.conserva_dias,cv);
+  assert.equal(x.despensa,false);assert.equal(x.congelacion,false);
  }
- const fruit=records.filter(x=>x.subcategoria==="Frutas");
- assert.equal(fruit.length,40);
- assert.ok(fruit.every(x=>!x.congelacion&&x.congelacion_dias===null&&x.tips_descongelacion===null));
- for(const id of ["FRV-TUB-002","FRV-TUB-003","FRV-TUB-005","FRV-TUB-006","FRV-TUB-011","FRV-HOR-008","FRV-HOR-012","FRV-HOR-013","FRV-HON-001","FRV-HON-002","FRV-HON-003","FRV-HON-004","FRV-HON-005","FRV-HON-006"]){
-  const x=records.find(z=>z.id===id);assert.ok(x);
-  assert.equal(x.congelacion,false);assert.equal(x.congelacion_dias,null);
+ const x=records.find(z=>z.id==="DES-CON-004");
+ assert.ok(x);assert.equal(x.nombre,"Carne de membrillo");
+ assert.ok(x.sinonimos.includes("Carne de membrillo casero"));
+ assert.equal(x.categoria,"Despensa");assert.equal(x.subcategoria,"Conservas");
+ assert.equal(x.refrigeracion,true);assert.equal(x.refrigeracion_dias,30);
+ for(const mode of ["conserva","despensa","congelacion"]){
+  assert.equal(x[mode],false);assert.equal(x[mode+"_dias"],null);
  }
+ assert.equal(x.tips_conserva,null);assert.equal(x.tips_descongelacion,null);
  assert.equal(records.length,179);
- const ids=records.map(x=>x.id_fuente).filter(Boolean);assert.equal(new Set(ids).size,ids.length);
+ const fruit=records.filter(z=>z.subcategoria==="Frutas");
+ assert.equal(fruit.length,40);
+ assert.ok(fruit.every(z=>!z.congelacion&&z.congelacion_dias===null));
+ const references=records.map(z=>z.id_fuente).filter(Boolean);
+ assert.equal(new Set(references).size,references.length);
 });

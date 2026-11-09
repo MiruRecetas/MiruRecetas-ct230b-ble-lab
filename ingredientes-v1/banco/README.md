@@ -1,24 +1,26 @@
 # FoodKeeper ES · archivo fuente original (solo consulta)
 
-## Uso doméstico del banco · conservas y calidad al congelar (10/11/2026)
+## Norma operativa vigente · precarga doméstica editable (10/11/2026)
 
-Este banco existe **para precargar etiquetas de cocina casera**, no para auditar procesos industriales. La ficha ofrece solo métodos útiles con plazo directo; los consejos cortos aclaran la situación aplicable.
+Este banco existe **solo para evitar rellenar etiquetas a mano**. Elegir una ficha precarga nombre, conservación, fecha y nota; **todos los valores siguen siendo editables por la persona usuaria en la interfaz**, incluida la fecha. No es un sistema industrial, de auditoría, certificación ni autorización de lo que se puede etiquetar. No añadir restricciones funcionales no solicitadas. Conservar siempre la etiqueta libre.
 
-| Preparación | Ruta | Nevera | Conserva casera sin abrir | Congelación |
-|---|---|---:|---:|---|
-| Compota de manzana casera | Despensa > Conservas · DES-CON-002 | 7 días | 365 días | No |
-| Mermeladas caseras | Despensa > Conservas · DES-CON-003 | 30 días (tradicional con azúcar) | 365 días | No |
-| Carne de membrillo casero | Despensa > Conservas · DES-CON-004 | 30 días (tradicional con azúcar) | 180 días | No |
+**Fichas en Despensa > Conservas:**
 
-En **Nevera**, plazo desde elaboración o apertura, conservar cerrado a ≤4 °C. En **Conserva**, el plazo solo sirve para tarros **sin abrir**, que se han hecho con receta adecuada, procesado térmico apropiado para el alimento/tamaño/altitud y cierre correcto; después de abrir usar nevera. No basta llenar el tarro caliente o darle la vuelta: [compota, NCHFP](https://nchfp.uga.edu/how/can/canning-fruit/applesauce/); [mermeladas, NCHFP](https://nchfp.uga.edu/how/make-jam-jelly/storing-home-canned-jams-and-jellies/); [Penn State en español](https://extension.psu.edu/vamos-a-conservar-alimentos-mermeladas-jaleas-y-compotas). Para la carne de membrillo, de textura mucho más espesa que una jalea, **no atribuir automáticamente al dulce tradicional los tiempos de procesado de las jaleas**: si no se dispone de receta/proceso adecuado para esa presentación, usar la opción Nevera, no Conserva. Los 180 días son un objetivo de calidad condicionado, no una sustitución de un método válido.
+| Ficha | Nevera | Conserva casera | Congelación |
+|---|---:|---:|---|
+| Compota de manzana casera (DES-CON-002) | 7 días | 365 días | No |
+| Mermeladas caseras (DES-CON-003) | 30 días | 365 días | No |
+| Carne de membrillo (DES-CON-004) | **30 días** | **No** | **No** |
 
-**Congelación basada en calidad real y presentación:** se desactiva para **20 fichas de fruta fresca/ingredientes secos** destinadas a consumirse con su textura habitual, ya que al descongelar pierden firmeza o cambian de uso; no implica que sea físicamente imposible congelar fruta para batidos o cocina, pero esas son **preparaciones diferentes** y deben tener su propia ficha cuando se soliciten. También se retira de **14 fichas** con pérdida evidente de calidad o que exigirían cocinar antes el alimento (patata y boniato cocidos/asados; remolacha cruda; berenjena y calabacín frescos; tomate fresco; hongos frescos). Se mantienen métodos adecuados en verduras escaldadas, guisantes/judías y otros alimentos cuyo uso cocinado responde bien. [NCHFP alimentos que no congelan bien](https://nchfp.uga.edu/how/freeze/freeze-general-information/foods-that-do-not-freeze-well/); [NCHFP fruta fresca](https://nchfp.uga.edu/blog/fresh-not-frozen); [University of Minnesota](https://extension.umn.edu/food/preparing/cooking-at-home/food-preservation/freezing).
+**Carne de membrillo**, casera o comprada: se conserva **solo en nevera**, sin tarros de conserva ni congelación en el banco. Se mantiene en `Despensa > Conservas` como agrupación de preparaciones, pero **la única modalidad precargable es Refrigeración**. Los 30 días son un valor inicial doméstico editable, no una imposición.
 
-**Alcance:** modificación directa en main de JSON, README y tests de datos. Se mantienen las fichas y códigos existentes; solo dos fichas nuevas. FoodKeeper original, UI e impresión intactos.
+**Compota y mermeladas** tienen precarga de nevera y conserva casera, con un plazo directo editable. Los modos `congelacion` y `despensa` no se ofrecen para estas tres fichas. Congelación: ofrecer solo cuando sea práctica y conserve una calidad adecuada a la presentación; no ofrecerla indiscriminadamente a fruta fresca o preparaciones cuya textura cambia mucho.
 
-## Frutas · selección doméstica aprobada (10/11/2026)
+**Interfaz:** mantener campos de etiqueta y fechas editables, además del modo libre. Este cambio afecta únicamente a datos y documentación; no modificar código ni impresión.
 
-**40 fichas nuevas, de las cuales 39 están en Frutas y 1 en Despensa > Conservas** (compota de manzana casera). Respetadas **37 frutas distintas**, Granada (entera y desgranada), Piña (entera y cortada) y la ficha previa **Orejones FRV-FRU-001 sin duplicar**. Total del banco: **177 fichas**; 40 bajo Frutas contando los Orejones. Las 137 fichas preexistentes se preservan sin cambios.
+## Frutas · lote de incorporación inicial (histórico, 10/11/2026)
+
+**Lote histórico: 40 fichas nuevas, de las cuales 39 están en Frutas y 1 en Despensa > Conservas** (compota de manzana casera). Respetadas **37 frutas distintas**, Granada (entera y desgranada), Piña (entera y cortada) y la ficha previa **Orejones FRV-FRU-001 sin duplicar**. Total del banco al completar aquel lote: **177 fichas**; hoy son **179**, incluidas mermeladas y carne de membrillo. Frutas conserva 40 fichas. Las 137 fichas preexistentes se preservan sin cambios.
 
 | Ficha | Nombre | Presentación | Subcategoría | Frío (d) | Congelación (d) | Despensa (d) | FoodKeeper ID asignado |
 |---|---|---|---|---:|---:|---:|---|
@@ -61,7 +63,7 @@ En **Nevera**, plazo desde elaboración o apertura, conservar cerrado a ≤4 °C
 | FRV-FRU-038 | Caqui | — | Frutas | 3 | — | — | agregación |
 | FRV-FRU-039 | Nísperos | — | Frutas | 14 | — | — | agregación |
 | FRV-FRU-040 | Membrillo fresco | — | Frutas | 28 | — | — | agregación |
-| DES-CON-002 | Compota de manzana casera | — | Conservas | 4 | 120 | — | agregación |
+| DES-CON-002 | Compota de manzana casera | — | Conservas | 7 | — | — | agregación |
 
 ### Fuente y grupos
 
@@ -71,7 +73,7 @@ Base original FoodKeeper ES, categoría de frutas **18**, salvo los especiales s
 
 Granada desgranada: **4 días frío / 300 días congelación**. Piña cortada: **4 días frío / 300 días congelación**. La refrigeración de cortadas es adaptación doméstica conservadora, no un plazo de FoodKeeper específico. Lavar antes de cortar, mantener en recipientes cerrados a ≤4 °C, no dejar fuera más de dos horas; orientaciones de [USDA sobre fruta cortada](https://ask.fsis.usda.gov/article/How-should-I-store-cut-fruit-and-vegetables), [FDA](https://www.fda.gov/food/buy-store-serve-safe-food/selecting-and-serving-produce-safely) y [Comunidad de Madrid](https://www.comunidad.madrid/salud/fruta-cortada-siempre-refrigerada). La congelación se limita a fruta debidamente preparada y es principalmente un plazo de calidad, no garantía de inocuidad ([University of Minnesota Extension](https://extension.umn.edu/food/preparing/cooking-at-home/food-preservation/freezing/freezing-fruit)). Las entradas con «hasta que madure» en FoodKeeper **no se convierten en una fecha fija desde el envasado**.
 
-**Compota casera**: clasificación solicitada **Despensa > Conservas**, **sin habilitar despensa ni conserva estable**, porque es compota cocida sin esterilización validada. Plazos de etiqueta doméstica **4 días frigorífico y 120 días congelación**; criterio conservador [USDA sobre sobras cocidas](https://ask.fsis.usda.gov/article/How-do-I-handle-leftovers-safely/) y [Buy BC](https://buybc.gov.bc.ca/recipes/homemade-applesauce), que indica una semana frío y cuatro meses congelación. FoodKeeper **562** conserva valores originales 3 semanas frío y 8–12 meses congelación; la divergencia está documentada, y esta ficha usa **fuente agregación**, sin asignar indebidamente el ID a los plazos alternativos. Para hacerla estable en despensa se necesitaría procedimiento de conserva verificado, distinto de esta ficha ([NCHFP](https://nchfp.uga.edu/how/can/canning-fruit/applesauce/)).
+**Compota casera**: actualmente precargada en Despensa > Conservas con 7 días en nevera o 365 días en conserva casera (véase la norma operativa vigente anterior). Sin congelación; ambas opciones y fechas son editables en la etiqueta.
 
 **Coco rallado**: FoodKeeper **257** contempla coco rallado seco **envasado sin abrir** con 365 días despensa y 365 congelado, no coco fresco recién rallado ni envase abierto. **Dátiles** FoodKeeper 260, fuente original con 2 meses despensa, 12 meses frigorífico y 1–2 años congelación (se adopta 1 año). **Uvas pasas** FoodKeeper **379**: 180 días despensa sin abrir; si se abre, usar indicaciones específicas (el origen indica 1 mes desde apertura).
 
