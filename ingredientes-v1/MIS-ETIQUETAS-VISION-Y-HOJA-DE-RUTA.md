@@ -1,5 +1,42 @@
 # MiruRecetas · «Mis etiquetas» · visión, decisiones y hoja de ruta
 
+## Crustáceos y moluscos y Cefalópodos · lote doméstico (09/11/2026, vigente)
+
+La usuaria aprueba **14 fichas nuevas** para «Crustáceos y moluscos» y **3 nuevas** para «Cefalópodos», además de **completar la ficha de Pulpo existente `PES-CEF-001` sin duplicarla**. Total **84 fichas** (67 anteriores + 17 nuevas), dentro de las cuatro categorías y 28 subcategorías existentes.
+
+**Unificación editorial:** «vivo» y «fresco» de los grupos FoodKeeper `Product.ID 157` y `160` se consideran **una única presentación fresca con concha** para Almejas y Mejillones. No se crean fichas separadas «vivas» y «frescas»: dos registros (Almejas `PES-CRM-001` y Mejillones `PES-CRM-002`), con alias «vivas». En el banco doméstico se usan **2 días de frío** por la pauta corta del grupo 157 y [OCU sobre moluscos vivos](https://www.ocu.org/alimentacion/carnes-pescados/informe/moluscos-guia-de-compra), y **60 días de congelación** tomados del mínimo del grupo 157. Para congelar moluscos en crudo, la preparación y calidad dependen del tipo de marisco; véanse las [recomendaciones de OCU](https://www.ocu.org/electrodomesticos/frigorificos/consejos/ordenar-frigorifico).
+
+| Subcategoría | ID | Ingrediente | Presentación | Nevera (d) | Congelación (d) |
+|---|---|---|---|---:|---:|
+| Crustáceos y moluscos | `PES-CRM-001` | Almejas | Frescas | 2 | 60 |
+| Crustáceos y moluscos | `PES-CRM-002` | Mejillones | Frescos | 2 | 60 |
+| Crustáceos y moluscos | `PES-CRM-003` | Langostinos | Crudos | 3 | 180 |
+| Crustáceos y moluscos | `PES-CRM-004` | Langostinos | Cocidos | 4 | 30 |
+| Crustáceos y moluscos | `PES-CRM-005` | Langostinos | Pelados | 3 | 180 |
+| Crustáceos y moluscos | `PES-CRM-006` | Gambas | Crudas | 3 | 180 |
+| Crustáceos y moluscos | `PES-CRM-007` | Gambas | Cocidas | 4 | 30 |
+| Crustáceos y moluscos | `PES-CRM-008` | Gambas | Peladas | 3 | 180 |
+| Crustáceos y moluscos | `PES-CRM-009` | Gambón | Crudo | 3 | 180 |
+| Crustáceos y moluscos | `PES-CRM-010` | Gambón | Cocido | 4 | 30 |
+| Crustáceos y moluscos | `PES-CRM-011` | Gambón | Pelado | 3 | 180 |
+| Crustáceos y moluscos | `PES-CRM-012` | Zamburiñas | Frescas | 3 | 180 |
+| Crustáceos y moluscos | `PES-CRM-013` | Bogavante | Pieza entera | 1 | 60 |
+| Crustáceos y moluscos | `PES-CRM-014` | Bogavante | Colas | 2 | 60 |
+| Cefalópodos | `PES-CEF-002` | Calamar | — | 3 | 180 |
+| Cefalópodos | `PES-CEF-003` | Chipirón | Fresco | 3 | 180 |
+| Cefalópodos | `PES-CEF-004` | Sepia | Fresca | 3 | 180 |
+| Cefalópodos | `PES-CEF-001` | Pulpo | — | 2 | 180 |
+
+**Criterios por grupos:**
+- **Gambas, langostinos y gambón:** tres presentaciones cada uno, «Crudas», «Cocidas», «Peladas» (para Gambón: «Crudo», «Cocido», «Pelado»). **Peladas/Pelado = pelado crudo**; las versiones cocidas se mantienen separadas. Crudos y pelados: **3 días refrigeración / 180 congelación**, según grupo FoodKeeper 151 (`Shrimp`, 1–3 días y 6–18 meses). Cocidos: **4 / 30 días** por FoodKeeper 162 (crustáceos cocidos, 3–4 días frío y 1–3 meses congelación) y [USDA, mariscos cocidos 3–4 días](https://ask.fsis.usda.gov/article/Como-preparar-los-pescados-y-los-mariscos). Los rangos se normalizan al máximo de frío y mínimo de congelación de FoodKeeper.
+- **Zamburiñas «Frescas»:** **3/180 días**, tomando por semejanza la ficha FoodKeeper 150 (vieiras); no afirmar que son idéntica especie.
+- **Bogavante fresco:** **Pieza entera, 1/60 días; Colas, 2/60 días**. FoodKeeper 158 (langosta viva) refiere a **1 día en nevera**, pero no recomienda congelación para langosta viva: no es una ficha directa de bogavante. [OCU sobre mariscos](https://www.ocu.org/alimentacion/carnes-pescados/informe/mariscos-y-crustaceos-comprar-y-degustar) indica expresamente que el bogavante admite congelación crudo o cocido, y [FoodSafety.gov](https://www.foodsafety.gov/food-safety-charts/cold-food-storage-charts) da **2–4 meses para langosta fresca**; se utiliza **60 días** de calidad. FoodKeeper 159 corresponde a **cola cocida de langosta**, y no se atribuye erróneamente a estas colas frescas sin cocinar.
+- **Calamar:** **3/180 días**, única correspondencia directa FoodKeeper 152 (`fuente: FoodKeeper`, `id_fuente: "152"`). **Chipirón** fresco y **Sepia** fresca: **3/180**, por la familia cefalópodos a partir de 152, sin simular IDs propios. El **Pulpo** de `PES-CEF-001` se actualiza de `sin_datos` a `verificado` con **2 días en nevera / 180 días en congelador**; para refrigeración se aplica el criterio general de pescado y marisco crudo **1–2 días** de [USDA](https://ask.fsis.usda.gov/article/Como-preparar-los-pescados-y-los-mariscos), y para congelación la familia cefalópodos de FoodKeeper 152.
+
+**Trazabilidad:** las entradas basadas en grupos, adaptaciones de nombres, tipos de gambón/bogavante, o mezcla de referencias quedan `fuente: "agregación"`, `id_fuente: null`; **solo Calamar** es coincidencia directa con `Product.ID 152`. FoodKeeper original no se modifica. Nuevos registros **`PES-CRM-001…014`** y **`PES-CEF-002…004`**; la clave de Pulpo permanece intacta. Modos ofrecidos únicamente refrigeración y congelación, nunca despensa ni conserva, sin inventar aplicaciones de otros modos.
+
+**Operativa:** banco doméstico de precarga de etiquetas, sin nuevos controles ni validaciones de impresión; se conserva la edición manual. Actualización de catálogo, una aserción simple de coherencia y documentación mediante **commit directo a `main`**, sin PR, tests integrales, UI ni cambios BLE.
+
 ## Pescado azul · selección autorizada (09/11/2026, vigente)
 
 Incorporadas **10 fichas** de la subcategoría **Pescado azul**, respetando exactamente las presentaciones elegidas por la usuaria:

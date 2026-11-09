@@ -1,3 +1,16 @@
+> **Pescados y mariscos · lote 09/11/2026:**
+> 14 nuevas fichas en **Crustáceos y moluscos**:
+> almejas y mejillones (sin duplicar vivo/fresco);
+> gambas, langostinos y gambón crudos, cocidos
+> y pelados (pelados en crudo); zamburiñas;
+> bogavante entero y colas. En **Cefalópodos**:
+> Calamar, Chipirón y Sepia nuevos y Pulpo
+> existente completado. Referencias FoodKeeper
+> 150/151/152/157/160/162 y OCU/USDA.
+> **84 fichas**; commit directo en main, sin cambios
+> de interfaz ni impresión.
+> [Expediente](ingredientes-v1/banco/README.md).
+>
 > **Banco · Pescado azul (09/11/2026, vigente):**
 > 10 fichas: Boquerón (Pieza entera); Atún (Lomos);
 > Bonito (Lomos y Rodajas); Caballa (Pieza entera);
