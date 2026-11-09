@@ -1,5 +1,68 @@
 # FoodKeeper ES · archivo fuente original (solo consulta)
 
+## Frutas · selección doméstica aprobada (10/11/2026)
+
+**40 fichas nuevas, de las cuales 39 están en Frutas y 1 en Despensa > Conservas** (compota de manzana casera). Respetadas **37 frutas distintas**, Granada (entera y desgranada), Piña (entera y cortada) y la ficha previa **Orejones FRV-FRU-001 sin duplicar**. Total del banco: **177 fichas**; 40 bajo Frutas contando los Orejones. Las 137 fichas preexistentes se preservan sin cambios.
+
+| Ficha | Nombre | Presentación | Subcategoría | Frío (d) | Congelación (d) | Despensa (d) | FoodKeeper ID asignado |
+|---|---|---|---|---:|---:|---:|---|
+| FRV-FRU-002 | Manzana | — | Frutas | 42 | 240 | 21 | 248 |
+| FRV-FRU-003 | Albaricoque fresco | — | Frutas | 5 | — | — | 249 |
+| FRV-FRU-004 | Melocotón | — | Frutas | 5 | 60 | — | 266 |
+| FRV-FRU-005 | Nectarina | — | Frutas | 5 | 60 | — | agregación |
+| FRV-FRU-006 | Ciruela | — | Frutas | 5 | 60 | — | agregación |
+| FRV-FRU-007 | Pera | — | Frutas | 5 | 60 | — | agregación |
+| FRV-FRU-008 | Cerezas | — | Frutas | 3 | 240 | — | 483 |
+| FRV-FRU-009 | Uvas | — | Frutas | 7 | 30 | 1 | 261 |
+| FRV-FRU-010 | Granada | Pieza entera | Frutas | 90 | — | 5 | 269 |
+| FRV-FRU-011 | Granada | Desgranada | Frutas | 4 | 300 | — | agregación |
+| FRV-FRU-012 | Naranja | — | Frutas | 21 | — | 10 | 256 |
+| FRV-FRU-013 | Limón | — | Frutas | 21 | — | 10 | agregación |
+| FRV-FRU-014 | Lima | — | Frutas | 21 | — | 10 | agregación |
+| FRV-FRU-015 | Pomelo | — | Frutas | 21 | — | 10 | agregación |
+| FRV-FRU-016 | Mandarina | — | Frutas | 21 | — | 10 | agregación |
+| FRV-FRU-017 | Clementina | — | Frutas | 21 | — | 10 | agregación |
+| FRV-FRU-018 | Fresas / fresón | — | Frutas | 3 | 240 | — | 481 |
+| FRV-FRU-019 | Frambuesas | — | Frutas | 3 | 240 | — | 482 |
+| FRV-FRU-020 | Moras | — | Frutas | 6 | 360 | — | 253 |
+| FRV-FRU-021 | Grosellas | — | Frutas | 6 | 360 | — | 252 |
+| FRV-FRU-022 | Arándanos azules | — | Frutas | 14 | 240 | — | 254 |
+| FRV-FRU-023 | Aguacate | — | Frutas | 4 | — | — | 250 |
+| FRV-FRU-024 | Chirimoya | — | Frutas | 4 | 300 | — | 255 |
+| FRV-FRU-025 | Kiwi | — | Frutas | 6 | — | — | 263 |
+| FRV-FRU-026 | Piña | Pieza entera | Frutas | 7 | — | — | 267 |
+| FRV-FRU-027 | Piña | Cortada | Frutas | 4 | 300 | — | agregación |
+| FRV-FRU-028 | Papaya | — | Frutas | 7 | 180 | 5 | 265 |
+| FRV-FRU-029 | Mango fresco | — | Frutas | 7 | 180 | 5 | agregación |
+| FRV-FRU-030 | Melón | — | Frutas | 14 | — | — | 264 |
+| FRV-FRU-031 | Sandía | — | Frutas | 4 | — | 2 | 495 |
+| FRV-FRU-032 | Plátano dulce / banana | — | Frutas | 3 | 60 | — | 251 |
+| FRV-FRU-033 | Coco fresco | — | Frutas | 21 | — | 7 | 258 |
+| FRV-FRU-034 | Coco rallado | Seco, envase sin abrir | Frutas | — | 365 | 365 | 257 |
+| FRV-FRU-035 | Dátiles | — | Frutas | 365 | 365 | 60 | 260 |
+| FRV-FRU-036 | Uvas pasas | — | Frutas | — | — | 180 | agregación |
+| FRV-FRU-037 | Higos frescos | — | Frutas | 3 | — | — | agregación |
+| FRV-FRU-038 | Caqui | — | Frutas | 3 | — | — | agregación |
+| FRV-FRU-039 | Nísperos | — | Frutas | 14 | — | — | agregación |
+| FRV-FRU-040 | Membrillo fresco | — | Frutas | 28 | — | — | agregación |
+| DES-CON-002 | Compota de manzana casera | — | Conservas | 4 | 120 | — | agregación |
+
+### Fuente y grupos
+
+Base original FoodKeeper ES, categoría de frutas **18**, salvo los especiales siguientes. **266** agrupa melocotón, nectarina, ciruela y pera: solo se asigna el ID 266 a Melocotón, los demás son agregaciones con nota. **256** agrupa 6 cítricos: ID para Naranja, resto agregación. **265** agrupa papaya/mango: ID para Papaya, Mango fresco agregado. **253** es grupo moras/grosellas: ID para Moras; Grosellas citan **252 y 253** pero no reclaman ID exclusivo. **269** Granada y **267** Piña se asignan únicamente a la variante entera; sus variantes desgranada/cortada son derivadas sin duplicar IDs. **379**, ya asignado a Orejones, solo se referencia en notas de Uvas pasas. No se inventan identificadores FoodKeeper individuales.
+
+### Frutas cortadas, conservación y seguridad
+
+Granada desgranada: **4 días frío / 300 días congelación**. Piña cortada: **4 días frío / 300 días congelación**. La refrigeración de cortadas es adaptación doméstica conservadora, no un plazo de FoodKeeper específico. Lavar antes de cortar, mantener en recipientes cerrados a ≤4 °C, no dejar fuera más de dos horas; orientaciones de [USDA sobre fruta cortada](https://ask.fsis.usda.gov/article/How-should-I-store-cut-fruit-and-vegetables), [FDA](https://www.fda.gov/food/buy-store-serve-safe-food/selecting-and-serving-produce-safely) y [Comunidad de Madrid](https://www.comunidad.madrid/salud/fruta-cortada-siempre-refrigerada). La congelación se limita a fruta debidamente preparada y es principalmente un plazo de calidad, no garantía de inocuidad ([University of Minnesota Extension](https://extension.umn.edu/food/preparing/cooking-at-home/food-preservation/freezing/freezing-fruit)). Las entradas con «hasta que madure» en FoodKeeper **no se convierten en una fecha fija desde el envasado**.
+
+**Compota casera**: clasificación solicitada **Despensa > Conservas**, **sin habilitar despensa ni conserva estable**, porque es compota cocida sin esterilización validada. Plazos de etiqueta doméstica **4 días frigorífico y 120 días congelación**; criterio conservador [USDA sobre sobras cocidas](https://ask.fsis.usda.gov/article/How-do-I-handle-leftovers-safely/) y [Buy BC](https://buybc.gov.bc.ca/recipes/homemade-applesauce), que indica una semana frío y cuatro meses congelación. FoodKeeper **562** conserva valores originales 3 semanas frío y 8–12 meses congelación; la divergencia está documentada, y esta ficha usa **fuente agregación**, sin asignar indebidamente el ID a los plazos alternativos. Para hacerla estable en despensa se necesitaría procedimiento de conserva verificado, distinto de esta ficha ([NCHFP](https://nchfp.uga.edu/how/can/canning-fruit/applesauce/)).
+
+**Coco rallado**: FoodKeeper **257** contempla coco rallado seco **envasado sin abrir** con 365 días despensa y 365 congelado, no coco fresco recién rallado ni envase abierto. **Dátiles** FoodKeeper 260, fuente original con 2 meses despensa, 12 meses frigorífico y 1–2 años congelación (se adopta 1 año). **Uvas pasas** FoodKeeper **379**: 180 días despensa sin abrir; si se abre, usar indicaciones específicas (el origen indica 1 mes desde apertura).
+
+**Frutas añadidas sin ID de FoodKeeper:** Higos frescos, 3 días frío ([Mississippi State Extension](https://extension.msstate.edu/blogs/extension-for-real-life/overview-figs)); Caqui, 3 días en frío *solo si está maduro* (guía [UF/IFAS 2026](https://ask.ifas.ufl.edu/publication/FY1609), variedad/estado de maduración condicionan el plazo); Nísperos, 14 días en frío de calidad conservadora (fuentes [UF/IFAS](https://ask.ifas.ufl.edu/publication/MG050) y [UC Davis Postharvest](https://postharvest.ucdavis.edu/produce-facts-sheets/loquat), cuyos valores más largos dependen de 0 °C); Membrillo fresco, 28 días en frío ([Royal Horticultural Society](https://www.rhs.org.uk/fruit/fruit-trees/storing), mes máximo de uso para membrillo a 4–7 °C). Estos plazos son adaptaciones domésticas claramente identificadas como tales.
+
+**Alcance:** catálogo JSON, esta sección README y aserciones ligeras del banco. Sin cambios en FoodKeeper original, interfaz, motor, impresión, Bluetooth ni publicación productiva; sin PR ni pruebas integrales.
+
 ## Hortalizas · selección doméstica autorizada (10/11/2026)
 
 Se registran **23 nuevas fichas para 21 ingredientes**: 22 presentaciones en **Hortalizas**, Rábano en **Tubérculos**. Cebolla seca y Pimiento cuentan con «Pieza entera» y «Picada». Total **137 fichas**. Se preservan los 114 registros anteriores y el FoodKeeper original.
