@@ -1,5 +1,45 @@
 # FoodKeeper ES · archivo fuente original (solo consulta)
 
+## Hortalizas · selección doméstica autorizada (10/11/2026)
+
+Se registran **23 nuevas fichas para 21 ingredientes**: 22 presentaciones en **Hortalizas**, Rábano en **Tubérculos**. Cebolla seca y Pimiento cuentan con «Pieza entera» y «Picada». Total **137 fichas**. Se preservan los 114 registros anteriores y el FoodKeeper original.
+
+| Ficha | Nombre | Presentación | Frigorífico (d) | Congelación (d) | Despensa (d) | ID FoodKeeper asignado |
+|---|---|---|---:|---:|---:|---|
+| FRV-HOR-001 | Alcachofa | — | 14 | — | 2 | 270 |
+| FRV-HOR-002 | Espárragos | — | 4 | 150 | — | 271 |
+| FRV-HOR-003 | Brócoli | — | 5 | 300 | — | 276 |
+| FRV-HOR-004 | Coles de Bruselas | — | 5 | 300 | — | 277 |
+| FRV-HOR-005 | Coliflor | — | 5 | 300 | — | 280 |
+| FRV-HOR-006 | Puerro | — | 14 | 300 | — | 289 |
+| FRV-HOR-007 | Pepino | — | 6 | — | — | 283 |
+| FRV-HOR-008 | Berenjena | — | 7 | 180 | 1 | 284 |
+| FRV-HOR-009 | Pimiento | Pieza entera | 14 | — | — | 296 |
+| FRV-HOR-010 | Pimiento | Picado | 3 | 180 | — | agregación |
+| FRV-HOR-011 | Calabaza | Pieza entera | 150 | — | 90 | 298 |
+| FRV-HOR-012 | Calabacín | Fresco, entero | 5 | 300 | 5 | 302 |
+| FRV-HOR-013 | Tomate | — | — | 60 | — | 306 |
+| FRV-HOR-014 | Tomate cherry | — | 5 | — | 10 | 600 |
+| FRV-HOR-015 | Ajo | Bulbo entero | — | — | 30 | 285 |
+| FRV-HOR-016 | Cebolla seca | Pieza entera | 60 | — | 30 | 294 |
+| FRV-HOR-017 | Cebolla seca | Picada | 7 | 90 | — | agregación |
+| FRV-HOR-018 | Cebolleta | — | 7 | — | — | 295 |
+| FRV-HOR-019 | Judías verdes | — | 5 | 240 | — | 273 |
+| FRV-HOR-020 | Habas frescas | — | 5 | 240 | — | agregación |
+| FRV-HOR-021 | Guisantes frescos | — | 5 | 240 | — | agregación |
+| FRV-HOR-022 | Edamame fresco | — | 5 | — | — | 640 |
+| FRV-TUB-013 | Rábano | — | 14 | — | — | 299 |
+
+**Trazabilidad FoodKeeper:** Los IDs corresponden a la categoría 19 «Vegetales Frescos» del archivo original. El **273** es un grupo común a judías, habas y guisantes: solo se asigna una vez, las otras dos fichas son agregaciones sin ID individual. El **276** agrupa brócoli y grelo, pero la selección solo incorpora brócoli. Calabacín usa **302**, y el otro registro original **547** queda documentado sin duplicarlo. Las variantes picadas se derivan del ID de su ingrediente entero sin reutilizarlo como si fuera ID independiente.
+
+**Presentaciones cortadas:** cebolla entera FoodKeeper 294, **60 días frío / 30 días despensa**; cebolla picada, **7 días frío** ([Iowa State](https://blogs.extension.iastate.edu/wellness/2023/08/07/produce-basics/), [Colorado State](https://extension.colostate.edu/resource/colorado-onions-3/)) y **90 días de congelación**, plazo doméstico de calidad conservador a partir de «pocos meses» según [NCHFP](https://nchfp.uga.edu/how/freeze/vegetable/freezing-onions/) y no una copia de los 10–12 meses genéricos FoodKeeper. Pimiento entero, **14 días frío**; picado, **3 días frío** ([UC San Diego](https://communityhealth.ucsd.edu/work/eat-ca/peppers)) y **180 días congelación** (FoodKeeper 296), sin escaldado según [NCHFP](https://nchfp.uga.edu/how/freeze/vegetable/freezing-bell-or-sweet-peppers/).
+
+**Particularidades:** Tomate FoodKeeper **306**: despensa «hasta que madure y 7 días después» es condición, **no plazo desde envasado**; no hay plazo numérico de frigorífico. Solo se habilita congelación de **60 días** para uso cocinado ([NCHFP](https://nchfp.uga.edu/how/freeze/vegetable/freezing-tomatoes/)). Tomate cherry **600**, 5 días frío y 10 despensa. Calabaza **298**, pieza entera: despensa 90 y frío 150 días, sin congelación de pieza entera ([NCHFP](https://nchfp.uga.edu/how/freeze/vegetable/freezing-pumpkin/)). Ajo **285**, bulbo entero, 30 días despensa; no extrapolar días de dientes, evitar ajo en aceite a temperatura ambiente ([NCHFP](https://nchfp.uga.edu/how/freeze/vegetables/freezing-garlic-in-oil/)). Cebolleta **295**, 7 días frío; el plazo de despensa del original no se activa por no ser apropiado para cebolla verde fresca ([Colorado State](https://extension.colostate.edu/docs/covid/HowOnions.pdf)). Edamame fresco **640** solo 5 días frío, sin inventar congelación. Alcachofa **270** entera no equivale a corazones congelables; Rábano **299** va a Tubérculos y no ofrece congelación.
+
+**Congelación:** métodos individuales de escaldado, enfriado y escurrido de [NCHFP](https://nchfp.uga.edu/how/freeze/freeze-general-information/blanching-times/). Plazos orientativos de calidad con congelador a ≤−18 °C y frigorífico ≤4 °C, no garantías automáticas de inocuidad.
+
+**Alcance:** commit directo en main solo para catálogo, tests de datos y este README; sin PR, cambios de interfaz, diseño, BLE, impresión ni repositorios de producción.
+
 ## Verduras de hoja · selección doméstica autorizada (09/11/2026)
 
 Se incorporan **13 fichas nuevas** y se conserva íntegra la **Lechuga** existente `FRV-HOJ-001` («Iceberg o romana»), sin duplicarla. Total del banco: **114 fichas**, subcategoría «Verduras de hoja»: **14 fichas para 10 ingredientes**.
