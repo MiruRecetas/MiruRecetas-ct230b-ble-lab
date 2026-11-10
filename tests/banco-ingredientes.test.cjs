@@ -18,8 +18,8 @@ const categories=props.categoria.enum;
 const subcategories=Object.fromEntries(allOf.slice(0,4).map(r=>[r.if.properties.categoria.const,r.then.properties.subcategoria.enum]));
 const byName=name=>records.find(x=>x.nombre===name);
 
-test("catálogo de ciento setenta y nueve fichas, con ID y variante únicos",()=>{
- assert.equal(records.length,179);
+test("catálogo de doscientas una fichas, con ID y variante únicos",()=>{
+ assert.equal(records.length,201);
  assert.equal(new Set(records.map(x=>x.nombre+"|"+String(x.presentacion))).size,records.length);
  assert.equal(new Set(records.map(x=>x.id)).size,records.length);
  assert.deepEqual(new Set(records.map(x=>x.nombre)),new Set([
@@ -32,7 +32,8 @@ test("catálogo de ciento setenta y nueve fichas, con ID y variante únicos",()=
   "Hamburguesas de ternera","Hamburguesas de pollo","Salchichas frescas","Chorizo fresco","Chorizo criollo","Morcilla de Burgos","Morcilla Matachana","Filetes rusos","Pincho moruno","Lomo de cerdo adobado","Cachopo","San Jacobo","Jamón cocido","Jamón serrano","Jamón ibérico","Pechuga de pavo (fiambre)","Salami","Lomo de cerdo embuchado","Salchichón","Chorizo curado","Bacon","Cecina",
   "Bacalao","Abadejo","Dorada","Lubina","Merluza","Corvina","Boquerón","Atún","Bonito","Caballa","Jurel","Pez espada","Salmón","Sardina","Almejas","Mejillones","Langostinos","Gambas","Gambón","Zamburiñas","Bogavante","Pulpo","Calamar","Chipirón","Sepia","Patata","Boniato","Yuca","Apionabo","Zanahoria","Remolacha","Champiñón","Portobello","Shiitake","Seta de ostra","Boletus","Níscalos","Lechuga","Repollo","Espinacas","Mezcla de hojas para ensalada","Acelga","Rúcula","Berzas","Escarola","Endivias","Canónigos","Orejones","Salsa de tomate",
   "Alcachofa","Espárragos","Brócoli","Coles de Bruselas","Coliflor","Puerro","Pepino","Berenjena","Pimiento","Calabaza","Calabacín","Tomate","Tomate cherry","Ajo","Cebolla seca","Cebolleta","Judías verdes","Habas frescas","Guisantes frescos","Edamame fresco","Rábano",
-  "Manzana","Albaricoque fresco","Melocotón","Nectarina","Ciruela","Pera","Cerezas","Uvas","Granada","Naranja","Limón","Lima","Pomelo","Mandarina","Clementina","Fresas / fresón","Frambuesas","Moras","Grosellas","Arándanos azules","Aguacate","Chirimoya","Kiwi","Piña","Papaya","Mango fresco","Melón","Sandía","Plátano dulce / banana","Coco fresco","Coco rallado","Dátiles","Uvas pasas","Higos frescos","Caqui","Nísperos","Membrillo fresco","Compota de manzana casera","Mermeladas caseras","Carne de membrillo"
+  "Manzana","Albaricoque fresco","Melocotón","Nectarina","Ciruela","Pera","Cerezas","Uvas","Granada","Naranja","Limón","Lima","Pomelo","Mandarina","Clementina","Fresas / fresón","Frambuesas","Moras","Grosellas","Arándanos azules","Aguacate","Chirimoya","Kiwi","Piña","Papaya","Mango fresco","Melón","Sandía","Plátano dulce / banana","Coco fresco","Coco rallado","Dátiles","Uvas pasas","Higos frescos","Caqui","Nísperos","Membrillo fresco","Compota de manzana casera","Mermeladas caseras","Carne de membrillo",
+  "Alubia blanca","Faba asturiana","Alubia pinta","Alubia canela","Alubia verdina","Judión","Lenteja pardina","Lenteja castellana","Lenteja roja pelada","Garbanzo pedrosillano","Garbanzo lechoso"
  ]));
  assert.equal(categories.length,4);
  assert.equal(Object.values(subcategories).flat().length,28);
@@ -349,7 +350,7 @@ test("cinco piezas enteras solo despensa y cinco loncheados condicionados al vac
   assert.equal(whole.conserva,false);assert.equal(whole.fuente,"usuario");
   assert.equal(whole.id_fuente,null);
  }
- assert.equal(records.length,179);
+ assert.equal(records.length,201);
  assert.equal(records.filter(x=>x.subcategoria==="Charcutería").length,15);
 });
 
@@ -383,7 +384,7 @@ test("mariscos: vivos/frescos unidos, variantes seleccionadas y Pulpo completado
  assert.equal(records.filter(x=>x.subcategoria==="Cefalópodos").length,4);
  assert.equal(records.filter(x=>x.id==="PES-CEF-001").length,1);
  assert.equal(records.find(x=>x.id==="PES-CEF-001").estado_recomendacion,"verificado");
- assert.equal(records.length,179);
+ assert.equal(records.length,201);
 });
 
 test("verduras de hoja aprobadas: 14 fichas, sin duplicar lechuga ni atribuir IDs de grupos",()=>{
@@ -418,7 +419,7 @@ test("verduras de hoja aprobadas: 14 fichas, sin duplicar lechuga ni atribuir ID
 
 test("hortalizas seleccionadas y rábano: 23 fichas, 21 nombres, trazabilidad sin IDs inventados",()=>{
  const a=records.filter(x=>x.subcategoria==="Hortalizas");
- assert.equal(records.length,179);assert.equal(a.length,22);
+ assert.equal(records.length,201);assert.equal(a.length,22);
  assert.equal(records.filter(x=>x.subcategoria==="Tubérculos").length,13);
  for(const n of ["Alcachofa","Espárragos","Brócoli","Coles de Bruselas","Coliflor","Puerro","Pepino","Berenjena","Pimiento","Calabaza","Calabacín","Tomate","Tomate cherry","Ajo","Cebolla seca","Cebolleta","Judías verdes","Habas frescas","Guisantes frescos","Edamame fresco"])assert.ok(a.some(x=>x.nombre===n),n);
  const by=(n,p)=>a.find(x=>x.nombre===n&&x.presentacion===p);
@@ -443,7 +444,7 @@ test("hortalizas seleccionadas y rábano: 23 fichas, 21 nombres, trazabilidad si
 
 test("Frutas aprobadas: 39 nuevas fichas, compota en Conservas sin despensa y sin duplicar Orejones",()=>{
  const fruit=records.filter(x=>x.subcategoria==="Frutas");
- assert.equal(records.length,179);assert.equal(fruit.length,40);
+ assert.equal(records.length,201);assert.equal(fruit.length,40);
  assert.equal(records.filter(x=>x.nombre==="Orejones").length,1);
  const get=(n,p)=>fruit.find(x=>x.nombre===n&&x.presentacion===p);
  for(const n of ["Manzana","Albaricoque fresco","Melocotón","Nectarina","Ciruela","Pera","Cerezas","Uvas","Granada","Naranja","Limón","Lima","Pomelo","Mandarina","Clementina","Fresas / fresón","Frambuesas","Moras","Grosellas","Arándanos azules","Aguacate","Chirimoya","Kiwi","Piña","Papaya","Mango fresco","Melón","Sandía","Plátano dulce / banana","Coco fresco","Coco rallado","Dátiles","Uvas pasas","Higos frescos","Caqui","Nísperos","Membrillo fresco"])assert.ok(fruit.some(x=>x.nombre===n),n);
@@ -493,10 +494,36 @@ test("banco doméstico: compota/mermeladas con nevera o conserva, membrillo solo
   assert.equal(x[mode],false);assert.equal(x[mode+"_dias"],null);
  }
  assert.equal(x.tips_conserva,null);assert.equal(x.tips_descongelacion,null);
- assert.equal(records.length,179);
+ assert.equal(records.length,201);
  const fruit=records.filter(z=>z.subcategoria==="Frutas");
  assert.equal(fruit.length,40);
  assert.ok(fruit.every(z=>!z.congelacion&&z.congelacion_dias===null));
  const references=records.map(z=>z.id_fuente).filter(Boolean);
  assert.equal(new Set(references).size,references.length);
+});
+
+
+test("Legumbres: 11 variedades aprobadas, cada una seca y cocida, sin fichas genéricas",()=>{
+ const approved=["Alubia blanca","Faba asturiana","Alubia pinta","Alubia canela","Alubia verdina","Judión","Lenteja pardina","Lenteja castellana","Lenteja roja pelada","Garbanzo pedrosillano","Garbanzo lechoso"];
+ const legumes=records.filter(x=>x.categoria==="Despensa"&&x.subcategoria==="Legumbres");
+ assert.equal(legumes.length,22);
+ assert.equal(new Set(legumes.map(x=>x.nombre)).size,11);
+ for(const n of approved){
+  const two=legumes.filter(x=>x.nombre===n);
+  assert.equal(two.length,2,n);
+  const dry=two.find(x=>x.presentacion==="Seca"),cooked=two.find(x=>x.presentacion==="Cocida");
+  assert.ok(dry&&cooked,n);
+  assert.equal(dry.despensa,true);assert.equal(dry.despensa_dias,365);
+  assert.equal(dry.refrigeracion,false);assert.equal(dry.congelacion,false);assert.equal(dry.conserva,false);
+  assert.equal(cooked.despensa,false);assert.equal(cooked.conserva,false);
+  assert.equal(cooked.refrigeracion,true);assert.equal(cooked.refrigeracion_dias,4);
+  assert.equal(cooked.congelacion,true);assert.equal(cooked.congelacion_dias,90);
+  assert.equal(cooked.id_fuente,null);
+ }
+ for(const n of ["Alubias cocidas caseras","Garbanzos cocidos caseros","Lentejas cocidas caseras"])
+  assert.ok(!legumes.some(x=>x.nombre===n),n);
+ const f333=legumes.filter(x=>x.id_fuente==="333"),f334=legumes.filter(x=>x.id_fuente==="334");
+ assert.equal(f333.length,1);assert.equal(f334.length,1);
+ for(const cat of ["Algas","Otras aves","Caza"])assert.equal(records.filter(x=>x.subcategoria===cat).length,0);
+ assert.equal(records.length,201);
 });

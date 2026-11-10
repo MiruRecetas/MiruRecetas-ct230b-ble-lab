@@ -1,5 +1,28 @@
 # FoodKeeper ES · archivo fuente original (solo consulta)
 
+## Legumbres · banco doméstico aprobado (10/11/2026)
+
+**22 fichas nuevas:** 11 variedades, **cada una** con dos registros independientes, **Seca** y **Cocida**. **No se crean entradas genéricas.** Total actualizado del banco: **201 fichas**.
+
+| Variedad | Seca: despensa | Cocida: nevera | Cocida: congelador | Referencia FoodKeeper, si procede |
+|---|---:|---:|---:|---|
+| Alubia blanca | 365 días | 4 días | 90 días | Grupo 333 |
+| Faba asturiana | 365 días | 4 días | 90 días | Grupo 333 |
+| Alubia pinta | 365 días | 4 días | 90 días | Grupo 333 |
+| Alubia canela | 365 días | 4 días | 90 días | Grupo 333 |
+| Alubia verdina | 365 días | 4 días | 90 días | Grupo 333 |
+| Judión | 365 días | 4 días | 90 días | Grupo 333 |
+| Lenteja pardina | 365 días | 4 días | 90 días | Grupo 334 |
+| Lenteja castellana | 365 días | 4 días | 90 días | Grupo 334 |
+| Lenteja roja pelada | 365 días | 4 días | 90 días | Grupo 334 |
+| Garbanzo pedrosillano | 365 días | 4 días | 90 días | Sin ID individual |
+| Garbanzo lechoso | 365 días | 4 días | 90 días | Sin ID individual |
+
+- Las variantes **Seca** solo ofrecen **Despensa (365 días)**. Las variantes **Cocida** solo ofrecen **Nevera (4 días)** y **Congelador (90 días)**. Las legumbres cocidas congeladas mantienen buen uso posterior en guisos y similares. Las tres modalidades son **precargas editables** de etiqueta, no restricciones de lo que puede etiquetarse.
+- FoodKeeper **333** agrupa alubias secas y **334** agrupa lentejas secas; cada ID se asigna a una única ficha seca y se deja constancia del grupo en las demás sin inventar IDs individuales. Garbanzos pedrosillanos y lechosos: propuestas domésticas sin FoodKeeper propio.
+- **Algas, Otras aves y Caza** permanecen vacías y ocultas por decisión expresa. No se duplican Habas, Guisantes, Judías verdes ni Edamame frescos registrados en Hortalizas.
+- Sin cambios de interfaz, impresión, archivo FoodKeeper original ni otros repositorios. Se conservan nombre, presentación y los cuatro métodos como sugerencias independientes para las etiquetas domésticas.
+
 ## Norma operativa vigente · precarga doméstica editable (10/11/2026)
 
 Este banco existe **solo para evitar rellenar etiquetas a mano**. Elegir una ficha precarga nombre, conservación, fecha y nota; **todos los valores siguen siendo editables por la persona usuaria en la interfaz**, incluida la fecha. No es un sistema industrial, de auditoría, certificación ni autorización de lo que se puede etiquetar. No añadir restricciones funcionales no solicitadas. Conservar siempre la etiqueta libre.
