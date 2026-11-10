@@ -1,5 +1,52 @@
 # FoodKeeper ES · archivo fuente original (solo consulta)
 
+## Frutos secos · selección aprobada (10/11/2026)
+
+Se incorporan **16 fichas** exclusivamente en **Despensa > Frutos secos**, ocho variedades con presentación explícita **Crudas** (por instrucción posterior de la usuaria) y ocho presentaciones tratadas o cortadas: Almendras (Tostadas, Laminadas, Fritas), Avellanas (Tostadas), Pistachos (Tostados), Cacahuetes (Tostados), Castañas (Asadas) y Anacardos (Fritos). Se distingue «Crudas» de `null` porque la usuaria lo especifica. Total banco **258 fichas**. No se agregan Nueces comunes, ni otras presentaciones, ni productos comerciales.
+
+| ID | Nombre | Presentación | Despensa (días) | Nevera (días) | Congelador (días) | Referencia |
+|---|---|---|---:|---:|---:|---|
+| DES-FRU-001 | Almendras | Crudas | 120 | — | — | FoodKeeper 438 |
+| DES-FRU-002 | Avellanas | Crudas | Sin plazo | — | — | Sin ID individual |
+| DES-FRU-003 | Anacardos | Crudas | 14 | — | — | FoodKeeper 439 |
+| DES-FRU-004 | Piñones | Crudas | 14 | 90 | 270 | FoodKeeper 653 |
+| DES-FRU-005 | Castañas | Crudas | Sin plazo | — | — | Sin ID individual |
+| DES-FRU-006 | Nueces pecanas | Crudas | 14 | — | — | FoodKeeper 444 |
+| DES-FRU-007 | Nueces de macadamia | Crudas | 14 | — | — | FoodKeeper 440 |
+| DES-FRU-008 | Nueces de Brasil | Crudas | Sin plazo | — | — | Sin ID individual |
+| DES-FRU-009 | Almendras | Tostadas | 7 | — | — | FoodKeeper 616 |
+| DES-FRU-010 | Almendras | Laminadas | Sin plazo | — | — | Sin ID individual |
+| DES-FRU-011 | Avellanas | Tostadas | Sin plazo | — | — | Sin ID individual |
+| DES-FRU-012 | Pistachos | Tostados | Sin plazo | — | — | Sin ID individual |
+| DES-FRU-013 | Cacahuetes | Tostados | Sin plazo | — | — | Sin ID individual |
+| DES-FRU-014 | Castañas | Asadas | Sin plazo | — | — | Sin ID individual |
+| DES-FRU-015 | Almendras | Fritas | Sin plazo | — | — | Sin ID individual |
+| DES-FRU-016 | Anacardos | Fritos | Sin plazo | — | — | Sin ID individual |
+
+**Trazabilidad y límites de aplicación** (original FoodKeeper ES consultado, sin modificar):
+- DES-FRU-001 Almendras (Crudas): FoodKeeper 438 sin cáscara 4 meses sin abrir; 437 con cáscara 6 meses. Se toma la referencia de menor plazo, pero no debe considerarse garantía después de apertura.
+- DES-FRU-002 Avellanas (Crudas): Sin ficha individual FoodKeeper; no plazo universal comprobado.
+- DES-FRU-003 Anacardos (Crudas): FoodKeeper 439 anacardos sin cáscara: 2–4 semanas sin abrir. Se precarga límite inferior.
+- DES-FRU-004 Piñones (Crudas): FoodKeeper 653: despensa 2–3 semanas; nevera 3 meses; congelador 9 meses.
+- DES-FRU-005 Castañas (Crudas): Sin ficha específica para castañas crudas frescas; no extrapolar frutos secos deshidratados.
+- DES-FRU-006 Nueces pecanas (Crudas): FoodKeeper 444 pecanas sin cáscara: 2–4 semanas sin abrir; 443 con cáscara mismo rango.
+- DES-FRU-007 Nueces de macadamia (Crudas): FoodKeeper 440 macadamia sin cáscara: 2–4 semanas sin abrir.
+- DES-FRU-008 Nueces de Brasil (Crudas): Sin ficha individual en FoodKeeper original.
+- DES-FRU-009 Almendras (Tostadas): FoodKeeper 616 frutos secos tostados (grupo, incluye almendras): 1–2 semanas tras abrir. Se aplica límite inferior con alcance de grupo.
+- DES-FRU-010 Almendras (Laminadas): Sin ficha específica; el procesado no está descrito en FoodKeeper.
+- DES-FRU-011 Avellanas (Tostadas): FoodKeeper 616 no las enumera explícitamente; analogía editorial sin plazo individual.
+- DES-FRU-012 Pistachos (Tostados): FoodKeeper 445 es pistacho sin tratamiento especificado; 616 grupo tostados sin pistacho individual.
+- DES-FRU-013 Cacahuetes (Tostados): FoodKeeper 616 grupo tostados, incluye cacahuete; ID asignado una única vez a almendras tostadas.
+- DES-FRU-014 Castañas (Asadas): FoodKeeper 616 incluye castañas en grupo tostados, pero no equivale a castañas asadas domésticas húmedas; sin plazo genérico.
+- DES-FRU-015 Almendras (Fritas): Sin entrada FoodKeeper específica de fritura; no extrapolar de frutos secos tostados.
+- DES-FRU-016 Anacardos (Fritos): Sin entrada FoodKeeper específica de fritura; no extrapolar de anacardos crudos.
+
+Las entradas FoodKeeper 437/438 distinguen almendras con y sin cáscara; el catálogo agrupa «Crudas», así que se toma la referencia sin cáscara **438** a título conservador. El 616 corresponde a **grupo de frutos secos tostados**, no identifica cada variedad ni describe las frituras. Su criterio de 1–2 semanas es **tras apertura** y no debe aplicarse a castañas asadas domésticas. Las cifras cargadas para 439, 440 y 444 corresponden al rango **sin abrir**; consultar fechas específicas del envase si corresponde. Donde no hay plazo comparable, el método despensa queda seleccionable y su duración `null`, para que la usuaria pueda editar sin generar fecha automáticamente.
+
+**Contraste español:** OCU https://www.ocu.org/alimentacion/alimentos/informe/frutos-secos-n384754 recomienda lugar fresco, seco y envase hermético, y nevera cuando vayan a conservarse mucho tiempo. EROSKI Consumer https://www.consumer.es/seguridad-alimentaria/frutos-secos-el-control-del-riesgo.html distingue con/sin cáscara, advierte del enranciamiento y plantea refrigeración o congelación de frutos pelados. Estos consejos generales **no aportan plazos individuales fiables** para las variantes sin ID. Conservación orientativa y editable; siempre respetar instrucciones específicas del alimento.
+
+Se mantienen `tips_preparacion_conservacion: null` en todas las fichas (no se inventan pasos previos). No se modifican fichas existentes, UI, BLE, impresión, original FoodKeeper ni otras subcategorías. Las subcategorías Algas, Otras aves y Caza continúan vacías.
+
 ## Pan rallado y Panko · incorporación al banco (10/11/2026)
 
 Tres fichas aprobadas en **Despensa > Cereales y harinas**: **Panko** (`presentacion: null`), **Pan rallado** (`Normal`) y **Pan rallado** (`Ajo y Perejil`). IDs `DES-PAN-001..003`. **242 fichas** totales; **17** en esta subcategoría. No se añaden marcas comerciales ni otras presentaciones. Resto del catálogo sin cambios.
