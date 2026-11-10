@@ -1,5 +1,19 @@
 # FoodKeeper ES · archivo fuente original (solo consulta)
 
+## Pan rallado y Panko · incorporación al banco (10/11/2026)
+
+Tres fichas aprobadas en **Despensa > Cereales y harinas**: **Panko** (`presentacion: null`), **Pan rallado** (`Normal`) y **Pan rallado** (`Ajo y Perejil`). IDs `DES-PAN-001..003`. **242 fichas** totales; **17** en esta subcategoría. No se añaden marcas comerciales ni otras presentaciones. Resto del catálogo sin cambios.
+
+| ID | Nombre | Presentación | Despensa (días) | Fuente |
+|---|---|---|---:|---|
+| DES-PAN-001 | Panko | `null` | Sin plazo precargado | Referencia española de fabricante; sin plazo general verificado |
+| DES-PAN-002 | Pan rallado | Normal | 180 | FoodKeeper original Product.ID 643 (pan rallado comercial, 6 meses en despensa) |
+| DES-PAN-003 | Pan rallado | Ajo y Perejil | Sin plazo precargado | Contraste español; sin vida útil universal tras apertura |
+
+**Evidencia:** el original FoodKeeper tiene entrada individual 643 para **pan rallado comercial**, con **6 meses en despensa**, pero sin entrada específica de Panko ni de pan rallado al ajo y perejil. Se asigna 643 solo a la ficha **Normal**, sin reutilizar ID para variantes. El fabricante español Haricaman indica para **Pan Rallado Ajo y Perejil** conservación en sitio fresco y seco, y volver a cerrar tras el uso (https://www.haricaman.com/productos/pan-rallado-y-coberturas/pan-rallado-ajo-y-perejil.html), sin plazo general. Un Panko Miyata distribuido en España indica consumir dentro de 30 días tras abrir, pero **es una condición de ese producto específico, no una duración aplicable a todo Panko** (https://www.aecoctrade.es/es/producto/5VplV6ikvVuYkZXIa9uEIB). Por eso esas dos fichas quedan en estado `parcial`, modo despensa habilitado y `despensa_dias: null`: no se calcula fecha sin edición de la usuaria. El pan rallado con ajo y perejil puede incluir hierbas y ajo deshidratados y el plazo concreto depende del producto. Estas fichas son **ingredientes domésticos genéricos**, no altas en el catálogo de productos comerciales. Respetar la fecha del envase si es más restrictiva.
+
+`tips_preparacion_conservacion` permanece `null`: no hay manipulación previa específica al almacenaje. Se mantiene el banco libre y editable. No se modifican código de UI, BLE, impresión ni archivo FoodKeeper original.
+
 **Criterio vigente de presentaciones de harinas (10/11/2026):** no utilizar presentaciones obvias «Seca/Seco» en harinas con una sola modalidad; registrar `presentacion: null` para harina de garbanzo, almendra, coco y almidón de maíz. Solo Harina de trigo distingue `Normal` y `Fuerza`; Harina de Maíz conserva `Precocida`. Los siete registros conservan IDs y plazos.
 
 ## Harinas · siete fichas domésticas aprobadas (10/11/2026)

@@ -6370,6 +6370,85 @@
       "conserva_dias": null,
       "tips_conserva": null,
       "tips_preparacion_conservacion": null
+    },
+    {
+      "id": "DES-PAN-001",
+      "categoria": "Despensa",
+      "subcategoria": "Cereales y harinas",
+      "presentacion": null,
+      "nombre": "Panko",
+      "sinonimos": [
+        "Pan rallado japonés",
+        "Pan rallado tipo panko"
+      ],
+      "estado_recomendacion": "parcial",
+      "fuente": "agregación",
+      "id_fuente": null,
+      "refrigeracion": false,
+      "refrigeracion_dias": null,
+      "tips_refrigeracion": null,
+      "congelacion": false,
+      "congelacion_dias": null,
+      "tips_descongelacion": null,
+      "despensa": true,
+      "despensa_dias": null,
+      "tips_despensa": "Conservar bien cerrado en lugar fresco y seco",
+      "conserva": false,
+      "conserva_dias": null,
+      "tips_conserva": null,
+      "tips_preparacion_conservacion": null
+    },
+    {
+      "id": "DES-PAN-002",
+      "categoria": "Despensa",
+      "subcategoria": "Cereales y harinas",
+      "presentacion": "Normal",
+      "nombre": "Pan rallado",
+      "sinonimos": [
+        "Pan rallado común"
+      ],
+      "estado_recomendacion": "verificado",
+      "fuente": "FoodKeeper",
+      "id_fuente": "643",
+      "refrigeracion": false,
+      "refrigeracion_dias": null,
+      "tips_refrigeracion": null,
+      "congelacion": false,
+      "congelacion_dias": null,
+      "tips_descongelacion": null,
+      "despensa": true,
+      "despensa_dias": 180,
+      "tips_despensa": "Conservar bien cerrado en lugar fresco y seco",
+      "conserva": false,
+      "conserva_dias": null,
+      "tips_conserva": null,
+      "tips_preparacion_conservacion": null
+    },
+    {
+      "id": "DES-PAN-003",
+      "categoria": "Despensa",
+      "subcategoria": "Cereales y harinas",
+      "presentacion": "Ajo y Perejil",
+      "nombre": "Pan rallado",
+      "sinonimos": [
+        "Pan rallado con ajo y perejil"
+      ],
+      "estado_recomendacion": "parcial",
+      "fuente": "agregación",
+      "id_fuente": null,
+      "refrigeracion": false,
+      "refrigeracion_dias": null,
+      "tips_refrigeracion": null,
+      "congelacion": false,
+      "congelacion_dias": null,
+      "tips_descongelacion": null,
+      "despensa": true,
+      "despensa_dias": null,
+      "tips_despensa": "Conservar bien cerrado en lugar fresco y seco",
+      "conserva": false,
+      "conserva_dias": null,
+      "tips_conserva": null,
+      "tips_preparacion_conservacion": null
     }
   ]
 }
