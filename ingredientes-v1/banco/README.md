@@ -1,5 +1,34 @@
 # FoodKeeper ES · archivo fuente original (solo consulta)
 
+## Pasta · selección y agrupación aprobadas (10/11/2026)
+
+Se incorporan **16 fichas** en **Despensa > Pasta** (catálogo total: **224**). Se agrupan los formatos en nombres genéricos **expresamente aprobados por la usuaria**, sin crear fichas individuales para espaguetis, macarrones, fusilli, raviolis o tortellini. Las variantes cocidas solo existen para Pasta larga, Pasta corta, Pasta integral y Pasta de legumbres. El estado del resto de subcategorías no cambia.
+
+| Nombre | Presentación | Sinónimos agrupados | Despensa / Nevera / Congelación (días) |
+|---|---|---|---|
+| Placas de pasta | Seca | Placas de lasaña, Placas de canelones, Láminas de lasaña, Láminas de canelones | 365 / — / — |
+| Pasta larga | Seca | Espaguetis, Espagueti, Tallarines, Linguine, Fettuccine | 365 / — / — |
+| Pasta larga | Cocida | Espaguetis cocidos, Tallarines cocidos | — / 5 / 30 |
+| Pasta corta | Seca | Macarrones, Fusilli, Espirales, Penne, Plumas | 365 / — / — |
+| Pasta corta | Cocida | Macarrones cocidos, Fusilli cocidos, Espirales cocidas | — / 5 / 30 |
+| Pasta rellena | Fresca | Ravioli frescos, Raviolis frescos, Tortellini frescos | — / 2 / 60 |
+| Pasta al huevo | Seca | Pasta seca al huevo | 60 / — / — |
+| Fideos | Seca | Fideos para sopa, Fideos finos | 365 / — / — |
+| Pasta integral | Seca | Pasta integral de trigo | 365 / — / — |
+| Pasta integral | Cocida | Pasta integral cocida | — / 5 / 30 |
+| Pasta de legumbres | Seca | Pasta de lentejas, Pasta de garbanzos | 365 / — / — |
+| Pasta de legumbres | Cocida | Pasta de lentejas cocida, Pasta de garbanzos cocida | — / 5 / 30 |
+| Noodles de arroz | Seca | Fideos de arroz secos, Noodles de arroz secos | 365 / — / — |
+| Fideos Soba | Seca | Fideos soba secos | 365 / — / — |
+| Fideos Udon | Fresca | Udon fresco, Noodles udon frescos | — / 2 / 60 |
+| Ñoquis | Fresca | Ñoquis de patata frescos, Gnocchi frescos | — / 2 / 60 |
+
+**FoodKeeper original:** 335 pasta seca sin huevo (2 años sin abrir, 1 año abierta); 336 fideos secos de huevo (2 años sin abrir, 1–2 meses abiertos); 332 pasta fresca (1–2 días en frío, 2 meses congelada); 177 pasta cocida (3–5 días en frío, 1–2 meses congelada). Se adoptan precargas domésticas de 365 días para pasta seca sin huevo, 60 días para pasta seca al huevo, 5 días/30 días para pasta cocida, y 2 días/60 días para pasta fresca. La extrapolación a pasta de legumbres, noodles de arroz, soba, udon y ñoquis es **editorial por semejanza**, no una duración individual declarada en FoodKeeper; revisar la información específica del alimento y fabricante si es más restrictiva. Los plazos de congelación son orientativos de calidad. No aplicar automáticamente a pastas con salsas o rellenos de conservación más corta.
+
+**Trazabilidad:** el esquema solo permite una fuente global por ficha. Los IDs FoodKeeper 335, 336, 332 y 177 se asignan una vez cada uno; las demás fichas usan `fuente: "agregación"` e `id_fuente: null`. No atribuir IDs exclusivos a formatos sin registro individual. `tips_preparacion_conservacion` solo incluye un consejo práctico de enfriamiento en las cuatro fichas cocidas, y es `null` en el resto. Los consejos visibles siguen siendo cortos y editables.
+
+**Alcance:** solo `catalogo.json`, README y prueba ligera de datos; commit directo a `main`, sin PR ni cambios en UI, impresión, BLE, FoodKeeper original ni otras familias. Algas, Otras aves y Caza permanecen vacías y ocultas.
+
 ## Arroz · selección aprobada (10/11/2026)
 
 Se incorporan **7 fichas nuevas** en **Despensa > Arroz**: **6 variedades exclusivamente secas** y **1 ficha «Arroz blanco» cocido**. La obligación de crear dos presentaciones por variedad correspondía **solo a Legumbres**; **no se aplica a Arroz**. No se crean fichas genéricas ni versiones cocidas adicionales. Total del banco: **208 fichas**.
