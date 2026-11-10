@@ -1,5 +1,57 @@
 # FoodKeeper ES · archivo fuente original (solo consulta)
 
+## Especias y hierbas · selección aprobada (10/11/2026)
+
+**37 fichas nuevas** en **Despensa > Especias y hierbas**, **36 opciones del selector** más **Pimentón / Ahumado** aprobado explícitamente en comentarios. Total banco: **302 fichas**. La denominación «Pimentón (Ahumado)» se materializa en `nombre: "Pimentón"` y `presentacion: "Ahumado"` como las variantes Dulce y Picante. Sal fina y Sal gruesa son **dos nombres independientes**, con `presentacion: null`. Se mantienen los nombres y variantes indicados, sin crear especias adicionales, marcas ni otras fichas.
+
+| ID | Nombre | Presentación | Despensa (días) | Nevera (días) | Congelación (días) | ID fuente asignado |
+|---|---|---|---:|---:|---:|---|
+| DES-ESP-001 | Pimienta negra | Molida | 730 | — | — | 469 |
+| DES-ESP-002 | Pimienta negra | En grano | 1095 | — | — | 237 |
+| DES-ESP-003 | Pimentón | Dulce | 730 | — | — | 238 |
+| DES-ESP-004 | Pimentón | Picante | 730 | — | — | — |
+| DES-ESP-005 | Pimentón | Ahumado | 730 | — | — | — |
+| DES-ESP-006 | Comino | Molido | 1095 | — | — | 473 |
+| DES-ESP-007 | Cúrcuma | Molida | 730 | — | — | — |
+| DES-ESP-008 | Nuez moscada | Molida | 1095 | — | — | 476 |
+| DES-ESP-009 | Nuez moscada | Entera | 1095 | — | — | — |
+| DES-ESP-010 | Azafrán | En hebras | 1095 | — | — | — |
+| DES-ESP-011 | Canela | Molida | 1095 | — | — | 472 |
+| DES-ESP-012 | Canela | En rama | 1095 | — | — | — |
+| DES-ESP-013 | Clavo de olor | Entero | 1095 | — | — | — |
+| DES-ESP-014 | Cardamomo | Vainas | 1095 | — | — | — |
+| DES-ESP-015 | Chili | En polvo | 730 | — | — | 232 |
+| DES-ESP-016 | Cayena | Molida | 730 | — | — | — |
+| DES-ESP-017 | Orégano | Seco | 365 | — | — | 236 |
+| DES-ESP-018 | Tomillo | Seco | 365 | — | — | — |
+| DES-ESP-019 | Romero | Seco | 365 | — | — | — |
+| DES-ESP-020 | Laurel | Seco | 365 | — | — | — |
+| DES-ESP-021 | Perejil | Seco | 365 | — | — | — |
+| DES-ESP-022 | Albahaca | Seca | 360 | — | — | 508 |
+| DES-ESP-023 | Eneldo | Seco | 365 | — | — | — |
+| DES-ESP-024 | Hierbabuena | Seca | 365 | — | — | — |
+| DES-ESP-025 | Perejil | Fresco | — | 3 | 90 | 611 |
+| DES-ESP-026 | Cilantro | Fresco | — | 21 | — | 506 |
+| DES-ESP-027 | Albahaca | Fresca | — | 10 | — | 509 |
+| DES-ESP-028 | Menta | Fresca | — | 21 | — | 507 |
+| DES-ESP-029 | Cebollino | Fresco | — | — | — | 288 |
+| DES-ESP-030 | Ajo en polvo | — | 1095 | — | — | 474 |
+| DES-ESP-031 | Cebolla en polvo | — | 1095 | — | — | 475 |
+| DES-ESP-032 | Garam masala | — | 180 | — | — | 234 |
+| DES-ESP-033 | Ras el hanout | — | 180 | — | — | — |
+| DES-ESP-034 | Hierbas provenzales | — | 180 | — | — | — |
+| DES-ESP-035 | Hierbas italianas | — | 180 | — | — | — |
+| DES-ESP-036 | Sal fina | — | — | — | — | — |
+| DES-ESP-037 | Sal gruesa | — | — | — | — | — |
+
+**FoodKeeper ES original consultado:** 232 (chili en polvo, 2 años abierto), 234 (mezclas, 6 meses sin abrir), 236 (hierbas secas, 1–2 años después de abrir), 237 (especias enteras, 3–4 años), 238 (especias molidas, 2–3 años), 469 (pimienta negra molida, 2 años sin abrir), 472 (canela molida, 3–4 años), 473 (comino molido, 3–4 años), 474 (ajo en polvo, 3–4 años), 475 (cebolla en polvo, 3–4 años), 476 (nuez moscada molida, 3–4 años), 508 (albahaca seca, 12 meses despensa), 509 (albahaca fresca, 10 días nevera), 611 (perejil fresco, 2–3 días nevera, 3–4 meses congelación), 506 (cilantro, 2–3 semanas nevera), 507 (menta, 2–3 semanas nevera), 288 (hierbas genéricas, sin duración específica). Los plazos son **precargas orientativas**, no una declaración de caducidad y no sustituyen las instrucciones de cada envase; en especial, los periodos de especias secas son fundamentalmente de calidad/aroma.
+
+**Trazabilidad:** cada `id_fuente` se asigna **una única vez** en todo el catálogo. Las fichas restantes comparten el contexto de sus **referencias de grupo** documentadas aquí sin recibir un ID duplicado; no equivalen a una ficha individual en FoodKeeper. Pimentón Dulce/Picante/Ahumado, cayena y cúrcuma usan el grupo de molidas (238); especias enteras usan 237; orégano, tomillo, romero, laurel, perejil seco, eneldo y hierbabuena secos usan 236; Garam masala, Ras el hanout, Hierbas provenzales e italianas usan 234. El ID 288 no ofrece plazo seguro para cebollino fresco: `refrigeracion_dias:null`. No se fuerza un plazo para las sales, cuyos registros no tienen referencia individual en el FoodKeeper original: `despensa_dias:null`, modo despensa disponible. Ninguna fecha automática cuando falta duración; los campos siguen editables.
+
+**Presentaciones:** se respetan las elegidas incluso cuando pudieran parecer obvias; únicamente Ajo en polvo, Cebolla en polvo, las cuatro mezclas y ambas sales tienen `presentacion:null`, conforme a la selección. Todas las fichas mantienen `tips_preparacion_conservacion:null`, ya que no hay paso previo específico aprobado para el almacenamiento. Las hierbas frescas se prefijan solo para refrigeración; el perejil incluye congelación respaldada en 611. La clasificación de Semillas permanece intacta.
+
+**Alcance técnico:** solo catálogo de datos, documentación del banco y comprobaciones de datos. Sin cambios en esquema, taxonomía, interfaz, BLE, impresión, FoodKeeper original ni otros repositorios. Algas, Otras aves y Caza permanecen vacías.
+
 ## Semillas · siete fichas seleccionadas (10/11/2026)
 
 Se incorporan **7 fichas** únicamente en **Despensa > Semillas**: Chía (`presentacion:null`), Lino (Enteras), Sésamo (Blanco, Negro y Tostadas), Pipas de calabaza (Tostadas), Pipas de girasol (Tostadas). Por corrección expresa de la usuaria, la variante antes propuesta como sésamo `null` se registra **«Semillas de sésamo» / «Blanco»**, para distinguirla de Negro y Tostadas. Sin otras variedades ni tratamientos. Banco total: **265 fichas**.
