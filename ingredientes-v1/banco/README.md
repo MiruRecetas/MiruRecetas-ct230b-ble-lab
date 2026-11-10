@@ -1,18 +1,20 @@
 # FoodKeeper ES · archivo fuente original (solo consulta)
 
+**Criterio vigente de presentaciones de harinas (10/11/2026):** no utilizar presentaciones obvias «Seca/Seco» en harinas con una sola modalidad; registrar `presentacion: null` para harina de garbanzo, almendra, coco y almidón de maíz. Solo Harina de trigo distingue `Normal` y `Fuerza`; Harina de Maíz conserva `Precocida`. Los siete registros conservan IDs y plazos.
+
 ## Harinas · siete fichas domésticas aprobadas (10/11/2026)
 
-Se añaden **7 fichas**, sin añadir otras variedades o presentaciones: **Harina de trigo** («Normal · Seca», «De fuerza · Seca»), **Harina de garbanzo** («Seca»), **Harina de almendra** («Seca»), **Harina de coco** («Seca»), **Harina de Maíz** («Precocida») y **Almidón de maíz (maicena)** («Seco»). Se usa la subcategoría unificada **Despensa > Cereales y harinas**. Banco total: **239 fichas**; subcategoría unificada: **14 fichas**. Ninguna ficha anterior se modifica y no se registran productos comerciales.
+Se añaden **7 fichas**, sin añadir otras variedades o presentaciones: **Harina de trigo** («Normal», «Fuerza»), **Harina de garbanzo** (sin presentación), **Harina de almendra** (sin presentación), **Harina de coco** (sin presentación), **Harina de Maíz** («Precocida») y **Almidón de maíz (maicena)** (sin presentación). Se usa la subcategoría unificada **Despensa > Cereales y harinas**. Banco total: **239 fichas**; subcategoría unificada: **14 fichas**. Ninguna ficha anterior se modifica y no se registran productos comerciales.
 
 | ID | Nombre | Presentación | Despensa (días) | Fuente/alcance |
 |---|---|---|---:|---|
-| DES-HAR-001 | Harina de trigo | Normal · Seca | 180 | undefined |
-| DES-HAR-002 | Harina de trigo | De fuerza · Seca | 180 | undefined |
-| DES-HAR-003 | Harina de garbanzo | Seca | 60 | undefined |
-| DES-HAR-004 | Harina de almendra | Seca | 90 | undefined |
-| DES-HAR-005 | Harina de coco | Seca | Sin plazo precargado | undefined |
-| DES-HAR-006 | Harina de Maíz | Precocida | 180 | undefined |
-| DES-HAR-007 | Almidón de maíz (maicena) | Seco | 540 | undefined |
+| DES-HAR-001 | Harina de trigo | Normal | 180 | Ver detalles de trazabilidad debajo |
+| DES-HAR-002 | Harina de trigo | Fuerza | 180 | Ver detalles de trazabilidad debajo |
+| DES-HAR-003 | Harina de garbanzo | — | 60 | Ver detalles de trazabilidad debajo |
+| DES-HAR-004 | Harina de almendra | — | 90 | Ver detalles de trazabilidad debajo |
+| DES-HAR-005 | Harina de coco | — | Sin plazo precargado | Ver detalles de trazabilidad debajo |
+| DES-HAR-006 | Harina de Maíz | Precocida | 180 | Ver detalles de trazabilidad debajo |
+| DES-HAR-007 | Almidón de maíz (maicena) | — | 540 | Ver detalles de trazabilidad debajo |
 
 **Contraste externo español (consultado 10/11/2026):**
 - Harina de garbanzo: Harinas La Fuensanta, ficha técnica https://harinaslafuensanta.com/wp-content/uploads/2020/05/FICHA-TE%CC%81CNICA-H.DE-GARBANZOS.pdf (60 días desde producción, conservación fresca/seca); Energy Feelings, ficha https://energyfeelings.com/wp-content/uploads/2024/05/FT-GARBANZO-ECO-harina-V.23.12-13.ES_.pdf (vida útil de 12 meses desde envasado). **No universalizar** estos plazos de fabricantes distintos.

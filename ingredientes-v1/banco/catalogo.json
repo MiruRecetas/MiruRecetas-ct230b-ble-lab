@@ -6188,7 +6188,7 @@
       "id": "DES-HAR-001",
       "categoria": "Despensa",
       "subcategoria": "Cereales y harinas",
-      "presentacion": "Normal · Seca",
+      "presentacion": "Normal",
       "nombre": "Harina de trigo",
       "sinonimos": [
         "Harina de trigo normal",
@@ -6215,7 +6215,7 @@
       "id": "DES-HAR-002",
       "categoria": "Despensa",
       "subcategoria": "Cereales y harinas",
-      "presentacion": "De fuerza · Seca",
+      "presentacion": "Fuerza",
       "nombre": "Harina de trigo",
       "sinonimos": [
         "Harina de fuerza",
@@ -6242,7 +6242,7 @@
       "id": "DES-HAR-003",
       "categoria": "Despensa",
       "subcategoria": "Cereales y harinas",
-      "presentacion": "Seca",
+      "presentacion": null,
       "nombre": "Harina de garbanzo",
       "sinonimos": [
         "Harina de garbanzos"
@@ -6268,7 +6268,7 @@
       "id": "DES-HAR-004",
       "categoria": "Despensa",
       "subcategoria": "Cereales y harinas",
-      "presentacion": "Seca",
+      "presentacion": null,
       "nombre": "Harina de almendra",
       "sinonimos": [
         "Almendra molida",
@@ -6295,7 +6295,7 @@
       "id": "DES-HAR-005",
       "categoria": "Despensa",
       "subcategoria": "Cereales y harinas",
-      "presentacion": "Seca",
+      "presentacion": null,
       "nombre": "Harina de coco",
       "sinonimos": [
         "Coco molido fino"
@@ -6348,7 +6348,7 @@
       "id": "DES-HAR-007",
       "categoria": "Despensa",
       "subcategoria": "Cereales y harinas",
-      "presentacion": "Seco",
+      "presentacion": null,
       "nombre": "Almidón de maíz (maicena)",
       "sinonimos": [
         "Maicena",

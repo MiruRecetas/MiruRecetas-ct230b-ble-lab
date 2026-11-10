@@ -618,7 +618,7 @@ test("Taxonomía: Cereales y harinas unificados sin cambiar fichas",()=>{
 
 test("Harinas: siete fichas aprobadas en Cereales y harinas",()=>{
  const h=records.filter(x=>x.id.startsWith("DES-HAR-"));
- assert.deepEqual(h.map(x=>[x.nombre,x.presentacion]),[["Harina de trigo","Normal · Seca"],["Harina de trigo","De fuerza · Seca"],["Harina de garbanzo","Seca"],["Harina de almendra","Seca"],["Harina de coco","Seca"],["Harina de Maíz","Precocida"],["Almidón de maíz (maicena)","Seco"]]);
+ assert.deepEqual(h.map(x=>[x.nombre,x.presentacion]),[["Harina de trigo","Normal"],["Harina de trigo","Fuerza"],["Harina de garbanzo",null],["Harina de almendra",null],["Harina de coco",null],["Harina de Maíz","Precocida"],["Almidón de maíz (maicena)",null]]);
  assert.equal(h.length,7);
  assert.equal(h.filter(x=>x.id_fuente==="222").length,1);
  assert.equal(h.filter(x=>x.id_fuente==="220").length,1);
