@@ -1,5 +1,24 @@
 # FoodKeeper ES · archivo fuente original (solo consulta)
 
+## Cereales y cuscús · selección aprobada (10/11/2026)
+
+Se añaden **ocho fichas**: siete en **Despensa > Cereales** y una de **Cuscús seco en Despensa > Pasta**. Total: **232 fichas** (Cereales 7, Pasta 17). Se mantienen separadas las subcategorías **Cereales** y **Harinas**; no se modifica la taxonomía. No se incorporan otros cereales, harinas, presentaciones ni productos comerciales.
+
+| Nombre | Presentación | Subcategoría | FoodKeeper original | Despensa / Nevera / Congelador (días) |
+|---|---|---|---|---|
+| Avena | Seca | Cereales | 375 | 365 / — / — |
+| Cebada perlada | Seca | Cereales | 577 | 180 / — / 360 |
+| Cebada perlada | Cocida | Cereales | Sin ID individual | — / 3 / 60 |
+| Quinoa | Seca | Cereales | 425 | 730 / — / — |
+| Quinoa | Cocida | Cereales | 426 | — / 6 / 180 |
+| Maíz dulce | Mazorca fresca | Cereales | 282 | — / 2 / 240 |
+| Maíz para palomitas | Grano seco | Cereales | 389 | 365 / — / — |
+| Cuscús | Seca | Pasta | Sin ID individual | 365 / — / — |
+
+**Correspondencia de fuentes:** FoodKeeper 375 (cereales que requieren cocción, incluye avena; 12 meses sin abrir, 6–12 meses abiertos), 577 (cebada entera, no específica perlada; 6 meses despensa y 12 meses congelación), 425 (quinoa sin cocer, 2–3 años despensa), 426 (quinoa cocida, 6–7 días nevera y 6–12 meses congelación), 282 (mazorca de maíz, 1–2 días nevera y 8 meses congelación), 389 (grano seco para palomitas, 2 años sin abrir y 1 año abierto). La ficha de **cebada perlada cocida** y la de **cuscús seco** no tienen ID específico en el original: sus tiempos son **estimaciones domésticas por analogía**, no plazos FoodKeeper individuales. Para cebada perlada seca se usa 577 solo como referencia de grupo; la presentación perlada no figura individualmente. Los tiempos son precargas editables y no sustituyen las instrucciones del envase. La mazorca fresca requiere refrigeración; no confundir con maíz en conserva o desgranado.
+
+`tips_preparacion_conservacion` solo contiene pasos prácticos previos a almacenar (enfriar porciones cocidas o preparar la mazorca para congelación), o `null`. Los IDs de FoodKeeper no se repiten. Se mantiene intacto el archivo FoodKeeper ES original y permanecen vacías Algas, Otras aves y Caza.
+
 ## Pasta · selección y agrupación aprobadas (10/11/2026)
 
 Se incorporan **16 fichas** en **Despensa > Pasta** (catálogo total: **224**). Se agrupan los formatos en nombres genéricos **expresamente aprobados por la usuaria**, sin crear fichas individuales para espaguetis, macarrones, fusilli, raviolis o tortellini. Las variantes cocidas solo existen para Pasta larga, Pasta corta, Pasta integral y Pasta de legumbres. El estado del resto de subcategorías no cambia.
