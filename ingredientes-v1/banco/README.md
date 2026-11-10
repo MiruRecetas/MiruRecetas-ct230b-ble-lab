@@ -1,3 +1,15 @@
+## Norma obligatoria de cambios · 10/11/2026
+
+**Secuencia vinculante para cualquier modificación de diseño, desarrollo o código del etiquetado y del laboratorio:**
+
+1. **Documentación previa en el laboratorio:** antes de implementar, registrar el alcance concreto, diseño previsto, archivos afectados, decisiones, límites y pruebas previstas mediante **PR documental o commit documental directo a `main` del laboratorio**. Esta evidencia debe existir en `main` antes de empezar la modificación técnica.
+2. **Implementación mediante PR:** realizar los cambios de diseño, desarrollo o código en una rama y abrir **PR de implementación**, revisarla y fusionarla con **merge**. No utilizar un commit directo a `main` como sustituto de esta PR de implementación.
+3. **Documentación posterior:** una vez fusionada y comprobada la implementación, registrar lo realmente realizado, la PR y commit de merge, validaciones, pruebas físicas (solo si ocurrieron), diferencias respecto al plan y pendientes, mediante **PR documental o commit documental directo a `main` del laboratorio**.
+
+**Orden obligatorio:** documentación previa integrada → PR técnica fusionada → documentación posterior integrada. La autorización general para implementar no omite ninguna etapa. Si cambia el alcance durante el trabajo, actualizar previamente el registro documental correspondiente antes de materializar el cambio. Distinguir expresamente implementación, validación informática, validación física y publicación productiva; no dar por cerrada una fase sin evidencia. Esta regla es aplicable también a cambios destinados a trasladarse al repositorio privado: documentar antes y después en el laboratorio, y respetar además la política de PR/CI/publicación del repositorio privado.
+
+**Decisión de catálogo:** la población selectiva del banco doméstico se considera finalizada por la usuaria. No incorporar ni proponer nuevas fichas hasta después del traspaso al repositorio privado y la publicación oficial de «Mis etiquetas» en web/PWA, y solo tras una nueva decisión expresa.
+
 # FoodKeeper ES · archivo fuente original (solo consulta)
 
 ## Especias y hierbas · selección aprobada (10/11/2026)
