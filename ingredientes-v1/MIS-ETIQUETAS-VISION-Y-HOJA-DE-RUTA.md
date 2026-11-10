@@ -1,5 +1,18 @@
 # MiruRecetas · «Mis etiquetas» · visión, decisiones y hoja de ruta
 
+## Decisión arquitectónica aprobada · integración de «Mis etiquetas» en MiruRecetas · 10/11/2026
+
+**Decisión expresa de la usuaria:** realizar una **integración directa mediante una única PR de implementación privada** en `MiruRecetas/mirurecetas-web-source`, trasladando «Mis etiquetas» como **módulo funcional independiente** integrado en la arquitectura, diseño compartido, navegación y PWA existentes. Mantener un único origen productivo para web/PWA y la publicación oficial mediante **GitHub Actions y GitHub App** hacia `MiruRecetas/menu-anual-recetas`. No publicar directamente desde el laboratorio ni establecer una segunda cadena de despliegue.
+
+**Alternativas descartadas:** privatizar el laboratorio y convertirlo en publicador autónomo al repositorio público; crear una segunda web/PWA; reconstruir la funcionalidad desde cero; copiar indiscriminadamente experimentos y versiones históricas del laboratorio. Criterio rector: simplicidad de mantenimiento, ausencia de duplicación y conservación de funciones aprobadas.
+
+**Alcance propuesto, aún sin implementar:** seleccionar los módulos productivos de las etiquetas libres Pequeña (30×20), Compacta (50×30) y Amplia B (50×80), banco doméstico cerrado, formulario editable y motor BLE/TSPL; integrarlos conservando formatos y comportamiento aprobados, sin alterar el etiquetado de recetas existente. La nueva ruta pública prevista es `/mis-etiquetas/`, sujeta a la revisión de navegación y rutas canónicas en producción. Evitar introducir el código experimental no necesario.
+
+**Procedimiento obligatorio para este traspaso:** (1) esta decisión no sustituye la especificación documental previa detallada en `main` del laboratorio (inventario, contratos, rutas, pruebas y compatibilidad), que debe completarse **antes de cualquier código**; (2) implementar en una rama y fusionar **una única PR técnica privada** en `mirurecetas-web-source`, con CI selectiva adecuada y publicación únicamente por la cadena vigente; (3) verificar producción web/PWA y BLE según lo realmente probado; (4) cerrar con PR o commit **documental posterior** a `main` del laboratorio, y actualizar manuales canónicos afectados en el repositorio privado. No afirmar publicación, fusión ni validación física antes de realizarlas.
+
+**Estado:** arquitectura seleccionada y documentada; implementación, PR privada, despliegue y verificaciones **pendientes**. Banco de ingredientes cerrado a nuevas altas hasta después de la publicación oficial y nueva autorización.
+
+
 ## Norma obligatoria de cambios · 10/11/2026
 
 **Secuencia vinculante para cualquier modificación de diseño, desarrollo o código del etiquetado y del laboratorio:**
