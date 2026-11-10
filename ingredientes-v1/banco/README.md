@@ -1,5 +1,32 @@
 # FoodKeeper ES · archivo fuente original (solo consulta)
 
+## Semillas · siete fichas seleccionadas (10/11/2026)
+
+Se incorporan **7 fichas** únicamente en **Despensa > Semillas**: Chía (`presentacion:null`), Lino (Enteras), Sésamo (Blanco, Negro y Tostadas), Pipas de calabaza (Tostadas), Pipas de girasol (Tostadas). Por corrección expresa de la usuaria, la variante antes propuesta como sésamo `null` se registra **«Semillas de sésamo» / «Blanco»**, para distinguirla de Negro y Tostadas. Sin otras variedades ni tratamientos. Banco total: **265 fichas**.
+
+| ID | Nombre | Presentación | Despensa (días) | ID fuente |
+|---|---|---|---:|---|
+| DES-SEM-001 | Semillas de chía | `null` | 540 | 573 |
+| DES-SEM-002 | Semillas de lino | Enteras | 730 | 503 |
+| DES-SEM-003 | Semillas de sésamo | Blanco | 1825 | 613 |
+| DES-SEM-004 | Semillas de sésamo | Negro | Sin plazo automático | Sin ID exclusivo |
+| DES-SEM-005 | Pipas de calabaza | Tostadas | 180 | 606 |
+| DES-SEM-006 | Pipas de girasol | Tostadas | 90 | 609 |
+| DES-SEM-007 | Semillas de sésamo | Tostadas | Sin plazo automático | Sin ID exclusivo |
+
+**Correspondencia y límites (FoodKeeper ES original):**
+- DES-SEM-001: FoodKeeper original 573: 18 meses a temperatura ambiente, no distingue presentación ni apertura.
+- DES-SEM-002: FoodKeeper original 503: linaza entera, 2 años sin abrir; no hay duración individual tras abrir.
+- DES-SEM-003: FoodKeeper original 613: sésamo sin especificar color, 5 años en despensa. Referencia agrupada, no exclusiva del blanco; seguir fabricante y fecha real del envase.
+- DES-SEM-004: FoodKeeper 613 se refiere al sésamo genérico, sin duración específica del negro. Ficha técnica española Conservas Dani (https://www.dani.es/sites/default/files/2019-09/Sesamo%20negro.pdf) indica 4 años de consumo preferente para su producto concreto, no generalizable. Sin plazo doméstico automático.
+- DES-SEM-005: FoodKeeper original 606: pipas tostadas sin cáscara, 6 meses despensa; ID 607 tostadas con cáscara, mismo plazo. Una única ficha, ID 606 representativo.
+- DES-SEM-006: FoodKeeper original 609: pipas tostadas sin cáscara, 3–4 meses tras abrir, se usa extremo inferior (90 días); 610 tostadas saladas con cáscara solo remite a fecha del envase. No agrupar esa presentación especial.
+- DES-SEM-007: FoodKeeper 613 es sésamo sin tratamiento indicado, no ficha específica de tostado. BioArtesa España (https://www.bioartesa.es/producto/semillas-sesamo-tostado-bio-500-gr) recomienda ambiente fresco, seco y oscuro, sin plazo general; se deja sin fecha automática.
+
+**Criterio doméstico:** cada ID FoodKeeper se usa una única vez. En la ficha de pipas de calabaza tostadas se elige 606 como referencia representativa de sin cáscara, aunque FoodKeeper 607 también declara 6 meses con cáscara. Para sésamo se usa 613 una sola vez, asignado al Blanco; las variantes Negro y Tostadas se documentan por contraste sin inventar IDs específicos. Las duraciones de los originales relativas a producto sin abrir **no garantizan ese plazo tras apertura**; revisar indicaciones concretas y editar la precarga. En Negro y Tostadas, el modo despensa está disponible pero su duración es `null` por falta de plazo general individual extrapolable.
+
+La ficha española de sésamo negro Dani y la de sésamo tostado BioArtesa justifican la conservación en lugar fresco, seco y cerrado, pero sus datos no se transfieren sin más a cualquier otro fabricante. `tips_preparacion_conservacion` permanece `null` en todas las fichas: no hay actuación previa al guardado. Sin modificaciones a ingredientes previos, UI, BLE, impresión ni archivo original FoodKeeper.
+
 ## Frutos secos · selección aprobada (10/11/2026)
 
 Se incorporan **16 fichas** exclusivamente en **Despensa > Frutos secos**, ocho variedades con presentación explícita **Crudas** (por instrucción posterior de la usuaria) y ocho presentaciones tratadas o cortadas: Almendras (Tostadas, Laminadas, Fritas), Avellanas (Tostadas), Pistachos (Tostados), Cacahuetes (Tostados), Castañas (Asadas) y Anacardos (Fritos). Se distingue «Crudas» de `null` porque la usuaria lo especifica. Total banco **258 fichas**. No se agregan Nueces comunes, ni otras presentaciones, ni productos comerciales.
