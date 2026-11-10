@@ -1,5 +1,10 @@
 # MiruRecetas · «Mis etiquetas» · visión, decisiones y hoja de ruta
 
+## Especificación previa de migración preparada · 10/11/2026
+
+Se ha registrado [el contrato documental previo de migración](ESPECIFICACION-PREVIA-MIGRACION-MIS-ETIQUETAS-2026-11-10.md), con inventario selectivo, contratos reales de generador, distribución, publicador, navegación, PWA, service worker, banco y regresiones. **Pendiente de revisión y coordinación con el responsable Web/PWA antes de abrir la PR funcional privada**. No se ha migrado código ni publicado ningún runtime. El cierre documental posterior seguirá siendo obligatorio.
+
+
 ## Decisión arquitectónica aprobada · integración de «Mis etiquetas» en MiruRecetas · 10/11/2026
 
 **Decisión expresa de la usuaria:** realizar una **integración directa mediante una única PR de implementación privada** en `MiruRecetas/mirurecetas-web-source`, trasladando «Mis etiquetas» como **módulo funcional independiente** integrado en la arquitectura, diseño compartido, navegación y PWA existentes. Mantener un único origen productivo para web/PWA y la publicación oficial mediante **GitHub Actions y GitHub App** hacia `MiruRecetas/menu-anual-recetas`. No publicar directamente desde el laboratorio ni establecer una segunda cadena de despliegue.
