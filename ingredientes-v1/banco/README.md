@@ -1,5 +1,28 @@
 # FoodKeeper ES · archivo fuente original (solo consulta)
 
+## Harinas · siete fichas domésticas aprobadas (10/11/2026)
+
+Se añaden **7 fichas**, sin añadir otras variedades o presentaciones: **Harina de trigo** («Normal · Seca», «De fuerza · Seca»), **Harina de garbanzo** («Seca»), **Harina de almendra** («Seca»), **Harina de coco** («Seca»), **Harina de Maíz** («Precocida») y **Almidón de maíz (maicena)** («Seco»). Se usa la subcategoría unificada **Despensa > Cereales y harinas**. Banco total: **239 fichas**; subcategoría unificada: **14 fichas**. Ninguna ficha anterior se modifica y no se registran productos comerciales.
+
+| ID | Nombre | Presentación | Despensa (días) | Fuente/alcance |
+|---|---|---|---:|---|
+| DES-HAR-001 | Harina de trigo | Normal · Seca | 180 | undefined |
+| DES-HAR-002 | Harina de trigo | De fuerza · Seca | 180 | undefined |
+| DES-HAR-003 | Harina de garbanzo | Seca | 60 | undefined |
+| DES-HAR-004 | Harina de almendra | Seca | 90 | undefined |
+| DES-HAR-005 | Harina de coco | Seca | Sin plazo precargado | undefined |
+| DES-HAR-006 | Harina de Maíz | Precocida | 180 | undefined |
+| DES-HAR-007 | Almidón de maíz (maicena) | Seco | 540 | undefined |
+
+**Contraste externo español (consultado 10/11/2026):**
+- Harina de garbanzo: Harinas La Fuensanta, ficha técnica https://harinaslafuensanta.com/wp-content/uploads/2020/05/FICHA-TE%CC%81CNICA-H.DE-GARBANZOS.pdf (60 días desde producción, conservación fresca/seca); Energy Feelings, ficha https://energyfeelings.com/wp-content/uploads/2024/05/FT-GARBANZO-ECO-harina-V.23.12-13.ES_.pdf (vida útil de 12 meses desde envasado). **No universalizar** estos plazos de fabricantes distintos.
+- Harina de almendra: ficha Sosa https://elmercadodenicolasyvalero.es/fichas-tecnicas-productos/9699-45060004-37337-FT-RAW-ALMOND-FLOUR-REFINED-1-1.5-mm-SOSA.pdf (3 meses después de abrir a 14–16 °C); Harimsa https://tienda.harimsa.es/harinas-sin-gluten/harina-de-almendra/ recomienda refrigeración después de abrir. El plazo de 90 días es extrapolación editorial, condicionado a conservación apropiada.
+- Harina de Maíz precocida: fabricante español Haricaman https://haricaman.com/productos/harina-de-otros-cereales/harina-maiz-blanca.html recomienda ambiente fresco/seco y cerrar tras usar; no proporciona vida útil general. Los **180 días** son estimación editorial, **no** FoodKeeper 218.
+- Harina de coco: no se halló plazo español genérico suficientemente respaldado. Se registra como **parcial**, con despensa seleccionable pero `despensa_dias:null`, sin fecha propuesta hasta edición manual; **no equivale** al coco rallado del FoodKeeper 257.
+- FoodKeeper original: 222 harina blanca común, 6–8 meses después de abrir (se elige 180 días como mínimo operativo); 220 almidón de maíz, 18 meses después de abrir (540 días). Cada `id_fuente` se asigna solo una vez. La harina de fuerza usa analogía con 222, sin duplicar ID de fuente.
+
+Todos los consejos en `tips_preparacion_conservacion` quedan en `null` (no hay preparación previa especial). Los plazos son precargas domésticas editables y deben ceder ante instrucciones más restrictivas del envase. No hay cambios de taxonomía, BLE, UI, impresión ni FoodKeeper original.
+
 ## Validación física de Pequeña desde el banco doméstico — 10/11/2026
 
 **Estado: APROBADA FÍSICAMENTE POR LA USUARIA.** La usuaria confirma expresamente: «Están todas perfectas impresas, todas han salido de los datos precargados del banco». Se trata de una prueba real de **Pequeña** con impresora térmica **Clabel** conectada mediante BLE/UART, **sin QR**, usando los datos precargados del **banco doméstico de ingredientes**, aplicados a las etiquetas. La fotografía compartida muestra la tira impresa con **Puerro** (50 g), **Pechuga de pavo – Tiras** (170 g, repetida), **Pechuga de pavo – Dados** (170 g), **Pechuga de pavo – Filetes** (170 g) y **Pulpo – cocido** (125 g parcialmente visible). No se deduce un inventario de la tira ni se presupone que represente todas las etiquetas emitidas.
