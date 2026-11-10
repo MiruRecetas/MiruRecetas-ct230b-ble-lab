@@ -527,3 +527,25 @@ test("Legumbres: 11 variedades aprobadas, cada una seca y cocida, sin fichas gen
  for(const cat of ["Algas","Otras aves","Caza"])assert.equal(records.filter(x=>x.subcategoria===cat).length,0);
  assert.equal(records.length,201);
 });
+
+test("tips_preparacion_conservacion: solo preparación útil; sin fuentes, plazos ni metatexto",()=>{
+ const populated=records.filter(x=>x.tips_preparacion_conservacion!==null);
+ assert.equal(populated.length,22);
+ const forbidden=/foodkeeper|product\.id|fuente|sin id|metadato|banco doméstico|pauta conservadora|protocolo|agregación|etiqueta|plazo|sin registro|sin duplicar/i;
+ for(const x of populated){
+  assert.equal(typeof x.tips_preparacion_conservacion,"string");
+  assert.ok(x.tips_preparacion_conservacion.length<=140,x.id);
+  assert.doesNotMatch(x.tips_preparacion_conservacion,forbidden,x.id);
+ }
+ const aprobadas=["Alubia blanca","Faba asturiana","Alubia pinta","Alubia canela","Alubia verdina","Judión","Lenteja pardina","Lenteja castellana","Lenteja roja pelada","Garbanzo pedrosillano","Garbanzo lechoso"];
+ const legumes=records.filter(x=>x.subcategoria==="Legumbres");
+ assert.equal(legumes.length,22);
+ assert.deepEqual(new Set(legumes.map(x=>x.nombre)),new Set(aprobadas));
+ for(const name of aprobadas){
+  const pair=legumes.filter(x=>x.nombre===name);
+  assert.deepEqual(new Set(pair.map(x=>x.presentacion)),new Set(["Seca","Cocida"]));
+  assert.ok(pair.every(x=>x.tips_preparacion_conservacion===null));
+ }
+ for(const s of ["Algas","Otras aves","Caza"])assert.equal(records.filter(x=>x.subcategoria===s).length,0);
+ assert.equal(records.length,201);
+});

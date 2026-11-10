@@ -1,5 +1,11 @@
 # FoodKeeper ES · archivo fuente original (solo consulta)
 
+## Campo de preparación · uso aprobado (10/11/2026)
+
+`tips_preparacion_conservacion` queda reservado **exclusivamente** para un consejo corto y práctico **anterior al almacenamiento, la congelación o el envasado**, como escaldar, enfriar, secar, desgranar o preparar porciones. No es una nota de procedencia, seguimiento, justificación de plazos, decisión editorial, aviso sobre permisos ni descripción del funcionamiento del banco. Si la ficha no necesita preparación específica, el valor es **`null`**. No almacenar ahí IDs FoodKeeper, referencias, citas, comparaciones ni comentarios de agentes. Es un campo reservado para la futura sección de la web, no visible ni impreso en las etiquetas actuales.
+
+Limpieza de 120 fichas del banco: se conservan 22 consejos de preparación concretos; los demás quedan a `null`. No se cambian nombres, métodos, fechas, notas visibles de las etiquetas ni el código. Legumbres conserva **11 variedades × 2 presentaciones (Seca y Cocida) = 22 fichas**, sin registros genéricos. Algas, Otras aves y Caza siguen vacías y ocultas por decisión expresa.
+
 ## Legumbres · banco doméstico aprobado (10/11/2026)
 
 **22 fichas nuevas:** 11 variedades, **cada una** con dos registros independientes, **Seca** y **Cocida**. **No se crean entradas genéricas.** Total actualizado del banco: **201 fichas**.
@@ -43,7 +49,7 @@ Este banco existe **solo para evitar rellenar etiquetas a mano**. Elegir una fic
 
 ## Frutas · lote de incorporación inicial (histórico, 10/11/2026)
 
-**Lote histórico: 40 fichas nuevas, de las cuales 39 están en Frutas y 1 en Despensa > Conservas** (compota de manzana casera). Respetadas **37 frutas distintas**, Granada (entera y desgranada), Piña (entera y cortada) y la ficha previa **Orejones FRV-FRU-001 sin duplicar**. Total del banco al completar aquel lote: **177 fichas**; hoy son **179**, incluidas mermeladas y carne de membrillo. Frutas conserva 40 fichas. Las 137 fichas preexistentes se preservan sin cambios.
+**Lote histórico: 40 fichas nuevas, de las cuales 39 están en Frutas y 1 en Despensa > Conservas** (compota de manzana casera). Respetadas **37 frutas distintas**, Granada (entera y desgranada), Piña (entera y cortada) y la ficha previa **Orejones FRV-FRU-001 sin duplicar**. Total del banco al completar aquel lote: **177 fichas**; después se añadieron dos conservas (**179**), y actualmente hay **201** fichas tras las 22 de Legumbres. Frutas conserva 40 fichas. Las 137 fichas preexistentes se preservan sin cambios.
 
 | Ficha | Nombre | Presentación | Subcategoría | Frío (d) | Congelación (d) | Despensa (d) | FoodKeeper ID asignado |
 |---|---|---|---|---:|---:|---:|---|

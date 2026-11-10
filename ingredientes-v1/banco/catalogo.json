@@ -668,7 +668,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Requiere refrigeración entre 2 y 4 °C."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "CAR-ELA-007",
@@ -695,7 +695,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Requiere refrigeración entre 2 y 4 °C."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "CAR-ELA-008",
@@ -1127,7 +1127,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Pieza sin empezar. Lugar fresco, seco y oscuro."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "CAR-CHA-012",
@@ -1154,7 +1154,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Pieza sin empezar. Lugar fresco, seco y oscuro."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "CAR-CHA-013",
@@ -1181,7 +1181,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Pieza sin empezar. Lugar fresco, seco y oscuro."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "CAR-CHA-014",
@@ -1208,7 +1208,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Pieza sin empezar. Lugar fresco, seco y oscuro."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "CAR-CHA-015",
@@ -1235,7 +1235,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Pieza sin empezar. Lugar fresco, seco y oscuro."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "PES-BLA-001",
@@ -1289,7 +1289,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Solo bacalao seco-salado apto para despensa; respetar las instrucciones del vendedor. Tras desalar, refrigerar."
+      "tips_preparacion_conservacion": "Desalar y refrigerar antes de guardar."
     },
     {
       "id": "PES-BLA-003",
@@ -2225,7 +2225,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Criterio banco doméstico (10/11/2026): congelación no ofrecida para esta presentación por pérdida de calidad o transformación notable de textura: para esta ficha la congelación cambia significativamente la textura o exige pasar de fresco/crudo a cocinado; sería una presentación distinta. El origen puede ofrecer 30 días congelación, pero no es recomendación para la presentación lista para etiquetar."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-TUB-003",
@@ -2252,7 +2252,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Criterio banco doméstico (10/11/2026): congelación no ofrecida para esta presentación por pérdida de calidad o transformación notable de textura: para esta ficha la congelación cambia significativamente la textura o exige pasar de fresco/crudo a cocinado; sería una presentación distinta. El origen puede ofrecer 30 días congelación, pero no es recomendación para la presentación lista para etiquetar."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-TUB-004",
@@ -2307,7 +2307,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Criterio banco doméstico (10/11/2026): congelación no ofrecida para esta presentación por pérdida de calidad o transformación notable de textura: para esta ficha la congelación cambia significativamente la textura o exige pasar de fresco/crudo a cocinado; sería una presentación distinta. El origen puede ofrecer 30 días congelación, pero no es recomendación para la presentación lista para etiquetar."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-TUB-006",
@@ -2334,7 +2334,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Criterio banco doméstico (10/11/2026): congelación no ofrecida para esta presentación por pérdida de calidad o transformación notable de textura: para esta ficha la congelación cambia significativamente la textura o exige pasar de fresco/crudo a cocinado; sería una presentación distinta. El origen puede ofrecer 30 días congelación, pero no es recomendación para la presentación lista para etiquetar."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-TUB-007",
@@ -2442,7 +2442,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Dados crudos; nevera 3 días como adaptación para producto cortado."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-TUB-011",
@@ -2469,7 +2469,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Criterio banco doméstico (10/11/2026): congelación no ofrecida para esta presentación por pérdida de calidad o transformación notable de textura: para esta ficha la congelación cambia significativamente la textura o exige pasar de fresco/crudo a cocinado; sería una presentación distinta. El origen puede ofrecer 180 días congelación, pero no es recomendación para la presentación lista para etiquetar."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-TUB-012",
@@ -2522,7 +2522,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper 299: 10–14 días frío. Congelación no recomendada. Ubicado en Tubérculos por la taxonomía doméstica de raíces."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-HON-001",
@@ -2549,7 +2549,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Congelar preferiblemente tras un salteado breve. Criterio banco doméstico (10/11/2026): congelación no ofrecida para esta presentación por pérdida de calidad o transformación notable de textura: para esta ficha la congelación cambia significativamente la textura o exige pasar de fresco/crudo a cocinado; sería una presentación distinta. El origen puede ofrecer 300 días congelación, pero no es recomendación para la presentación lista para etiquetar."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-HON-002",
@@ -2576,7 +2576,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Congelar preferiblemente tras un salteado breve. Criterio banco doméstico (10/11/2026): congelación no ofrecida para esta presentación por pérdida de calidad o transformación notable de textura: para esta ficha la congelación cambia significativamente la textura o exige pasar de fresco/crudo a cocinado; sería una presentación distinta. El origen puede ofrecer 300 días congelación, pero no es recomendación para la presentación lista para etiquetar."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-HON-003",
@@ -2603,7 +2603,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Congelar preferiblemente tras un salteado breve. Criterio banco doméstico (10/11/2026): congelación no ofrecida para esta presentación por pérdida de calidad o transformación notable de textura: para esta ficha la congelación cambia significativamente la textura o exige pasar de fresco/crudo a cocinado; sería una presentación distinta. El origen puede ofrecer 300 días congelación, pero no es recomendación para la presentación lista para etiquetar."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-HON-004",
@@ -2630,7 +2630,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Congelar preferiblemente tras un salteado breve. Criterio banco doméstico (10/11/2026): congelación no ofrecida para esta presentación por pérdida de calidad o transformación notable de textura: para esta ficha la congelación cambia significativamente la textura o exige pasar de fresco/crudo a cocinado; sería una presentación distinta. El origen puede ofrecer 300 días congelación, pero no es recomendación para la presentación lista para etiquetar."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-HON-005",
@@ -2657,7 +2657,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Congelar preferiblemente tras un salteado breve. Criterio banco doméstico (10/11/2026): congelación no ofrecida para esta presentación por pérdida de calidad o transformación notable de textura: para esta ficha la congelación cambia significativamente la textura o exige pasar de fresco/crudo a cocinado; sería una presentación distinta. El origen puede ofrecer 300 días congelación, pero no es recomendación para la presentación lista para etiquetar."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-HON-006",
@@ -2684,7 +2684,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Congelar preferiblemente tras un salteado breve. Criterio banco doméstico (10/11/2026): congelación no ofrecida para esta presentación por pérdida de calidad o transformación notable de textura: para esta ficha la congelación cambia significativamente la textura o exige pasar de fresco/crudo a cocinado; sería una presentación distinta. El origen puede ofrecer 300 días congelación, pero no es recomendación para la presentación lista para etiquetar."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-HOJ-001",
@@ -2738,7 +2738,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Para congelar utilizar la presentación «Escaldado»; la congelación afecta a la textura para ensalada."
+      "tips_preparacion_conservacion": "Escaldar antes de congelar; usar la variante escaldada."
     },
     {
       "id": "FRV-HOJ-003",
@@ -2762,7 +2762,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Para congelar: escaldar en agua hirviendo 1½ minutos, enfriar inmediatamente en agua helada, escurrir bien y envasar. Consumir tras cocción. Frigorífico máximo 4 días solo si se enfrió rápidamente; preferir congelar cuanto antes."
+      "tips_preparacion_conservacion": "Escaldar 1½ min, enfriar en agua helada y escurrir antes de congelar."
     },
     {
       "id": "FRV-HOJ-004",
@@ -2788,7 +2788,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper 291 agrupa lechuga de hoja y espinacas; no recomienda congelar hojas frescas sin escaldar."
+      "tips_preparacion_conservacion": "Escaldar antes de congelar; usar la variante escaldada."
     },
     {
       "id": "FRV-HOJ-005",
@@ -2812,7 +2812,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Para congelar: escaldar en agua hirviendo 2 minutos, enfriar inmediatamente en agua helada, escurrir bien y envasar. Consumir tras cocción. Frigorífico máximo 4 días solo si se enfrió rápidamente; preferir congelar cuanto antes."
+      "tips_preparacion_conservacion": "Escaldar 2 min, enfriar en agua helada y escurrir antes de congelar."
     },
     {
       "id": "FRV-HOJ-006",
@@ -2839,7 +2839,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Plazo 2 días para la bolsa abierta; si está cerrada, respetar la fecha del envase y las indicaciones del fabricante."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-HOJ-007",
@@ -2865,7 +2865,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Guardar en bolsa que retenga la humedad. Para congelar, usar la presentación «Escaldada»."
+      "tips_preparacion_conservacion": "Guardar en una bolsa que conserve la humedad."
     },
     {
       "id": "FRV-HOJ-008",
@@ -2889,7 +2889,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Para congelar: escaldar en agua hirviendo 2 minutos (hojas), enfriar inmediatamente en agua helada, escurrir bien y envasar. Consumir tras cocción. Frigorífico máximo 4 días solo si se enfrió rápidamente; preferir congelar cuanto antes."
+      "tips_preparacion_conservacion": "Escaldar las hojas 2 min, enfriar y escurrir antes de congelar."
     },
     {
       "id": "FRV-HOJ-009",
@@ -2915,7 +2915,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Conservar refrigerada; no ofrecer congelación para ensalada fresca."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-HOJ-010",
@@ -2941,7 +2941,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Grupo de hoja tipo collard greens (berzas), con pauta conservadora de refrigeración de hasta una semana; no tiene ID FoodKeeper individual."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-HOJ-011",
@@ -2965,7 +2965,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Para congelar: escaldar en agua hirviendo 3 minutos, enfriar inmediatamente en agua helada, escurrir bien y envasar. Consumir tras cocción. Frigorífico máximo 4 días solo si se enfrió rápidamente; preferir congelar cuanto antes."
+      "tips_preparacion_conservacion": "Escaldar 3 min, enfriar en agua helada y escurrir antes de congelar."
     },
     {
       "id": "FRV-HOJ-012",
@@ -2991,7 +2991,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Plazo doméstico conservador, adaptado de verduras de hoja; sin ID FoodKeeper individual."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-HOJ-013",
@@ -3018,7 +3018,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Plazo doméstico conservador, adaptado de verduras de hoja; sin ID FoodKeeper individual."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-HOJ-014",
@@ -3045,7 +3045,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Hojas tiernas y delicadas: pauta conservadora doméstica; sin ID FoodKeeper individual."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-HOR-001",
@@ -3071,7 +3071,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper 270: alcachofa completa. Congelar corazones escaldados es otra presentación, no se congela la pieza entera."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-HOR-002",
@@ -3097,7 +3097,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper 271: refrigeración 3–4 días, congelación 5 meses."
+      "tips_preparacion_conservacion": "Escaldar 2–4 min, enfriar y escurrir antes de congelar."
     },
     {
       "id": "FRV-HOR-003",
@@ -3121,7 +3121,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper 276 es un registro conjunto de Brócoli y Grelo; aquí solo representa Brócoli."
+      "tips_preparacion_conservacion": "Separar ramilletes, escaldar 3 min y enfriar antes de congelar."
     },
     {
       "id": "FRV-HOR-004",
@@ -3147,7 +3147,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper 277: 3–5 días frigorífico y 10–12 meses congelación."
+      "tips_preparacion_conservacion": "Escaldar 3–5 min según tamaño, enfriar antes de congelar."
     },
     {
       "id": "FRV-HOR-005",
@@ -3171,7 +3171,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper 280: 3–5 días frigorífico y 10–12 meses congelación."
+      "tips_preparacion_conservacion": "Cortar en ramilletes y escaldar 3 min antes de congelar."
     },
     {
       "id": "FRV-HOR-006",
@@ -3197,7 +3197,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper 289: 1–2 semanas frío y 10–12 meses congelación."
+      "tips_preparacion_conservacion": "Lavar entre las capas, trocear y escaldar antes de congelar."
     },
     {
       "id": "FRV-HOR-007",
@@ -3223,7 +3223,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper 283: 4–6 días frigorífico. Congelación no recomendada para consumo fresco."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-HOR-008",
@@ -3247,7 +3247,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper 284: frigorífico 4–7 días, congelación 6–8 meses, despensa 1 día. Criterio banco doméstico (10/11/2026): congelación no ofrecida para esta presentación por pérdida de calidad o transformación notable de textura: para esta ficha la congelación cambia significativamente la textura o exige pasar de fresco/crudo a cocinado; sería una presentación distinta. El origen puede ofrecer 180 días congelación, pero no es recomendación para la presentación lista para etiquetar."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-HOR-009",
@@ -3275,7 +3275,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper 296: frigorífico 4–14 días. La congelación requiere quitar semillas y cortar; usar variante Picado."
+      "tips_preparacion_conservacion": "Lavar, retirar semillas y picar antes de congelar."
     },
     {
       "id": "FRV-HOR-010",
@@ -3302,7 +3302,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Adaptación FoodKeeper 296: congelación 6–8 meses; frío 3 días para pimiento cortado según UC San Diego. Sin segundo ID 296."
+      "tips_preparacion_conservacion": "Retirar semillas, lavar y secar bien antes de congelar."
     },
     {
       "id": "FRV-HOR-011",
@@ -3328,7 +3328,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper 298: pieza entera, frigorífico 3–5 meses y despensa 2–3 meses. Congelar solo pulpa previamente cocinada, otra presentación."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-HOR-012",
@@ -3355,7 +3355,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper 302: 4–5 días frío, 1–5 días despensa y 10–12 meses congelación. El 547 es segundo registro (7 días frío, 10 meses congelación), sin duplicar su ID. Criterio banco doméstico (10/11/2026): congelación no ofrecida para esta presentación por pérdida de calidad o transformación notable de textura: para esta ficha la congelación cambia significativamente la textura o exige pasar de fresco/crudo a cocinado; sería una presentación distinta. El origen puede ofrecer 300 días congelación, pero no es recomendación para la presentación lista para etiquetar."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-HOR-013",
@@ -3382,7 +3382,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper 306: despensa «hasta que madure, después 7 días más», condición no transformable a plazo fijo desde envasado; frigorífico sin días. Solo se ofrece congelación 2 meses, para cocina. Criterio banco doméstico (10/11/2026): congelación no ofrecida para esta presentación por pérdida de calidad o transformación notable de textura: para esta ficha la congelación cambia significativamente la textura o exige pasar de fresco/crudo a cocinado; sería una presentación distinta. El origen puede ofrecer 60 días congelación, pero no es recomendación para la presentación lista para etiquetar."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-HOR-014",
@@ -3409,7 +3409,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper 600: 5 días frigorífico y 10 días despensa; seguir el estado real de maduración."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-HOR-015",
@@ -3436,7 +3436,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper 285: 1 mes despensa para bulbo intacto; sus plazos de dientes separados no valen para bulbo entero. Nunca ajo en aceite a temperatura ambiente (botulismo)."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-HOR-016",
@@ -3465,7 +3465,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper 294: cebolla seca 2 meses frigorífico y 1 mes despensa. Para congelar, usar Picada."
+      "tips_preparacion_conservacion": "Pelar y picar la cebolla antes de congelar."
     },
     {
       "id": "FRV-HOR-017",
@@ -3492,7 +3492,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Adaptación FoodKeeper 294 y NCHFP: cebolla picada congelada mejor en pocos meses, 90 días de calidad conservadores, no 10–12 meses genéricos. En frío 7 días según Iowa State/Colorado State Extension."
+      "tips_preparacion_conservacion": "Repartir la cebolla picada en porciones antes de congelar."
     },
     {
       "id": "FRV-HOR-018",
@@ -3519,7 +3519,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper 295: cebolla verde, 1 semana refrigeración. No usar 1 mes despensa original para cebolla verde fresca (Colorado State). Distinta de cebollino aromático."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-HOR-019",
@@ -3546,7 +3546,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper 273 agrupa judías, habas y guisantes. Solo esta ficha conserva el ID 273; no es ID individual."
+      "tips_preparacion_conservacion": "Despuntar, escaldar 3 min y enfriar antes de congelar."
     },
     {
       "id": "FRV-HOR-020",
@@ -3573,7 +3573,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Agregación del grupo FoodKeeper 273: 3–5 días frío, 8 meses congelación; sin ID individual para habas."
+      "tips_preparacion_conservacion": "Desgranar y escaldar antes de congelar."
     },
     {
       "id": "FRV-HOR-021",
@@ -3600,7 +3600,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Agregación del grupo FoodKeeper 273: 3–5 días frío, 8 meses congelación; sin ID individual para guisantes."
+      "tips_preparacion_conservacion": "Desgranar, escaldar 1½ min y enfriar antes de congelar."
     },
     {
       "id": "FRV-HOR-022",
@@ -3627,7 +3627,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper 640: 4–5 días frigorífico. Sin plazo numérico de congelación en este registro."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-FRU-001",
@@ -3680,7 +3680,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper Product.ID 248. FoodKeeper 248: 4–6 semanas frigorífico, 8 meses congelación, 3 semanas despensa. Criterio banco doméstico (10/11/2026): congelación no ofrecida para esta presentación por pérdida de calidad o transformación notable de textura: fruta fresca o ingrediente seco presentado para consumir tal cual; al descongelar se altera la textura o la presentación. Para batidos, repostería o fruta preparada se puede crear otra ficha específica.. El origen puede ofrecer 240 días congelación, pero no es recomendación para la presentación lista para etiquetar."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-FRU-003",
@@ -3706,7 +3706,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper Product.ID 249. FoodKeeper 249: 2–5 días frío; temperatura ambiente hasta madurar (sin días fijos). Congelación de pieza entera no recomendada."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-FRU-004",
@@ -3732,7 +3732,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper Product.ID 266. FoodKeeper 266 agrupa melocotón, nectarina, ciruela, pera y zapote. Maduración sin fecha fija. Criterio banco doméstico (10/11/2026): congelación no ofrecida para esta presentación por pérdida de calidad o transformación notable de textura: fruta fresca o ingrediente seco presentado para consumir tal cual; al descongelar se altera la textura o la presentación. Para batidos, repostería o fruta preparada se puede crear otra ficha específica.. El origen puede ofrecer 60 días congelación, pero no es recomendación para la presentación lista para etiquetar."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-FRU-005",
@@ -3758,7 +3758,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper Product.ID 266. FoodKeeper 266 compartido entre frutas de hueso y pera; sin ID individual para nectarina. Criterio banco doméstico (10/11/2026): congelación no ofrecida para esta presentación por pérdida de calidad o transformación notable de textura: fruta fresca o ingrediente seco presentado para consumir tal cual; al descongelar se altera la textura o la presentación. Para batidos, repostería o fruta preparada se puede crear otra ficha específica.. El origen puede ofrecer 60 días congelación, pero no es recomendación para la presentación lista para etiquetar."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-FRU-006",
@@ -3784,7 +3784,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper Product.ID 266. FoodKeeper 266 compartido; sin ID individual para ciruela. Criterio banco doméstico (10/11/2026): congelación no ofrecida para esta presentación por pérdida de calidad o transformación notable de textura: fruta fresca o ingrediente seco presentado para consumir tal cual; al descongelar se altera la textura o la presentación. Para batidos, repostería o fruta preparada se puede crear otra ficha específica.. El origen puede ofrecer 60 días congelación, pero no es recomendación para la presentación lista para etiquetar."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-FRU-007",
@@ -3810,7 +3810,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper Product.ID 266. FoodKeeper 266 compartido; mantener a temperatura ambiente hasta madurar sin fijar un número de días. Criterio banco doméstico (10/11/2026): congelación no ofrecida para esta presentación por pérdida de calidad o transformación notable de textura: fruta fresca o ingrediente seco presentado para consumir tal cual; al descongelar se altera la textura o la presentación. Para batidos, repostería o fruta preparada se puede crear otra ficha específica.. El origen puede ofrecer 60 días congelación, pero no es recomendación para la presentación lista para etiquetar."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-FRU-008",
@@ -3837,7 +3837,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper Product.ID 483. FoodKeeper 483 «Cerezas, guinda», 2–3 días frío, 8–12 meses congelación. Cerezas y guindas comparten ID. Criterio banco doméstico (10/11/2026): congelación no ofrecida para esta presentación por pérdida de calidad o transformación notable de textura: fruta fresca o ingrediente seco presentado para consumir tal cual; al descongelar se altera la textura o la presentación. Para batidos, repostería o fruta preparada se puede crear otra ficha específica.. El origen puede ofrecer 240 días congelación, pero no es recomendación para la presentación lista para etiquetar."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-FRU-009",
@@ -3863,7 +3863,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper Product.ID 261. FoodKeeper 261: 1 semana frío, 1 mes congelación y 1 día despensa. Criterio banco doméstico (10/11/2026): congelación no ofrecida para esta presentación por pérdida de calidad o transformación notable de textura: fruta fresca o ingrediente seco presentado para consumir tal cual; al descongelar se altera la textura o la presentación. Para batidos, repostería o fruta preparada se puede crear otra ficha específica.. El origen puede ofrecer 30 días congelación, pero no es recomendación para la presentación lista para etiquetar."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-FRU-010",
@@ -3889,7 +3889,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper Product.ID 269. FoodKeeper 269: 1–3 meses refrigeración, 2–5 días despensa, 10–12 meses congelación genérica; la congelación se aplica a granos en variante separada."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-FRU-011",
@@ -3916,7 +3916,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper Product.ID 269. FoodKeeper 269 para fruto entero; los 4 días frío son adaptación doméstica conservadora para fruta fresca cortada (USDA/Comunidad de Madrid), 10–12 meses congelación del original para granos. ID 269 solo queda asignado a la pieza entera. Criterio banco doméstico (10/11/2026): congelación no ofrecida para esta presentación por pérdida de calidad o transformación notable de textura: fruta fresca o ingrediente seco presentado para consumir tal cual; al descongelar se altera la textura o la presentación. Para batidos, repostería o fruta preparada se puede crear otra ficha específica.. El origen puede ofrecer 300 días congelación, pero no es recomendación para la presentación lista para etiquetar."
+      "tips_preparacion_conservacion": "Extraer los granos y retirar las membranas antes de guardar."
     },
     {
       "id": "FRV-FRU-012",
@@ -3942,7 +3942,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper Product.ID 256. FoodKeeper 256 es un registro colectivo: limón, lima, naranja, pomelo/toronja, mandarina y clementina; congelar entero no recomendado."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-FRU-013",
@@ -3968,7 +3968,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper Product.ID 256. Adaptación FoodKeeper 256, grupo de cítricos. No tiene ID individual."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-FRU-014",
@@ -3994,7 +3994,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper Product.ID 256. Adaptación FoodKeeper 256, grupo de cítricos. No tiene ID individual."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-FRU-015",
@@ -4020,7 +4020,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper Product.ID 256. Adaptación FoodKeeper 256, grupo de cítricos. No tiene ID individual."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-FRU-016",
@@ -4046,7 +4046,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper Product.ID 256. Adaptación FoodKeeper 256, grupo de cítricos. No tiene ID individual."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-FRU-017",
@@ -4072,7 +4072,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper Product.ID 256. Adaptación FoodKeeper 256, grupo de cítricos. No tiene ID individual."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-FRU-018",
@@ -4100,7 +4100,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper Product.ID 481. FoodKeeper 481: 2–3 días frío, 8–12 meses congelación. Criterio banco doméstico (10/11/2026): congelación no ofrecida para esta presentación por pérdida de calidad o transformación notable de textura: fruta fresca o ingrediente seco presentado para consumir tal cual; al descongelar se altera la textura o la presentación. Para batidos, repostería o fruta preparada se puede crear otra ficha específica.. El origen puede ofrecer 240 días congelación, pero no es recomendación para la presentación lista para etiquetar."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-FRU-019",
@@ -4126,7 +4126,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper Product.ID 482. FoodKeeper 482: 2–3 días frío, 8–12 meses congelación. Criterio banco doméstico (10/11/2026): congelación no ofrecida para esta presentación por pérdida de calidad o transformación notable de textura: fruta fresca o ingrediente seco presentado para consumir tal cual; al descongelar se altera la textura o la presentación. Para batidos, repostería o fruta preparada se puede crear otra ficha específica.. El origen puede ofrecer 240 días congelación, pero no es recomendación para la presentación lista para etiquetar."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-FRU-020",
@@ -4152,7 +4152,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper Product.ID 253. FoodKeeper 253 agrupa moras y grosellas: 3–6 días frío, 12 meses congelación. Criterio banco doméstico (10/11/2026): congelación no ofrecida para esta presentación por pérdida de calidad o transformación notable de textura: fruta fresca o ingrediente seco presentado para consumir tal cual; al descongelar se altera la textura o la presentación. Para batidos, repostería o fruta preparada se puede crear otra ficha específica.. El origen puede ofrecer 360 días congelación, pero no es recomendación para la presentación lista para etiquetar."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-FRU-021",
@@ -4178,7 +4178,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper Product.ID 252, 253 (registros agrupados/solapados). FoodKeeper 252 y 253 son grupos parcialmente solapados que incluyen grosellas; 252 = 7 días frío y 12 meses congelación; 253 = 3–6 días frío y 12 meses congelación. Se elige 6 días por criterio conservador; no hay ID exclusivo. Criterio banco doméstico (10/11/2026): congelación no ofrecida para esta presentación por pérdida de calidad o transformación notable de textura: fruta fresca o ingrediente seco presentado para consumir tal cual; al descongelar se altera la textura o la presentación. Para batidos, repostería o fruta preparada se puede crear otra ficha específica.. El origen puede ofrecer 360 días congelación, pero no es recomendación para la presentación lista para etiquetar."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-FRU-022",
@@ -4205,7 +4205,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper Product.ID 254. FoodKeeper 254: 1–2 semanas frío y 8–12 meses congelación. Criterio banco doméstico (10/11/2026): congelación no ofrecida para esta presentación por pérdida de calidad o transformación notable de textura: fruta fresca o ingrediente seco presentado para consumir tal cual; al descongelar se altera la textura o la presentación. Para batidos, repostería o fruta preparada se puede crear otra ficha específica.. El origen puede ofrecer 240 días congelación, pero no es recomendación para la presentación lista para etiquetar."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-FRU-023",
@@ -4231,7 +4231,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper Product.ID 250. FoodKeeper 250: 3–4 días frigorífico; dejar madurar a temperatura ambiente sin fecha fija; no se ofrece congelación de fruto entero."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-FRU-024",
@@ -4257,7 +4257,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper Product.ID 255. FoodKeeper 255: 4 días frío y 10–12 meses congelación; madurar sin fijar fecha en despensa. Criterio banco doméstico (10/11/2026): congelación no ofrecida para esta presentación por pérdida de calidad o transformación notable de textura: fruta fresca o ingrediente seco presentado para consumir tal cual; al descongelar se altera la textura o la presentación. Para batidos, repostería o fruta preparada se puede crear otra ficha específica.. El origen puede ofrecer 300 días congelación, pero no es recomendación para la presentación lista para etiquetar."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-FRU-025",
@@ -4283,7 +4283,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper Product.ID 263. FoodKeeper 263: 3–6 días frío, hasta madurar en despensa sin fecha fija; congelación no recomendada para pieza entera."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-FRU-026",
@@ -4309,7 +4309,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper Product.ID 267. FoodKeeper 267: 5–7 días frío; temperatura ambiente hasta madurar (sin fecha fija). La congelación 10–12 meses corresponde a piña preparada/cortada; no congelar con piel."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-FRU-027",
@@ -4336,7 +4336,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper Product.ID 267. FoodKeeper 267, congelación 10–12 meses. Refrigeración 4 días como adaptación doméstica conservadora de fruta recién cortada (USDA / Comunidad de Madrid). La ficha entera conserva exclusivamente el ID 267. Criterio banco doméstico (10/11/2026): congelación no ofrecida para esta presentación por pérdida de calidad o transformación notable de textura: fruta fresca o ingrediente seco presentado para consumir tal cual; al descongelar se altera la textura o la presentación. Para batidos, repostería o fruta preparada se puede crear otra ficha específica.. El origen puede ofrecer 300 días congelación, pero no es recomendación para la presentación lista para etiquetar."
+      "tips_preparacion_conservacion": "Pelar, retirar el corazón y guardar los trozos bien tapados."
     },
     {
       "id": "FRV-FRU-028",
@@ -4362,7 +4362,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper Product.ID 265. FoodKeeper 265 agrupa papaya, mango, feijoa, maracuyá y melón verde: 7 días frigorífico, 3–5 días despensa y 6–8 meses congelación. Criterio banco doméstico (10/11/2026): congelación no ofrecida para esta presentación por pérdida de calidad o transformación notable de textura: fruta fresca o ingrediente seco presentado para consumir tal cual; al descongelar se altera la textura o la presentación. Para batidos, repostería o fruta preparada se puede crear otra ficha específica.. El origen puede ofrecer 180 días congelación, pero no es recomendación para la presentación lista para etiquetar."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-FRU-029",
@@ -4388,7 +4388,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper Product.ID 265. Adaptación del grupo FoodKeeper 265. No existe ID FoodKeeper individual para mango dentro de ese grupo. Criterio banco doméstico (10/11/2026): congelación no ofrecida para esta presentación por pérdida de calidad o transformación notable de textura: fruta fresca o ingrediente seco presentado para consumir tal cual; al descongelar se altera la textura o la presentación. Para batidos, repostería o fruta preparada se puede crear otra ficha específica.. El origen puede ofrecer 180 días congelación, pero no es recomendación para la presentación lista para etiquetar."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-FRU-030",
@@ -4414,7 +4414,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper Product.ID 264. FoodKeeper 264: 2 semanas frío; despensa hasta que madure (sin días). La congelación 1 mes requiere pulpa preparada; no habilitada para pieza entera."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-FRU-031",
@@ -4440,7 +4440,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper Product.ID 495. FoodKeeper 495: 3–4 días frío y 1–2 días despensa. Su congelación de 12 meses supone preparar trozos; no habilitada para pieza entera."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-FRU-032",
@@ -4468,7 +4468,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper Product.ID 251. FoodKeeper 251 «Guineos»: 3 días frío tras madurar, maduración en ambiente sin fecha fija y 2–3 meses congelación. Criterio banco doméstico (10/11/2026): congelación no ofrecida para esta presentación por pérdida de calidad o transformación notable de textura: fruta fresca o ingrediente seco presentado para consumir tal cual; al descongelar se altera la textura o la presentación. Para batidos, repostería o fruta preparada se puede crear otra ficha específica.. El origen puede ofrecer 60 días congelación, pero no es recomendación para la presentación lista para etiquetar."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-FRU-033",
@@ -4494,7 +4494,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper Product.ID 258. FoodKeeper 258: coco fresco, 2–3 semanas frío y 1 semana despensa. Congelación de coco entero no recomendada."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-FRU-034",
@@ -4521,7 +4521,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper Product.ID 257. FoodKeeper 257: coco rallado seco sin abrir, 1 año despensa y 1 año congelación. No aplicar estos plazos al coco fresco recién rallado ni al paquete abierto. Criterio banco doméstico (10/11/2026): congelación no ofrecida para esta presentación por pérdida de calidad o transformación notable de textura: fruta fresca o ingrediente seco presentado para consumir tal cual; al descongelar se altera la textura o la presentación. Para batidos, repostería o fruta preparada se puede crear otra ficha específica.. El origen puede ofrecer 365 días congelación, pero no es recomendación para la presentación lista para etiquetar."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-FRU-035",
@@ -4547,7 +4547,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper Product.ID 260. FoodKeeper 260: dátiles almacenados 2 meses despensa, 12 meses refrigeración, 1–2 años congelación; se aplica un año conservador en congelación. Criterio banco doméstico (10/11/2026): congelación no ofrecida para esta presentación por pérdida de calidad o transformación notable de textura: fruta fresca o ingrediente seco presentado para consumir tal cual; al descongelar se altera la textura o la presentación. Para batidos, repostería o fruta preparada se puede crear otra ficha específica.. El origen puede ofrecer 365 días congelación, pero no es recomendación para la presentación lista para etiquetar."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-FRU-036",
@@ -4574,7 +4574,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "FoodKeeper Product.ID 379. FoodKeeper 379 «Frutas Secas/Deshidratadas» también cubre orejones; ID 379 ya usado por FRV-FRU-001 Orejones. 6 meses despensa para producto seco envasado sin abrir; 1 mes despensa una vez abierto."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-FRU-037",
@@ -4600,7 +4600,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Sin ID individual FoodKeeper. Mississippi State Extension: higos frescos duran generalmente 2–3 días tras recolección; Oregon State Extension recomienda refrigerar secos y sin lavar. Plazo doméstico 3 días."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-FRU-038",
@@ -4627,7 +4627,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Sin ID individual FoodKeeper. UF/IFAS 2026 (Diospyros kaki): caqui muy maduro se consume pronto y el no completamente maduro puede refrigerarse pocos días; 3 días es una pauta conservadora, depende de Fuyu/Hachiya."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-FRU-039",
@@ -4653,7 +4653,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Sin ID individual FoodKeeper. UF/IFAS Extension MG050 dice que nísperos maduros pueden mantenerse varias semanas en frío; UC Davis Postharvest 2–4 semanas a 0 °C. Se toma 14 días como plazo de calidad conservador; vigilar daños y temperatura."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "FRV-FRU-040",
@@ -4680,7 +4680,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Sin ID individual FoodKeeper. Royal Horticultural Society: utilizar membrillos en un mes en lugar fresco 4–7 °C; 28 días como aproximación doméstica conservadora. No confundir con dulce de membrillo."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "DES-CON-001",
@@ -4721,7 +4721,7 @@
       "conserva": true,
       "conserva_dias": 365,
       "tips_conserva": "Conserva casera sin abrir",
-      "tips_preparacion_conservacion": "Compota de manzana casera: precarga editable de 7 días en nevera o 365 días en conserva casera sin abrir."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "DES-CON-003",
@@ -4748,7 +4748,7 @@
       "conserva": true,
       "conserva_dias": 365,
       "tips_conserva": "Conserva casera sin abrir",
-      "tips_preparacion_conservacion": "Mermelada casera: precarga editable de 30 días en nevera o 365 días en conserva casera sin abrir."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "DES-CON-004",
@@ -4778,7 +4778,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Carne de membrillo, casera o comprada: precarga editable de 30 días en nevera. No se almacena en tarros ni tiene modalidad de conserva o congelación en este banco."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "DES-LEG-001",
@@ -4804,7 +4804,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Variedad seca: 365 días en despensa. FoodKeeper Product.ID 333, que es un grupo compartido por variedades de alubia; este identificador no es exclusivo de esta variedad."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "DES-LEG-002",
@@ -4830,7 +4830,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Variedad cocida en casa: 4 días en nevera o 90 días en congelador, recomendación doméstica editable. Sin ID FoodKeeper de la variedad cocida."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "DES-LEG-003",
@@ -4857,7 +4857,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Variedad seca: 365 días en despensa. FoodKeeper Product.ID 333, que es un grupo compartido por variedades de alubia; este identificador no es exclusivo de esta variedad."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "DES-LEG-004",
@@ -4884,7 +4884,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Variedad cocida en casa: 4 días en nevera o 90 días en congelador, recomendación doméstica editable. Sin ID FoodKeeper de la variedad cocida."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "DES-LEG-005",
@@ -4910,7 +4910,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Variedad seca: 365 días en despensa. FoodKeeper Product.ID 333, que es un grupo compartido por variedades de alubia; este identificador no es exclusivo de esta variedad."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "DES-LEG-006",
@@ -4936,7 +4936,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Variedad cocida en casa: 4 días en nevera o 90 días en congelador, recomendación doméstica editable. Sin ID FoodKeeper de la variedad cocida."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "DES-LEG-007",
@@ -4962,7 +4962,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Variedad seca: 365 días en despensa. FoodKeeper Product.ID 333, que es un grupo compartido por variedades de alubia; este identificador no es exclusivo de esta variedad."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "DES-LEG-008",
@@ -4988,7 +4988,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Variedad cocida en casa: 4 días en nevera o 90 días en congelador, recomendación doméstica editable. Sin ID FoodKeeper de la variedad cocida."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "DES-LEG-009",
@@ -5015,7 +5015,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Variedad seca: 365 días en despensa. FoodKeeper Product.ID 333, que es un grupo compartido por variedades de alubia; este identificador no es exclusivo de esta variedad."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "DES-LEG-010",
@@ -5042,7 +5042,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Variedad cocida en casa: 4 días en nevera o 90 días en congelador, recomendación doméstica editable. Sin ID FoodKeeper de la variedad cocida."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "DES-LEG-011",
@@ -5068,7 +5068,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Variedad seca: 365 días en despensa. FoodKeeper Product.ID 333, que es un grupo compartido por variedades de alubia; este identificador no es exclusivo de esta variedad."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "DES-LEG-012",
@@ -5094,7 +5094,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Variedad cocida en casa: 4 días en nevera o 90 días en congelador, recomendación doméstica editable. Sin ID FoodKeeper de la variedad cocida."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "DES-LEG-013",
@@ -5120,7 +5120,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Variedad seca: 365 días en despensa. FoodKeeper Product.ID 334, que es un grupo compartido por variedades de lenteja; este identificador no es exclusivo de esta variedad."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "DES-LEG-014",
@@ -5146,7 +5146,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Variedad cocida en casa: 4 días en nevera o 90 días en congelador, recomendación doméstica editable. Sin ID FoodKeeper de la variedad cocida."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "DES-LEG-015",
@@ -5172,7 +5172,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Variedad seca: 365 días en despensa. FoodKeeper Product.ID 334, que es un grupo compartido por variedades de lenteja; este identificador no es exclusivo de esta variedad."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "DES-LEG-016",
@@ -5198,7 +5198,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Variedad cocida en casa: 4 días en nevera o 90 días en congelador, recomendación doméstica editable. Sin ID FoodKeeper de la variedad cocida."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "DES-LEG-017",
@@ -5224,7 +5224,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Variedad seca: 365 días en despensa. FoodKeeper Product.ID 334, que es un grupo compartido por variedades de lenteja; este identificador no es exclusivo de esta variedad."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "DES-LEG-018",
@@ -5250,7 +5250,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Variedad cocida en casa: 4 días en nevera o 90 días en congelador, recomendación doméstica editable. Sin ID FoodKeeper de la variedad cocida."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "DES-LEG-019",
@@ -5276,7 +5276,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Garbanzo seco. Valor orientativo doméstico de conservación: 365 días en despensa. Sin registro individual FoodKeeper."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "DES-LEG-020",
@@ -5302,7 +5302,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Variedad cocida en casa: 4 días en nevera o 90 días en congelador, recomendación doméstica editable. Sin ID FoodKeeper de la variedad cocida."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "DES-LEG-021",
@@ -5328,7 +5328,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Garbanzo seco. Valor orientativo doméstico de conservación: 365 días en despensa. Sin registro individual FoodKeeper."
+      "tips_preparacion_conservacion": null
     },
     {
       "id": "DES-LEG-022",
@@ -5354,7 +5354,7 @@
       "conserva": false,
       "conserva_dias": null,
       "tips_conserva": null,
-      "tips_preparacion_conservacion": "Variedad cocida en casa: 4 días en nevera o 90 días en congelador, recomendación doméstica editable. Sin ID FoodKeeper de la variedad cocida."
+      "tips_preparacion_conservacion": null
     }
   ]
 }
