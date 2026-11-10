@@ -1,5 +1,13 @@
 # MiruRecetas · «Mis etiquetas» · visión, decisiones y hoja de ruta
 
+## Validación física de Pequeña desde el banco doméstico — 10/11/2026
+
+**Estado: APROBADA FÍSICAMENTE POR LA USUARIA.** La usuaria confirma expresamente: «Están todas perfectas impresas, todas han salido de los datos precargados del banco». Se trata de una prueba real de **Pequeña** con impresora térmica **Clabel** conectada mediante BLE/UART, **sin QR**, usando los datos precargados del **banco doméstico de ingredientes**, aplicados a las etiquetas. La fotografía compartida muestra la tira impresa con **Puerro** (50 g), **Pechuga de pavo – Tiras** (170 g, repetida), **Pechuga de pavo – Dados** (170 g), **Pechuga de pavo – Filetes** (170 g) y **Pulpo – cocido** (125 g parcialmente visible). No se deduce un inventario de la tira ni se presupone que represente todas las etiquetas emitidas.
+
+**Evidencia aportada:** fotografía de impresión física y registro de consola del 10/11/2026, aproximadamente 22:32–22:39 (Europe/Madrid). El registro indica cinco trabajos de envío BLE concluidos con fragmentos **198/198**, **241/241** (trabajo TSPL de dos copias), **239/239**, **238/238** y **223/223**. Se registra «Notificaciones GATT habilitadas», conexión UART y transmisión completa. La optimización de raster Pequeña presenta en las muestras informadas ahorros de aproximadamente **18,8–23,5 %**, con partición en más sub-bandas. **La transmisión completa no basta por sí misma para acreditar la impresión: la confirmación expresa de la usuaria es la validación física definitiva.** Las fotografías y los logs proceden de la conversación; **no se incorporan al repositorio público**.
+
+**Alcance de la aprobación:** queda validado el recorrido **selección de ficha del banco → precarga editable → raster Pequeña → transporte BLE → impresión física**, con legibilidad y alineación aceptadas por la usuaria. No constituye ensayo ni aprobación física de **Compacta** o **Amplia B**; la prueba física de Amplia sigue pendiente según el registro facilitado. No implica inventarios, cambios de formatos, ni nuevos requisitos de seguridad alimentaria. No se modifica el motor, la interfaz, la impresión, las fichas, ni la fuente original FoodKeeper; solo documentación del resultado de pruebas.
+
 ## Tubérculos y Hongos · incorporación doméstica (09/11/2026, vigente)
 
 La usuaria aprueba **17 fichas nuevas**: **11 en Tubérculos**, **6 en Hongos**. Se **actualiza Patata `FRV-TUB-001` sin duplicarla**. La subcategoría **Algas permanece vacía y oculta**, sin registros.
