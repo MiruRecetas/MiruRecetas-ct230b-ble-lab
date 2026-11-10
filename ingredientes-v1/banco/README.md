@@ -1,5 +1,11 @@
 # FoodKeeper ES · archivo fuente original (solo consulta)
 
+## Actualización de taxonomía: «Cereales y harinas» (10/11/2026)
+
+Por decisión expresa de la usuaria, **Despensa > Cereales** y **Despensa > Harinas** se unifican en la única subcategoría **«Cereales y harinas»**. La clasificación vigente pasa de **28 a 27 subcategorías** (cuatro categorías principales). Se trasladan las **7 fichas de Cereales** a la subcategoría unificada; todavía no hay fichas de harinas. Ninguna ficha se elimina, se duplica ni cambia de ID, nombre, presentación, fuente o conservación. El cuscús sigue en **Pasta**.
+
+El filtro de subcategorías se genera automáticamente a partir del catálogo: mostrará solo «Cereales y harinas» y no los dos nombres anteriores. El schema se actualiza para que los registros futuros de harinas pertenezcan a esta misma subcategoría. Las secciones previas de este README documentan las decisiones y estados de su fecha, no la taxonomía actual.
+
 ## Cereales y cuscús · selección aprobada (10/11/2026)
 
 Se añaden **ocho fichas**: siete en **Despensa > Cereales** y una de **Cuscús seco en Despensa > Pasta**. Total: **232 fichas** (Cereales 7, Pasta 17). Se mantienen separadas las subcategorías **Cereales** y **Harinas**; no se modifica la taxonomía. No se incorporan otros cereales, harinas, presentaciones ni productos comerciales.

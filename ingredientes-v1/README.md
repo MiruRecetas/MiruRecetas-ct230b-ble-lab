@@ -246,7 +246,11 @@ AESAN queda como fuente de contraste. **`estado_recomendacion`, `fuente` e `id_f
 
 **Uso doméstico del banco (08/11/2026):** es una ayuda opcional para evitar escribir etiquetas a mano. Siempre se puede usar **Ingrediente libre** y **editar cualquier campo precargado** desde el banco antes de imprimir. Los estados `verificado`, `parcial`, `sin_datos` describen fichas, **no bloquean la creación o impresión**; si no hay plazo, no se propone fecha, pero la usuaria puede introducirla. Los criterios editoriales del catálogo (solo incorporar las fichas que interesan) **no restringen las etiquetas libres**. No añadir validaciones o controles alimentarios no solicitados; mantener únicamente las reglas técnicas del motor de impresión ya existentes.
 
-## Taxonomía aprobada para el banco de ingredientes (08/11/2026)
+## Taxonomía vigente del banco de ingredientes (10/11/2026)
+
+Por decisión aprobada, las anteriores **Cereales** y **Harinas** se unifican en **Cereales y harinas** dentro de Despensa. La taxonomía vigente tiene **4 categorías y 27 subcategorías**. No se renombra ninguna categoría principal ni se crean fichas; las 7 existentes de Cereales pasan a esta subcategoría. El cuscús sigue en Pasta. El esquema del catálogo y el filtro dinámico del banco emplean exclusivamente la denominación nueva. Las menciones de 28 subcategorías en los apartados históricos corresponden a etapas anteriores.
+
+## Taxonomía aprobada para el banco de ingredientes (08/11/2026) (histórico)
 
 **4 categorías principales:** **Carnes y Aves** (Vacuno, Porcino, Ovino, Pollo, Pavo, Otras aves, Caza, Elaborados, Charcutería); **Pescados y Mariscos** (Pescado blanco, Pescado azul, Crustáceos y moluscos, Cefalópodos); **Frutas y Verduras** (Frutas, Hortalizas, Verduras de hoja, Tubérculos, Hongos, Algas); **Despensa** (Arroz, Pasta, Cereales, Legumbres, Harinas, Frutos secos, Semillas, Especias y hierbas, Conservas).
 

@@ -39,7 +39,7 @@ test("catálogo de doscientas treinta y dos fichas, con ID y variante únicos",(
   "Avena","Cebada perlada","Quinoa","Maíz","Cuscús"
  ]));
  assert.equal(categories.length,4);
- assert.equal(Object.values(subcategories).flat().length,28);
+ assert.equal(Object.values(subcategories).flat().length,27);
  assert.deepEqual(subcategories["Carnes y Aves"],
   ["Vacuno","Porcino","Ovino","Pollo","Pavo","Otras aves","Caza","Elaborados","Charcutería"]);
  for(const empty of ["Otras aves","Caza"])
@@ -596,12 +596,22 @@ test("Pasta: 16 fichas agrupadas exactamente según selección",()=>{
 });
 
 test("Cereales: siete fichas seleccionadas; cuscús solo en Pasta",()=>{
- const c=records.filter(x=>x.subcategoria==="Cereales");
+ const c=records.filter(x=>x.subcategoria==="Cereales y harinas");
  assert.deepEqual(c.map(x=>[x.nombre,x.presentacion]),[["Avena","Seca"],["Cebada perlada","Seca"],["Cebada perlada","Cocida"],["Quinoa","Seca"],["Quinoa","Cocida"],["Maíz","Mazorca fresca"],["Maíz","Grano seco"]]);
  const cous=records.filter(x=>x.nombre==="Cuscús");
  assert.equal(cous.length,1);
  assert.equal(cous[0].subcategoria,"Pasta");
  assert.equal(cous[0].presentacion,"Seca");
- assert.equal(records.filter(x=>x.subcategoria==="Harinas").length,0);
+ assert.equal(records.filter(x=>x.subcategoria==="Harinas"||x.subcategoria==="Cereales").length,0);
+ assert.equal(records.length,232);
+});
+
+test("Taxonomía: Cereales y harinas unificados sin cambiar fichas",()=>{
+ const subs=subcategories["Despensa"];
+ assert.ok(subs.includes("Cereales y harinas"));
+ assert.ok(!subs.includes("Cereales"));
+ assert.ok(!subs.includes("Harinas"));
+ assert.equal(records.filter(x=>x.subcategoria==="Cereales y harinas").length,7);
+ assert.equal(records.filter(x=>x.subcategoria==="Cereales"||x.subcategoria==="Harinas").length,0);
  assert.equal(records.length,232);
 });

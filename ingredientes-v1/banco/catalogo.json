@@ -6000,7 +6000,7 @@
     {
       "id": "DES-CER-001",
       "categoria": "Despensa",
-      "subcategoria": "Cereales",
+      "subcategoria": "Cereales y harinas",
       "presentacion": "Seca",
       "nombre": "Avena",
       "sinonimos": [
@@ -6027,7 +6027,7 @@
     {
       "id": "DES-CER-002",
       "categoria": "Despensa",
-      "subcategoria": "Cereales",
+      "subcategoria": "Cereales y harinas",
       "presentacion": "Seca",
       "nombre": "Cebada perlada",
       "sinonimos": [
@@ -6053,7 +6053,7 @@
     {
       "id": "DES-CER-003",
       "categoria": "Despensa",
-      "subcategoria": "Cereales",
+      "subcategoria": "Cereales y harinas",
       "presentacion": "Cocida",
       "nombre": "Cebada perlada",
       "sinonimos": [
@@ -6079,7 +6079,7 @@
     {
       "id": "DES-CER-004",
       "categoria": "Despensa",
-      "subcategoria": "Cereales",
+      "subcategoria": "Cereales y harinas",
       "presentacion": "Seca",
       "nombre": "Quinoa",
       "sinonimos": [
@@ -6105,7 +6105,7 @@
     {
       "id": "DES-CER-005",
       "categoria": "Despensa",
-      "subcategoria": "Cereales",
+      "subcategoria": "Cereales y harinas",
       "presentacion": "Cocida",
       "nombre": "Quinoa",
       "sinonimos": [
@@ -6131,7 +6131,7 @@
     {
       "id": "DES-CER-006",
       "categoria": "Despensa",
-      "subcategoria": "Cereales",
+      "subcategoria": "Cereales y harinas",
       "presentacion": "Mazorca fresca",
       "nombre": "Maíz",
       "sinonimos": [
@@ -6159,7 +6159,7 @@
     {
       "id": "DES-CER-007",
       "categoria": "Despensa",
-      "subcategoria": "Cereales",
+      "subcategoria": "Cereales y harinas",
       "presentacion": "Grano seco",
       "nombre": "Maíz",
       "sinonimos": [
