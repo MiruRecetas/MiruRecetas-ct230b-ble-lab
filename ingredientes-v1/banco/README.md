@@ -1,5 +1,25 @@
 # FoodKeeper ES · archivo fuente original (solo consulta)
 
+## Arroz · selección aprobada (10/11/2026)
+
+Se incorporan **7 fichas nuevas** en **Despensa > Arroz**: **6 variedades exclusivamente secas** y **1 ficha «Arroz blanco» cocido**. La obligación de crear dos presentaciones por variedad correspondía **solo a Legumbres**; **no se aplica a Arroz**. No se crean fichas genéricas ni versiones cocidas adicionales. Total del banco: **208 fichas**.
+
+| Ficha | Nombre | Presentación | Despensa (d) | Nevera (d) | Congelador (d) | Referencia original |
+|---|---|---|---:|---:|---:|---|
+| DES-ARR-001 | Arroz redondo | Seco | 365 | — | — | FoodKeeper 338 (grupo) |
+| DES-ARR-002 | Arroz bomba | Seco | 365 | — | — | FoodKeeper 338 (grupo) |
+| DES-ARR-003 | Arroz basmati | Seco | 365 | — | — | FoodKeeper 338 (grupo) |
+| DES-ARR-004 | Arroz vaporizado | Seco | 365 | — | — | FoodKeeper 338 (grupo) |
+| DES-ARR-005 | Arroz integral | Seco | 365 | — | — | FoodKeeper 339 (grupo) |
+| DES-ARR-006 | Arroz arborio | Seco | 365 | — | — | FoodKeeper 338 (grupo) |
+| DES-ARR-007 | Arroz blanco | Cocido | — | 1 | 90 | FoodKeeper 178 (arroz cocido general) |
+
+**Secos:** precarga de **365 días en despensa**, práctica para arroz seco reenvasado en casa. FoodKeeper 338 («Arroz blanco o mixto») registra dos años sin abrir y un año tras abrir; FoodKeeper 339 («Arroz marrón/integral») registra un año. Los IDs grupales no son identificadores exclusivos de cada variedad y se asignan como `id_fuente` una sola vez; las otras variedades son agregaciones, sin duplicación.
+
+**Arroz blanco cocido:** el original FoodKeeper 178 indica **4–6 días refrigerado y 6 meses congelado**. Se adopta una precarga doméstica más breve de **1 día refrigerado** por la pauta específica de [Food Standards Agency](https://www.gov.uk/government/publications/home-food-fact-checker/home-food-fact-checker) (enfriar en aproximadamente una hora, refrigerar y consumir en 24 horas) y **90 días congelado** como plazo práctico de calidad, por debajo de los seis meses del registro original; [USA Rice](https://www.usarice.com/thinkrice/how-to/how-to-store-rice) también describe la congelación del arroz cocido. `tips_preparacion_conservacion` contiene solo «Repartir en porciones y enfriar en 1 hora antes de guardar.» Las notas visibles siguen siendo breves y editables.
+
+**Alcance:** solo `catalogo.json`, este README y comprobaciones ligeras de datos; cambios directos a `main`. No alterar `banco-ui.js`, otros diseños, impresión, BLE, FoodKeeper original, ni Algas, Otras aves o Caza (vacías y ocultas). El banco solo precarga etiquetas, sin restricciones funcionales.
+
 ## Campo de preparación · uso aprobado (10/11/2026)
 
 `tips_preparacion_conservacion` queda reservado **exclusivamente** para un consejo corto y práctico **anterior al almacenamiento, la congelación o el envasado**, como escaldar, enfriar, secar, desgranar o preparar porciones. No es una nota de procedencia, seguimiento, justificación de plazos, decisión editorial, aviso sobre permisos ni descripción del funcionamiento del banco. Si la ficha no necesita preparación específica, el valor es **`null`**. No almacenar ahí IDs FoodKeeper, referencias, citas, comparaciones ni comentarios de agentes. Es un campo reservado para la futura sección de la web, no visible ni impreso en las etiquetas actuales.
