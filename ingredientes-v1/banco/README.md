@@ -11,9 +11,11 @@ Se añaden **ocho fichas**: siete en **Despensa > Cereales** y una de **Cuscús 
 | Cebada perlada | Cocida | Cereales | Sin ID individual | — / 3 / 60 |
 | Quinoa | Seca | Cereales | 425 | 730 / — / — |
 | Quinoa | Cocida | Cereales | 426 | — / 6 / 180 |
-| Maíz dulce | Mazorca fresca | Cereales | 282 | — / 2 / 240 |
-| Maíz para palomitas | Grano seco | Cereales | 389 | 365 / — / — |
+| Maíz | Mazorca fresca | Cereales | 282 | — / 2 / 240 |
+| Maíz | Grano seco | Cereales | 389 | 365 / — / — |
 | Cuscús | Seca | Pasta | Sin ID individual | 365 / — / — |
+
+**Nombres aprobados:** las dos fichas se denominan **Maíz**, distinguidas por presentación **Mazorca fresca** y **Grano seco**. «Maíz dulce» y «Maíz para palomitas» quedan como sinónimos, no como nombres principales.
 
 **Correspondencia de fuentes:** FoodKeeper 375 (cereales que requieren cocción, incluye avena; 12 meses sin abrir, 6–12 meses abiertos), 577 (cebada entera, no específica perlada; 6 meses despensa y 12 meses congelación), 425 (quinoa sin cocer, 2–3 años despensa), 426 (quinoa cocida, 6–7 días nevera y 6–12 meses congelación), 282 (mazorca de maíz, 1–2 días nevera y 8 meses congelación), 389 (grano seco para palomitas, 2 años sin abrir y 1 año abierto). La ficha de **cebada perlada cocida** y la de **cuscús seco** no tienen ID específico en el original: sus tiempos son **estimaciones domésticas por analogía**, no plazos FoodKeeper individuales. Para cebada perlada seca se usa 577 solo como referencia de grupo; la presentación perlada no figura individualmente. Los tiempos son precargas editables y no sustituyen las instrucciones del envase. La mazorca fresca requiere refrigeración; no confundir con maíz en conserva o desgranado.
 

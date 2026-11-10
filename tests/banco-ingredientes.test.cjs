@@ -36,7 +36,7 @@ test("catálogo de doscientas treinta y dos fichas, con ID y variante únicos",(
   "Alubia blanca","Faba asturiana","Alubia pinta","Alubia canela","Alubia verdina","Judión","Lenteja pardina","Lenteja castellana","Lenteja roja pelada","Garbanzo pedrosillano","Garbanzo lechoso",
   "Arroz redondo","Arroz bomba","Arroz basmati","Arroz vaporizado","Arroz integral","Arroz arborio","Arroz blanco",
   "Placas de pasta","Pasta larga","Pasta corta","Pasta rellena","Pasta al huevo","Fideos","Pasta integral","Pasta de legumbres","Noodles de arroz","Fideos Soba","Fideos Udon","Ñoquis",
-  "Avena","Cebada perlada","Quinoa","Maíz dulce","Maíz para palomitas","Cuscús"
+  "Avena","Cebada perlada","Quinoa","Maíz","Cuscús"
  ]));
  assert.equal(categories.length,4);
  assert.equal(Object.values(subcategories).flat().length,28);
@@ -597,7 +597,7 @@ test("Pasta: 16 fichas agrupadas exactamente según selección",()=>{
 
 test("Cereales: siete fichas seleccionadas; cuscús solo en Pasta",()=>{
  const c=records.filter(x=>x.subcategoria==="Cereales");
- assert.deepEqual(c.map(x=>[x.nombre,x.presentacion]),[["Avena","Seca"],["Cebada perlada","Seca"],["Cebada perlada","Cocida"],["Quinoa","Seca"],["Quinoa","Cocida"],["Maíz dulce","Mazorca fresca"],["Maíz para palomitas","Grano seco"]]);
+ assert.deepEqual(c.map(x=>[x.nombre,x.presentacion]),[["Avena","Seca"],["Cebada perlada","Seca"],["Cebada perlada","Cocida"],["Quinoa","Seca"],["Quinoa","Cocida"],["Maíz","Mazorca fresca"],["Maíz","Grano seco"]]);
  const cous=records.filter(x=>x.nombre==="Cuscús");
  assert.equal(cous.length,1);
  assert.equal(cous[0].subcategoria,"Pasta");

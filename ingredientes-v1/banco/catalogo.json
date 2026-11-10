@@ -6133,8 +6133,9 @@
       "categoria": "Despensa",
       "subcategoria": "Cereales",
       "presentacion": "Mazorca fresca",
-      "nombre": "Maíz dulce",
+      "nombre": "Maíz",
       "sinonimos": [
+        "Maíz dulce",
         "Mazorca de maíz dulce",
         "Maíz en mazorca"
       ],
@@ -6160,8 +6161,9 @@
       "categoria": "Despensa",
       "subcategoria": "Cereales",
       "presentacion": "Grano seco",
-      "nombre": "Maíz para palomitas",
+      "nombre": "Maíz",
       "sinonimos": [
+        "Maíz para palomitas",
         "Maíz palomero",
         "Granos de maíz para palomitas"
       ],
