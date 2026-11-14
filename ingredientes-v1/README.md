@@ -1,3 +1,5 @@
+> **Migración a producción completada · 14/11/2026.** La [PR privada #113](https://github.com/MiruRecetas/mirurecetas-web-source/pull/113) fusionó «Mis etiquetas» en la única web/PWA. [Publicación automática #43584394847](https://github.com/MiruRecetas/mirurecetas-web-source/actions/runs/43584394847), [PR pública #203](https://github.com/MiruRecetas/menu-anual-recetas/pull/203) y [Pages #43584749102](https://github.com/MiruRecetas/menu-anual-recetas/actions/runs/43584749102) correctos. Catálogo 302 fichas (301 seleccionables); origen y SHA documentados. **Compacta y Amplia B siguen pendientes de aprobación física CT230B.** El laboratorio sigue siendo un entorno de referencia, no la fuente productiva. [Cierre y trazabilidad](ESPECIFICACION-PREVIA-MIGRACION-MIS-ETIQUETAS-2026-11-10.md#10-cierre-documental-posterior--migración-publicada--14112026).
+
 ## Norma obligatoria de cambios · 10/11/2026
 
 **Secuencia vinculante para cualquier modificación de diseño, desarrollo o código del etiquetado y del laboratorio:**
