@@ -4691,10 +4691,22 @@
       "sinonimos": [
         "Tomate en conserva"
       ],
-      "estado_recomendacion": "sin_datos",
-      "fuente": null,
+      "estado_recomendacion": "parcial",
+      "fuente": "usuario",
       "id_fuente": null,
-      "tips_preparacion_conservacion": null
+      "tips_preparacion_conservacion": "180 días: precarga doméstica elegida por la usuaria para tarros cerrados; no equivale a validación de seguridad del procedimiento.",
+      "refrigeracion": true,
+      "refrigeracion_dias": 3,
+      "tips_refrigeracion": "Conservar en nevera",
+      "congelacion": true,
+      "congelacion_dias": 90,
+      "tips_descongelacion": "Descongelar en nevera",
+      "despensa": false,
+      "despensa_dias": null,
+      "tips_despensa": null,
+      "conserva": true,
+      "conserva_dias": 180,
+      "tips_conserva": "Conserva casera sin abrir"
     },
     {
       "id": "DES-CON-002",
