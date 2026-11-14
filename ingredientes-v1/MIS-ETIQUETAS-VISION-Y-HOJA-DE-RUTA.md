@@ -1,3 +1,5 @@
+> **Hito de integración completado · 14/11/2026.** La decisión 10/11 se materializó en una única [PR privada #113](https://github.com/MiruRecetas/mirurecetas-web-source/pull/113), merge `15ecd44404787872aa8671e544ad89f642b95d32`, CI full correcta, transporte [Actions #43584394847](https://github.com/MiruRecetas/mirurecetas-web-source/actions/runs/43584394847), [PR pública #203](https://github.com/MiruRecetas/menu-anual-recetas/pull/203), [Pages #43584749102](https://github.com/MiruRecetas/menu-anual-recetas/actions/runs/43584749102) y HTTP/SHA correctos. Nueva página [Mis etiquetas](https://mirurecetas.github.io/menu-anual-recetas/mis-etiquetas/). Catálogo 302 fichas con 301 seleccionables. **Pendiente**: pruebas físicas y aprobación de Compacta y Amplia B. [Expediente posterior](ESPECIFICACION-PREVIA-MIGRACION-MIS-ETIQUETAS-2026-11-10.md).
+
 # MiruRecetas · «Mis etiquetas» · visión, decisiones y hoja de ruta
 
 ## Especificación previa de migración preparada · 10/11/2026

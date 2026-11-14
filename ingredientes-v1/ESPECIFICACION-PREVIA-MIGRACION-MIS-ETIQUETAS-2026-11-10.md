@@ -1,5 +1,5 @@
 # MiruRecetas · Especificación documental previa de migración «Mis etiquetas»
-**Fecha:** 10/11/2026 · **Estado:** contrato previo técnico propuesto, pendiente de ejecución y revisión del responsable web/PWA. **Naturaleza:** documentación solamente; no equivale a implementación, fusión, publicación ni validación física adicional.
+**Fecha:** 10/11/2026 · **Estado:** contrato previo aprobado y ejecutado el 14/11/2026; expediente posterior incorporado en la sección 10. **Naturaleza:** la sección inicial preserva la especificación histórica; la evidencia real de implementación/publicación figura en el cierre, sin atribuir validaciones físicas adicionales.
 
 ## 1. Decisión y repositorios
 **Decisión de producto aprobada:** trasladar selectivamente «Mis etiquetas» desde `MiruRecetas/MiruRecetas-ct230b-ble-lab/main` a `MiruRecetas/mirurecetas-web-source` como módulo independiente integrado en la arquitectura, identidad, navegación y **única PWA** existentes. Entregarlo en **una PR técnica privada de integración**, con merge ordinario, y publicar exclusivamente desde la cadena vigente `publicar-recetas.yml` → GitHub App → `MiruRecetas/menu-anual-recetas` → Pages. El laboratorio sigue siendo referencia/entorno de ensayo; **no** crea otro publicador, otra PWA ni un origen productivo paralelo.
@@ -122,3 +122,34 @@ Tras la coordinación técnica de este expediente, la usuaria ha autorizado una 
 
 **Obsolescencia controlada:** los recuentos 280/21/1 y el blob `711ca791...` de la sección 9 son un corte histórico de la revisión técnica, no el catálogo vigente. Para la PR funcional tomar nuevo corte y SHA exacto de laboratorio, JSON y módulos; mantener 302 IDs únicos y prueba de estados 280/22/0. No reintroducir la ficha sin datos ni sustituir el consentimiento del usuario por una recomendación sanitaria certificada. La actualización es **solo de datos y documentación**, sin cambio de diseño ni código.
 
+
+## 10. Cierre documental posterior · migración publicada · 14/11/2026
+
+**Resultado:** integración de «Mis etiquetas» completada en una única PR técnica privada, CI full correcta y despliegue público mediante el publicador ordinario. Esta sección es el registro *posterior* exigido por el contrato, no una revisión retroactiva del diseño del laboratorio. Los estados «pendiente» anteriores documentan la etapa previa y no representan la situación actual.
+
+### 10.1 Trazabilidad de fuente, PR y SHA
+
+- Fuente congelada del laboratorio: `044acc389cb92a4d757bc691e98399c1dc8d05df`; catálogo `ingredientes-v1/banco/catalogo.json` de 302 fichas, **280 verificadas, 22 parciales, 0 sin_datos**, 302 IDs únicos.
+- Registro privado de hashes de 11 archivos de origen y runtime derivado: `migracion/mis-etiquetas-origen.json` en el repositorio web (SHA-256 de motor, tres plantillas, app, banco UI, HTML/CSS, catálogo, esquema e isotipo). Origen y derivación se distinguen expresamente.
+- [PR privada #113](https://github.com/MiruRecetas/mirurecetas-web-source/pull/113) de implementación: **fusionada**, merge `15ecd44404787872aa8671e544ad89f642b95d32` en `MiruRecetas/mirurecetas-web-source/main`.
+- Validación `full` de PR [Actions #43583644101](https://github.com/MiruRecetas/mirurecetas-web-source/actions/runs/43583644101): **success** (unitarias Python, raster/TSPL Node, QA Chromium con navegador y regresiones web/PWA). Distribución y ensayo contra árbol público [#43583644136](https://github.com/MiruRecetas/mirurecetas-web-source/actions/runs/43583644136): **success**.
+- Publicación desde fuente privada vía GitHub App [Actions #43584394847](https://github.com/MiruRecetas/mirurecetas-web-source/actions/runs/43584394847): **success** y verificación HTTP/hash de rutas afectadas. [PR pública automática #203](https://github.com/MiruRecetas/menu-anual-recetas/pull/203) fusionada, commit público `9294c8d89d59927b5100cbb59a28a13e28f52cab`. [Pages #43584749102](https://github.com/MiruRecetas/menu-anual-recetas/actions/runs/43584749102): **success**.
+- `publicacion.json` público: `source_commit=15ecd44404787872aa8671e544ad89f642b95d32`, `build_run=43584394847`, `content_sha256=4103319a923fb131723b535fc4dd048e07058942e329a06911faf7dae540f711`.
+- [Página pública Mis etiquetas](https://mirurecetas.github.io/menu-anual-recetas/mis-etiquetas/) y [catálogo público proyectado](https://mirurecetas.github.io/menu-anual-recetas/mis-etiquetas/banco/catalogo.json). HTML/JS/CSS y banco comprobados contra repo público y mediante job de verificación HTTP del publicador; no se equipara con una sesión manual en dispositivo físico.
+
+### 10.2 Arquitectura efectivamente implantada
+
+- URL `/menu-anual-recetas/mis-etiquetas/`, con entrada en **Conserva** y cabecera única de `plantillas/cabecera.html`. Generación desde `plantillas/mis-etiquetas.html` y `scripts/generar_mis_etiquetas.py`, invocado por `scripts/generar.py`.
+- Componentes aislados `assets/mis-etiquetas-*.js` y `mis-etiquetas.css`. Motor libre + Pequeña 30×20 + Compacta 50×30 + Amplia B 50×80 horizontal; no se modifica el motor, etiquetas ni QR de recetas.
+- Banco fuente completo y esquema solamente en `datos/mis-etiquetas/` del privado; proyección mínima determinista pública con 302 IDs y estados, sin `fuente`, `id_fuente`, `tips_preparacion_conservacion` ni expediente/JSON de FoodKeeper. **301 fichas seleccionables** por disponer de alguna modalidad `true`; `FRV-HOR-013 · Tomate` se conserva en el catálogo pero carece de modalidad habilitada y no se ofrece como elección. Ninguna ficha ni plazo se alteró para facilitar la migración.
+- Isotipo único `assets/etiquetas-isotipo-bn.svg`, verificado idéntico al del laboratorio. Recursos versionados por SHA con `scripts/pwa.py`; `migracion/distribucion.json` y `public_path` autorizan únicamente rutas runtime. Publicación exclusivamente GitHub Actions/GitHub App, sin publicar directamente desde el laboratorio.
+- Una sola PWA y SW, acceso online con fallback offline; banco con `fetch` y `cache: 'no-store'`, no precacheado. Impresión BLE comunica estado ocupado mediante `data-miru-print-busy` y evento `miru:print-state`; el controlador compartido aplaza la recarga consentida mientras dura la transmisión, y restablece su estado al concluir, también en fallo.
+- QA de navegador integrada para tres anchuras, búsqueda y selección del banco, precarga de días editable, cambio entre los tres formatos, bloqueo de impresión sin impresora y navegación desde Conserva. Las pruebas raster heredadas comprueban equivalencia lógica sin sustituir pruebas con hardware.
+
+### 10.3 Evidencias no cubiertas y pendientes
+
+**No existe aprobación física nueva de Compacta ni Amplia B en CT230B.** Pequeña conserva la evidencia histórica del laboratorio; las otras dos requieren impresión real, inspección de márgenes/legibilidad y aprobación expresa. Las pruebas de software, raster y Bluetooth no equivalen a impresión física. La migración tampoco supone que el catálogo o BLE funcionen sin conexión.
+
+**Gobierno:** el banco permanece cerrado a altas hasta decisión posterior explícita de la usuaria. Los registros `parcial` (incluida Salsa de tomate con 3/90/180 días como preferencia doméstica) conservan sus límites; ningún plazo expresa certificación sanitaria. Mantenimiento productivo del módulo, generación y publicación: `mirurecetas-web-source`; el laboratorio permanece como origen de referencia para experimentación, sin segunda PWA/publicador.
+
+**Documentación correlativa:** manuales `README.md`, `docs/PWA.md`, `docs/PUBLICACION-ORDINARIA.md`, `docs/MANTENIMIENTO-DISENO-WEB.md`, `docs/NAVEGACION-HERO-PORTADA.md` y `docs/ETIQUETADO-CT230B-ESTADO-PRODUCCION-2026-11-03.md` en el privado. La evidencia de su actualización se registra en PR exclusivamente documental posterior.
