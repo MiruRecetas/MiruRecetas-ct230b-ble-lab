@@ -1,3 +1,7 @@
+## Corrección excepcional de ficha · Salsa de tomate · 14/11/2026
+
+Por instrucción expresa de la usuaria se completa **DES-CON-001 · Salsa de tomate** como precarga personal de etiquetas, sin añadir un ingrediente nuevo. **Nevera 3 días; congelación 90 días; conserva casera en tarro sin abrir 180 días**, en la modalidad `conserva` del banco (no `despensa` genérica). La cifra de 180 días es una **preferencia doméstica de la usuaria**, no una certificación ni plazo de seguridad verificado para su baño maría/olla exprés; por ello el registro pasa de `sin_datos` a `parcial`, con `fuente: usuario`. La precarga es editable y opcional. Mantener visibles los límites de las fichas parciales y no alterar motor ni diseño. Registro de datos: commit [859a862](https://github.com/MiruRecetas/MiruRecetas-ct230b-ble-lab/commit/859a8624118b27bbc1e53547d999a4c15634259a). Nuevo reparto: **302 ingredientes, 280 verificados, 22 parciales y 0 sin datos**. Se mantiene el cierre de altas antes de la migración, salvo esta corrección expresamente solicitada.
+
 ## Norma obligatoria de cambios · 10/11/2026
 
 **Secuencia vinculante para cualquier modificación de diseño, desarrollo o código del etiquetado y del laboratorio:**
